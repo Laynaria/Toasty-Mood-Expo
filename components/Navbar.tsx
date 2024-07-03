@@ -1,6 +1,8 @@
 import { Link, usePathname } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
+const addToastIcon = require("../assets/toasts/toast.png");
+
 const homeIcon = require("../assets/icons/home.png");
 const timelineIcon = require("../assets/icons/timeline.png");
 const shopIcon = require("../assets/icons/shop.png");
@@ -26,6 +28,12 @@ export default function Navbar() {
           <Image
             source={path === "/timeline" ? timelineClicked : timelineIcon}
           />
+        </Pressable>
+      </Link>
+
+      <Link href="/add" asChild style={styles.addButton}>
+        <Pressable>
+          <Image source={addToastIcon} />
         </Pressable>
       </Link>
 
@@ -57,5 +65,13 @@ const styles = StyleSheet.create({
   },
   link: {
     padding: 15,
+  },
+  addButton: {
+    marginTop: -70,
+    backgroundColor: "#E3A062",
+    padding: 15,
+    borderRadius: 60,
+    borderWidth: 12,
+    borderColor: "white",
   },
 });
