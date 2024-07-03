@@ -37,6 +37,8 @@ export default function Navbar() {
         </Pressable>
       </Link>
 
+      <View style={styles.masked} />
+
       <Link href="/shop" asChild style={styles.link}>
         <Pressable>
           <Image source={path === "/shop" ? shopClicked : shopIcon} />
@@ -71,7 +73,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#E3A062",
     padding: 15,
     borderRadius: 60,
-    borderWidth: 12,
-    borderColor: "white",
+  },
+  masked: {
+    width: 92,
+    height: 48,
+    backgroundColor: "white",
+    position: "absolute",
+    top: 0,
+    left: 163,
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+    zIndex: -1,
   },
 });
