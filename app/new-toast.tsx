@@ -7,12 +7,19 @@ import {
   TextInput,
   View,
   Image,
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import MoodChoice from "../components/MoodChoice";
+import { useState } from "react";
 
 const bgImg = require("../assets/background-toasts-flip.png");
+const pencil = require("../assets/icons/pencil.png");
 
 export default function NewToast() {
+  const [note, setNote] = useState("");
+
   const date = new Date();
 
   const months = [
@@ -32,43 +39,69 @@ export default function NewToast() {
 
   const daySuffix = ["st", "nd", "rd"];
 
+  const handleChangeNote = (e) => {
+    setNote(e);
+  };
+
   const handleSubmit = () => {
     router.back();
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient colors={["#E3A062", "#FFFFFF"]} style={styles.gradient} />
-      <View style={styles.subContainer}>
-        <Text style={[styles.text, { marginBottom: 100 }]}>{`${
-          months[date.getMonth()]
-        } ${date.getDay()}${
-          date.getDay() > 3 ? "th" : daySuffix[date.getDay() - 1]
-        }`}</Text>
-        <Text style={styles.text}>How was your day today?</Text>
-        <TextInput multiline placeholder="Today's Note" />
+    <ScrollView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#E3A062", "#FFFFFF"]}
+          style={styles.gradient}
+        />
 
-        <Pressable style={styles.doneButton} onPress={handleSubmit}>
-          <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
-        </Pressable>
-        <StatusBar style="auto" />
+        <View style={styles.subContainer}>
+          <Text style={[styles.text, { marginBottom: 100 }]}>{`${
+            months[date.getMonth()]
+          } ${date.getDay()}${
+            date.getDay() > 3 ? "th" : daySuffix[date.getDay() - 1]
+          }`}</Text>
+
+          <Text style={styles.text}>How was your day today?</Text>
+          <MoodChoice />
+
+          <View style={styles.inputWrapper}>
+            <TextInput
+              multiline
+              placeholder="Today's Note"
+              placeholderTextColor="#A9692E"
+              style={styles.textInput}
+              value={note}
+              onChangeText={setNote}
+            />
+            {note === "" ? (
+              <Image source={pencil} style={styles.pencil} />
+            ) : null}
+          </View>
+
+          <Pressable style={styles.doneButton} onPress={handleSubmit}>
+            <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
+          </Pressable>
+          <StatusBar style="auto" />
+        </View>
+        <Image source={bgImg} style={styles.background} />
       </View>
-      <Image source={bgImg} style={styles.background} />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    minHeight: Dimensions.get("screen").height,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 55, // 55 ou 80
+    paddingTop: 55,
+    paddingBottom: 40,
   },
   subContainer: {
     width: "70%",
     height: "100%",
-    gap: 10,
+    gap: 20,
     justifyContent: "flex-start",
   },
 
@@ -77,6 +110,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#6A3C11",
   },
+
+  inputWrapper: {
+    justifyContent: "center",
+    backgroundColor: "rgba(241, 239, 237, 0.5)",
+    borderColor: "#E1DCDC",
+    borderRadius: 5,
+    borderWidth: 1,
+    padding: 5,
+  },
+
+  textInput: {
+    color: "#6A3C11",
+  },
+
+  pencil: { position: "absolute", left: 97 },
 
   doneButton: {
     backgroundColor: "#E3A062",
@@ -89,6 +137,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 0,
+    zIndex: -1,
   },
 
   gradient: {
