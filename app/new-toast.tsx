@@ -16,6 +16,7 @@ import { useState } from "react";
 
 const bgImg = require("../assets/background-toasts-flip.png");
 const pencil = require("../assets/icons/pencil.png");
+const camera = require("../assets/icons/camera.png");
 
 export default function NewToast() {
   const [note, setNote] = useState("");
@@ -62,7 +63,9 @@ export default function NewToast() {
             date.getDay() > 3 ? "th" : daySuffix[date.getDay() - 1]
           }`}</Text>
 
-          <Text style={styles.text}>How was your day today?</Text>
+          <Text style={[styles.text, { fontWeight: "500" }]}>
+            How was your day today?
+          </Text>
           <MoodChoice />
 
           <View style={styles.inputWrapper}>
@@ -77,6 +80,18 @@ export default function NewToast() {
             {note === "" ? (
               <Image source={pencil} style={styles.pencil} />
             ) : null}
+          </View>
+
+          <View style={styles.inputWrapper}>
+            <View style={styles.photoTop}>
+              <Text style={{ color: "#A9692E" }}>Today's Photo</Text>
+              <Pressable>
+                <Text style={{ color: "#A9692E" }}>+</Text>
+              </Pressable>
+            </View>
+            <View style={styles.cameraWrapper}>
+              <Image source={camera} />
+            </View>
           </View>
 
           <Pressable style={styles.doneButton} onPress={handleSubmit}>
@@ -109,6 +124,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     color: "#6A3C11",
+    fontWeight: "bold",
   },
 
   inputWrapper: {
@@ -125,6 +141,22 @@ const styles = StyleSheet.create({
   },
 
   pencil: { position: "absolute", left: 97 },
+
+  photoTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginRight: 5,
+  },
+
+  cameraWrapper: {
+    margin: 15,
+    paddingHorizontal: 50,
+    paddingVertical: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#E3A062",
+    borderRadius: 12,
+  },
 
   doneButton: {
     backgroundColor: "#E3A062",
