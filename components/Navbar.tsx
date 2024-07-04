@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   addButton: {
-    marginTop: -70,
+    marginTop: -45,
     backgroundColor: "#E3A062",
     padding: 15,
     borderRadius: 60,
-    borderWidth: 12,
+    borderWidth: 10,
     borderColor: "white",
   },
 });
