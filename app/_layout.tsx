@@ -17,10 +17,11 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
-    top: 30,
-    left: 10,
+    top: 40,
+    left: 17,
     padding: 15,
     zIndex: 1,
+    borderRadius: 15,
   },
   img: {
     height: 20,
