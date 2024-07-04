@@ -78,17 +78,15 @@ export default function NewToast() {
             ) : null}
           </View>
 
-          <View style={styles.inputWrapper}>
+          <Pressable style={styles.inputWrapper}>
             <View style={styles.photoTop}>
               <Text style={{ color: "#A9692E" }}>Today's Photo</Text>
-              <Pressable>
-                <Text style={{ color: "#A9692E" }}>+</Text>
-              </Pressable>
+              <Text style={{ color: "#A9692E" }}>+</Text>
             </View>
             <View style={styles.cameraWrapper}>
               <Image source={camera} />
             </View>
-          </View>
+          </Pressable>
 
           <Pressable style={styles.doneButton} onPress={handleSubmit}>
             <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
