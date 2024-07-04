@@ -1,6 +1,6 @@
 # Toasty Mood
 
-<!-- <img src="./frontend/src/assets/MoodGood.png" width="70" height="70"/> -->
+<img src="./assets/toasts/toast-okay.png" />
 
 Toasty Mood is a Single Page App that will help you to review your mood according to the weather and manage your everyday's life tasks.
 
