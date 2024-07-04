@@ -1,12 +1,14 @@
 import { Slot } from "expo-router";
 import Navbar from "../components/Navbar";
 import { Image, StyleSheet, View } from "react-native";
+import Header from "../components/Header";
 
 const bgImg = require("../assets/background-toasts.png");
 
 export default function RootLayout() {
   return (
     <>
+      <Header />
       <Slot />
       <View />
       <Image source={bgImg} style={styles.background} />
