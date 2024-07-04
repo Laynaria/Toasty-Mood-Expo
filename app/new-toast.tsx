@@ -40,10 +40,6 @@ export default function NewToast() {
 
   const daySuffix = ["st", "nd", "rd"];
 
-  const handleChangeNote = (e) => {
-    setNote(e);
-  };
-
   const handleSubmit = () => {
     router.back();
   };
@@ -107,7 +103,7 @@ export default function NewToast() {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: Dimensions.get("screen").height,
+    minHeight: Dimensions.get("screen").height - 48,
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 55,
