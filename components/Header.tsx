@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { Pressable, StyleSheet, View, Image } from "react-native";
 
 const toDoIcon = require("../assets/icons/todo.png");
@@ -6,15 +7,19 @@ const themeIcon = require("../assets/icons/theme.png");
 export default function Header() {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.buttons}>
-        <Image source={toDoIcon} />
-      </Pressable>
+      <Link href="/todo" asChild>
+        <Pressable style={styles.buttons}>
+          <Image source={toDoIcon} />
+        </Pressable>
+      </Link>
 
       <View style={styles.background} />
 
-      <Pressable style={styles.buttons}>
-        <Image source={themeIcon} />
-      </Pressable>
+      <Link href="/theme" asChild>
+        <Pressable style={styles.buttons}>
+          <Image source={themeIcon} />
+        </Pressable>
+      </Link>
     </View>
   );
 }
