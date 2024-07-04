@@ -8,6 +8,7 @@ import {
   View,
   Image,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const bgImg = require("../assets/background-toasts-flip.png");
 
@@ -37,8 +38,9 @@ export default function NewToast() {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={["#E3A062", "#FFFFFF"]} style={styles.gradient} />
       <View style={styles.subContainer}>
-        <Text style={styles.text}>{`${
+        <Text style={[styles.text, { marginBottom: 100 }]}>{`${
           months[date.getMonth()]
         } ${date.getDay()}${
           date.getDay() > 3 ? "th" : daySuffix[date.getDay() - 1]
@@ -61,10 +63,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 80,
+    paddingTop: 55, // 55 ou 80
   },
   subContainer: {
-    backgroundColor: "#fff",
     width: "70%",
     height: "100%",
     gap: 10,
@@ -88,5 +89,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 0,
+  },
+
+  gradient: {
+    position: "absolute",
+    width: "100%",
+    height: "50%",
+    top: 0,
   },
 });
