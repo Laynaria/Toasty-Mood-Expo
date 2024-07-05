@@ -13,8 +13,8 @@ graph TD;
 
 ## How It Looks Like
 
-<img src="./ressources-readme/screen-home.jpg" alt="Home Screenshot" width="49%">
-<img src="./ressources-readme/screen-new.jpg" alt="New Toast Screen" width="49%">
+<img src="./ressources-readme/screen-home.jpg" alt="Home Screenshot" width="40%">
+<img src="./ressources-readme/screen-new.jpg" alt="New Toast Screen" width="40%">
 
 ### Tools & Technologies
 
