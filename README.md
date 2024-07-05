@@ -11,16 +11,21 @@ graph TD;
     Home-->Settings;
 ```
 
+## How It Looks Like
+
+<img src="./ressources-readme/screen-home.jpg" alt="Home Screenshot" width="49%">
+<img src="./ressources-readme/screen-new.jpg" alt="New Toast Screen" width="49%">
+
 ### Tools & Technologies
 
-#Figma
-#Git
-#Github
-#EXPO
-#React Native
-#TSX
-#Typescript
-#CSS
+`#Figma`
+`#Git`
+`#Github`
+`#EXPO`
+`#React Native`
+`#TSX`
+`#Typescript`
+`#CSS`
 
 ### Setup
 
