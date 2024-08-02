@@ -14,6 +14,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import MoodChoice from "../components/MoodChoice";
 import { useState } from "react";
 
+import { getToasts, storeToasts } from "../services/storage";
+
 const bgImg = require("../assets/background-toasts-flip.png");
 const pencil = require("../assets/icons/pencil.png");
 const camera = require("../assets/icons/camera.png");
@@ -41,8 +43,16 @@ export default function NewToast() {
 
   const daySuffix = ["st", "nd", "rd"];
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newToast = { selectedToast, note, moodArray: 0 };
+    const existingToasts = await getToasts();
+
+    if (existingToasts) {
+      await storeToasts([...existingToasts, newToast]);
+      return router.back();
+    }
+
+    await storeToasts([newToast]);
 
     router.back();
   };
