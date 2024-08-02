@@ -42,6 +42,8 @@ export default function NewToast() {
   const daySuffix = ["st", "nd", "rd"];
 
   const handleSubmit = () => {
+    const newToast = { selectedToast, note, moodArray: 0 };
+
     router.back();
   };
 
