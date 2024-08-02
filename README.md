@@ -1,6 +1,6 @@
 # Toasty Mood
 
-<img src="./assets/toasts/toast-okay.png" />
+![Logo](./assets/toasts/toast-okay.png)
 
 Toasty Mood is a Single Page App that will help you to review your mood according to the weather and manage your everyday's life tasks.
 
@@ -11,16 +11,20 @@ graph TD;
     Home-->Settings;
 ```
 
+## How It Looks Like
+
+<img src="./ressources-readme/screen-home.jpg" alt="Home Screenshot" width="40%"> <img src="./ressources-readme/screen-new.jpg" alt="New Toast Screen" width="40%">
+
 ### Tools & Technologies
 
-#Figma
-#Git
-#Github
-#EXPO
-#React Native
-#TSX
-#Typescript
-#CSS
+`#Figma`
+`#Git`
+`#Github`
+`#EXPO`
+`#React Native`
+`#TSX`
+`#Typescript`
+`#CSS`
 
 ### Setup
 
