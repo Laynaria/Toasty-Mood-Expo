@@ -1,10 +1,12 @@
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import toastsMoods from "../services/toasts";
-import { useState } from "react";
 
-export default function MoodChoice() {
-  const [selected, setSelected] = useState(0);
+export default function MoodChoice({ selectedToast, setSelectedToast }) {
+  const handleToastChange = (id) => {
+    setSelectedToast(id);
+  };
+
   return (
     <View style={styles.container}>
       {toastsMoods[0].map((toast) => (
@@ -12,9 +14,9 @@ export default function MoodChoice() {
           key={toast.id}
           style={[
             styles.button,
-            selected === toast.id ? styles.selected : null,
+            selectedToast === toast.id ? styles.selected : null,
           ]}
-          onPress={() => setSelected(toast.id)}
+          onPress={() => handleToastChange(toast.id)}
         >
           <Image source={toast.img} />
         </Pressable>

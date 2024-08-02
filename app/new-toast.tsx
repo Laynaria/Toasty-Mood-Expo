@@ -19,6 +19,7 @@ const pencil = require("../assets/icons/pencil.png");
 const camera = require("../assets/icons/camera.png");
 
 export default function NewToast() {
+  const [selectedToast, setSelectedToast] = useState(0);
   const [note, setNote] = useState("");
 
   const date = new Date();
@@ -62,7 +63,10 @@ export default function NewToast() {
           <Text style={[styles.text, { fontWeight: "500" }]}>
             How was your day today?
           </Text>
-          <MoodChoice />
+          <MoodChoice
+            selectedToast={selectedToast}
+            setSelectedToast={setSelectedToast}
+          />
 
           <View style={styles.inputWrapper}>
             <TextInput
