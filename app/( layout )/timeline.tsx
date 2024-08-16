@@ -4,6 +4,7 @@ import { getToasts } from "../../services/storage";
 import { useEffect, useState } from "react";
 
 import toastsMoods from "../../services/toasts";
+import TimelineCard from "../../components/TimelineCard";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
@@ -20,12 +21,11 @@ export default function Timeline() {
     <View style={styles.container}>
       <Text>Toasty Mood Timeline Page!!!</Text>
       {toasts?.map((toast) => (
-        <View>
-          <Image
-            source={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
-          />
-          <Text>{toast.note}</Text>
-        </View>
+        <TimelineCard
+          key={toast.date}
+          toast={toast}
+          img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
+        />
       ))}
       <StatusBar style="auto" />
     </View>
