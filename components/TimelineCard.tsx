@@ -29,6 +29,7 @@ export default function TimelineCard({ toast, img }) {
         date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
       }`}</Text>
       <View style={styles.content}>
+        <View style={styles.dot} />
         <Image source={img} />
         <Text>{toast.note}</Text>
       </View>
@@ -39,6 +40,7 @@ export default function TimelineCard({ toast, img }) {
 const styles = StyleSheet.create({
   container: {
     width: "80%",
+    zIndex: 1,
   },
   date: {
     paddingHorizontal: 16,
@@ -46,9 +48,21 @@ const styles = StyleSheet.create({
     color: "#6A3C11",
   },
   content: {
+    justifyContent: "center",
     backgroundColor: "#E3A062",
     paddingVertical: 32,
     paddingHorizontal: 32,
     borderRadius: 16,
+  },
+  dot: {
+    position: "absolute",
+    zIndex: 1,
+    width: 30,
+    height: 30,
+    borderRadius: 60,
+    borderWidth: 3,
+    left: -20,
+    backgroundColor: "#E3A062",
+    borderColor: "white",
   },
 });
