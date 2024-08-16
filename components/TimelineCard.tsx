@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 32,
     paddingHorizontal: 32,
     borderRadius: 16,
+    gap: 8,
   },
   dot: {
     position: "absolute",
