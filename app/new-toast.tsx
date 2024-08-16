@@ -48,7 +48,14 @@ export default function NewToast() {
     const existingToasts = await getToasts();
 
     if (existingToasts) {
-      await storeToasts([...existingToasts, newToast]);
+      await storeToasts([
+        ...existingToasts.filter(
+          (toast) =>
+            new Date(toast.date).toLocaleDateString() !==
+            date.toLocaleDateString()
+        ),
+        newToast,
+      ]);
       return router.back();
     }
 
