@@ -2,8 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { getToasts } from "../../services/storage";
 import { useEffect, useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 import toastsMoods from "../../services/toasts";
+import TimelineCard from "../../components/TimelineCard";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
@@ -18,15 +20,17 @@ export default function Timeline() {
 
   return (
     <View style={styles.container}>
-      <Text>Toasty Mood Timeline Page!!!</Text>
       {toasts?.map((toast) => (
-        <View>
-          <Image
-            source={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
-          />
-          <Text>{toast.note}</Text>
-        </View>
+        <TimelineCard
+          key={toast.date}
+          toast={toast}
+          img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
+        />
       ))}
+      <LinearGradient
+        colors={["#FFFFFF", "#E3A062", "#FFFFFF"]}
+        style={styles.timebar}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -37,6 +41,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    gap: 30,
+  },
+  timebar: {
+    width: 2,
+    height: "100%",
+    position: "absolute",
+    left: 34,
   },
 });

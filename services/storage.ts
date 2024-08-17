@@ -18,3 +18,11 @@ export const getToasts = async () => {
     console.warn("Error in getting your toasts");
   }
 };
+
+export const deleteToasts = async () => {
+  try {
+    await AsyncStorage.removeItem("toasts");
+  } catch (e) {
+    console.warn("Error in deleting your toasts");
+  }
+};
