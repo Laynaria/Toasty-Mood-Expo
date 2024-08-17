@@ -44,11 +44,18 @@ export default function NewToast() {
   const daySuffix = ["st", "nd", "rd"];
 
   const handleSubmit = async () => {
-    const newToast = { selectedToast, note, moodArray: 0 };
+    const newToast = { selectedToast, note, moodArray: 0, date };
     const existingToasts = await getToasts();
 
     if (existingToasts) {
-      await storeToasts([...existingToasts, newToast]);
+      await storeToasts([
+        ...existingToasts.filter(
+          (toast) =>
+            new Date(toast.date).toLocaleDateString() !==
+            date.toLocaleDateString()
+        ),
+        newToast,
+      ]);
       return router.back();
     }
 
@@ -68,8 +75,8 @@ export default function NewToast() {
         <View style={styles.subContainer}>
           <Text style={[styles.text, { marginBottom: 100 }]}>{`${
             months[date.getMonth()]
-          } ${date.getDay()}${
-            date.getDay() > 3 ? "th" : daySuffix[date.getDay() - 1]
+          } ${date.getDate()}${
+            date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
           }`}</Text>
 
           <Text style={[styles.text, { fontWeight: "500" }]}>
