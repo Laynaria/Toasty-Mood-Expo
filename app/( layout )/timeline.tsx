@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
-    gap: 2,
+    gap: 30,
   },
   timebar: {
     width: 2,
