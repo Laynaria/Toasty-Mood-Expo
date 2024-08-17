@@ -32,6 +32,7 @@ export default function TimelineCard({ toast, img }) {
         <View style={styles.dot} />
         <Image source={img} />
         <Text>{toast.note}</Text>
+        {toast.photo ? <Image source={toast.photo} /> : ""}
       </View>
     </View>
   );
