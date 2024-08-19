@@ -28,7 +28,7 @@ export default function Timeline() {
         />
       ))}
       <LinearGradient
-        colors={["#FFFFFF", "#E3A062", "#FFFFFF"]}
+        colors={["rgba(255,255,255, 0)", "#E3A062", "rgba(255,255,255, 0)"]}
         style={styles.timebar}
       />
       <StatusBar style="auto" />
@@ -39,10 +39,10 @@ export default function Timeline() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 30,
+    zIndex: 1,
   },
   timebar: {
     width: 2,
