@@ -15,6 +15,7 @@ import MoodChoice from "../components/MoodChoice";
 import { useEffect, useState } from "react";
 
 import { getToasts, storeToasts } from "../services/storage";
+import { months, daySuffix } from "../services/time";
 import PhotoChoice from "../components/PhotoChoice";
 
 const bgImg = require("../assets/background-toasts-flip.png");
@@ -28,23 +29,6 @@ export default function NewToast() {
   const [photo, setPhoto] = useState(null);
 
   const date = new Date();
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const daySuffix = ["st", "nd", "rd"];
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();

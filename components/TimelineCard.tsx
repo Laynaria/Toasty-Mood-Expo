@@ -1,26 +1,10 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import { months, daySuffix } from "../services/time";
 
 export default function TimelineCard({ toast, img }) {
   const date = new Date(toast.date);
 
   const photoSource = toast.photo ? { uri: toast.photo } : null;
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const daySuffix = ["st", "nd", "rd"];
 
   return (
     <View style={styles.container}>
