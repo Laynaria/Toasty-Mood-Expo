@@ -46,7 +46,7 @@ export default function NewToast() {
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
-    const newToast = { selectedToast, note, moodArray: 0, date };
+    const newToast = { selectedToast, note, moodArray: 0, date, photo };
 
     if (existingToasts) {
       await storeToasts([

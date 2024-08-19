@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 30,
+    marginBottom: 100,
   },
   timebar: {
     width: 2,
