@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     backgroundColor: "#E3A062",
     paddingVertical: 10,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    zIndex: 2,
   },
   link: {
     padding: 15,

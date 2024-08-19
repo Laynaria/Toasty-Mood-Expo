@@ -15,14 +15,15 @@ import MoodChoice from "../components/MoodChoice";
 import { useState } from "react";
 
 import { getToasts, storeToasts } from "../services/storage";
+import PhotoChoice from "../components/PhotoChoice";
 
 const bgImg = require("../assets/background-toasts-flip.png");
 const pencil = require("../assets/icons/pencil.png");
-const camera = require("../assets/icons/camera.png");
 
 export default function NewToast() {
   const [selectedToast, setSelectedToast] = useState(0);
   const [note, setNote] = useState("");
+  const [photo, setPhoto] = useState(null);
 
   const date = new Date();
 
@@ -101,15 +102,7 @@ export default function NewToast() {
             ) : null}
           </View>
 
-          <Pressable style={styles.inputWrapper}>
-            <View style={styles.photoTop}>
-              <Text style={{ color: "#A9692E" }}>Today's Photo</Text>
-              <Text style={{ color: "#A9692E" }}>+</Text>
-            </View>
-            <View style={styles.cameraWrapper}>
-              <Image source={camera} />
-            </View>
-          </Pressable>
+          <PhotoChoice photo={photo} setPhoto={setPhoto} />
 
           <Pressable style={styles.doneButton} onPress={handleSubmit}>
             <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
@@ -158,22 +151,6 @@ const styles = StyleSheet.create({
   },
 
   pencil: { position: "absolute", left: 97 },
-
-  photoTop: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginRight: 5,
-  },
-
-  cameraWrapper: {
-    margin: 15,
-    paddingHorizontal: 50,
-    paddingVertical: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#E3A062",
-    borderRadius: 12,
-  },
 
   doneButton: {
     backgroundColor: "#E3A062",
