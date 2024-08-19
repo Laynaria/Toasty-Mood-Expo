@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MoodChoice from "../components/MoodChoice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getToasts, storeToasts } from "../services/storage";
 import PhotoChoice from "../components/PhotoChoice";
@@ -45,8 +45,8 @@ export default function NewToast() {
   const daySuffix = ["st", "nd", "rd"];
 
   const handleSubmit = async () => {
-    const newToast = { selectedToast, note, moodArray: 0, date };
     const existingToasts = await getToasts();
+    const newToast = { selectedToast, note, moodArray: 0, date };
 
     if (existingToasts) {
       await storeToasts([
@@ -64,6 +64,26 @@ export default function NewToast() {
 
     router.back();
   };
+
+  useEffect(() => {
+    const loadToasts = async () => {
+      const existingToasts = await getToasts();
+
+      if (existingToasts) {
+        const [todayToast] = existingToasts.filter(
+          (toast) =>
+            new Date(toast.date).toLocaleDateString() ===
+            date.toLocaleDateString()
+        );
+
+        setNote(todayToast.note);
+        setSelectedToast(todayToast.selectedToast);
+        setPhoto(todayToast.photo);
+      }
+    };
+
+    loadToasts();
+  }, []);
 
   return (
     <ScrollView style={{ flex: 1 }}>
