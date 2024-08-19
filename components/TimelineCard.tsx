@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 export default function TimelineCard({ toast, img }) {
   const date = new Date(toast.date);
 
+  const photoSource = toast.photo ? { uri: toast.photo } : null;
+
   const months = [
     "January",
     "February",
@@ -32,7 +34,7 @@ export default function TimelineCard({ toast, img }) {
         <View style={styles.dot} />
         <Image source={img} />
         <Text>{toast.note}</Text>
-        {toast.photo ? <Image source={toast.photo} /> : ""}
+        {photoSource ? <Image source={photoSource} style={styles.photo} /> : ""}
       </View>
     </View>
   );
@@ -66,5 +68,9 @@ const styles = StyleSheet.create({
     left: -20,
     backgroundColor: "#E3A062",
     borderColor: "white",
+  },
+  photo: {
+    width: "100%",
+    height: 300,
   },
 });
