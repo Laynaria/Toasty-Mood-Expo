@@ -23,6 +23,12 @@ export default function Calendar() {
     }
   };
 
+  const daysInMonth = new Date(
+    parseInt(selectedYear),
+    months.indexOf(selectedMonth) + 1,
+    0
+  ).getDate();
+
   useEffect(() => {
     const loadToasts = async () => {
       setToasts(await getToasts());
@@ -32,26 +38,33 @@ export default function Calendar() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      {daysName.map((day) => (
-        <Text style={styles.daysName} key={day}>
-          {day}
-        </Text>
-      ))}
+    <View>
+      <View style={styles.container}>
+        {daysName.map((day) => (
+          <Text style={styles.daysName} key={day}>
+            {day}
+          </Text>
+        ))}
 
-      {days.map((day) => (
-        <Image
-          source={
-            !!checkDate(day)
-              ? toastsMoods[checkDate(day).moodArray][
-                  checkDate(day).selectedToast - 1
-                ].img
-              : toastEmpty
-          }
-          style={styles.toast}
-          key={day}
-        />
-      ))}
+        {days
+          .filter((day) => day <= daysInMonth)
+          .map((day) => (
+            <Image
+              source={
+                !!checkDate(day)
+                  ? toastsMoods[checkDate(day).moodArray][
+                      checkDate(day).selectedToast - 1
+                    ].img
+                  : toastEmpty
+              }
+              style={[
+                styles.toast,
+                // { tintColor: day > daysInMonth ? "rgba(0, 0, 0, 0.2)" : "auto" },
+              ]}
+              key={day}
+            />
+          ))}
+      </View>
     </View>
   );
 }
@@ -67,6 +80,7 @@ const styles = StyleSheet.create({
     rowGap: 24,
     height: "100%",
     paddingTop: 48,
+    paddingLeft: 24,
   },
   daysName: {
     color: "#E3A062",
