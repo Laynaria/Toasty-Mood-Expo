@@ -21,6 +21,8 @@ const bgImg = require("../assets/background-toasts-flip.png");
 const pencil = require("../assets/icons/pencil.png");
 
 export default function NewToast() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [selectedToast, setSelectedToast] = useState(0);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
@@ -80,10 +82,24 @@ export default function NewToast() {
         setSelectedToast(todayToast.selectedToast);
         setPhoto(todayToast.photo);
       }
+
+      setIsLoading(false);
     };
 
     loadToasts();
   }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#E3A062", "#FFFFFF"]}
+          style={styles.gradient}
+        />
+        <Text>Loading ...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={{ flex: 1 }}>
