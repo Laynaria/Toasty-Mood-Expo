@@ -59,7 +59,12 @@ export default function Calendar() {
               }
               style={[
                 styles.toast,
-                // { tintColor: day > daysInMonth ? "rgba(0, 0, 0, 0.2)" : "auto" },
+                {
+                  tintColor:
+                    day > parseInt(new Date().toLocaleDateString())
+                      ? "rgba(0, 0, 0, 0.1)"
+                      : "auto",
+                },
               ]}
               key={day}
             />
