@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Calendar from "../../components/Calendar";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text>Toasty Mood Home Page!!!</Text>
+      <Calendar />
       <StatusBar style="auto" />
     </View>
   );
