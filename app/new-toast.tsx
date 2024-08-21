@@ -62,9 +62,11 @@ export default function NewToast() {
             date.toLocaleDateString()
         );
 
-        setNote(todayToast.note);
-        setSelectedToast(todayToast.selectedToast);
-        setPhoto(todayToast.photo);
+        if (todayToast) {
+          setNote(todayToast.note);
+          setSelectedToast(todayToast.selectedToast);
+          setPhoto(todayToast.photo);
+        }
       }
 
       setIsLoading(false);
