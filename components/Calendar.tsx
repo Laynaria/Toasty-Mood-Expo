@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { getToasts } from "../services/storage";
-import { days, daysName, months } from "../services/time";
+import { days, daysName, months, calendarFlexgrow } from "../services/time";
 import toastsMoods from "../services/toasts";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
@@ -69,6 +69,18 @@ export default function Calendar() {
               key={day}
             />
           ))}
+
+        {daysInMonth !== 28 ? (
+          <View
+            style={{
+              width:
+                calendarFlexgrow(daysInMonth) * 38 +
+                calendarFlexgrow(daysInMonth) * 11,
+            }}
+          />
+        ) : (
+          ""
+        )}
       </View>
     </View>
   );
@@ -80,12 +92,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
+    justifyContent: "center",
     flexWrap: "wrap",
     columnGap: 3,
     rowGap: 24,
     height: "100%",
     paddingTop: 48,
-    paddingLeft: 24,
+    // paddingLeft: 24,
   },
   daysName: {
     color: "#E3A062",
