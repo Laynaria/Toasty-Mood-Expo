@@ -1,29 +1,9 @@
 import { Image, StyleSheet } from "react-native";
 import toastsMoods from "../services/toasts";
-import { months } from "../services/time";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
-export default function CalendarCard({
-  toasts,
-  day,
-  selectedYear,
-  selectedMonth,
-}) {
-  const checkDate = (day) => {
-    if (toasts) {
-      return toasts.filter(
-        (toast) =>
-          new Date(toast.date).toLocaleDateString() ===
-          new Date(
-            `${selectedYear}-${
-              months.indexOf(selectedMonth) + 1
-            }-${day}T03:22:00`
-          ).toLocaleDateString()
-      )[0];
-    }
-  };
-
+export default function CalendarCard({ day, checkDate }) {
   return (
     <Image
       source={
