@@ -37,3 +37,14 @@ export const calendarFlexgrow = (daysInmonth) => {
 
   return 0;
 };
+
+export const years = () => {
+  const currentYear = new Date().getFullYear();
+  const yearsArray = [];
+
+  for (let i = 2022; i <= currentYear; i++) {
+    yearsArray.push(i);
+  }
+
+  return yearsArray;
+};

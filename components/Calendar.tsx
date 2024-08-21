@@ -5,12 +5,10 @@ import { days, daysName, months, calendarFlexgrow } from "../services/time";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
 
-export default function Calendar() {
+export default function Calendar({ selectedMonth, selectedYear }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState("September");
-  const [selectedYear, setSelectedYear] = useState("2024");
 
   const daysInMonth = new Date(
     parseInt(selectedYear),
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     columnGap: 3,
     rowGap: 24,
-    height: "100%",
     paddingTop: 48,
   },
   daysName: {
