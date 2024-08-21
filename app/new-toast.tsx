@@ -87,7 +87,7 @@ export default function NewToast() {
   }
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <LinearGradient
           colors={["#E3A062", "#FFFFFF"]}

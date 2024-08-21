@@ -6,7 +6,7 @@ import { months, years } from "../../services/time";
 
 export default function Index() {
   return (
-    <ScrollView style={styles.scroll}>
+    <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         {years().map((year) =>
           months

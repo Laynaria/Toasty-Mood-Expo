@@ -20,7 +20,7 @@ export default function Timeline() {
 
   return (
     <View style={styles.scroll}>
-      <ScrollView style={styles.scroll}>
+      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           {toasts?.map((toast) => (
             <TimelineCard
