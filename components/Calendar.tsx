@@ -3,8 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import { getToasts } from "../services/storage";
 import { days, daysName, months, calendarFlexgrow } from "../services/time";
 import CalendarCard from "./CalendarCard";
+import MonthCard from "./MonthCard";
 
 export default function Calendar() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [toasts, setToasts] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState("September");
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -18,14 +21,22 @@ export default function Calendar() {
   useEffect(() => {
     const loadToasts = async () => {
       setToasts(await getToasts());
+
+      setIsLoading(false);
     };
 
     loadToasts();
   }, []);
 
+  if (isLoading) {
+    return <View />;
+  }
+
   return (
     <View>
       <View style={styles.container}>
+        <MonthCard selectedMonth={selectedMonth} selectedYear={selectedYear} />
+
         {daysName.map((day) => (
           <Text style={styles.daysName} key={day}>
             {day}

@@ -82,7 +82,6 @@ export default function NewToast() {
           colors={["#E3A062", "#FFFFFF"]}
           style={styles.gradient}
         />
-        <Text>Loading ...</Text>
       </View>
     );
   }
