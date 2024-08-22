@@ -12,8 +12,9 @@ export default function MonthCard({
         styles.container,
         {
           marginTop: timeline ? 20 : 0,
-          alignItems: timeline ? "flex-start" : "center",
-          width: timeline ? "72%" : "100%",
+          alignItems: timeline ? "center" : "center",
+          width: timeline ? "65.5%" : "100%",
+          alignSelf: timeline ? "flex-start" : "center",
         },
       ]}
     >
