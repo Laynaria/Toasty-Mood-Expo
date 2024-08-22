@@ -12,7 +12,7 @@ export default function Index() {
 
   const [toasts, setToasts] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [yearNumber, setYearNumber] = useState(2024);
+  const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
