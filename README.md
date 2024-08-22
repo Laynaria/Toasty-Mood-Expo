@@ -6,11 +6,11 @@ Toasty Mood is a Single Page App that will help you to review your mood accordin
 
 ```mermaid
 graph TD;
-    Home(Calendar)-->ToDoList;
-    Home(Calendar)-->Theme;
-    Home(Calendar)-->Timeline;
-    Home(Calendar)-->Shop;
-    Home(Calendar)-->Settings;
+    Home-Calendar-->ToDoList;
+    Home-Calendar-->Theme;
+    Home-Calendar-->Timeline;
+    Home-Calendar-->Shop;
+    Home-Calendar-->Settings;
 ```
 
 ## How It Looks Like
