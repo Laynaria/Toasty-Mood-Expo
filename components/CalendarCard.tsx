@@ -1,28 +1,31 @@
-import { Image, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
+import { router } from "expo-router";
 import toastsMoods from "../services/toasts";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
 export default function CalendarCard({ day, checkDate }) {
   return (
-    <Image
-      source={
-        !!checkDate(day)
-          ? toastsMoods[checkDate(day).moodArray][
-              checkDate(day).selectedToast - 1
-            ].img
-          : toastEmpty
-      }
-      style={[
-        styles.toast,
-        {
-          tintColor:
-            day > parseInt(new Date().toLocaleDateString())
-              ? "#E6E6E6"
-              : "auto",
-        },
-      ]}
-    />
+    <Pressable onPress={() => router.push(`/new-toast/${checkDate().date}`)}>
+      <Image
+        source={
+          !!checkDate(day)
+            ? toastsMoods[checkDate(day).moodArray][
+                checkDate(day).selectedToast - 1
+              ].img
+            : toastEmpty
+        }
+        style={[
+          styles.toast,
+          {
+            tintColor:
+              day > parseInt(new Date().toLocaleDateString())
+                ? "#E6E6E6"
+                : "auto",
+          },
+        ]}
+      />
+    </Pressable>
   );
 }
 

@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
@@ -11,15 +11,15 @@ import {
   Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import MoodChoice from "../components/MoodChoice";
+import MoodChoice from "../../components/MoodChoice";
 import { useEffect, useState } from "react";
 
-import { getToasts, storeToasts } from "../services/storage";
-import { months, daySuffix } from "../services/time";
-import PhotoChoice from "../components/PhotoChoice";
+import { getToasts, storeToasts } from "../../services/storage";
+import { months, daySuffix } from "../../services/time";
+import PhotoChoice from "../../components/PhotoChoice";
 
-const bgImg = require("../assets/background-toasts-flip.png");
-const pencil = require("../assets/icons/pencil.png");
+const bgImg = require("../../assets/background-toasts-flip.png");
+const pencil = require("../../assets/icons/pencil.png");
 
 export default function NewToast() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function NewToast() {
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
-  const date = new Date();
+  const date = new Date(useGlobalSearchParams().date as string);
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();

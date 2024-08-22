@@ -34,13 +34,19 @@ export default function Timeline() {
             selectedYear={selectedYear}
             timeline={true}
           />
-          {toasts?.map((toast) => (
-            <TimelineCard
-              key={toast.date}
-              toast={toast}
-              img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
-            />
-          ))}
+          {toasts
+            // ?.sort(
+            //   (a, b) =>
+            //     new Date(a.date.split("T")[0]).getTime() <
+            //     new Date(b.date.split("T")[0]).getTime()
+            // )
+            ?.map((toast) => (
+              <TimelineCard
+                key={toast.date}
+                toast={toast}
+                img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
+              />
+            ))}
           <StatusBar style="auto" />
         </View>
       </ScrollView>
