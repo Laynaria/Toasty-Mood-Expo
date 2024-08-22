@@ -35,11 +35,11 @@ export default function Timeline() {
             timeline={true}
           />
           {toasts
-            // ?.sort(
-            //   (a, b) =>
-            //     new Date(a.date.split("T")[0]).getTime() <
-            //     new Date(b.date.split("T")[0]).getTime()
-            // )
+            ?.sort(
+              (a, b) =>
+                new Date(a.date.split("T")[0]).getTime() -
+                new Date(b.date.split("T")[0]).getTime()
+            )
             ?.map((toast) => (
               <TimelineCard
                 key={toast.date}
