@@ -42,6 +42,13 @@ export default function Calendar({ selectedMonth, selectedYear, toasts }) {
             <CalendarCard
               day={day}
               checkDate={() => checkDate(day)}
+              date={
+                new Date(
+                  `${selectedYear}-${
+                    months.indexOf(selectedMonth) + 1
+                  }-${day}T03:22:00`
+                )
+              }
               key={day}
             />
           ))}

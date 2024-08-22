@@ -4,11 +4,11 @@ import toastsMoods from "../services/toasts";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
-export default function CalendarCard({ day, checkDate }) {
+export default function CalendarCard({ day, checkDate, date }) {
   return (
     <Pressable
       style={styles.container}
-      onPress={() => router.push(`/new-toast/${checkDate().date}`)}
+      onPress={() => router.push(`/new-toast/${date}`)}
     >
       <Image
         source={
