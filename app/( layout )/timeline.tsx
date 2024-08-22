@@ -4,11 +4,18 @@ import { getToasts } from "../../services/storage";
 import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { months } from "../../services/time";
+
 import toastsMoods from "../../services/toasts";
 import TimelineCard from "../../components/TimelineCard";
+import MonthCard from "../../components/MonthCard";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(
+    months[new Date().getMonth()]
+  );
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -22,6 +29,11 @@ export default function Timeline() {
     <View style={styles.scroll}>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
+          <MonthCard
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            timeline={true}
+          />
           {toasts?.map((toast) => (
             <TimelineCard
               key={toast.date}

@@ -1,9 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Path, Svg } from "react-native-svg";
 
-export default function MonthCard({ selectedMonth, selectedYear }) {
+export default function MonthCard({
+  selectedMonth,
+  selectedYear,
+  timeline = false,
+}) {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          marginTop: timeline ? 20 : 0,
+          alignItems: timeline ? "flex-start" : "center",
+          width: timeline ? "72%" : "100%",
+        },
+      ]}
+    >
       <Svg
         width="156"
         height="48"
@@ -27,9 +40,7 @@ export default function MonthCard({ selectedMonth, selectedYear }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     justifyContent: "center",
-    alignItems: "center",
     marginBottom: 12,
   },
   image: {
