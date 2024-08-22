@@ -1,16 +1,26 @@
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import Calendar from "../../components/Calendar";
 import { getToasts } from "../../services/storage";
 
 import { months, years } from "../../services/time";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const scrollViewRef = useRef<ScrollView>();
   const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [yearNumber, setYearNumber] = useState(2024);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setYearNumber(yearNumber - 1);
+      setRefreshing(false);
+    }, 100);
+  }, [yearNumber]);
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -39,12 +49,24 @@ export default function Index() {
       style={styles.scroll}
       showsVerticalScrollIndicator={false}
       ref={scrollViewRef}
-      onContentSizeChange={() =>
-        scrollViewRef.current.scrollToEnd({ animated: false })
+      onContentSizeChange={() => {
+        if (yearNumber === 2024) {
+          return scrollViewRef.current.scrollToEnd({ animated: false });
+        }
+
+        return scrollViewRef.current.scrollTo({
+          y: 2023 * 3 - 35,
+          animated: false,
+        });
+      }}
+      refreshControl={
+        yearNumber > 2022 ? (
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        ) : null
       }
     >
       <View style={styles.container}>
-        {years().map((year) =>
+        {years(yearNumber).map((year) =>
           months
             .filter(
               (month) =>
