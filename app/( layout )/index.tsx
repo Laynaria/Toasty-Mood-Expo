@@ -56,7 +56,7 @@ export default function Index() {
           }
 
           return scrollViewRef.current.scrollTo({
-            y: 2075 * 3 + 1,
+            y: 2519 * 3 - 0.5,
             animated: false,
           });
         }}
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 108,
-    marginBottom: 250,
+    marginBottom: 143,
     zIndex: 1,
-    gap: 16,
+    gap: 22,
   },
 });
