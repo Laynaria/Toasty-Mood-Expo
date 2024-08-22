@@ -26,13 +26,16 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    top: 0,
+    width: "100%",
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
     padding: 15,
     paddingTop: 30,
-    zIndex: 1,
+    zIndex: 2,
   },
   buttons: {
     marginTop: 10,

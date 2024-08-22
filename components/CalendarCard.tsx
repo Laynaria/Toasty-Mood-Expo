@@ -18,7 +18,7 @@ export default function CalendarCard({ day, checkDate }) {
         {
           tintColor:
             day > parseInt(new Date().toLocaleDateString())
-              ? "rgba(0, 0, 0, 0.1)"
+              ? "#E6E6E6"
               : "auto",
         },
       ]}
