@@ -31,7 +31,11 @@ export default function Navbar() {
         </Pressable>
       </Link>
 
-      <Link href="/new-toast" asChild style={styles.addButton}>
+      <Link
+        href={`/new-toast/${new Date().toString()}`}
+        asChild
+        style={styles.addButton}
+      >
         <Pressable>
           <Image source={addToastIcon} />
         </Pressable>

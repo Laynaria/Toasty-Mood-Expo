@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
@@ -11,14 +11,15 @@ import {
   Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import MoodChoice from "../components/MoodChoice";
+import MoodChoice from "../../components/MoodChoice";
 import { useEffect, useState } from "react";
 
-import { getToasts, storeToasts } from "../services/storage";
-import PhotoChoice from "../components/PhotoChoice";
+import { getToasts, storeToasts } from "../../services/storage";
+import { months, daySuffix } from "../../services/time";
+import PhotoChoice from "../../components/PhotoChoice";
 
-const bgImg = require("../assets/background-toasts-flip.png");
-const pencil = require("../assets/icons/pencil.png");
+const bgImg = require("../../assets/background-toasts-flip.png");
+const pencil = require("../../assets/icons/pencil.png");
 
 export default function NewToast() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,24 +28,7 @@ export default function NewToast() {
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
-  const date = new Date();
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const daySuffix = ["st", "nd", "rd"];
+  const date = new Date(useGlobalSearchParams().date as string);
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
@@ -78,9 +62,11 @@ export default function NewToast() {
             date.toLocaleDateString()
         );
 
-        setNote(todayToast.note);
-        setSelectedToast(todayToast.selectedToast);
-        setPhoto(todayToast.photo);
+        if (todayToast) {
+          setNote(todayToast.note);
+          setSelectedToast(todayToast.selectedToast);
+          setPhoto(todayToast.photo);
+        }
       }
 
       setIsLoading(false);
@@ -96,13 +82,12 @@ export default function NewToast() {
           colors={["#E3A062", "#FFFFFF"]}
           style={styles.gradient}
         />
-        <Text>Loading ...</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <LinearGradient
           colors={["#E3A062", "#FFFFFF"]}
