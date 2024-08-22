@@ -61,7 +61,11 @@ export default function Index() {
       }}
       refreshControl={
         yearNumber > 2022 ? (
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={["#E3A062"]}
+          />
         ) : null
       }
     >
