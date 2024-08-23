@@ -40,6 +40,11 @@ export default function Timeline() {
                 new Date(a.date.split("T")[0]).getTime() -
                 new Date(b.date.split("T")[0]).getTime()
             )
+            .filter(
+              (toast) =>
+                new Date(toast.date).getMonth() ===
+                months.indexOf(selectedMonth)
+            )
             ?.map((toast) => (
               <TimelineCard
                 key={toast.date}
