@@ -99,7 +99,7 @@ export default function NewToast() {
             months[date.getMonth()]
           } ${date.getDate()}${
             date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
-          }`}</Text>
+          } ${date.getFullYear()}`}</Text>
 
           <Text style={[styles.text, { fontWeight: "500" }]}>
             How was your day today?
