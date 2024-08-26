@@ -1,16 +1,17 @@
 import { router, Slot } from "expo-router";
 import { Image, Pressable, StyleSheet } from "react-native";
+import { ThemeColorContextProvider } from "../contexts/ThemeColorContext";
 
 const backIcon = require("../assets/icons/back.png");
 
 export default function RootLayout() {
   return (
-    <>
+    <ThemeColorContextProvider>
       <Pressable onPress={router.back} style={styles.backButton}>
         <Image source={backIcon} style={styles.img} />
       </Pressable>
       <Slot />
-    </>
+    </ThemeColorContextProvider>
   );
 }
 

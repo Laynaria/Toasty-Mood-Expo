@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function ThemeColor() {
-  const themeColors = ["#E3A062", "#5673DB", "#EA4848"];
-  const [selectedTheme, setSelectedTheme] = useState<string>(themeColors[0]);
+  const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
+  const themeColors: string[] = ["#E3A062", "#5673DB", "#EA4848"];
+  //   const [selectedTheme, setSelectedTheme] = useState<string>(themeColors[0]);
 
-  const handlePress = (theme) => {
+  const handlePress = (theme: string) => {
     if (theme !== selectedTheme) {
       setSelectedTheme(themeColors[themeColors.indexOf(theme)]);
     }
   };
 
+  useEffect(() => {
+    console.log(selectedTheme);
+  }, [selectedTheme]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Theme Colour</Text>
 
-      {themeColors.map((theme) => (
+      {themeColors.map((theme: string) => (
         <Pressable
           key={theme}
           onPress={() => handlePress(theme)}
