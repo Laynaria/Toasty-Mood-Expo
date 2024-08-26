@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
   const themeColors: string[] = ["#E3A062", "#5673DB", "#EA4848"];
-  //   const [selectedTheme, setSelectedTheme] = useState<string>(themeColors[0]);
 
   const handlePress = (theme: string) => {
     if (theme !== selectedTheme) {
@@ -13,12 +12,8 @@ export default function ThemeColor() {
     }
   };
 
-  useEffect(() => {
-    console.log(selectedTheme);
-  }, [selectedTheme]);
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: selectedTheme }]}>
       <Text style={styles.text}>Theme Colour</Text>
 
       {themeColors.map((theme: string) => (
@@ -46,7 +41,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     rowGap: 24,
-    backgroundColor: "#E3A062",
     width: "90%",
     paddingHorizontal: 16,
     paddingTop: 5,

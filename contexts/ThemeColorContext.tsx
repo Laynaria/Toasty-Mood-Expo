@@ -8,11 +8,9 @@ const ThemeColorContext = createContext({
 const ThemeColorContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const [selectedTheme, setSelectedTheme] = useState("#E3A062");
+  const [selectedTheme, setSelectedTheme] = useState<string>("#E3A062");
 
-  useEffect(() => {
-    // console.log(selectedTheme);
-  }, [selectedTheme]);
+  useEffect(() => {}, [selectedTheme]);
 
   const userMemo = useMemo(
     () => ({
