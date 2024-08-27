@@ -1,16 +1,30 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
+import { ThemeType } from "../types/theme.types";
+import { getThemeColor } from "../services/storage";
 
 const ThemeColorContext = createContext({
-  selectedTheme: "",
-  setSelectedTheme: (selectedTheme: string) => {},
+  selectedTheme: { primary: "", secondary: "" },
+  setSelectedTheme: (selectedTheme: ThemeType) => {},
 });
 
 const ThemeColorContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const [selectedTheme, setSelectedTheme] = useState<string>("#E3A062");
+  const [selectedTheme, setSelectedTheme] = useState<ThemeType>({
+    primary: "#E3A062",
+    secondary: "#6A3C11",
+  });
 
-  useEffect(() => {}, [selectedTheme]);
+  useEffect(() => {
+    const getTheme = async () => {
+      const response: ThemeType = await getThemeColor();
+      if (response) {
+        setSelectedTheme(response);
+      }
+    };
+
+    getTheme();
+  }, []);
 
   const userMemo = useMemo(
     () => ({

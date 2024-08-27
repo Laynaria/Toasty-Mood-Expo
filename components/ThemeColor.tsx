@@ -1,30 +1,44 @@
 import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeType } from "../types/theme.types";
+import { storeThemeColor } from "../services/storage";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
-  const themeColors: string[] = ["#E3A062", "#5673DB", "#EA4848"];
+  const themeColors: ThemeType[] = [
+    { primary: "#E3A062", secondary: "#6A3C11" },
+    { primary: "#6296E3", secondary: "#F3FAFD" },
+    { primary: "#E47B7B", secondary: "#89122F" },
+  ];
 
-  const handlePress = (theme: string) => {
+  const handlePress = (theme: ThemeType) => {
     if (theme !== selectedTheme) {
       setSelectedTheme(themeColors[themeColors.indexOf(theme)]);
+      storeThemeColor(theme);
     }
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: selectedTheme }]}>
-      <Text style={styles.text}>Theme Colour</Text>
+    <View
+      style={[styles.container, { backgroundColor: selectedTheme.primary }]}
+    >
+      <Text style={[styles.text, { color: selectedTheme.secondary }]}>
+        Theme Colour
+      </Text>
 
-      {themeColors.map((theme: string) => (
+      {themeColors.map((theme: ThemeType) => (
         <Pressable
-          key={theme}
+          key={theme.primary}
           onPress={() => handlePress(theme)}
           style={[
             styles.button,
             {
-              backgroundColor: theme,
-              borderColor: theme === selectedTheme ? "#FFFFFF" : "#6A3C11",
+              backgroundColor: theme.primary,
+              borderColor:
+                theme.primary === selectedTheme.primary
+                  ? theme.secondary
+                  : theme.primary,
             },
           ]}
         />
@@ -49,7 +63,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    color: "#6A3C11",
     width: "100%",
   },
   button: {
