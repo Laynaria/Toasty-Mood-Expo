@@ -1,23 +1,49 @@
 import { Link } from "expo-router";
+import { useContext } from "react";
 import { Pressable, StyleSheet, View, Image } from "react-native";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 const toDoIcon = require("../assets/icons/todo.png");
 const themeIcon = require("../assets/icons/theme.png");
 
 export default function Header() {
+  const { selectedTheme } = useContext(ThemeColorContext);
+
   return (
     <View style={styles.container}>
       <Link href="/todo" asChild>
-        <Pressable style={styles.buttons}>
-          <Image source={toDoIcon} />
+        <Pressable
+          style={{
+            backgroundColor: selectedTheme.primary,
+            marginTop: 10,
+            padding: 15,
+            borderRadius: 15,
+          }}
+        >
+          <Image
+            source={toDoIcon}
+            style={{ tintColor: selectedTheme.secondary }}
+          />
         </Pressable>
       </Link>
 
-      <View style={styles.background} />
+      <View
+        style={[styles.background, { backgroundColor: selectedTheme.primary }]}
+      />
 
       <Link href="/theme" asChild>
-        <Pressable style={styles.buttons}>
-          <Image source={themeIcon} />
+        <Pressable
+          style={{
+            backgroundColor: selectedTheme.primary,
+            marginTop: 10,
+            padding: 15,
+            borderRadius: 15,
+          }}
+        >
+          <Image
+            source={themeIcon}
+            style={{ tintColor: selectedTheme.secondary }}
+          />
         </Pressable>
       </Link>
     </View>
@@ -37,15 +63,8 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     zIndex: 2,
   },
-  buttons: {
-    marginTop: 10,
-    backgroundColor: "#E3A062",
-    padding: 15,
-    borderRadius: 15,
-  },
   background: {
     top: 0,
-    backgroundColor: "#E3A062",
     zIndex: -1,
     width: "120%",
     position: "absolute",
