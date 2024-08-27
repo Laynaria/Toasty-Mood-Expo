@@ -23,7 +23,7 @@ export default function TimelineCard({ toast, img }) {
           style={[styles.dot, { backgroundColor: selectedTheme.primary }]}
         />
         <Image source={img} />
-        <Text>{toast.note}</Text>
+        <Text style={{ color: selectedTheme.secondary }}>{toast.note}</Text>
         {photoSource ? <Image source={photoSource} style={styles.photo} /> : ""}
       </View>
     </View>
