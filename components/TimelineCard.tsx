@@ -1,21 +1,27 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { months, daySuffix } from "../services/time";
+import { useContext } from "react";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function TimelineCard({ toast, img }) {
+  const { selectedTheme } = useContext(ThemeColorContext);
   const date = new Date(toast.date);
 
   const photoSource = toast.photo ? { uri: toast.photo } : null;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.date}>{`${months[date.getMonth()].slice(
-        0,
-        3
-      )}. ${date.getDate()}${
+      <Text
+        style={[styles.date, { color: selectedTheme.secondary }]}
+      >{`${months[date.getMonth()].slice(0, 3)}. ${date.getDate()}${
         date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
       }`}</Text>
-      <View style={styles.content}>
-        <View style={styles.dot} />
+      <View
+        style={[styles.content, { backgroundColor: selectedTheme.primary }]}
+      >
+        <View
+          style={[styles.dot, { backgroundColor: selectedTheme.primary }]}
+        />
         <Image source={img} />
         <Text>{toast.note}</Text>
         {photoSource ? <Image source={photoSource} style={styles.photo} /> : ""}
@@ -32,11 +38,9 @@ const styles = StyleSheet.create({
   date: {
     paddingHorizontal: 16,
     marginBottom: 8,
-    color: "#6A3C11",
   },
   content: {
     justifyContent: "center",
-    backgroundColor: "#E3A062",
     paddingVertical: 32,
     paddingHorizontal: 32,
     borderRadius: 16,
@@ -50,7 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderWidth: 3,
     left: -20,
-    backgroundColor: "#E3A062",
     borderColor: "white",
   },
   photo: {
