@@ -1,9 +1,12 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useContext } from "react";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 const camera = require("../assets/icons/camera.png");
 
 export default function PhotoChoice({ photo, setPhoto }) {
+  const { selectedTheme } = useContext(ThemeColorContext);
   const photoSource = photo ? { uri: photo } : camera;
 
   const handlePhotoChange = async () => {
@@ -22,8 +25,20 @@ export default function PhotoChoice({ photo, setPhoto }) {
   return (
     <Pressable style={styles.inputWrapper} onPress={handlePhotoChange}>
       <View style={styles.photoTop}>
-        <Text style={{ color: "#A9692E" }}>Today's Photo</Text>
-        <Text style={{ color: "#A9692E" }}>+</Text>
+        <Text
+          style={{
+            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+          }}
+        >
+          Today's Photo
+        </Text>
+        <Text
+          style={{
+            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+          }}
+        >
+          +
+        </Text>
       </View>
       <View
         style={[
@@ -31,6 +46,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
           {
             paddingHorizontal: !photo ? 50 : 0,
             paddingVertical: !photo ? 100 : 0,
+            backgroundColor: selectedTheme.primary,
           },
         ]}
       >
@@ -63,7 +79,6 @@ const styles = StyleSheet.create({
   },
   cameraWrapper: {
     margin: 15,
-    backgroundColor: "#E3A062",
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
