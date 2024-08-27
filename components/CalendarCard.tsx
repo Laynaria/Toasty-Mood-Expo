@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import toastsMoods from "../services/toasts";
 import { useContext } from "react";
@@ -15,6 +15,18 @@ export default function CalendarCard({ day, checkDate, date }) {
     }
   };
 
+  const tintColor = () => {
+    if (date.getTime() >= new Date().getTime()) {
+      return "#E6E6E6";
+    }
+
+    if (!checkDate(day)) {
+      return selectedTheme.primary;
+    }
+
+    return "auto";
+  };
+
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image
@@ -28,11 +40,11 @@ export default function CalendarCard({ day, checkDate, date }) {
         style={[
           styles.toast,
           {
-            tintColor:
-              date.getTime() >= new Date().getTime() ? "#E6E6E6" : "auto",
+            tintColor: tintColor(),
           },
         ]}
       />
+
       <Text style={{ color: selectedTheme.primary }}>{day}</Text>
     </Pressable>
   );
