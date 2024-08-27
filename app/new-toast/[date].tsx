@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 
-  pencil: { position: "absolute", left: 97 },
+  pencil: { position: "absolute", left: 97, zIndex: -1 },
 
   doneButton: {
     width: "100%",

@@ -8,7 +8,7 @@ export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
   const themeColors: ThemeType[] = [
     { primary: "#E3A062", secondary: "#6A3C11" },
-    { primary: "#8DAEDF", secondary: "#2685BA" },
+    { primary: "#8DAEDF", secondary: "#1E648B" },
     { primary: "#E47B7B", secondary: "#89122F" },
   ];
 
