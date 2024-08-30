@@ -12,11 +12,12 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MoodChoice from "../../components/MoodChoice";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { getToasts, storeToasts } from "../../services/storage";
 import { months, daySuffix } from "../../services/time";
 import PhotoChoice from "../../components/PhotoChoice";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -27,6 +28,8 @@ export default function NewToast() {
   const [selectedToast, setSelectedToast] = useState(0);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
+
+  const { selectedTheme } = useContext(ThemeColorContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
 
@@ -79,7 +82,7 @@ export default function NewToast() {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={["#E3A062", "#FFFFFF"]}
+          colors={[selectedTheme.primary, "#FFFFFF"]}
           style={styles.gradient}
         />
       </View>
@@ -90,18 +93,26 @@ export default function NewToast() {
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <LinearGradient
-          colors={["#E3A062", "#FFFFFF"]}
+          colors={[selectedTheme.primary, "#FFFFFF"]}
           style={styles.gradient}
         />
 
         <View style={styles.subContainer}>
-          <Text style={[styles.text, { marginBottom: 100 }]}>{`${
-            months[date.getMonth()]
-          } ${date.getDate()}${
+          <Text
+            style={[
+              styles.text,
+              { marginBottom: 100, color: selectedTheme.secondary },
+            ]}
+          >{`${months[date.getMonth()]} ${date.getDate()}${
             date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
           } ${date.getFullYear()}`}</Text>
 
-          <Text style={[styles.text, { fontWeight: "500" }]}>
+          <Text
+            style={[
+              styles.text,
+              { fontWeight: "500", color: selectedTheme.secondary },
+            ]}
+          >
             How was your day today?
           </Text>
           <MoodChoice
@@ -113,19 +124,28 @@ export default function NewToast() {
             <TextInput
               multiline
               placeholder="Today's Note"
-              placeholderTextColor="#A9692E"
-              style={styles.textInput}
+              placeholderTextColor={selectedTheme.primary}
+              style={{ color: selectedTheme.secondary }}
               value={note}
               onChangeText={setNote}
             />
             {note === "" ? (
-              <Image source={pencil} style={styles.pencil} />
+              <Image
+                source={pencil}
+                style={[styles.pencil, { tintColor: selectedTheme.primary }]}
+              />
             ) : null}
           </View>
 
           <PhotoChoice photo={photo} setPhoto={setPhoto} />
 
-          <Pressable style={styles.doneButton} onPress={handleSubmit}>
+          <Pressable
+            style={[
+              styles.doneButton,
+              { backgroundColor: selectedTheme.primary },
+            ]}
+            onPress={handleSubmit}
+          >
             <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
           </Pressable>
           <StatusBar style="auto" />
@@ -154,7 +174,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontSize: 18,
-    color: "#6A3C11",
     fontWeight: "bold",
   },
 
@@ -167,14 +186,9 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 
-  textInput: {
-    color: "#6A3C11",
-  },
-
-  pencil: { position: "absolute", left: 97 },
+  pencil: { position: "absolute", left: 97, zIndex: -1 },
 
   doneButton: {
-    backgroundColor: "#E3A062",
     width: "100%",
     padding: 12,
     borderRadius: 12,

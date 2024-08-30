@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { getToasts } from "../../services/storage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 import { months } from "../../services/time";
 
@@ -16,6 +17,7 @@ export default function Timeline() {
     months[new Date().getMonth()]
   );
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const { selectedTheme } = useContext(ThemeColorContext);
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -56,7 +58,11 @@ export default function Timeline() {
         </View>
       </ScrollView>
       <LinearGradient
-        colors={["rgba(255,255,255, 0)", "#E3A062", "rgba(255,255,255, 0)"]}
+        colors={[
+          "rgba(255,255,255, 0)",
+          selectedTheme.primary,
+          "rgba(255,255,255, 0)",
+        ]}
         style={styles.timebar}
       />
     </View>

@@ -26,7 +26,6 @@ graph TD;
 `#React Native`
 `#TSX`
 `#Typescript`
-`#CSS`
 
 ### Setup
 

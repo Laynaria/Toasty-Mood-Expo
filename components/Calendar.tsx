@@ -3,8 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import { days, daysName, months, calendarFlexgrow } from "../services/time";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
+import { useContext } from "react";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function Calendar({ selectedMonth, selectedYear, toasts }) {
+  const { selectedTheme } = useContext(ThemeColorContext);
   const daysInMonth = new Date(
     parseInt(selectedYear),
     months.indexOf(selectedMonth) + 1,
@@ -31,7 +34,10 @@ export default function Calendar({ selectedMonth, selectedYear, toasts }) {
         <MonthCard selectedMonth={selectedMonth} selectedYear={selectedYear} />
 
         {daysName.map((day) => (
-          <Text style={styles.daysName} key={day}>
+          <Text
+            style={[styles.daysName, { color: selectedTheme.primary }]}
+            key={day}
+          >
             {day}
           </Text>
         ))}
@@ -82,7 +88,6 @@ const styles = StyleSheet.create({
     paddingTop: 48,
   },
   daysName: {
-    color: "#E3A062",
     width: 46,
     textAlign: "center",
   },
