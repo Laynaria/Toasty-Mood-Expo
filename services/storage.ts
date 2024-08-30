@@ -26,3 +26,24 @@ export const deleteToasts = async () => {
     console.warn("Error in deleting your toasts");
   }
 };
+
+// Theme
+
+export const storeThemeColor = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("themeColor", jsonValue);
+  } catch (e) {
+    console.warn("Error in registering your theme color");
+  }
+};
+
+export const getThemeColor = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("themeColor");
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.warn("Error in getting your theme color");
+  }
+};

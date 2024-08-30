@@ -1,15 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-
-import { deleteToasts } from "../../services/storage";
+import { StyleSheet, Text, View } from "react-native";
+import ClearAllData from "../../components/ClearAllData";
+import ThemeColor from "../../components/ThemeColor";
 
 export default function Settings() {
   return (
     <View style={styles.container}>
-      <Text>Toasty Mood Settings Page!!!</Text>
-      <Pressable onPress={deleteToasts}>
-        <Text>Delete Toasts</Text>
-      </Pressable>
+      <ThemeColor />
+
+      {/* <ClearAllData /> */}
 
       <StatusBar style="auto" />
     </View>
@@ -19,7 +18,6 @@ export default function Settings() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -4,7 +4,8 @@ import Calendar from "../../components/Calendar";
 import { getToasts } from "../../services/storage";
 
 import { months, years } from "../../services/time";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useContext } from "react";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export default function Index() {
   const scrollViewRef = useRef<ScrollView>();
@@ -13,6 +14,7 @@ export default function Index() {
   const [toasts, setToasts] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
+  const { selectedTheme } = useContext(ThemeColorContext);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -66,7 +68,7 @@ export default function Index() {
               progressViewOffset={100}
               refreshing={refreshing}
               onRefresh={onRefresh}
-              colors={["#E3A062"]}
+              colors={[selectedTheme.primary]}
             />
           ) : null
         }
