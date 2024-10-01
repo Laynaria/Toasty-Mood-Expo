@@ -1,4 +1,4 @@
-import { Link, router, useGlobalSearchParams, usePathname } from "expo-router";
+import { Link, router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
