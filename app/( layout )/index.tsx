@@ -82,6 +82,8 @@ export default function Index() {
           <FlatList
             inverted
             initialNumToRender={1}
+            maxToRenderPerBatch={2}
+            showsVerticalScrollIndicator={false}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item }) => (
               <Calendar
