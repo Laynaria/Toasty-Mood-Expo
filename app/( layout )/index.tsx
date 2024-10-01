@@ -4,7 +4,7 @@ import Calendar from "../../components/Calendar";
 import { getToasts } from "../../services/storage";
 
 import { months, years } from "../../services/time";
-import { useState, useEffect, useCallback, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 // import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,12 +14,6 @@ export default function Index() {
   const [toasts, setToasts] = useState(null);
   const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
   // const { selectedTheme } = useContext(ThemeColorContext);
-
-  // const onRefresh = useCallback(() => {
-  //   if (yearNumber > 2022) {
-  //     setYearNumber(yearNumber - 1);
-  //   }
-  // }, [yearNumber]);
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -59,15 +53,39 @@ export default function Index() {
         }))
   );
 
+  const checkMonth = (item) => {
+    const index = dataCalendar
+      .flat(Infinity)
+      .findIndex(
+        (i: DataCalendar) => i.month === item.month && i.year === item.year
+      );
+
+    if (index === 0) {
+      return {
+        marginTop: 108,
+      };
+    }
+
+    if (index === dataCalendar.flat(Infinity).length - 1) {
+      return {
+        marginBottom: 143,
+      };
+    }
+
+    return { marginBottem: 0 };
+  };
+
   return (
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlatList
             inverted
+            initialNumToRender={1}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item }) => (
               <Calendar
+                style={checkMonth(item)}
                 selectedMonth={item.month}
                 selectedYear={item.year}
                 toasts={toasts.filter(
@@ -77,7 +95,6 @@ export default function Index() {
               />
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}
-            // onEndReached={onRefresh}
           ></FlatList>
           <StatusBar style="auto" />
         </View>
@@ -95,9 +112,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 108,
-    marginBottom: 143,
     zIndex: 1,
     gap: 22,
   },
+  firstCalendar: {
+    marginTop: 108,
+  },
+  lastCalendar: {
+    marginBottom: 143,
+  },
+  calendar: {},
 });
