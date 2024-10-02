@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Pressable, StyleSheet, View, Image } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
@@ -8,44 +8,53 @@ const themeIcon = require("../assets/icons/theme.png");
 
 export default function Header() {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const path = usePathname();
 
   return (
     <View style={styles.container}>
-      <Link href="/todo" asChild>
-        <Pressable
-          style={{
-            backgroundColor: selectedTheme.primary,
-            marginTop: 10,
-            padding: 15,
-            borderRadius: 15,
-          }}
-        >
-          <Image
-            source={toDoIcon}
-            style={{ tintColor: selectedTheme.secondary }}
-          />
-        </Pressable>
-      </Link>
+      <Pressable
+        style={{
+          backgroundColor: selectedTheme.primary,
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 15,
+        }}
+        onPress={() =>
+          router.navigate({
+            pathname: "/todo",
+            params: { previousPage: path },
+          })
+        }
+      >
+        <Image
+          source={toDoIcon}
+          style={{ tintColor: selectedTheme.secondary }}
+        />
+      </Pressable>
 
       <View
         style={[styles.background, { backgroundColor: selectedTheme.primary }]}
       />
 
-      <Link href="/theme" asChild>
-        <Pressable
-          style={{
-            backgroundColor: selectedTheme.primary,
-            marginTop: 10,
-            padding: 15,
-            borderRadius: 15,
-          }}
-        >
-          <Image
-            source={themeIcon}
-            style={{ tintColor: selectedTheme.secondary }}
-          />
-        </Pressable>
-      </Link>
+      <Pressable
+        style={{
+          backgroundColor: selectedTheme.primary,
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 15,
+        }}
+        onPress={() =>
+          router.navigate({
+            pathname: "/theme",
+            params: { previousPage: path },
+          })
+        }
+      >
+        <Image
+          source={themeIcon}
+          style={{ tintColor: selectedTheme.secondary }}
+        />
+      </Pressable>
     </View>
   );
 }

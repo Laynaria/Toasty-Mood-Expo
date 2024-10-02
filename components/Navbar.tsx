@@ -1,4 +1,4 @@
-import { Link, usePathname } from "expo-router";
+import { Link, router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
@@ -41,15 +41,17 @@ export default function Navbar() {
         </Pressable>
       </Link>
 
-      <Link
-        href={`/new-toast/${new Date().toString()}`}
-        asChild
+      <Pressable
         style={[styles.addButton, { backgroundColor: selectedTheme.primary }]}
+        onPress={() =>
+          router.navigate({
+            pathname: `/new-toast/${new Date().toString()}`,
+            params: { previousPage: path },
+          })
+        }
       >
-        <Pressable>
-          <Image source={addToastIcon} />
-        </Pressable>
-      </Link>
+        <Image source={addToastIcon} />
+      </Pressable>
 
       <Link href="/shop" asChild style={styles.link}>
         <Pressable>
