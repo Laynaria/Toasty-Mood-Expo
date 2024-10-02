@@ -7,6 +7,7 @@ import { months, years } from "../../services/time";
 import { useState, useEffect, useContext } from "react";
 // import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FlashList } from "@shopify/flash-list";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -79,10 +80,9 @@ export default function Index() {
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
-          <FlatList
+          <FlashList
             inverted
-            initialNumToRender={1}
-            maxToRenderPerBatch={2}
+            estimatedItemSize={759}
             showsVerticalScrollIndicator={false}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item }) => (
@@ -97,7 +97,7 @@ export default function Index() {
               />
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}
-          ></FlatList>
+          />
           <StatusBar style="auto" />
         </View>
       </SafeAreaView>
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     zIndex: 1,
     gap: 22,
   },
