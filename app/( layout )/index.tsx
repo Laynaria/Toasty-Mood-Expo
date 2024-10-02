@@ -82,7 +82,7 @@ export default function Index() {
         <View style={styles.container}>
           <FlashList
             inverted
-            estimatedItemSize={759}
+            estimatedItemSize={1000}
             showsVerticalScrollIndicator={false}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item }) => (
