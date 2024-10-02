@@ -1,8 +1,11 @@
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import toastsMoods from "../services/toasts";
+import { useContext } from "react";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function MoodChoice({ selectedToast, setSelectedToast }) {
+  const { selectedTheme } = useContext(ThemeColorContext);
   const handleToastChange = (id) => {
     setSelectedToast(id);
   };
@@ -14,7 +17,10 @@ export default function MoodChoice({ selectedToast, setSelectedToast }) {
           key={toast.id}
           style={[
             styles.button,
-            selectedToast === toast.id ? styles.selected : null,
+            {
+              backgroundColor:
+                selectedToast === toast.id ? selectedTheme.primary : null,
+            },
           ]}
           onPress={() => handleToastChange(toast.id)}
         >
@@ -35,8 +41,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: "transparent",
-  },
-  selected: {
-    backgroundColor: "#E3A062",
   },
 });
