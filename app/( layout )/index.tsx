@@ -12,7 +12,7 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState(null);
-  const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
+  // const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
   // const { selectedTheme } = useContext(ThemeColorContext);
 
   useEffect(() => {
@@ -117,11 +117,4 @@ const styles = StyleSheet.create({
     zIndex: 1,
     gap: 22,
   },
-  firstCalendar: {
-    marginTop: 108,
-  },
-  lastCalendar: {
-    marginBottom: 143,
-  },
-  calendar: {},
 });
