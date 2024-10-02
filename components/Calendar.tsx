@@ -6,7 +6,12 @@ import MonthCard from "./MonthCard";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
-export default function Calendar({ selectedMonth, selectedYear, toasts }) {
+export default function Calendar({
+  selectedMonth,
+  selectedYear,
+  toasts,
+  style,
+}) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const daysInMonth = new Date(
     parseInt(selectedYear),
@@ -30,7 +35,7 @@ export default function Calendar({ selectedMonth, selectedYear, toasts }) {
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <MonthCard selectedMonth={selectedMonth} selectedYear={selectedYear} />
 
         {daysName.map((day) => (

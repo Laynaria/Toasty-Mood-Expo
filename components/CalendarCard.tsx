@@ -1,8 +1,9 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { router } from "expo-router";
 import toastsMoods from "../services/toasts";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { Image } from "expo-image";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
@@ -43,6 +44,7 @@ export default function CalendarCard({ day, checkDate, date }) {
             tintColor: tintColor(),
           },
         ]}
+        recyclingKey={date}
       />
 
       <Text style={{ color: selectedTheme.primary }}>{day}</Text>
