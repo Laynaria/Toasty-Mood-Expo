@@ -25,7 +25,8 @@
     "expo-image-picker": "~15.0.7",
     "react-native-svg": "15.2.0",
     "@shopify/flash-list": "1.6.4",
-    "expo-image": "~1.13.0"
+    "expo-image": "~1.13.0",
+    "expo-system-ui": "~3.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
