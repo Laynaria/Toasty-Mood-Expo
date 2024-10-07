@@ -3,7 +3,7 @@ import { ThemeType } from "../types/theme.types";
 import { getThemeColor } from "../services/storage";
 
 const ThemeColorContext = createContext({
-  selectedTheme: { primary: "", secondary: "" },
+  selectedTheme: { primary: "", secondary: "", darkBackground: "" },
   setSelectedTheme: (selectedTheme: ThemeType) => {},
 });
 
@@ -13,6 +13,7 @@ const ThemeColorContextProvider = ({
   const [selectedTheme, setSelectedTheme] = useState<ThemeType>({
     primary: "#E3A062",
     secondary: "#6A3C11",
+    darkBackground: "#221603",
   });
 
   useEffect(() => {
