@@ -17,18 +17,6 @@ export default function CalendarCard({ day, checkDate, date }) {
     }
   };
 
-  const tintColor = () => {
-    if (date.getTime() >= new Date().getTime()) {
-      return colorScheme === "light" ? "#E6E6E6" : "#272727";
-    }
-
-    if (!checkDate(day)) {
-      return selectedTheme.primary;
-    }
-
-    return "auto";
-  };
-
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image
@@ -42,7 +30,8 @@ export default function CalendarCard({ day, checkDate, date }) {
         style={[
           styles.toast,
           {
-            tintColor: tintColor(),
+            tintColor: !checkDate(day) ? selectedTheme.primary : "auto",
+            opacity: date.getTime() >= new Date().getTime() ? 0.5 : 1,
           },
         ]}
         recyclingKey={date}
