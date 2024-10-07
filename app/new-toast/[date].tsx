@@ -9,6 +9,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  useColorScheme,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MoodChoice from "../../components/MoodChoice";
@@ -30,6 +31,7 @@ export default function NewToast() {
   const [photo, setPhoto] = useState(null);
 
   const { selectedTheme } = useContext(ThemeColorContext);
+  let colorScheme = useColorScheme();
 
   const date = new Date(useGlobalSearchParams().date as string);
 
@@ -82,7 +84,10 @@ export default function NewToast() {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={[selectedTheme.primary, "#FFFFFF"]}
+          colors={[
+            selectedTheme.primary,
+            colorScheme === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+          ]}
           style={styles.gradient}
         />
       </View>
@@ -93,7 +98,10 @@ export default function NewToast() {
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <LinearGradient
-          colors={[selectedTheme.primary, "#FFFFFF"]}
+          colors={[
+            selectedTheme.primary,
+            colorScheme === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+          ]}
           style={styles.gradient}
         />
 
@@ -110,7 +118,13 @@ export default function NewToast() {
           <Text
             style={[
               styles.text,
-              { fontWeight: "500", color: selectedTheme.secondary },
+              {
+                fontWeight: "500",
+                color:
+                  colorScheme === "light"
+                    ? selectedTheme.secondary
+                    : selectedTheme.primary,
+              },
             ]}
           >
             How was your day today?
@@ -146,7 +160,19 @@ export default function NewToast() {
             ]}
             onPress={handleSubmit}
           >
-            <Text style={[styles.text, { color: "white" }]}>I'm Done!</Text>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color:
+                    colorScheme === "light"
+                      ? "white"
+                      : selectedTheme.darkBackground,
+                },
+              ]}
+            >
+              I'm Done!
+            </Text>
           </Pressable>
           <StatusBar style="auto" />
         </View>
