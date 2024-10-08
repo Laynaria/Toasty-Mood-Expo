@@ -1,7 +1,8 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { Image } from "expo-image";
 
 const camera = require("../../assets/icons/camera.png");
 
@@ -73,6 +74,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
             borderRadius: !photo ? 0 : 5,
             tintColor: tintColor(),
           }}
+          recyclingKey={photo}
         />
       </View>
     </Pressable>
