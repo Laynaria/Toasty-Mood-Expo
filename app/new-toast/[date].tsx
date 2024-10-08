@@ -85,8 +85,10 @@ export default function NewToast() {
       <View style={styles.container}>
         <LinearGradient
           colors={[
-            selectedTheme.primary,
-            colorScheme === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+            colorScheme === "light"
+              ? selectedTheme.primary
+              : selectedTheme.darkBackground,
+            colorScheme === "light" ? "#FFFFFF" : selectedTheme.secondary,
           ]}
           style={styles.gradient}
         />
@@ -99,8 +101,10 @@ export default function NewToast() {
       <View style={styles.container}>
         <LinearGradient
           colors={[
-            selectedTheme.primary,
-            colorScheme === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+            colorScheme === "light"
+              ? selectedTheme.primary
+              : selectedTheme.darkBackground,
+            colorScheme === "light" ? "#FFFFFF" : selectedTheme.secondary,
           ]}
           style={styles.gradient}
         />
@@ -109,7 +113,13 @@ export default function NewToast() {
           <Text
             style={[
               styles.text,
-              { marginBottom: 100, color: selectedTheme.secondary },
+              {
+                marginBottom: 100,
+                color:
+                  colorScheme === "light"
+                    ? selectedTheme.secondary
+                    : selectedTheme.primary,
+              },
             ]}
           >{`${months[date.getMonth()]} ${date.getDate()}${
             date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]

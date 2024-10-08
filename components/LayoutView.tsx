@@ -1,19 +1,31 @@
 import { View } from "react-native";
-import { Slot } from "expo-router";
+import { Slot, usePathname } from "expo-router";
 import BackArrow from "./BackArrow";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function LayoutView() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+  const path = usePathname();
+
+  const bgColor = () => {
+    if (colorScheme() !== "light") {
+      if (path.startsWith("/new-toast")) {
+        return selectedTheme.secondary;
+      }
+
+      return selectedTheme.darkBackground;
+    }
+
+    return "#FFFFFF";
+  };
 
   return (
     <View
       style={{
         display: "flex",
         height: "100%",
-        backgroundColor:
-          colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+        backgroundColor: bgColor(),
       }}
     >
       <BackArrow />

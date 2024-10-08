@@ -1,4 +1,4 @@
-import { router, useGlobalSearchParams, usePathname } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
@@ -9,7 +9,6 @@ export default function BackArrow() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   const { previousPage } = useGlobalSearchParams();
-  const path = usePathname();
 
   const handlePress = () => {
     previousPage
@@ -25,7 +24,7 @@ export default function BackArrow() {
           styles.img,
           {
             tintColor:
-              colorScheme() === "light" || path.startsWith("/new-toast")
+              colorScheme() === "light"
                 ? selectedTheme.secondary
                 : selectedTheme.primary,
           },
