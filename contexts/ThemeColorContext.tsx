@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { ThemePreference, ThemeType } from "../types/theme.types";
-import { getThemeColor } from "../services/storage";
+import { getThemeColor, getThemePreference } from "../services/storage";
 import { useColorScheme } from "react-native";
 
 const ThemeColorContext = createContext({
@@ -42,7 +42,16 @@ const ThemeColorContextProvider = ({
       }
     };
 
+    const getPreference = async () => {
+      const response: ThemePreference = await getThemePreference();
+
+      if (response) {
+        setThemePreference(response);
+      }
+    };
+
     getTheme();
+    getPreference();
   }, []);
 
   const userMemo = useMemo(

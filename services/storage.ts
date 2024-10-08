@@ -47,3 +47,22 @@ export const getThemeColor = async () => {
     console.warn("Error in getting your theme color");
   }
 };
+
+export const storeThemePreference = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("themePreference", jsonValue);
+  } catch (e) {
+    console.warn("Error in registering your theme preference");
+  }
+};
+
+export const getThemePreference = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("themePreference");
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.warn("Error in getting your theme preference");
+  }
+};

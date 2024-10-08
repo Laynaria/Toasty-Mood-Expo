@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemePreference } from "../../types/theme.types";
+import { storeThemePreference } from "../../services/storage";
 
 export default function ThemeSetting() {
   const { selectedTheme, themePreference, setThemePreference, colorScheme } =
@@ -12,7 +13,7 @@ export default function ThemeSetting() {
   const handlePress = (theme: ThemePreference) => {
     if (theme !== themePreference) {
       setThemePreference(theme);
-      // storeThemePreference(theme);
+      storeThemePreference(theme);
     }
   };
 
