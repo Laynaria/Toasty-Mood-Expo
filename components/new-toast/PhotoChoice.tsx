@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-const camera = require("../assets/icons/camera.png");
+const camera = require("../../assets/icons/camera.png");
 
 export default function PhotoChoice({ photo, setPhoto }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
@@ -22,6 +22,18 @@ export default function PhotoChoice({ photo, setPhoto }) {
     }
   };
 
+  const tintColor = () => {
+    if (photoSource !== camera) {
+      return "";
+    }
+
+    if (colorScheme() !== "light") {
+      return selectedTheme.darkBackground;
+    }
+
+    return "white";
+  };
+
   return (
     <Pressable
       style={[styles.inputWrapper, { borderColor: selectedTheme.primary }]}
@@ -30,7 +42,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
       <View style={styles.photoTop}>
         <Text
           style={{
-            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+            color: selectedTheme.primary,
           }}
         >
           Today's Photo
@@ -59,10 +71,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
             width: !photo ? 54 : "100%",
             height: !photo ? 49 : 300,
             borderRadius: !photo ? 0 : 5,
-            tintColor:
-              colorScheme() === "light"
-                ? "white"
-                : selectedTheme.darkBackground,
+            tintColor: tintColor(),
           }}
         />
       </View>

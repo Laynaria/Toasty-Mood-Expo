@@ -12,12 +12,12 @@ import {
   useColorScheme,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import MoodChoice from "../../components/MoodChoice";
+import MoodChoice from "../../components/new-toast/MoodChoice";
 import { useContext, useEffect, useState } from "react";
 
 import { getToasts, storeToasts } from "../../services/storage";
 import { months, daySuffix } from "../../services/time";
-import PhotoChoice from "../../components/PhotoChoice";
+import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
