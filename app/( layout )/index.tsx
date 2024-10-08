@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Calendar from "../../components/Calendar";
 import { getToasts } from "../../services/storage";
 
 import { months, years } from "../../services/time";
-import { useState, useEffect, useContext } from "react";
-// import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 
@@ -13,8 +11,6 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [toasts, setToasts] = useState(null);
-  // const [yearNumber, setYearNumber] = useState(new Date().getFullYear());
-  // const { selectedTheme } = useContext(ThemeColorContext);
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -40,18 +36,17 @@ export default function Index() {
 
   type DataCalendar = { month: string; year: string };
 
-  const dataCalendar: DataCalendar[][] = years(2022 /*yearNumber*/).map(
-    (year) =>
-      months
-        .filter(
-          (month) =>
-            months.indexOf(month) <= new Date().getMonth() ||
-            year !== new Date().getFullYear()
-        )
-        .map((month) => ({
-          month,
-          year: year as string,
-        }))
+  const dataCalendar: DataCalendar[][] = years(2022).map((year) =>
+    months
+      .filter(
+        (month) =>
+          months.indexOf(month) <= new Date().getMonth() ||
+          year !== new Date().getFullYear()
+      )
+      .map((month) => ({
+        month,
+        year: year as string,
+      }))
   );
 
   const checkMonth = (item) => {
@@ -98,7 +93,6 @@ export default function Index() {
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}
           />
-          <StatusBar style="auto" />
         </View>
       </SafeAreaView>
     </View>
@@ -112,8 +106,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     zIndex: 1,
     gap: 22,
   },

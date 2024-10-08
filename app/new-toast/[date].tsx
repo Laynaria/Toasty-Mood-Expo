@@ -1,5 +1,4 @@
 import { router, useGlobalSearchParams } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
   StyleSheet,
@@ -145,7 +144,6 @@ export default function NewToast() {
           >
             <TextNewToast text="I'm Done!" style={{}} />
           </Pressable>
-          <StatusBar style="auto" />
         </View>
         <Image source={bgImg} style={styles.background} />
       </View>

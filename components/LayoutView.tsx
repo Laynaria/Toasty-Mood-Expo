@@ -3,6 +3,7 @@ import { Slot, usePathname } from "expo-router";
 import BackArrow from "./BackArrow";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { StatusBar } from "expo-status-bar";
 
 export default function LayoutView() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
@@ -30,6 +31,7 @@ export default function LayoutView() {
     >
       <BackArrow />
       <Slot />
+      <StatusBar style="inverted" />
     </View>
   );
 }

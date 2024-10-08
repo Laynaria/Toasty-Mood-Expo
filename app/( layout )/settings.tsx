@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 // import ClearAllData from "../../components/ClearAllData";
 import ThemeColor from "../../components/settings/ThemeColor";
@@ -11,8 +10,6 @@ export default function Settings() {
       <ThemeSetting />
 
       {/* <ClearAllData /> */}
-
-      <StatusBar style="auto" />
     </View>
   );
 }
