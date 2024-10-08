@@ -23,7 +23,10 @@ export default function PhotoChoice({ photo, setPhoto }) {
   };
 
   return (
-    <Pressable style={styles.inputWrapper} onPress={handlePhotoChange}>
+    <Pressable
+      style={[styles.inputWrapper, { borderColor: selectedTheme.primary }]}
+      onPress={handlePhotoChange}
+    >
       <View style={styles.photoTop}>
         <Text
           style={{
@@ -70,8 +73,6 @@ export default function PhotoChoice({ photo, setPhoto }) {
 const styles = StyleSheet.create({
   inputWrapper: {
     justifyContent: "center",
-    backgroundColor: "rgba(241, 239, 237, 0.5)",
-    borderColor: "#E1DCDC",
     borderRadius: 5,
     borderWidth: 1,
     padding: 5,

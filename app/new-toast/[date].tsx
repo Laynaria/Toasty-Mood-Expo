@@ -144,12 +144,17 @@ export default function NewToast() {
             setSelectedToast={setSelectedToast}
           />
 
-          <View style={styles.inputWrapper}>
+          <View
+            style={[
+              styles.inputWrapper,
+              { borderColor: selectedTheme.primary },
+            ]}
+          >
             <TextInput
               multiline
               placeholder="Today's Note"
               placeholderTextColor={selectedTheme.primary}
-              style={{ color: selectedTheme.secondary }}
+              style={{ color: selectedTheme.primary }}
               value={note}
               onChangeText={setNote}
             />
@@ -215,8 +220,8 @@ const styles = StyleSheet.create({
 
   inputWrapper: {
     justifyContent: "center",
-    backgroundColor: "rgba(241, 239, 237, 0.5)",
-    borderColor: "#E1DCDC",
+    // backgroundColor: "rgba(241, 239, 237, 0.5)",
+    // borderColor: "#E1DCDC",
     borderRadius: 5,
     borderWidth: 1,
     padding: 5,
