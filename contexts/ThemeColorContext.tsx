@@ -12,7 +12,9 @@ import { useColorScheme } from "react-native";
 const ThemeColorContext = createContext({
   selectedTheme: { primary: "", secondary: "", darkBackground: "" },
   setSelectedTheme: (selectedTheme: ThemeType) => {},
-  colorScheme: (): ThemePreference => "automatic",
+  themePreference: "",
+  setThemePreference: (themePreference: ThemePreference) => {},
+  colorScheme: (): ThemePreference => "system",
 });
 
 const ThemeColorContextProvider = ({
@@ -24,11 +26,13 @@ const ThemeColorContextProvider = ({
     darkBackground: "#221603",
   });
   const [themePreference, setThemePreference] =
-    useState<ThemePreference>("automatic");
+    useState<ThemePreference>("system");
 
-  const colorScheme = useCallback(() => {
-    return themePreference === "automatic" ? useColorScheme() : themePreference;
-  }, [themePreference]);
+  const phoneScheme = useColorScheme();
+
+  const colorScheme = () => {
+    return themePreference === "system" ? phoneScheme : themePreference;
+  };
 
   useEffect(() => {
     const getTheme = async () => {
@@ -45,9 +49,17 @@ const ThemeColorContextProvider = ({
     () => ({
       selectedTheme,
       setSelectedTheme,
+      themePreference,
+      setThemePreference,
       colorScheme,
     }),
-    [selectedTheme, setSelectedTheme, colorScheme]
+    [
+      selectedTheme,
+      setSelectedTheme,
+      themePreference,
+      setThemePreference,
+      colorScheme,
+    ]
   );
 
   return (

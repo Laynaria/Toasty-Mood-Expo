@@ -4,4 +4,4 @@ export type ThemeType = {
   darkBackground: string;
 };
 
-export type ThemePreference = "light" | "dark" | "automatic";
+export type ThemePreference = "light" | "dark" | "system";

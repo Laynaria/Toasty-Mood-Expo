@@ -1,12 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import ClearAllData from "../../components/ClearAllData";
-import ThemeColor from "../../components/ThemeColor";
+// import ClearAllData from "../../components/ClearAllData";
+import ThemeColor from "../../components/settings/ThemeColor";
+import ThemeSetting from "../../components/settings/ThemeSetting";
 
 export default function Settings() {
   return (
     <View style={styles.container}>
       <ThemeColor />
+      <ThemeSetting />
 
       {/* <ClearAllData /> */}
 
@@ -20,5 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    gap: 30,
   },
 });
