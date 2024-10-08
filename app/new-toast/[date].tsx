@@ -11,15 +11,15 @@ import {
   Dimensions,
   useColorScheme,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import MoodChoice from "../../components/new-toast/MoodChoice";
 import { useContext, useEffect, useState } from "react";
 
 import { getToasts, storeToasts } from "../../services/storage";
-import { months, daySuffix } from "../../services/time";
+
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
+import DateNewToast from "../../components/new-toast/DateNewToast";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -95,20 +95,7 @@ export default function NewToast() {
         <GradientNewToast />
 
         <View style={styles.subContainer}>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginBottom: 100,
-                color:
-                  colorScheme === "light"
-                    ? selectedTheme.secondary
-                    : selectedTheme.primary,
-              },
-            ]}
-          >{`${months[date.getMonth()]} ${date.getDate()}${
-            date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
-          } ${date.getFullYear()}`}</Text>
+          <DateNewToast date={date} />
 
           <Text
             style={[
