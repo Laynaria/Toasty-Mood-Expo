@@ -19,6 +19,7 @@ import { getToasts, storeToasts } from "../../services/storage";
 import { months, daySuffix } from "../../services/time";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import GradientNewToast from "../../components/new-toast/GradientNewToast";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -83,15 +84,7 @@ export default function NewToast() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <LinearGradient
-          colors={[
-            colorScheme === "light"
-              ? selectedTheme.primary
-              : selectedTheme.darkBackground,
-            colorScheme === "light" ? "#FFFFFF" : selectedTheme.secondary,
-          ]}
-          style={styles.gradient}
-        />
+        <GradientNewToast />
       </View>
     );
   }
@@ -99,15 +92,7 @@ export default function NewToast() {
   return (
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <LinearGradient
-          colors={[
-            colorScheme === "light"
-              ? selectedTheme.primary
-              : selectedTheme.darkBackground,
-            colorScheme === "light" ? "#FFFFFF" : selectedTheme.secondary,
-          ]}
-          style={styles.gradient}
-        />
+        <GradientNewToast />
 
         <View style={styles.subContainer}>
           <Text
@@ -220,8 +205,6 @@ const styles = StyleSheet.create({
 
   inputWrapper: {
     justifyContent: "center",
-    // backgroundColor: "rgba(241, 239, 237, 0.5)",
-    // borderColor: "#E1DCDC",
     borderRadius: 5,
     borderWidth: 1,
     padding: 5,
@@ -240,12 +223,5 @@ const styles = StyleSheet.create({
     width: "100%",
     bottom: 0,
     zIndex: -1,
-  },
-
-  gradient: {
-    position: "absolute",
-    width: "100%",
-    height: "50%",
-    top: 0,
   },
 });
