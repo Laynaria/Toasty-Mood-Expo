@@ -1,26 +1,43 @@
 import { StyleSheet, Text } from "react-native";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { months, daySuffix } from "../../services/time";
 
-export default function DateNewToast({ date }) {
+export default function TextNewToast({ text, style }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+
+  if (text === "I'm Done!") {
+    return (
+      <Text
+        style={[
+          styles.text,
+          {
+            color:
+              colorScheme() === "light"
+                ? "white"
+                : selectedTheme.darkBackground,
+          },
+        ]}
+      >
+        I'm Done!
+      </Text>
+    );
+  }
 
   return (
     <Text
       style={[
         styles.text,
+        style,
         {
-          marginBottom: 100,
           color:
             colorScheme() === "light"
               ? selectedTheme.secondary
               : selectedTheme.primary,
         },
       ]}
-    >{`${months[date.getMonth()]} ${date.getDate()}${
-      date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
-    } ${date.getFullYear()}`}</Text>
+    >
+      {text}
+    </Text>
   );
 }
 

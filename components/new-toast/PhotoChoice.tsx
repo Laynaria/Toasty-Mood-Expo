@@ -17,7 +17,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
 
     if (!result.canceled) {
       setPhoto(result.assets[0].uri);
-    } else {
+    } else if (!photo) {
       alert("You did not select a photo.");
     }
   };
@@ -49,7 +49,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
         </Text>
         <Text
           style={{
-            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+            color: selectedTheme.primary,
           }}
         >
           +

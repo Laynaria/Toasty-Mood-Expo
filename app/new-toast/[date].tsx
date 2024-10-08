@@ -3,23 +3,22 @@ import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
   StyleSheet,
-  Text,
   TextInput,
   View,
   Image,
   ScrollView,
   Dimensions,
-  useColorScheme,
 } from "react-native";
-import MoodChoice from "../../components/new-toast/MoodChoice";
 import { useContext, useEffect, useState } from "react";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
+import { months, daySuffix } from "../../services/time";
 import { getToasts, storeToasts } from "../../services/storage";
 
-import PhotoChoice from "../../components/new-toast/PhotoChoice";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
-import DateNewToast from "../../components/new-toast/DateNewToast";
+import TextNewToast from "../../components/new-toast/TextNewToast";
+import MoodChoice from "../../components/new-toast/MoodChoice";
+import PhotoChoice from "../../components/new-toast/PhotoChoice";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -32,7 +31,6 @@ export default function NewToast() {
   const [photo, setPhoto] = useState(null);
 
   const { selectedTheme } = useContext(ThemeColorContext);
-  let colorScheme = useColorScheme();
 
   const date = new Date(useGlobalSearchParams().date as string);
 
@@ -95,22 +93,20 @@ export default function NewToast() {
         <GradientNewToast />
 
         <View style={styles.subContainer}>
-          <DateNewToast date={date} />
+          <TextNewToast
+            text={`${months[date.getMonth()]} ${date.getDate()}${
+              date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
+            } ${date.getFullYear()}`}
+            style={{ marginBottom: 100 }}
+          />
 
-          <Text
-            style={[
-              styles.text,
-              {
-                fontWeight: "500",
-                color:
-                  colorScheme === "light"
-                    ? selectedTheme.secondary
-                    : selectedTheme.primary,
-              },
-            ]}
-          >
-            How was your day today?
-          </Text>
+          <TextNewToast
+            text="How was your day today?"
+            style={{
+              fontWeight: "500",
+            }}
+          />
+
           <MoodChoice
             selectedToast={selectedToast}
             setSelectedToast={setSelectedToast}
@@ -147,19 +143,7 @@ export default function NewToast() {
             ]}
             onPress={handleSubmit}
           >
-            <Text
-              style={[
-                styles.text,
-                {
-                  color:
-                    colorScheme === "light"
-                      ? "white"
-                      : selectedTheme.darkBackground,
-                },
-              ]}
-            >
-              I'm Done!
-            </Text>
+            <TextNewToast text="I'm Done!" style={{}} />
           </Pressable>
           <StatusBar style="auto" />
         </View>
@@ -182,12 +166,6 @@ const styles = StyleSheet.create({
     height: "100%",
     gap: 20,
     justifyContent: "flex-start",
-  },
-
-  text: {
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 
   inputWrapper: {
