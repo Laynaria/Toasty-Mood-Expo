@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useMemo,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { createContext, useState, useMemo, useEffect } from "react";
 import { ThemePreference, ThemeType } from "../types/theme.types";
 import { getThemeColor, getThemePreference } from "../services/storage";
 import { useColorScheme } from "react-native";

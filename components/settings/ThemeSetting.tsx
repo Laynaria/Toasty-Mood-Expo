@@ -5,7 +5,7 @@ import { ThemePreference } from "../../types/theme.types";
 import { storeThemePreference } from "../../services/storage";
 
 export default function ThemeSetting() {
-  const { selectedTheme, themePreference, setThemePreference, colorScheme } =
+  const { selectedTheme, themePreference, setThemePreference } =
     useContext(ThemeColorContext);
 
   const themeSetting: ThemePreference[] = ["light", "dark", "system"];

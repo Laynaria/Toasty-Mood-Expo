@@ -1,12 +1,6 @@
 import { Link, router, usePathname } from "expo-router";
 import { useContext } from "react";
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 const addToastIcon = require("../assets/toasts/toast-okay.png");
@@ -18,11 +12,10 @@ const settingsIcon = require("../assets/icons/settings.png");
 
 export default function Navbar() {
   const path = usePathname();
-  const { selectedTheme } = useContext(ThemeColorContext);
-  let colorScheme = useColorScheme();
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   const selectedColor = () => {
-    return colorScheme === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
+    return colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
   };
 
   return (
@@ -61,7 +54,9 @@ export default function Navbar() {
           {
             backgroundColor: selectedTheme.primary,
             borderColor:
-              colorScheme === "light" ? "white" : selectedTheme.darkBackground,
+              colorScheme() === "light"
+                ? "white"
+                : selectedTheme.darkBackground,
           },
         ]}
         onPress={() =>

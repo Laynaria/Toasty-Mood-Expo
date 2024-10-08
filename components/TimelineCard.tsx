@@ -1,11 +1,10 @@
-import { Image, StyleSheet, Text, useColorScheme, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { months, daySuffix } from "../services/time";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function TimelineCard({ toast, img }) {
-  const { selectedTheme } = useContext(ThemeColorContext);
-  let colorScheme = useColorScheme();
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const date = new Date(toast.date);
 
   const photoSource = toast.photo ? { uri: toast.photo } : null;
@@ -17,7 +16,7 @@ export default function TimelineCard({ toast, img }) {
           styles.date,
           {
             color:
-              colorScheme === "light"
+              colorScheme() === "light"
                 ? selectedTheme.secondary
                 : selectedTheme.primary,
           },
@@ -34,7 +33,7 @@ export default function TimelineCard({ toast, img }) {
             {
               backgroundColor: selectedTheme.primary,
               borderColor:
-                colorScheme === "light"
+                colorScheme() === "light"
                   ? "white"
                   : selectedTheme.darkBackground,
             },
