@@ -3,3 +3,5 @@ export type ThemeType = {
   secondary: string;
   darkBackground: string;
 };
+
+export type ThemePreference = "light" | "dark" | "automatic";

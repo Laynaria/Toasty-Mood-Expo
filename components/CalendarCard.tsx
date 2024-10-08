@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { router } from "expo-router";
 import toastsMoods from "../services/toasts";
 import { useContext } from "react";
@@ -9,7 +9,6 @@ const toastEmpty = require("../assets/icons/toast-empty.png");
 
 export default function CalendarCard({ day, checkDate, date }) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  let colorScheme = useColorScheme();
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {

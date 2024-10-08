@@ -1,11 +1,4 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
@@ -13,8 +6,7 @@ import { ThemeColorContext } from "../contexts/ThemeColorContext";
 const camera = require("../assets/icons/camera.png");
 
 export default function PhotoChoice({ photo, setPhoto }) {
-  const { selectedTheme } = useContext(ThemeColorContext);
-  let colorScheme = useColorScheme();
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const photoSource = photo ? { uri: photo } : camera;
 
   const handlePhotoChange = async () => {
@@ -65,7 +57,9 @@ export default function PhotoChoice({ photo, setPhoto }) {
             height: !photo ? 49 : 300,
             borderRadius: !photo ? 0 : 5,
             tintColor:
-              colorScheme === "light" ? "white" : selectedTheme.darkBackground,
+              colorScheme() === "light"
+                ? "white"
+                : selectedTheme.darkBackground,
           }}
         />
       </View>
