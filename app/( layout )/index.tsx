@@ -75,7 +75,7 @@ export default function Index() {
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
-          <FlashList
+          <FlashList<DataCalendar>
             inverted
             estimatedItemSize={1000}
             showsVerticalScrollIndicator={false}

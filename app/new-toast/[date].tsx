@@ -46,12 +46,12 @@ export default function NewToast() {
         ),
         newToast,
       ]);
-      return router.back();
+      return router.push("/");
     }
 
     await storeToasts([newToast]);
 
-    router.back();
+    router.push("/");
   };
 
   useEffect(() => {
