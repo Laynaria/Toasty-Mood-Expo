@@ -1,12 +1,13 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { Image } from "expo-image";
 
-const camera = require("../assets/icons/camera.png");
+const camera = require("../../assets/icons/camera.png");
 
 export default function PhotoChoice({ photo, setPhoto }) {
-  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const photoSource = photo ? { uri: photo } : camera;
 
   const handlePhotoChange = async () => {
@@ -17,24 +18,39 @@ export default function PhotoChoice({ photo, setPhoto }) {
 
     if (!result.canceled) {
       setPhoto(result.assets[0].uri);
-    } else {
+    } else if (!photo) {
       alert("You did not select a photo.");
     }
   };
 
+  const tintColor = () => {
+    if (photoSource !== camera) {
+      return "";
+    }
+
+    if (colorScheme() !== "light") {
+      return selectedTheme.darkBackground;
+    }
+
+    return "white";
+  };
+
   return (
-    <Pressable style={styles.inputWrapper} onPress={handlePhotoChange}>
+    <Pressable
+      style={[styles.inputWrapper, { borderColor: selectedTheme.primary }]}
+      onPress={handlePhotoChange}
+    >
       <View style={styles.photoTop}>
         <Text
           style={{
-            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+            color: selectedTheme.primary,
           }}
         >
           Today's Photo
         </Text>
         <Text
           style={{
-            color: !photo ? selectedTheme.primary : selectedTheme.secondary,
+            color: selectedTheme.primary,
           }}
         >
           +
@@ -56,7 +72,9 @@ export default function PhotoChoice({ photo, setPhoto }) {
             width: !photo ? 54 : "100%",
             height: !photo ? 49 : 300,
             borderRadius: !photo ? 0 : 5,
+            tintColor: tintColor(),
           }}
+          recyclingKey={photo}
         />
       </View>
     </Pressable>
@@ -66,8 +84,6 @@ export default function PhotoChoice({ photo, setPhoto }) {
 const styles = StyleSheet.create({
   inputWrapper: {
     justifyContent: "center",
-    backgroundColor: "rgba(241, 239, 237, 0.5)",
-    borderColor: "#E1DCDC",
     borderRadius: 5,
     borderWidth: 1,
     padding: 5,

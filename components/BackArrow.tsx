@@ -6,7 +6,7 @@ import { ThemeColorContext } from "../contexts/ThemeColorContext";
 const backIcon = require("../assets/icons/back.png");
 
 export default function BackArrow() {
-  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   const { previousPage } = useGlobalSearchParams();
 
@@ -20,7 +20,15 @@ export default function BackArrow() {
     <Pressable onPress={handlePress} style={styles.backButton}>
       <Image
         source={backIcon}
-        style={[styles.img, { tintColor: selectedTheme.secondary }]}
+        style={[
+          styles.img,
+          {
+            tintColor:
+              colorScheme() === "light"
+                ? selectedTheme.secondary
+                : selectedTheme.primary,
+          },
+        ]}
       />
     </Pressable>
   );

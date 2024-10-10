@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { getToasts } from "../../services/storage";
 import { useContext, useEffect, useState } from "react";
@@ -54,7 +53,6 @@ export default function Timeline() {
                 img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
               />
             ))}
-          <StatusBar style="auto" />
         </View>
       </ScrollView>
       <LinearGradient
