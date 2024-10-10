@@ -21,13 +21,13 @@ export default function Calendar({
 
   const firstDay = new Date(
     parseInt(selectedYear),
-    months.indexOf(selectedMonth) + 1,
+    months.indexOf(selectedMonth),
     1
   )
     .toString()
     .split(" ")[0];
 
-  console.log(firstDay);
+  const firstDayFlexGrow = daysName.indexOf(firstDay);
 
   const checkDate = (day) => {
     if (toasts) {
@@ -56,6 +56,16 @@ export default function Calendar({
             {day}
           </Text>
         ))}
+
+        {firstDayFlexGrow > 0 ? (
+          <View
+            style={{
+              width: firstDayFlexGrow * 38 + firstDayFlexGrow * 11,
+            }}
+          />
+        ) : (
+          ""
+        )}
 
         {days
           .filter((day) => day <= daysInMonth)
