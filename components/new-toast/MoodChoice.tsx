@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
-import toastsMoods from "../services/toasts";
+import toastsMoods from "../../services/toasts";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export default function MoodChoice({ selectedToast, setSelectedToast }) {
   const { selectedTheme } = useContext(ThemeColorContext);

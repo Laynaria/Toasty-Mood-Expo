@@ -1,10 +1,14 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
-import { ThemeType } from "../types/theme.types";
-import { getThemeColor } from "../services/storage";
+import { ThemePreference, ThemeType } from "../types/theme.types";
+import { getThemeColor, getThemePreference } from "../services/storage";
+import { useColorScheme } from "react-native";
 
 const ThemeColorContext = createContext({
-  selectedTheme: { primary: "", secondary: "" },
+  selectedTheme: { primary: "", secondary: "", darkBackground: "" },
   setSelectedTheme: (selectedTheme: ThemeType) => {},
+  themePreference: "",
+  setThemePreference: (themePreference: ThemePreference) => {},
+  colorScheme: (): ThemePreference => "system",
 });
 
 const ThemeColorContextProvider = ({
@@ -13,7 +17,16 @@ const ThemeColorContextProvider = ({
   const [selectedTheme, setSelectedTheme] = useState<ThemeType>({
     primary: "#E3A062",
     secondary: "#6A3C11",
+    darkBackground: "#221603",
   });
+  const [themePreference, setThemePreference] =
+    useState<ThemePreference>("system");
+
+  const phoneScheme = useColorScheme();
+
+  const colorScheme = () => {
+    return themePreference === "system" ? phoneScheme : themePreference;
+  };
 
   useEffect(() => {
     const getTheme = async () => {
@@ -23,15 +36,33 @@ const ThemeColorContextProvider = ({
       }
     };
 
+    const getPreference = async () => {
+      const response: ThemePreference = await getThemePreference();
+
+      if (response) {
+        setThemePreference(response);
+      }
+    };
+
     getTheme();
+    getPreference();
   }, []);
 
   const userMemo = useMemo(
     () => ({
       selectedTheme,
       setSelectedTheme,
+      themePreference,
+      setThemePreference,
+      colorScheme,
     }),
-    [selectedTheme, setSelectedTheme]
+    [
+      selectedTheme,
+      setSelectedTheme,
+      themePreference,
+      setThemePreference,
+      colorScheme,
+    ]
   );
 
   return (

@@ -12,7 +12,11 @@ const settingsIcon = require("../assets/icons/settings.png");
 
 export default function Navbar() {
   const path = usePathname();
-  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+
+  const selectedColor = () => {
+    return colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
+  };
 
   return (
     <View
@@ -23,7 +27,8 @@ export default function Navbar() {
           <Image
             source={homeIcon}
             style={{
-              tintColor: path === "/" ? "#FFF" : selectedTheme.secondary,
+              tintColor:
+                path === "/" ? selectedColor() : selectedTheme.secondary,
             }}
           />
         </Pressable>
@@ -35,14 +40,25 @@ export default function Navbar() {
             source={timelineIcon}
             style={{
               tintColor:
-                path === "/timeline" ? "#FFF" : selectedTheme.secondary,
+                path === "/timeline"
+                  ? selectedColor()
+                  : selectedTheme.secondary,
             }}
           />
         </Pressable>
       </Link>
 
       <Pressable
-        style={[styles.addButton, { backgroundColor: selectedTheme.primary }]}
+        style={[
+          styles.addButton,
+          {
+            backgroundColor: selectedTheme.primary,
+            borderColor:
+              colorScheme() === "light"
+                ? "white"
+                : selectedTheme.darkBackground,
+          },
+        ]}
         onPress={() =>
           router.navigate({
             pathname: `/new-toast/${new Date().toString()}`,
@@ -58,7 +74,8 @@ export default function Navbar() {
           <Image
             source={shopIcon}
             style={{
-              tintColor: path === "/shop" ? "#FFF" : selectedTheme.secondary,
+              tintColor:
+                path === "/shop" ? selectedColor() : selectedTheme.secondary,
             }}
           />
         </Pressable>
@@ -70,7 +87,9 @@ export default function Navbar() {
             source={settingsIcon}
             style={{
               tintColor:
-                path === "/settings" ? "#FFF" : selectedTheme.secondary,
+                path === "/settings"
+                  ? selectedColor()
+                  : selectedTheme.secondary,
             }}
           />
         </Pressable>
@@ -99,6 +118,5 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 60,
     borderWidth: 10,
-    borderColor: "white",
   },
 });

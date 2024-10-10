@@ -1,12 +1,10 @@
-import { Slot } from "expo-router";
 import { ThemeColorContextProvider } from "../contexts/ThemeColorContext";
-import BackArrow from "../components/BackArrow";
+import LayoutView from "../components/LayoutView";
 
 export default function RootLayout() {
   return (
     <ThemeColorContextProvider>
-      <BackArrow />
-      <Slot />
+      <LayoutView />
     </ThemeColorContextProvider>
   );
 }
