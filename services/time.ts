@@ -22,22 +22,6 @@ export const months = [
 
 export const daySuffix = ["st", "nd", "rd"];
 
-export const calendarFlexgrow = (daysInmonth) => {
-  if (daysInmonth === 29) {
-    return 6;
-  }
-
-  if (daysInmonth === 30) {
-    return 5;
-  }
-
-  if (daysInmonth === 31) {
-    return 4;
-  }
-
-  return 0;
-};
-
 export const years = (year) => {
   const currentYear = new Date().getFullYear();
   const yearsArray = [];

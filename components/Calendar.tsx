@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { days, daysName, months, calendarFlexgrow } from "../services/time";
+import { days, daysName, months } from "../services/time";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
 import { useContext } from "react";
@@ -28,6 +28,16 @@ export default function Calendar({
     .split(" ")[0];
 
   const firstDayFlexGrow = daysName.indexOf(firstDay);
+
+  const lastDay = new Date(
+    parseInt(selectedYear),
+    months.indexOf(selectedMonth),
+    daysInMonth
+  )
+    .toString()
+    .split(" ")[0];
+
+  const lastDayFlexgrow = 6 - daysName.indexOf(lastDay);
 
   const checkDate = (day) => {
     if (toasts) {
@@ -84,17 +94,11 @@ export default function Calendar({
             />
           ))}
 
-        {daysInMonth !== 28 ? (
-          <View
-            style={{
-              width:
-                calendarFlexgrow(daysInMonth) * 38 +
-                calendarFlexgrow(daysInMonth) * 11,
-            }}
-          />
-        ) : (
-          ""
-        )}
+        <View
+          style={{
+            width: lastDayFlexgrow * 38 + lastDayFlexgrow * 11,
+          }}
+        />
       </View>
     </View>
   );
