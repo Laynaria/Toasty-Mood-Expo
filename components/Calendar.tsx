@@ -19,6 +19,16 @@ export default function Calendar({
     0
   ).getDate();
 
+  const firstDay = new Date(
+    parseInt(selectedYear),
+    months.indexOf(selectedMonth) + 1,
+    1
+  )
+    .toString()
+    .split(" ")[0];
+
+  console.log(firstDay);
+
   const checkDate = (day) => {
     if (toasts) {
       return toasts.filter(
