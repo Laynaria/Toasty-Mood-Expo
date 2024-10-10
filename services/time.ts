@@ -22,6 +22,12 @@ export const months = [
 
 export const daySuffix = ["st", "nd", "rd"];
 
+export const getDaysName = (year, month, day) => {
+  return new Date(parseInt(year), months.indexOf(month), day)
+    .toString()
+    .split(" ")[0];
+};
+
 export const years = (year) => {
   const currentYear = new Date().getFullYear();
   const yearsArray = [];

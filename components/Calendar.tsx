@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { days, daysName, months } from "../services/time";
+import { days, daysName, months, getDaysName } from "../services/time";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
 import { useContext } from "react";
@@ -19,23 +19,11 @@ export default function Calendar({
     0
   ).getDate();
 
-  const firstDay = new Date(
-    parseInt(selectedYear),
-    months.indexOf(selectedMonth),
-    1
-  )
-    .toString()
-    .split(" ")[0];
+  const firstDay = getDaysName(selectedYear, selectedMonth, 1);
 
   const firstDayFlexGrow = daysName.indexOf(firstDay);
 
-  const lastDay = new Date(
-    parseInt(selectedYear),
-    months.indexOf(selectedMonth),
-    daysInMonth
-  )
-    .toString()
-    .split(" ")[0];
+  const lastDay = getDaysName(selectedYear, selectedMonth, daysInMonth);
 
   const lastDayFlexgrow = 6 - daysName.indexOf(lastDay);
 
