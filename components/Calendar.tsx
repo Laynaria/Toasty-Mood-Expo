@@ -58,7 +58,7 @@ export default function Calendar({
         {firstDayFlexGrow > 0 ? (
           <View
             style={{
-              width: firstDayFlexGrow * 38 + firstDayFlexGrow * 11,
+              width: firstDayFlexGrow * 49,
             }}
           />
         ) : (
@@ -84,7 +84,7 @@ export default function Calendar({
 
         <View
           style={{
-            width: lastDayFlexgrow * 38 + lastDayFlexgrow * 11,
+            width: lastDayFlexgrow * 49,
           }}
         />
       </View>
