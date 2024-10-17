@@ -1,4 +1,17 @@
-export const daysName = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+import { getCalendars } from "expo-localization";
+import { FirstDayOfTheWeek } from "../types/weekday.types";
+
+export const weekDays = (weekPreference: FirstDayOfTheWeek) => {
+  const [{ firstWeekday }] = getCalendars();
+  const daysName = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const daysNameBis = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  if (weekPreference === "system" || !weekPreference) {
+    return firstWeekday === 2 ? daysName : daysNameBis;
+  }
+
+  return weekPreference === "monday" ? daysName : daysNameBis;
+};
 
 export const days = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,

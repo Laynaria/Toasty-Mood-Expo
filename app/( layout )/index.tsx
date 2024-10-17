@@ -1,33 +1,26 @@
 import { StyleSheet, View } from "react-native";
-import Calendar from "../../components/Calendar";
-import { getToasts } from "../../services/storage";
-
-import { months, years } from "../../services/time";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
-import { getCalendars } from "expo-localization";
+
+import { getFirstDayPreference, getToasts } from "../../services/storage";
+import { months, weekDays, years } from "../../services/time";
+import Calendar from "../../components/Calendar";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
-
-  const [{ firstWeekday }] = getCalendars();
-
-  // console.log(firstWeekday);
-  // console.log(getCalendars()[0].firstWeekday);
-
-  // firstWeekday === 2 ? lundi : dimanche
-
   const [toasts, setToasts] = useState(null);
+  const [weekPreference, setWeekPreference] = useState(null);
 
   useEffect(() => {
-    const loadToasts = async () => {
+    const load = async () => {
       setToasts(await getToasts());
+      setWeekPreference(await getFirstDayPreference());
 
       setIsLoading(false);
     };
 
-    loadToasts();
+    load();
   }, []);
 
   if (isLoading) {
@@ -93,6 +86,7 @@ export default function Index() {
                 style={checkMonth(item)}
                 selectedMonth={item.month}
                 selectedYear={item.year}
+                weekDays={() => weekDays(weekPreference)}
                 toasts={toasts.filter(
                   (toast) =>
                     toast.date.slice(0, 7) === checkDate(item.year, item.month)

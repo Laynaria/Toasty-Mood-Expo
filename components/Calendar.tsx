@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { days, daysName, months, getDaysName } from "../services/time";
+import { days, months, getDaysName } from "../services/time";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
 import { useContext } from "react";
@@ -11,6 +11,7 @@ export default function Calendar({
   selectedYear,
   toasts,
   style,
+  weekDays,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const daysInMonth = new Date(
@@ -18,6 +19,8 @@ export default function Calendar({
     months.indexOf(selectedMonth) + 1,
     0
   ).getDate();
+
+  const daysName = weekDays();
 
   const firstDay = getDaysName(selectedYear, selectedMonth, 1);
 

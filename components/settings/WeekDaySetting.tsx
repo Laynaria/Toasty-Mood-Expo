@@ -8,7 +8,7 @@ import {
 } from "../../services/storage";
 
 export default function WeekDaySetting() {
-  const { selectedTheme, themePreference } = useContext(ThemeColorContext);
+  const { selectedTheme } = useContext(ThemeColorContext);
   const [dayPreference, setDayPreference] =
     useState<FirstDayOfTheWeek>("system");
 
