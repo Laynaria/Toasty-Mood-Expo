@@ -66,3 +66,24 @@ export const getThemePreference = async () => {
     console.warn("Error in getting your theme preference");
   }
 };
+
+// First Day of The Week
+
+export const storeFirstDayPreference = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("firstDayPreference", jsonValue);
+  } catch (e) {
+    console.warn("Error in registering your theme preference");
+  }
+};
+
+export const getFirstDayPreference = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("firstDayPreference");
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.warn("Error in getting your theme preference");
+  }
+};
