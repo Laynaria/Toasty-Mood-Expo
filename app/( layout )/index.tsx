@@ -6,9 +6,17 @@ import { months, years } from "../../services/time";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
+import { getCalendars } from "expo-localization";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
+
+  const [{ firstWeekday }] = getCalendars();
+
+  // console.log(firstWeekday);
+  // console.log(getCalendars()[0].firstWeekday);
+
+  // firstWeekday === 2 ? lundi : dimanche
 
   const [toasts, setToasts] = useState(null);
 
