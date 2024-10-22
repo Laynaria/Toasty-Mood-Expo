@@ -37,21 +37,23 @@ export default function NewToast() {
     const existingToasts = await getToasts();
     const newToast = { selectedToast, note, moodArray: 0, date, photo };
 
-    if (existingToasts) {
-      await storeToasts([
-        ...existingToasts.filter(
-          (toast) =>
-            new Date(toast.date).toLocaleDateString() !==
-            date.toLocaleDateString()
-        ),
-        newToast,
-      ]);
-      return router.push("/");
+    if (selectedToast !== 0) {
+      if (existingToasts) {
+        await storeToasts([
+          ...existingToasts.filter(
+            (toast) =>
+              new Date(toast.date).toLocaleDateString() !==
+              date.toLocaleDateString()
+          ),
+          newToast,
+        ]);
+        return router.push("/");
+      }
+
+      await storeToasts([newToast]);
+
+      router.push("/");
     }
-
-    await storeToasts([newToast]);
-
-    router.push("/");
   };
 
   useEffect(() => {
