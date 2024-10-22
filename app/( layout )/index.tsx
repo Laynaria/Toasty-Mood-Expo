@@ -33,6 +33,7 @@ export default function Index() {
       index: index,
       // viewOffset: 478 * index + pageY,
       // viewOffset: 746 * index + pageY,
+      viewOffset: 143,
       viewPosition: index,
       animated: false,
     });
