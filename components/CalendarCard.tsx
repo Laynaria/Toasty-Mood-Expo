@@ -1,23 +1,29 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import toastsMoods from "../services/toasts";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { Image } from "expo-image";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
-export default function CalendarCard({ day, checkDate, date }) {
+export default function CalendarCard({ day, checkDate, date, index }) {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const ref = useRef<View>();
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {
-      router.push(`/new-toast/${date}`);
+      ref?.current?.measure((_, __, ___, ____, _____, pageY) => {
+        router.push({
+          pathname: `/new-toast/${date}`,
+          params: { pageY, index },
+        });
+      });
     }
   };
 
   return (
-    <Pressable style={styles.container} onPress={handlePress}>
+    <Pressable style={styles.container} onPress={handlePress} ref={ref}>
       <Image
         source={
           !!checkDate(day)

@@ -12,6 +12,7 @@ export default function Calendar({
   toasts,
   style,
   weekDays,
+  index,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const daysInMonth = new Date(
@@ -81,6 +82,7 @@ export default function Calendar({
                   }-${day}T03:22:00`
                 )
               }
+              index={index}
               key={day}
             />
           ))}

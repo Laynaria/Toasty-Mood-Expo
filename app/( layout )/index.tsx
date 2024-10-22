@@ -1,16 +1,21 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
 import Calendar from "../../components/Calendar";
+import { useGlobalSearchParams } from "expo-router";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
+  const ref = useRef<any>();
+
+  const pageY = parseInt(useGlobalSearchParams().pageY as string);
+  const index = parseInt(useGlobalSearchParams().index as string);
 
   useEffect(() => {
     const load = async () => {
@@ -22,6 +27,18 @@ export default function Index() {
 
     load();
   }, []);
+
+  const scrollOnLoad = () => {
+    console.log("index: " + index + " scroll: " + pageY);
+    ref?.current?.scrollToIndex({
+      index: index,
+      viewOffset: 478 * index + pageY,
+      viewPosition: index,
+      animated: false,
+    });
+
+    // reset scrollY and index to 0 / undefined
+  };
 
   if (isLoading) {
     return <View />;
@@ -78,10 +95,14 @@ export default function Index() {
         <View style={styles.container}>
           <FlashList<DataCalendar>
             inverted
+            ref={ref}
             estimatedItemSize={1000}
             showsVerticalScrollIndicator={false}
+            onLoad={() => {
+              scrollOnLoad();
+            }}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Calendar
                 style={checkMonth(item)}
                 selectedMonth={item.month}
@@ -91,6 +112,7 @@ export default function Index() {
                   (toast) =>
                     toast.date.slice(0, 7) === checkDate(item.year, item.month)
                 )}
+                index={index}
               />
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}

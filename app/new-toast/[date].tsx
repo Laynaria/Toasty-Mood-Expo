@@ -32,6 +32,8 @@ export default function NewToast() {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
+  const pageY = useGlobalSearchParams().pageY;
+  const index = useGlobalSearchParams().index;
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
@@ -47,12 +49,12 @@ export default function NewToast() {
           ),
           newToast,
         ]);
-        return router.push("/");
+        return router.push({ pathname: "/", params: { pageY, index } });
       }
 
       await storeToasts([newToast]);
 
-      router.push("/");
+      router.push({ pathname: "/", params: { pageY, index } });
     }
   };
 
