@@ -10,7 +10,6 @@ export default function Calendar({
   selectedMonth,
   selectedYear,
   toasts,
-  style,
   weekDays,
   index,
 }) {
@@ -47,7 +46,7 @@ export default function Calendar({
 
   return (
     <View>
-      <View style={[styles.container, style]}>
+      <View style={[styles.container]}>
         <MonthCard selectedMonth={selectedMonth} selectedYear={selectedYear} />
 
         {daysName.map((day) => (

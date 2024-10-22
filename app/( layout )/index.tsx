@@ -31,7 +31,8 @@ export default function Index() {
   const scrollOnLoad = () => {
     ref?.current?.scrollToIndex({
       index: index,
-      viewOffset: 478 * index + pageY,
+      // viewOffset: 478 * index + pageY,
+      // viewOffset: 746 * index + pageY,
       viewPosition: index,
       animated: false,
     });
@@ -66,36 +67,15 @@ export default function Index() {
       }))
   );
 
-  const checkMonth = (item) => {
-    const index = dataCalendar
-      .flat(Infinity)
-      .findIndex(
-        (i: DataCalendar) => i.month === item.month && i.year === item.year
-      );
-
-    if (index === 0) {
-      return {
-        marginTop: 108,
-      };
-    }
-
-    if (index === dataCalendar.flat(Infinity).length - 1) {
-      return {
-        marginBottom: 143,
-      };
-    }
-
-    return { marginBottem: 0 };
-  };
-
   return (
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
+            contentContainerStyle={{ paddingTop: 143, paddingBottom: 108 }}
             inverted
             ref={ref}
-            estimatedItemSize={1000}
+            estimatedItemSize={661}
             showsVerticalScrollIndicator={false}
             onLoad={() => {
               scrollOnLoad();
@@ -103,7 +83,7 @@ export default function Index() {
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item, index }) => (
               <Calendar
-                style={checkMonth(item)}
+                // style={checkMonth(item)}
                 selectedMonth={item.month}
                 selectedYear={item.year}
                 weekDays={() => weekDays(weekPreference)}
