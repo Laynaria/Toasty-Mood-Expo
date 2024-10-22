@@ -33,8 +33,9 @@ export default function Index() {
       index: index,
       // viewOffset: 478 * index + pageY,
       // viewOffset: 746 * index + pageY,
+      // viewOffset: 143 - 151 * index,
       viewOffset: 143,
-      viewPosition: index,
+      viewPosition: 0.5,
       animated: false,
     });
 
@@ -84,7 +85,6 @@ export default function Index() {
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item, index }) => (
               <Calendar
-                // style={checkMonth(item)}
                 selectedMonth={item.month}
                 selectedYear={item.year}
                 weekDays={() => weekDays(weekPreference)}
