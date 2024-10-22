@@ -1,4 +1,8 @@
-import { router, useGlobalSearchParams } from "expo-router";
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+} from "expo-router";
 import {
   Pressable,
   StyleSheet,
@@ -32,8 +36,8 @@ export default function NewToast() {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
-  const pageY = useGlobalSearchParams().pageY;
-  const index = useGlobalSearchParams().index;
+  const pageY = useLocalSearchParams().pageY;
+  const index = useLocalSearchParams().index;
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();

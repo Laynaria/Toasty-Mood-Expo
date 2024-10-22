@@ -6,7 +6,7 @@ import { FlashList } from "@shopify/flash-list";
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
 import Calendar from "../../components/Calendar";
-import { useGlobalSearchParams } from "expo-router";
+import { useLocalSearchParams, router } from "expo-router";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,8 +14,8 @@ export default function Index() {
   const [weekPreference, setWeekPreference] = useState(null);
   const ref = useRef<any>();
 
-  const pageY = parseInt(useGlobalSearchParams().pageY as string);
-  const index = parseInt(useGlobalSearchParams().index as string);
+  const pageY = parseInt(useLocalSearchParams().pageY as string);
+  const index = parseInt(useLocalSearchParams().index as string);
 
   useEffect(() => {
     const load = async () => {
@@ -29,7 +29,6 @@ export default function Index() {
   }, []);
 
   const scrollOnLoad = () => {
-    console.log("index: " + index + " scroll: " + pageY);
     ref?.current?.scrollToIndex({
       index: index,
       viewOffset: 478 * index + pageY,
@@ -37,7 +36,7 @@ export default function Index() {
       animated: false,
     });
 
-    // reset scrollY and index to 0 / undefined
+    router.setParams({ index: 0, pageY: 0 });
   };
 
   if (isLoading) {
