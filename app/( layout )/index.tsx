@@ -9,6 +9,7 @@ import Calendar from "../../components/Calendar";
 import { useLocalSearchParams, router } from "expo-router";
 
 export default function Index() {
+  // const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
   const ref = useRef<any>();
@@ -20,21 +21,28 @@ export default function Index() {
     const load = async () => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
+
+      // setIsLoading(false);
     };
 
     load();
   }, []);
 
   const scrollOnLoad = () => {
+    // console.log(pageY);
+    // console.log(index + 1 === dataCalendar.flat(Infinity).reverse().length);
     ref?.current?.scrollToIndex({
       index: index,
-      viewOffset: 51 - 92 + pageY,
-      viewPosition: 0.5,
-      animated: false,
+      //   // viewOffset: 51 - 92 + pageY,
+      viewOffset: 51,
+      viewPosition: 0,
+      animated: true,
     });
-
-    router.setParams({ index: 0, pageY: 0 });
   };
+
+  // if (isLoading) {
+  //   return <View />;
+  // }
 
   const checkDate = (year, month) => {
     return `${year}-${
@@ -72,6 +80,7 @@ export default function Index() {
             onLoad={() => {
               scrollOnLoad();
             }}
+            initialScrollIndex={index}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item, index }) => (
               <Calendar
