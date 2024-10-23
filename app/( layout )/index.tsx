@@ -9,7 +9,6 @@ import Calendar from "../../components/Calendar";
 import { useLocalSearchParams, router } from "expo-router";
 
 export default function Index() {
-  const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
   const ref = useRef<any>();
@@ -21,8 +20,6 @@ export default function Index() {
     const load = async () => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
-
-      setIsLoading(false);
     };
 
     load();
@@ -41,10 +38,6 @@ export default function Index() {
 
     router.setParams({ index: 0, pageY: 0 });
   };
-
-  if (isLoading) {
-    return <View />;
-  }
 
   const checkDate = (year, month) => {
     return `${year}-${
@@ -88,7 +81,7 @@ export default function Index() {
                 selectedMonth={item.month}
                 selectedYear={item.year}
                 weekDays={() => weekDays(weekPreference)}
-                toasts={toasts.filter(
+                toasts={toasts?.filter(
                   (toast) =>
                     toast.date.slice(0, 7) === checkDate(item.year, item.month)
                 )}
