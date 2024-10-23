@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     columnGap: 3,
     rowGap: 24,
     paddingTop: 48,
+    height: 707,
   },
   daysName: {
     width: 46,

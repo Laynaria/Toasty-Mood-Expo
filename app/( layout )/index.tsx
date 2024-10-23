@@ -28,10 +28,7 @@ export default function Index() {
   const scrollOnLoad = () => {
     ref?.current?.scrollToIndex({
       index: index,
-      // viewOffset: 478 * index + pageY,
-      // viewOffset: 746 * index + pageY,
-      // viewOffset: 143 - 151 * index,
-      viewOffset: 143,
+      viewOffset: 51 - 92 + pageY,
       viewPosition: 0.5,
       animated: false,
     });
@@ -67,10 +64,10 @@ export default function Index() {
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
-            contentContainerStyle={{ paddingTop: 143, paddingBottom: 108 }}
+            contentContainerStyle={{ paddingTop: 51, paddingBottom: 108 }}
             inverted
             ref={ref}
-            estimatedItemSize={661}
+            estimatedItemSize={707}
             showsVerticalScrollIndicator={false}
             onLoad={() => {
               scrollOnLoad();
