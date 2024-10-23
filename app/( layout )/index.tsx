@@ -2,47 +2,38 @@ import { StyleSheet, View } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
+import { useLocalSearchParams } from "expo-router";
 
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
 import Calendar from "../../components/Calendar";
-import { useLocalSearchParams, router } from "expo-router";
+
+type DataCalendar = { month: string; year: string };
 
 export default function Index() {
-  // const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
-  const ref = useRef<any>();
+  const ref = useRef<FlashList<DataCalendar>>();
 
-  const pageY = parseInt(useLocalSearchParams().pageY as string);
   const index = parseInt(useLocalSearchParams().index as string);
 
   useEffect(() => {
     const load = async () => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
-
-      // setIsLoading(false);
     };
 
     load();
   }, []);
 
   const scrollOnLoad = () => {
-    // console.log(pageY);
-    // console.log(index + 1 === dataCalendar.flat(Infinity).reverse().length);
     ref?.current?.scrollToIndex({
       index: index,
-      //   // viewOffset: 51 - 92 + pageY,
       viewOffset: 51,
       viewPosition: 0,
       animated: true,
     });
   };
-
-  // if (isLoading) {
-  //   return <View />;
-  // }
 
   const checkDate = (year, month) => {
     return `${year}-${
@@ -51,8 +42,6 @@ export default function Index() {
         : `0${months.indexOf(month) + 1}`
     }`;
   };
-
-  type DataCalendar = { month: string; year: string };
 
   const dataCalendar: DataCalendar[][] = years(2022).map((year) =>
     months
@@ -72,7 +61,7 @@ export default function Index() {
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
-            contentContainerStyle={{ paddingTop: 51, paddingBottom: 108 }}
+            contentContainerStyle={{ paddingTop: 51, paddingBottom: 78 }}
             inverted
             ref={ref}
             estimatedItemSize={707}
