@@ -1,31 +1,38 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
+import { useLocalSearchParams } from "expo-router";
 
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
 import Calendar from "../../components/Calendar";
 
+type DataCalendar = { month: string; year: string };
+
 export default function Index() {
-  const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const ref = useRef<FlashList<DataCalendar>>();
+
+  const index = parseInt(useLocalSearchParams().index as string);
+  const previousOffset = parseInt(
+    useLocalSearchParams().previousOffset as string
+  );
 
   useEffect(() => {
     const load = async () => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
-
-      setIsLoading(false);
     };
 
     load();
   }, []);
 
-  if (isLoading) {
-    return <View />;
-  }
+  const scrollOnLoad = () => {
+    ref?.current?.scrollToOffset({ offset: previousOffset, animated: true });
+  };
 
   const checkDate = (year, month) => {
     return `${year}-${
@@ -34,8 +41,6 @@ export default function Index() {
         : `0${months.indexOf(month) + 1}`
     }`;
   };
-
-  type DataCalendar = { month: string; year: string };
 
   const dataCalendar: DataCalendar[][] = years(2022).map((year) =>
     months
@@ -50,50 +55,38 @@ export default function Index() {
       }))
   );
 
-  const checkMonth = (item) => {
-    const index = dataCalendar
-      .flat(Infinity)
-      .findIndex(
-        (i: DataCalendar) => i.month === item.month && i.year === item.year
-      );
-
-    if (index === 0) {
-      return {
-        marginTop: 108,
-      };
-    }
-
-    if (index === dataCalendar.flat(Infinity).length - 1) {
-      return {
-        marginBottom: 143,
-      };
-    }
-
-    return { marginBottem: 0 };
-  };
-
   return (
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
+            contentContainerStyle={{ paddingTop: 51, paddingBottom: 78 }}
             inverted
-            estimatedItemSize={1000}
+            ref={ref}
+            estimatedItemSize={707}
             showsVerticalScrollIndicator={false}
+            onLoad={() => {
+              scrollOnLoad();
+            }}
+            initialScrollIndex={index}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Calendar
-                style={checkMonth(item)}
                 selectedMonth={item.month}
                 selectedYear={item.year}
                 weekDays={() => weekDays(weekPreference)}
-                toasts={toasts.filter(
+                toasts={toasts?.filter(
                   (toast) =>
                     toast.date.slice(0, 7) === checkDate(item.year, item.month)
                 )}
+                index={index}
+                currentOffset={currentOffset}
               />
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}
+            onScroll={(e) => {
+              setCurrentOffset(e.nativeEvent.contentOffset.y);
+            }}
           />
         </View>
       </SafeAreaView>
