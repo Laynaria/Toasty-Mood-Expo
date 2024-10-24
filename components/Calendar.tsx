@@ -10,8 +10,9 @@ export default function Calendar({
   selectedMonth,
   selectedYear,
   toasts,
-  style,
   weekDays,
+  index,
+  currentOffset,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const daysInMonth = new Date(
@@ -46,7 +47,7 @@ export default function Calendar({
 
   return (
     <View>
-      <View style={[styles.container, style]}>
+      <View style={[styles.container]}>
         <MonthCard selectedMonth={selectedMonth} selectedYear={selectedYear} />
 
         {daysName.map((day) => (
@@ -81,6 +82,8 @@ export default function Calendar({
                   }-${day}T03:22:00`
                 )
               }
+              index={index}
+              currentOffset={currentOffset}
               key={day}
             />
           ))}
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
     columnGap: 3,
     rowGap: 24,
     paddingTop: 48,
+    height: 707,
   },
   daysName: {
     width: 46,

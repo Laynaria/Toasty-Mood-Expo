@@ -1,4 +1,8 @@
-import { router, useGlobalSearchParams } from "expo-router";
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+} from "expo-router";
 import {
   Pressable,
   StyleSheet,
@@ -32,26 +36,32 @@ export default function NewToast() {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
+  const { index, previousOffset } = useLocalSearchParams();
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
     const newToast = { selectedToast, note, moodArray: 0, date, photo };
 
-    if (existingToasts) {
-      await storeToasts([
-        ...existingToasts.filter(
-          (toast) =>
-            new Date(toast.date).toLocaleDateString() !==
-            date.toLocaleDateString()
-        ),
-        newToast,
-      ]);
-      return router.push("/");
+    if (selectedToast !== 0) {
+      if (existingToasts) {
+        await storeToasts([
+          ...existingToasts.filter(
+            (toast) =>
+              new Date(toast.date).toLocaleDateString() !==
+              date.toLocaleDateString()
+          ),
+          newToast,
+        ]);
+        return router.push({
+          pathname: "/",
+          params: { index, previousOffset },
+        });
+      }
+
+      await storeToasts([newToast]);
+
+      router.push({ pathname: "/", params: { index, previousOffset } });
     }
-
-    await storeToasts([newToast]);
-
-    router.push("/");
   };
 
   useEffect(() => {
