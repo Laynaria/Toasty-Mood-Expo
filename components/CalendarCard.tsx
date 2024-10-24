@@ -7,14 +7,20 @@ import { Image } from "expo-image";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 
-export default function CalendarCard({ day, checkDate, date, index }) {
+export default function CalendarCard({
+  day,
+  checkDate,
+  date,
+  index,
+  currentOffset,
+}) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {
       router.push({
         pathname: `/new-toast/${date}`,
-        params: { index },
+        params: { index, previousOffset: currentOffset },
       });
     }
   };

@@ -8,12 +8,12 @@ const backIcon = require("../assets/icons/back.png");
 export default function BackArrow() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
-  const { previousPage, index } = useGlobalSearchParams();
+  const { previousPage, index, previousOffset } = useGlobalSearchParams();
 
   const handlePress = () => {
     previousPage
       ? router.navigate(previousPage as string)
-      : router.navigate({ pathname: "/", params: { index } });
+      : router.navigate({ pathname: "/", params: { index, previousOffset } });
   };
 
   return (

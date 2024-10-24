@@ -13,9 +13,13 @@ type DataCalendar = { month: string; year: string };
 export default function Index() {
   const [toasts, setToasts] = useState(null);
   const [weekPreference, setWeekPreference] = useState(null);
+  const [currentOffset, setCurrentOffset] = useState(0);
   const ref = useRef<FlashList<DataCalendar>>();
 
   const index = parseInt(useLocalSearchParams().index as string);
+  const previousOffset = parseInt(
+    useLocalSearchParams().previousOffset as string
+  );
 
   useEffect(() => {
     const load = async () => {
@@ -27,12 +31,7 @@ export default function Index() {
   }, []);
 
   const scrollOnLoad = () => {
-    ref?.current?.scrollToIndex({
-      index: index,
-      viewOffset: 51,
-      viewPosition: 0,
-      animated: true,
-    });
+    ref?.current?.scrollToOffset({ offset: previousOffset, animated: true });
   };
 
   const checkDate = (year, month) => {
@@ -81,9 +80,13 @@ export default function Index() {
                     toast.date.slice(0, 7) === checkDate(item.year, item.month)
                 )}
                 index={index}
+                currentOffset={currentOffset}
               />
             )}
             keyExtractor={(item) => `${item.month} ${item.year}`}
+            onScroll={(e) => {
+              setCurrentOffset(e.nativeEvent.contentOffset.y);
+            }}
           />
         </View>
       </SafeAreaView>

@@ -36,7 +36,7 @@ export default function NewToast() {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
-  const index = useLocalSearchParams().index;
+  const { index, previousOffset } = useLocalSearchParams();
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
@@ -52,12 +52,15 @@ export default function NewToast() {
           ),
           newToast,
         ]);
-        return router.push({ pathname: "/", params: { index } });
+        return router.push({
+          pathname: "/",
+          params: { index, previousOffset },
+        });
       }
 
       await storeToasts([newToast]);
 
-      router.push({ pathname: "/", params: { index } });
+      router.push({ pathname: "/", params: { index, previousOffset } });
     }
   };
 
