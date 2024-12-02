@@ -34,6 +34,8 @@ export default function Timeline() {
     setSelectedYear(newYear);
   };
 
+  const closeModal = () => setIsSelectingMonth(false);
+
   return (
     <>
       <View style={styles.scroll}>
@@ -78,7 +80,10 @@ export default function Timeline() {
       </View>
 
       {isSelectingMonth ? (
-        <SelectMonthModal timelineFunction={handleMonthChange} />
+        <SelectMonthModal
+          timelineFunction={handleMonthChange}
+          closeModal={closeModal}
+        />
       ) : null}
     </>
   );
