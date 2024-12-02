@@ -7,7 +7,7 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { months } from "../../services/time";
 
 import toastsMoods from "../../services/toasts";
-import TimelineCard from "../../components/TimelineCard";
+import TimelineCard from "../../components/timeline/TimelineCard";
 import MonthCard from "../../components/MonthCard";
 
 export default function Timeline() {
