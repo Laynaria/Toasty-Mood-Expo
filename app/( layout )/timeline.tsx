@@ -26,6 +26,11 @@ export default function Timeline() {
     loadToasts();
   }, []);
 
+  const handleMonthChange = (newMonth, newYear) => {
+    setSelectedMonth(newMonth);
+    setSelectedYear(newYear);
+  };
+
   return (
     <View style={styles.scroll}>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -34,6 +39,7 @@ export default function Timeline() {
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
             timeline={true}
+            timelineFunction={handleMonthChange}
           />
           {toasts
             ?.sort(
