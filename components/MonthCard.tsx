@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Image, StyleSheet, Text, Pressable } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import SelectMonthModal from "./timeline/SelectMonthModal";
 
 const backIcon = require("../assets/icons/month-arrow.png");
 
@@ -9,10 +10,9 @@ export default function MonthCard({
   selectedMonth,
   selectedYear,
   timeline = false,
-  timelineFunction = null,
+  setIsSelectingMonth = null,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
 
   const handlePress = () => {
     if (!timeline) {
@@ -20,9 +20,6 @@ export default function MonthCard({
     }
 
     setIsSelectingMonth(true);
-
-    // timelineFunction("October", 2024);
-    console.log(isSelectingMonth);
   };
 
   return (
