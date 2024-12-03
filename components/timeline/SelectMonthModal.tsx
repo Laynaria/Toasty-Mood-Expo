@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { months, years } from "../../services/time";
 import SelectValidationButton from "./SelectValidationButton";
+import SelectList from "./SelectList";
 
 export default function SelectMonthModal({
   timelineFunction,
@@ -18,7 +19,7 @@ export default function SelectMonthModal({
     closeModal();
   };
 
-  const handleChange = () => {
+  const validateChange = () => {
     timelineFunction("November", 2024);
     closeModal();
   };
@@ -36,37 +37,8 @@ export default function SelectMonthModal({
           Sélectionnez une date
         </Text>
 
-        <View style={styles.buttons}>
-          {months.map((month) => (
-            <Text
-              key={month}
-              style={[
-                styles.texts,
-                {
-                  color: selectedTheme.secondary,
-                },
-              ]}
-            >
-              {month}
-            </Text>
-          ))}
-        </View>
-
-        <View style={styles.buttons}>
-          {years(2018).map((year) => (
-            <Text
-              key={year}
-              style={[
-                styles.texts,
-                {
-                  color: selectedTheme.secondary,
-                },
-              ]}
-            >
-              {year}
-            </Text>
-          ))}
-        </View>
+        <SelectList array={months} />
+        <SelectList array={years(2018)} />
 
         <SelectValidationButton
           text={"Cancel"}
@@ -80,7 +52,7 @@ export default function SelectMonthModal({
 
         <SelectValidationButton
           text={"Ok"}
-          buttonFunction={handleChange}
+          buttonFunction={validateChange}
           style={{
             backgroundColor: selectedTheme.secondary,
             color: selectedTheme.primary,
