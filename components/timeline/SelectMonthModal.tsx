@@ -1,14 +1,41 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { months, years } from "../../services/time";
+import SelectValidationButton from "./SelectValidationButton";
 
-export default function SelectMonthModal({ timelineFunction, closeModal }) {
+export default function SelectMonthModal({
+  timelineFunction,
+  closeModal,
+  selectedMonth,
+  selectedYear,
+}) {
+  const [newMonth, setNewMonth] = useState<string>(selectedMonth);
+  const [newYear, setNewYear] = useState<string>(selectedYear);
   const { selectedTheme } = useContext(ThemeColorContext);
+
+  const cancelChange = () => {
+    closeModal();
+  };
+
+  const handleChange = () => {
+    console.log("ok");
+    return;
+  };
 
   return (
     <View style={styles.container}>
       <View style={[styles.modal, { backgroundColor: selectedTheme.primary }]}>
+        <Text
+          style={{
+            color: selectedTheme.secondary,
+            fontWeight: "bold",
+            fontSize: 16,
+          }}
+        >
+          Sélectionnez une date
+        </Text>
+
         <View style={styles.buttons}>
           {months.map((month) => (
             <Text
@@ -41,31 +68,25 @@ export default function SelectMonthModal({ timelineFunction, closeModal }) {
           ))}
         </View>
 
-        <Pressable style={styles.buttons} onPress={closeModal}>
-          <Text
-            style={[
-              styles.texts,
-              {
-                color: selectedTheme.secondary,
-              },
-            ]}
-          >
-            Cancel
-          </Text>
-        </Pressable>
+        <SelectValidationButton
+          text={"Cancel"}
+          buttonFunction={cancelChange}
+          style={{
+            backgroundColor: selectedTheme.primary,
+            color: selectedTheme.secondary,
+            borderColor: selectedTheme.secondary,
+          }}
+        />
 
-        <Pressable style={styles.buttons}>
-          <Text
-            style={[
-              styles.texts,
-              {
-                color: selectedTheme.secondary,
-              },
-            ]}
-          >
-            Ok
-          </Text>
-        </Pressable>
+        <SelectValidationButton
+          text={"Ok"}
+          buttonFunction={handleChange}
+          style={{
+            backgroundColor: selectedTheme.secondary,
+            color: selectedTheme.primary,
+            borderColor: selectedTheme.primary,
+          }}
+        />
       </View>
     </View>
   );
@@ -83,10 +104,10 @@ const styles = StyleSheet.create({
   },
   modal: {
     padding: 30,
-    maxWidth: "60%",
+    maxWidth: "70%",
     rowGap: 15,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
     flexWrap: "wrap",
     borderRadius: 16,

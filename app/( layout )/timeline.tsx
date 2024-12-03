@@ -83,6 +83,8 @@ export default function Timeline() {
         <SelectMonthModal
           timelineFunction={handleMonthChange}
           closeModal={closeModal}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
         />
       ) : null}
     </>
