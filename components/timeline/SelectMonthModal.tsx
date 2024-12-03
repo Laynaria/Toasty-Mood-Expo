@@ -84,11 +84,4 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     borderRadius: 16,
   },
-  buttons: {
-    flexBasis: "50%",
-  },
-  texts: {
-    fontWeight: "bold",
-    textAlign: "center",
-  },
 });
