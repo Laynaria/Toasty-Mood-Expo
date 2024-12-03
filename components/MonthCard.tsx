@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Image, StyleSheet, Text, Pressable } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
-import SelectMonthModal from "./timeline/SelectMonthModal";
 
 const backIcon = require("../assets/icons/month-arrow.png");
 

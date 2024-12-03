@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { months, years } from "../../services/time";
 import SelectValidationButton from "./SelectValidationButton";
@@ -19,8 +19,8 @@ export default function SelectMonthModal({
   };
 
   const handleChange = () => {
-    console.log("ok");
-    return;
+    timelineFunction("November", 2024);
+    closeModal();
   };
 
   return (
