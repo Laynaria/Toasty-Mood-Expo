@@ -12,7 +12,7 @@ export default function SelectMonthModal({
   selectedYear,
 }) {
   const [newMonth, setNewMonth] = useState<string>(selectedMonth);
-  const [newYear, setNewYear] = useState<string>(selectedYear);
+  const [newYear, setNewYear] = useState<number>(selectedYear);
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const cancelChange = () => {
@@ -20,8 +20,16 @@ export default function SelectMonthModal({
   };
 
   const validateChange = () => {
-    timelineFunction("November", 2024);
+    timelineFunction(newMonth, newYear);
     closeModal();
+  };
+
+  const handleMonthChange = (month) => {
+    setNewMonth(month);
+  };
+
+  const handleYearChange = (year) => {
+    setNewYear(year);
   };
 
   return (
@@ -37,8 +45,8 @@ export default function SelectMonthModal({
           Sélectionnez une date
         </Text>
 
-        <SelectList array={months} />
-        <SelectList array={years(2018)} />
+        <SelectList array={months} handleFunction={handleMonthChange} />
+        <SelectList array={years(2018)} handleFunction={handleYearChange} />
 
         <SelectValidationButton
           text={"Cancel"}
