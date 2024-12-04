@@ -60,7 +60,7 @@ export default function Index() {
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
-            contentContainerStyle={{ paddingTop: 51, paddingBottom: 78 }}
+            contentContainerStyle={{ paddingTop: 95, paddingBottom: 35 }}
             inverted
             ref={ref}
             estimatedItemSize={707}
