@@ -56,7 +56,8 @@ export default function Timeline() {
               .filter(
                 (toast) =>
                   new Date(toast.date).getMonth() ===
-                  months.indexOf(selectedMonth)
+                    months.indexOf(selectedMonth) &&
+                  new Date(toast.date).getFullYear() === selectedYear
               )
               ?.map((toast) => (
                 <TimelineCard
