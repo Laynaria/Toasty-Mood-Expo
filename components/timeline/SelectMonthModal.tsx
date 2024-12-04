@@ -39,8 +39,16 @@ export default function SelectMonthModal({
           Sélectionnez une date
         </Text>
 
-        <SelectList array={months} handleFunction={handleMonthChange} />
-        <SelectList array={years(2018)} handleFunction={handleYearChange} />
+        <SelectList
+          array={months}
+          handleFunction={handleMonthChange}
+          current={selectedMonth}
+        />
+        <SelectList
+          array={years(2018)}
+          handleFunction={handleYearChange}
+          current={selectedYear}
+        />
 
         <View
           style={[
