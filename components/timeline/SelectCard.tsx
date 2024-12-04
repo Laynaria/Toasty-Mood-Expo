@@ -1,27 +1,24 @@
 import { useContext } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-export default function SelectCard({ item, handleFunction }) {
+export default function SelectCard({ item, currentScrollItem }) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
-    <Pressable
-      style={styles.container}
-      key={item}
-      onPress={() => handleFunction(item)}
-    >
+    <View style={styles.container} key={item}>
       <Text
         style={[
           styles.texts,
           {
             color: selectedTheme.secondary,
+            opacity: item === currentScrollItem ? 1 : 0.5,
           },
         ]}
       >
         {item}
       </Text>
-    </Pressable>
+    </View>
   );
 }
 
