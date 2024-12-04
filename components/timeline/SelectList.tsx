@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export default function SelectList({ array }) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
-    <View style={styles.container}>
-      {array.map((element) => (
-        <Pressable key={element}>
+    <FlatList
+      style={styles.container}
+      data={array}
+      renderItem={({ item }) => (
+        <Pressable key={item} onPress={() => console.log(item)}>
           <Text
             style={[
               styles.texts,
@@ -17,11 +19,11 @@ export default function SelectList({ array }) {
               },
             ]}
           >
-            {element}
+            {item}
           </Text>
         </Pressable>
-      ))}
-    </View>
+      )}
+    />
   );
 }
 
