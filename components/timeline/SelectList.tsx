@@ -1,27 +1,19 @@
-import { useContext } from "react";
-import { FlatList, Pressable, StyleSheet, Text } from "react-native";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { StyleSheet } from "react-native";
+
+import SelectCard from "./SelectCard";
+import Animated from "react-native-reanimated";
 
 export default function SelectList({ array, handleFunction }) {
-  const { selectedTheme } = useContext(ThemeColorContext);
-
   return (
-    <FlatList
+    <Animated.FlatList
       style={styles.container}
+      decelerationRate="fast"
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={16}
+      snapToInterval={41}
       data={array}
       renderItem={({ item }) => (
-        <Pressable key={item} onPress={() => handleFunction(item)}>
-          <Text
-            style={[
-              styles.texts,
-              {
-                color: selectedTheme.secondary,
-              },
-            ]}
-          >
-            {item}
-          </Text>
-        </Pressable>
+        <SelectCard item={item} handleFunction={handleFunction} />
       )}
     />
   );
@@ -30,9 +22,6 @@ export default function SelectList({ array, handleFunction }) {
 const styles = StyleSheet.create({
   container: {
     flexBasis: "50%",
-  },
-  texts: {
-    fontWeight: "bold",
-    textAlign: "center",
+    height: 120,
   },
 });

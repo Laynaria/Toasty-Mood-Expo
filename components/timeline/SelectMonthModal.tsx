@@ -35,18 +35,26 @@ export default function SelectMonthModal({
   return (
     <View style={styles.container}>
       <View style={[styles.modal, { backgroundColor: selectedTheme.primary }]}>
-        <Text
-          style={{
-            color: selectedTheme.secondary,
-            fontWeight: "bold",
-            fontSize: 16,
-          }}
-        >
+        <Text style={[styles.title, { color: selectedTheme.secondary }]}>
           Sélectionnez une date
         </Text>
 
         <SelectList array={months} handleFunction={handleMonthChange} />
         <SelectList array={years(2018)} handleFunction={handleYearChange} />
+
+        <View
+          style={[
+            styles.lineDecoration,
+            { top: "50%", backgroundColor: selectedTheme.secondary },
+          ]}
+        />
+
+        <View
+          style={[
+            styles.lineDecoration,
+            { top: "70%", backgroundColor: selectedTheme.secondary },
+          ]}
+        />
 
         <SelectValidationButton
           text={"Cancel"}
@@ -91,5 +99,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
     borderRadius: 16,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  lineDecoration: {
+    position: "absolute",
+    height: 1,
+    width: "70%",
+    backgroundColor: "black",
+    left: "25%",
   },
 });
