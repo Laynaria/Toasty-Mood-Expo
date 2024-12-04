@@ -31,7 +31,7 @@ export default function Index() {
   }, []);
 
   const scrollOnLoad = () => {
-    ref?.current?.scrollToOffset({ offset: previousOffset, animated: true });
+    ref?.current?.scrollToOffset({ offset: previousOffset, animated: false });
   };
 
   const checkDate = (year, month) => {
