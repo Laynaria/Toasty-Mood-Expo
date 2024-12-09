@@ -1,17 +1,17 @@
 import { StyleSheet } from "react-native";
+import { useState } from "react";
+import Animated from "react-native-reanimated";
 
 import SelectCard from "./SelectCard";
-import Animated from "react-native-reanimated";
-import { useState } from "react";
 
 export default function SelectList({ array, handleFunction, current }) {
-  const [currentScrollItem, setCurrentScrollItem] = useState<string | number>(
+  const [currentScrollIndex, setCurrentScrollIndex] = useState<string | number>(
     null
   );
 
   const handleScroll = (currentItem) => {
     handleFunction(currentItem);
-    setCurrentScrollItem(currentItem);
+    setCurrentScrollIndex(currentItem);
   };
 
   const ITEM_HEIGHT = 40;
@@ -23,19 +23,23 @@ export default function SelectList({ array, handleFunction, current }) {
       showsVerticalScrollIndicator={false}
       scrollEventThrottle={16}
       snapToInterval={ITEM_HEIGHT}
-      data={[null, ...array, null]} // until we find out how to have infinite scroll
+      data={[null, ...array, null]}
       renderItem={({ item }) => (
-        <SelectCard item={item} currentScrollItem={currentScrollItem} />
+        <SelectCard
+          item={item}
+          currentScrollIndex={currentScrollIndex}
+          array={array}
+        />
       )}
-      onViewableItemsChanged={({ viewableItems }) =>
-        handleScroll(viewableItems[1]?.item)
-      }
       initialScrollIndex={array.indexOf(current)}
       getItemLayout={(_, index) => ({
         length: ITEM_HEIGHT,
         offset: ITEM_HEIGHT * index,
         index,
       })}
+      onScroll={(e) => {
+        handleScroll(e.nativeEvent.contentOffset.y / 40);
+      }}
     />
   );
 }

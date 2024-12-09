@@ -36,7 +36,7 @@ export default function SelectMonthModal({
     <View style={styles.container}>
       <View style={[styles.modal, { backgroundColor: selectedTheme.primary }]}>
         <Text style={[styles.title, { color: selectedTheme.secondary }]}>
-          Sélectionnez une date
+          Select period
         </Text>
 
         <SelectList
@@ -111,6 +111,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 17,
+    width: "100%",
+    textAlign: "center",
   },
   lineDecoration: {
     position: "absolute",
