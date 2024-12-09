@@ -45,7 +45,7 @@ export default function SelectMonthModal({
           current={selectedMonth}
         />
         <SelectList
-          array={years(2018)}
+          array={years(2022)}
           handleFunction={handleYearChange}
           current={selectedYear}
         />

@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { useRef, useState } from "react";
 import Animated from "react-native-reanimated";
 
 import SelectCard from "./SelectCard";
@@ -8,6 +8,7 @@ export default function SelectList({ array, handleFunction, current }) {
   const [currentScrollIndex, setCurrentScrollIndex] = useState<string | number>(
     null
   );
+  const ref = useRef<FlatList>();
 
   const handleScroll = (currentItem) => {
     setCurrentScrollIndex(currentItem);
@@ -19,8 +20,15 @@ export default function SelectList({ array, handleFunction, current }) {
 
   const ITEM_HEIGHT = 40;
 
+  const handleClick = (e) => {
+    if (e >= 0) {
+      ref?.current?.scrollToIndex({ index: e });
+    }
+  };
+
   return (
     <Animated.FlatList
+      ref={ref}
       style={styles.container}
       decelerationRate="fast"
       showsVerticalScrollIndicator={false}
@@ -32,6 +40,7 @@ export default function SelectList({ array, handleFunction, current }) {
           item={item}
           currentScrollIndex={currentScrollIndex}
           array={array}
+          handleClick={handleClick}
         />
       )}
       initialScrollIndex={array.indexOf(current)}

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import Animated, {
   Easing,
@@ -8,7 +8,12 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-export default function SelectCard({ item, currentScrollIndex, array }) {
+export default function SelectCard({
+  item,
+  currentScrollIndex,
+  array,
+  handleClick,
+}) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const opacity = useSharedValue(1);
@@ -33,7 +38,11 @@ export default function SelectCard({ item, currentScrollIndex, array }) {
   }, [currentScrollIndex]);
 
   return (
-    <View style={styles.container} key={item}>
+    <Pressable
+      style={styles.container}
+      key={item}
+      onPress={() => handleClick(array.indexOf(item))}
+    >
       <Animated.Text
         style={[
           styles.texts,
@@ -45,7 +54,7 @@ export default function SelectCard({ item, currentScrollIndex, array }) {
       >
         {item}
       </Animated.Text>
-    </View>
+    </Pressable>
   );
 }
 
