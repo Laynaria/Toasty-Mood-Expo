@@ -10,8 +10,11 @@ export default function SelectList({ array, handleFunction, current }) {
   );
 
   const handleScroll = (currentItem) => {
-    handleFunction(currentItem);
     setCurrentScrollIndex(currentItem);
+  };
+
+  const handleSelectionScroll = (currentItem) => {
+    handleFunction(currentItem);
   };
 
   const ITEM_HEIGHT = 40;
@@ -37,6 +40,9 @@ export default function SelectList({ array, handleFunction, current }) {
         offset: ITEM_HEIGHT * index,
         index,
       })}
+      onViewableItemsChanged={({ viewableItems }) =>
+        handleSelectionScroll(viewableItems[1]?.item)
+      }
       onScroll={(e) => {
         handleScroll(e.nativeEvent.contentOffset.y / 40);
       }}
