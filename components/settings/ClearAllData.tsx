@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 
-import { deleteToasts } from "../services/storage";
+import { deleteToasts } from "../../services/storage";
 import { useState } from "react";
 
 export default function ClearAllData() {

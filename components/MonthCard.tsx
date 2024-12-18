@@ -1,17 +1,28 @@
 import { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, Pressable } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+
+const backIcon = require("../assets/icons/month-arrow.png");
 
 export default function MonthCard({
   selectedMonth,
   selectedYear,
   timeline = false,
+  setIsSelectingMonth = null,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
+  const handlePress = () => {
+    if (!timeline) {
+      return;
+    }
+
+    setIsSelectingMonth(true);
+  };
+
   return (
-    <View
+    <Pressable
       style={[
         styles.container,
         {
@@ -21,6 +32,7 @@ export default function MonthCard({
           alignSelf: timeline ? "flex-start" : "center",
         },
       ]}
+      onPress={handlePress}
     >
       <Svg
         width="156"
@@ -36,15 +48,35 @@ export default function MonthCard({
         <Path d="M0 0H13.1646V8.20513H0V0Z" fill={selectedTheme.primary} />
       </Svg>
 
-      <Text style={[styles.text, { color: selectedTheme.secondary }]}>
+      <Text
+        style={[
+          styles.text,
+          {
+            color: selectedTheme.secondary,
+            paddingHorizontal: !timeline ? 16 : 0,
+          },
+        ]}
+      >
         {selectedMonth} {selectedYear}
       </Text>
-    </View>
+      {timeline ? (
+        <Image
+          source={backIcon}
+          style={[
+            styles.backIcon,
+            {
+              tintColor: selectedTheme.secondary,
+            },
+          ]}
+        />
+      ) : null}
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     justifyContent: "center",
     marginBottom: 12,
   },
@@ -54,5 +86,9 @@ const styles = StyleSheet.create({
   text: {
     padding: 16,
     fontWeight: "bold",
+  },
+  backIcon: {
+    height: 16,
+    width: 16,
   },
 });

@@ -31,7 +31,7 @@ export default function Index() {
   }, []);
 
   const scrollOnLoad = () => {
-    ref?.current?.scrollToOffset({ offset: previousOffset, animated: true });
+    ref?.current?.scrollToOffset({ offset: previousOffset, animated: false });
   };
 
   const checkDate = (year, month) => {
@@ -60,7 +60,7 @@ export default function Index() {
       <SafeAreaView style={styles.scroll}>
         <View style={styles.container}>
           <FlashList<DataCalendar>
-            contentContainerStyle={{ paddingTop: 51, paddingBottom: 78 }}
+            contentContainerStyle={{ paddingTop: 95, paddingBottom: 35 }}
             inverted
             ref={ref}
             estimatedItemSize={707}

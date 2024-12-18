@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import { months, daySuffix } from "../services/time";
+import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export default function TimelineCard({ toast, img }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);

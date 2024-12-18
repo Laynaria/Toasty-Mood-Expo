@@ -7,8 +7,9 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { months } from "../../services/time";
 
 import toastsMoods from "../../services/toasts";
-import TimelineCard from "../../components/TimelineCard";
+import TimelineCard from "../../components/timeline/TimelineCard";
 import MonthCard from "../../components/MonthCard";
+import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
@@ -18,6 +19,8 @@ export default function Timeline() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const { selectedTheme } = useContext(ThemeColorContext);
 
+  const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
+
   useEffect(() => {
     const loadToasts = async () => {
       setToasts(await getToasts());
@@ -26,44 +29,66 @@ export default function Timeline() {
     loadToasts();
   }, []);
 
+  const handleMonthChange = (newMonth, newYear) => {
+    setSelectedMonth(newMonth);
+    setSelectedYear(newYear);
+  };
+
+  const closeModal = () => setIsSelectingMonth(false);
+
   return (
-    <View style={styles.scroll}>
-      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <MonthCard
-            selectedMonth={selectedMonth}
-            selectedYear={selectedYear}
-            timeline={true}
-          />
-          {toasts
-            ?.sort(
-              (a, b) =>
-                new Date(a.date.split("T")[0]).getTime() -
-                new Date(b.date.split("T")[0]).getTime()
-            )
-            .filter(
-              (toast) =>
-                new Date(toast.date).getMonth() ===
-                months.indexOf(selectedMonth)
-            )
-            ?.map((toast) => (
-              <TimelineCard
-                key={toast.date}
-                toast={toast}
-                img={toastsMoods[toast.moodArray][toast.selectedToast - 1].img}
-              />
-            ))}
-        </View>
-      </ScrollView>
-      <LinearGradient
-        colors={[
-          "rgba(255,255,255, 0)",
-          selectedTheme.primary,
-          "rgba(255,255,255, 0)",
-        ]}
-        style={styles.timebar}
-      />
-    </View>
+    <>
+      <View style={styles.scroll}>
+        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
+            <MonthCard
+              selectedMonth={selectedMonth}
+              selectedYear={selectedYear}
+              timeline={true}
+              setIsSelectingMonth={setIsSelectingMonth}
+            />
+            {toasts
+              ?.sort(
+                (a, b) =>
+                  new Date(a.date.split("T")[0]).getTime() -
+                  new Date(b.date.split("T")[0]).getTime()
+              )
+              .filter(
+                (toast) =>
+                  new Date(toast.date).getMonth() ===
+                    months.indexOf(selectedMonth) &&
+                  new Date(toast.date).getFullYear() === selectedYear
+              )
+              ?.map((toast) => (
+                <TimelineCard
+                  key={toast.date}
+                  toast={toast}
+                  img={
+                    toastsMoods[toast.moodArray][toast.selectedToast - 1].img
+                  }
+                />
+              ))}
+          </View>
+        </ScrollView>
+        <LinearGradient
+          colors={[
+            "rgba(255,255,255, 0)",
+            selectedTheme.primary,
+            "rgba(255,255,255, 0)",
+          ]}
+          style={styles.timebar}
+        />
+      </View>
+
+      {isSelectingMonth ? (
+        <SelectMonthModal
+          timelineFunction={handleMonthChange}
+          closeModal={closeModal}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+        />
+      ) : null}
+    </>
   );
 }
 
