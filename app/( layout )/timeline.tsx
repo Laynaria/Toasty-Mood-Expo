@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import { getToasts } from "../../services/storage";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
@@ -64,7 +64,11 @@ export default function Timeline() {
                   key={toast.date}
                   toast={toast}
                   img={
-                    toastsMoods[toast.moodArray][toast.selectedToast - 1].img
+                    toast.jam
+                      ? toastsMoods[toast.moodArray][toast.selectedToast - 1]
+                          .jamImg
+                      : toastsMoods[toast.moodArray][toast.selectedToast - 1]
+                          .img
                   }
                 />
               ))}
