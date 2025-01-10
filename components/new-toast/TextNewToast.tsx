@@ -5,7 +5,7 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 export default function TextNewToast({ text, style }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
-  if (text === "I'm Done!") {
+  if (text === "I'm Done!" || text === "Yes" || text === "No") {
     return (
       <Text
         style={[
@@ -18,7 +18,7 @@ export default function TextNewToast({ text, style }) {
           },
         ]}
       >
-        I'm Done!
+        {text}
       </Text>
     );
   }
