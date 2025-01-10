@@ -42,7 +42,14 @@ export default function NewToast() {
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
-    const newToast = { selectedToast, note, moodArray: 0, date, photo };
+    const newToast = {
+      selectedToast,
+      isJamDay,
+      note,
+      moodArray: 0,
+      date,
+      photo,
+    };
 
     if (selectedToast !== 0) {
       if (existingToasts) {
@@ -81,6 +88,10 @@ export default function NewToast() {
           setNote(todayToast.note);
           setSelectedToast(todayToast.selectedToast);
           setPhoto(todayToast.photo);
+
+          if (todayToast.isJamDay) {
+            setIsJamDay(todayToast.isJamDay);
+          }
         }
       }
 

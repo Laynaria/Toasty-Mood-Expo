@@ -64,11 +64,7 @@ export default function Timeline() {
                   key={toast.date}
                   toast={toast}
                   img={
-                    toast.jam
-                      ? toastsMoods[toast.moodArray][toast.selectedToast - 1]
-                          .jamImg
-                      : toastsMoods[toast.moodArray][toast.selectedToast - 1]
-                          .img
+                    toastsMoods[toast.moodArray][toast.selectedToast - 1].img
                   }
                 />
               ))}

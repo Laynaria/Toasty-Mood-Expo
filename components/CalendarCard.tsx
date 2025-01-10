@@ -30,7 +30,7 @@ export default function CalendarCard({
       return toastEmpty;
     }
 
-    if (checkDate(day).jam) {
+    if (checkDate(day).isJamDay) {
       return toastsMoods[checkDate(day).moodArray][
         checkDate(day).selectedToast - 1
       ].jamImg;

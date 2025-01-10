@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     columnGap: 24,
-
     paddingHorizontal: 16,
   },
 });
