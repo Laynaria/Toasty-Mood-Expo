@@ -8,13 +8,20 @@ export default function CardViewElement({ children }) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
-    <View>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Image
         source={backgroundElement}
         style={{
           tintColor: selectedTheme.secondary,
           position: "absolute",
           opacity: 0.3,
+          height: 44,
+          width: 44,
         }}
       />
       {children}

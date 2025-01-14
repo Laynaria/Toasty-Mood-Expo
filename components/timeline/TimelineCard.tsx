@@ -2,8 +2,10 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { opacity } from "react-native-reanimated/lib/typescript/Colors";
 import CardViewElement from "./CardViewElement";
+
+const crunchedToast = require("../../assets/icons/toast-crunched.png");
+const uncrunchedToast = require("../../assets/icons/toast-uncrunched.png");
 
 const jam = require("../../assets/icons/jam.png");
 const grayJam = require("../../assets/icons/jam-gray.png");
@@ -47,7 +49,6 @@ export default function TimelineCard({ toast, img }) {
         <View
           style={{
             flexDirection: "row",
-            columnGap: 12,
             justifyContent: "space-around",
           }}
         >
@@ -56,7 +57,7 @@ export default function TimelineCard({ toast, img }) {
           </CardViewElement>
 
           <CardViewElement>
-            <Image source={img} style={{ opacity: 0 }} />
+            <Image source={toast.isBitey ? crunchedToast : uncrunchedToast} />
           </CardViewElement>
 
           <CardViewElement>
