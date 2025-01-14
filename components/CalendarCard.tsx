@@ -25,16 +25,26 @@ export default function CalendarCard({
     }
   };
 
+  const imgSource = () => {
+    if (!checkDate(day)) {
+      return toastEmpty;
+    }
+
+    if (checkDate(day).isJamDay) {
+      return toastsMoods[checkDate(day).moodArray][
+        checkDate(day).selectedToast - 1
+      ].jamImg;
+    }
+
+    return toastsMoods[checkDate(day).moodArray][
+      checkDate(day).selectedToast - 1
+    ].img;
+  };
+
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image
-        source={
-          !!checkDate(day)
-            ? toastsMoods[checkDate(day).moodArray][
-                checkDate(day).selectedToast - 1
-              ].img
-            : toastEmpty
-        }
+        source={imgSource()}
         style={[
           styles.toast,
           {
