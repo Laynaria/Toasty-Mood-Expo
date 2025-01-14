@@ -3,6 +3,7 @@ import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { opacity } from "react-native-reanimated/lib/typescript/Colors";
+import CardViewElement from "./CardViewElement";
 
 const jam = require("../../assets/icons/jam.png");
 const grayJam = require("../../assets/icons/jam-gray.png");
@@ -43,12 +44,43 @@ export default function TimelineCard({ toast, img }) {
             },
           ]}
         />
-        <View style={{ flexDirection: "row", columnGap: 12 }}>
-          <Image source={img} />
+        <View
+          style={{
+            flexDirection: "row",
+            columnGap: 12,
+            justifyContent: "space-around",
+          }}
+        >
+          <CardViewElement>
+            <Image source={img} />
+          </CardViewElement>
 
-          <Image source={toast.isJamDay ? jam : grayJam} />
+          <CardViewElement>
+            <Image source={img} style={{ opacity: 0 }} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={toast.isJamDay ? jam : grayJam} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={img} style={{ opacity: 0 }} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={img} style={{ opacity: 0 }} />
+          </CardViewElement>
         </View>
-        <Text style={{ color: selectedTheme.secondary }}>{toast.note}</Text>
+        {toast.note ? (
+          <Text
+            style={{
+              color: selectedTheme.secondary,
+              marginBottom: photoSource ? 0 : -5,
+            }}
+          >
+            {toast.note}
+          </Text>
+        ) : null}
         {photoSource ? <Image source={photoSource} style={styles.photo} /> : ""}
       </View>
     </View>
