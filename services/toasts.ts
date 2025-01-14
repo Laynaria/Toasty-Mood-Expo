@@ -1,6 +1,9 @@
 const toastOkay = require("../assets/toasts/toast-okay.png");
 const jamToastOkay = require("../assets/toasts/toast-okay-jam.png");
 
+const toastBad = require("../assets/toasts/toast-bad.png");
+const jamToastBad = require("../assets/toasts/toast-bad-jam.png");
+
 const toastVeryBad = require("../assets/toasts/toast-very-bad.png");
 const jamToastVeryBad = require("../assets/toasts/toast-very-bad-jam.png");
 
@@ -22,8 +25,8 @@ const basicMoods = [
   },
   {
     id: 4,
-    img: toastVeryBad,
-    jamImg: jamToastVeryBad,
+    img: toastBad,
+    jamImg: jamToastBad,
   },
   {
     id: 5,
