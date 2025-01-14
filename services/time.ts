@@ -51,3 +51,9 @@ export const years = (year) => {
 
   return yearsArray;
 };
+
+export const isOrWas = (date) => {
+  return date.toLocaleDateString() === new Date().toLocaleDateString()
+    ? "Is"
+    : "Was";
+};

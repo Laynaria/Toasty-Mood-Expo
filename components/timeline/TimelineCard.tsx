@@ -2,6 +2,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import CardViewElement from "./CardViewElement";
+
+const crunchedToast = require("../../assets/icons/toast-crunched.png");
+const uncrunchedToast = require("../../assets/icons/toast-uncrunched.png");
+
+const jam = require("../../assets/icons/jam.png");
+const grayJam = require("../../assets/icons/jam-gray.png");
 
 export default function TimelineCard({ toast, img }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
@@ -39,8 +46,42 @@ export default function TimelineCard({ toast, img }) {
             },
           ]}
         />
-        <Image source={img} />
-        <Text style={{ color: selectedTheme.secondary }}>{toast.note}</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+          }}
+        >
+          <CardViewElement>
+            <Image source={img} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={toast.isBitey ? crunchedToast : uncrunchedToast} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={toast.isJamDay ? jam : grayJam} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={img} style={{ opacity: 0 }} />
+          </CardViewElement>
+
+          <CardViewElement>
+            <Image source={img} style={{ opacity: 0 }} />
+          </CardViewElement>
+        </View>
+        {toast.note ? (
+          <Text
+            style={{
+              color: selectedTheme.secondary,
+              marginBottom: photoSource ? 0 : -5,
+            }}
+          >
+            {toast.note}
+          </Text>
+        ) : null}
         {photoSource ? <Image source={photoSource} style={styles.photo} /> : ""}
       </View>
     </View>

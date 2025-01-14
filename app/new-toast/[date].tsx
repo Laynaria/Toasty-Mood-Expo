@@ -15,13 +15,14 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-import { months, daySuffix } from "../../services/time";
+import { months, daySuffix, isOrWas } from "../../services/time";
 import { getToasts, storeToasts } from "../../services/storage";
 
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
 import TextNewToast from "../../components/new-toast/TextNewToast";
 import MoodChoice from "../../components/new-toast/MoodChoice";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
+import JamDayChoice from "../../components/new-toast/JamDayChoice";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -30,6 +31,7 @@ export default function NewToast() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [selectedToast, setSelectedToast] = useState(0);
+  const [isJamDay, setIsJamDay] = useState(false);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
@@ -40,7 +42,14 @@ export default function NewToast() {
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
-    const newToast = { selectedToast, note, moodArray: 0, date, photo };
+    const newToast = {
+      selectedToast,
+      isJamDay,
+      note,
+      moodArray: 0,
+      date,
+      photo,
+    };
 
     if (selectedToast !== 0) {
       if (existingToasts) {
@@ -79,6 +88,10 @@ export default function NewToast() {
           setNote(todayToast.note);
           setSelectedToast(todayToast.selectedToast);
           setPhoto(todayToast.photo);
+
+          if (todayToast.isJamDay) {
+            setIsJamDay(todayToast.isJamDay);
+          }
         }
       }
 
@@ -110,7 +123,9 @@ export default function NewToast() {
           />
 
           <TextNewToast
-            text="How was your day today?"
+            text={`How was your day ${
+              isOrWas(date) === "Is" ? "today" : "that day"
+            }?`}
             style={{
               fontWeight: "500",
             }}
@@ -119,6 +134,12 @@ export default function NewToast() {
           <MoodChoice
             selectedToast={selectedToast}
             setSelectedToast={setSelectedToast}
+          />
+
+          <JamDayChoice
+            date={date}
+            isJamDay={isJamDay}
+            setIsJamDay={setIsJamDay}
           />
 
           <View

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import Animated, {
   Easing,

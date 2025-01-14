@@ -1,3 +1,4 @@
+import React from "react";
 import { Slot } from "expo-router";
 import Navbar from "../../components/Navbar";
 import { Image, StyleSheet, View } from "react-native";
