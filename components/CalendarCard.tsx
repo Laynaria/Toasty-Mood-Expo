@@ -6,6 +6,7 @@ import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { Image } from "expo-image";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
+const biteyOption = require("../assets/icons/bitey-calendar.png");
 
 export default function CalendarCard({
   day,
@@ -14,7 +15,7 @@ export default function CalendarCard({
   index,
   currentOffset,
 }) {
-  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {
@@ -41,6 +42,14 @@ export default function CalendarCard({
     ].img;
   };
 
+  const biteySource = () => {
+    if (!checkDate(day)) {
+      return false;
+    }
+
+    return checkDate(day).isBitey;
+  };
+
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image
@@ -54,6 +63,21 @@ export default function CalendarCard({
         ]}
         recyclingKey={date}
       />
+
+      {biteySource() ? (
+        <Image
+          source={biteyOption}
+          style={[
+            styles.bitey,
+            {
+              tintColor:
+                colorScheme() === "light"
+                  ? "#FFFFFF"
+                  : selectedTheme.darkBackground,
+            },
+          ]}
+        />
+      ) : null}
 
       <Text style={{ color: selectedTheme.primary }}>{day}</Text>
     </Pressable>
@@ -70,5 +94,13 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     margin: 4,
+  },
+  bitey: {
+    position: "absolute",
+    width: 21,
+    height: 19,
+    zIndex: 1,
+    top: -1,
+    right: -1,
   },
 });
