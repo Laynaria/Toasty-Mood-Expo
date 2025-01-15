@@ -94,6 +94,10 @@ export default function NewToast() {
           if (todayToast.isJamDay) {
             setIsJamDay(todayToast.isJamDay);
           }
+
+          if (todayToast.isBitey) {
+            setIsBitey(todayToast.isBitey);
+          }
         }
       }
 
