@@ -143,15 +143,15 @@ export default function NewToast() {
           />
 
           <ToastOptionChoice
-            text={`${isOrWas(date)} it a Jam Day?`}
-            optionState={isJamDay}
-            setOptionState={setIsJamDay}
-          />
-
-          <ToastOptionChoice
             text="Were you Bitey?"
             optionState={isBitey}
             setOptionState={setIsBitey}
+          />
+
+          <ToastOptionChoice
+            text={`${isOrWas(date)} it a Jam Day?`}
+            optionState={isJamDay}
+            setOptionState={setIsJamDay}
           />
 
           <View
