@@ -22,7 +22,7 @@ import GradientNewToast from "../../components/new-toast/GradientNewToast";
 import TextNewToast from "../../components/new-toast/TextNewToast";
 import MoodChoice from "../../components/new-toast/MoodChoice";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
-import JamDayChoice from "../../components/new-toast/JamDayChoice";
+import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -32,6 +32,7 @@ export default function NewToast() {
 
   const [selectedToast, setSelectedToast] = useState(0);
   const [isJamDay, setIsJamDay] = useState(false);
+  const [isBitey, setIsBitey] = useState(false);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
@@ -45,6 +46,7 @@ export default function NewToast() {
     const newToast = {
       selectedToast,
       isJamDay,
+      isBitey,
       note,
       moodArray: 0,
       date,
@@ -92,6 +94,10 @@ export default function NewToast() {
           if (todayToast.isJamDay) {
             setIsJamDay(todayToast.isJamDay);
           }
+
+          if (todayToast.isBitey) {
+            setIsBitey(todayToast.isBitey);
+          }
         }
       }
 
@@ -136,10 +142,16 @@ export default function NewToast() {
             setSelectedToast={setSelectedToast}
           />
 
-          <JamDayChoice
-            date={date}
-            isJamDay={isJamDay}
-            setIsJamDay={setIsJamDay}
+          <ToastOptionChoice
+            text="Were you Bitey?"
+            optionState={isBitey}
+            setOptionState={setIsBitey}
+          />
+
+          <ToastOptionChoice
+            text={`${isOrWas(date)} it a Jam Day?`}
+            optionState={isJamDay}
+            setOptionState={setIsJamDay}
           />
 
           <View

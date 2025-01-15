@@ -3,11 +3,16 @@ import { Pressable, StyleSheet } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import TextNewToast from "./TextNewToast";
 
-export default function ChoiceButton({ text, isJamDay, setIsJamDay, value }) {
+export default function ChoiceButton({
+  text,
+  optionState,
+  setOptionState,
+  value,
+}) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const handlePress = () => {
-    setIsJamDay(value);
+    setOptionState(value);
   };
 
   return (
@@ -16,7 +21,7 @@ export default function ChoiceButton({ text, isJamDay, setIsJamDay, value }) {
         styles.button,
         {
           backgroundColor:
-            value === isJamDay
+            value === optionState
               ? selectedTheme.primary
               : `${selectedTheme.primary}80`,
         },
