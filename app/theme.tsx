@@ -8,6 +8,9 @@ import { ThemeColorContext } from "../contexts/ThemeColorContext";
 
 export default function Theme() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+
+  const themeNamesArray: String[] = ["Original", "Alternative"];
+
   return (
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View
@@ -33,7 +36,11 @@ export default function Theme() {
 
         <View style={styles.arrayContainer}>
           {toastsMoods.map((toastThemeArray, index) => (
-            <ToastThemeChoice array={toastThemeArray} key={index} />
+            <ToastThemeChoice
+              array={toastThemeArray}
+              key={index}
+              name={themeNamesArray[index]}
+            />
           ))}
         </View>
       </View>
