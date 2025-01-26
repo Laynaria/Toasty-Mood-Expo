@@ -1,25 +1,33 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
+import { getThemeToast } from "../services/storage";
 
 const ThemeToastContext = createContext({
-  themeToast: 0,
-  setThemeToast: (themeToast: number) => {},
+  selectedThemeToast: 0,
+  setSelectedThemeToast: (selectedThemeToast: number) => {},
 });
 
 const ThemeToastContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const [themeToast, setThemeToast] = useState<number>(1);
+  const [selectedThemeToast, setSelectedThemeToast] = useState<number>(1);
 
   useEffect(() => {
-    // get fromstorage
+    const getTheme = async () => {
+      const response: number = await getThemeToast();
+      if (response) {
+        setSelectedThemeToast(response);
+      }
+    };
+
+    getTheme();
   }, []);
 
   const userMemo = useMemo(
     () => ({
-      themeToast,
-      setThemeToast,
+      selectedThemeToast,
+      setSelectedThemeToast,
     }),
-    [themeToast, setThemeToast]
+    [selectedThemeToast, setSelectedThemeToast]
   );
 
   return (

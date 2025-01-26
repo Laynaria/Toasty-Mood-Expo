@@ -27,7 +27,7 @@ export const deleteToasts = async () => {
   }
 };
 
-// Theme
+// ThemeColor
 
 export const storeThemeColor = async (value) => {
   try {
@@ -85,5 +85,26 @@ export const getFirstDayPreference = async () => {
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     console.warn("Error in getting your theme preference");
+  }
+};
+
+// ThemeToast
+
+export const storeThemeToast = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("themeToast", jsonValue);
+  } catch (e) {
+    console.warn("Error in registering your theme color");
+  }
+};
+
+export const getThemeToast = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("themeToast");
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.warn("Error in getting your theme color");
   }
 };
