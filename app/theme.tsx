@@ -25,6 +25,8 @@ export default function Theme() {
         <GradientNewToast />
         <Text
           style={{
+            fontSize: 18,
+            fontWeight: "500",
             color:
               colorScheme() === "light"
                 ? selectedTheme.secondary
@@ -38,8 +40,9 @@ export default function Theme() {
           {toastsMoods.map((toastThemeArray, index) => (
             <ToastThemeChoice
               array={toastThemeArray}
-              key={index}
               name={themeNamesArray[index]}
+              index={index}
+              key={index}
             />
           ))}
         </View>
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
   container: {
     minHeight: Dimensions.get("screen").height - 48,
     alignItems: "center",
-    paddingTop: 55,
+    paddingTop: 50,
     paddingBottom: 40,
     gap: 24,
   },

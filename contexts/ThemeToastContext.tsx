@@ -9,7 +9,7 @@ const ThemeToastContext = createContext({
 const ThemeToastContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const [selectedThemeToast, setSelectedThemeToast] = useState<number>(1);
+  const [selectedThemeToast, setSelectedThemeToast] = useState<number>(0);
 
   useEffect(() => {
     const getTheme = async () => {
