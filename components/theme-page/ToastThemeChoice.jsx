@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
+import { storeThemeToast } from "../../services/storage";
 
 export default function ToastThemeChoice({ array, name, index }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
@@ -20,8 +21,18 @@ export default function ToastThemeChoice({ array, name, index }) {
     return "transparent";
   };
 
+  const handlePress = () => {
+    if (selectedThemeToast !== index) {
+      setSelectedThemeToast(index);
+      storeThemeToast(index);
+    }
+  };
+
   return (
-    <View style={[styles.container, { borderColor: borderColor() }]}>
+    <Pressable
+      style={[styles.container, { borderColor: borderColor() }]}
+      onPress={handlePress}
+    >
       <Text
         style={{
           color:
@@ -46,7 +57,7 @@ export default function ToastThemeChoice({ array, name, index }) {
           ))}
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
