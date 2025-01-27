@@ -1,10 +1,13 @@
 import { ThemeColorContextProvider } from "../contexts/ThemeColorContext";
 import LayoutView from "../components/LayoutView";
+import { ThemeToastContextProvider } from "../contexts/ThemeToastContext";
 
 export default function RootLayout() {
   return (
     <ThemeColorContextProvider>
-      <LayoutView />
+      <ThemeToastContextProvider>
+        <LayoutView />
+      </ThemeToastContextProvider>
     </ThemeColorContextProvider>
   );
 }
