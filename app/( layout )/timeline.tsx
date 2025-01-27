@@ -10,6 +10,7 @@ import toastsMoods from "../../services/toasts";
 import TimelineCard from "../../components/timeline/TimelineCard";
 import MonthCard from "../../components/MonthCard";
 import SelectMonthModal from "../../components/timeline/SelectMonthModal";
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
@@ -20,6 +21,8 @@ export default function Timeline() {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
+
+  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
 
   useEffect(() => {
     const loadToasts = async () => {
@@ -64,7 +67,9 @@ export default function Timeline() {
                   key={toast.date}
                   toast={toast}
                   img={
-                    toastsMoods[toast.moodArray][toast.selectedToast - 1].img
+                    toastsMoods[
+                      selectOverride ? selectedThemeToast : toast.moodArray
+                    ][toast.selectedToast - 1].img
                   }
                 />
               ))}
