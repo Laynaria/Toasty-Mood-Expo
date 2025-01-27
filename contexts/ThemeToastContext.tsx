@@ -1,5 +1,5 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
-import { getThemeToast } from "../services/storage";
+import { getThemeOverride, getThemeToast } from "../services/storage";
 
 const ThemeToastContext = createContext({
   selectedThemeToast: 0,
@@ -22,7 +22,15 @@ const ThemeToastContextProvider = ({
       }
     };
 
+    const getOverride = async () => {
+      const response: boolean = await getThemeOverride();
+      if (response) {
+        setSelectOverride(response);
+      }
+    };
+
     getTheme();
+    getOverride();
   }, []);
 
   const userMemo = useMemo(
