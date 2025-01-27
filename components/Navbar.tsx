@@ -2,8 +2,8 @@ import { Link, router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
-
-const addToastIcon = require("../assets/toasts/toast-okay.png");
+import { ThemeToastContext } from "../contexts/ThemeToastContext";
+import toastsMoods from "../services/toasts";
 
 const homeIcon = require("../assets/icons/home.png");
 const timelineIcon = require("../assets/icons/timeline.png");
@@ -13,6 +13,7 @@ const settingsIcon = require("../assets/icons/settings.png");
 export default function Navbar() {
   const path = usePathname();
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast } = useContext(ThemeToastContext);
 
   const selectedColor = () => {
     return colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
@@ -66,7 +67,7 @@ export default function Navbar() {
           })
         }
       >
-        <Image source={addToastIcon} />
+        <Image source={toastsMoods[selectedThemeToast][1].img} />
       </Pressable>
 
       <Link href="/shop" asChild style={styles.link}>
