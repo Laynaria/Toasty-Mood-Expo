@@ -1,15 +1,18 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
-import { getThemeToast } from "../services/storage";
+import { getThemeOverride, getThemeToast } from "../services/storage";
 
 const ThemeToastContext = createContext({
   selectedThemeToast: 0,
   setSelectedThemeToast: (selectedThemeToast: number) => {},
+  selectOverride: false,
+  setSelectOverride: (selectOverride: boolean) => {},
 });
 
 const ThemeToastContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
   const [selectedThemeToast, setSelectedThemeToast] = useState<number>(0);
+  const [selectOverride, setSelectOverride] = useState<boolean>(false);
 
   useEffect(() => {
     const getTheme = async () => {
@@ -19,15 +22,30 @@ const ThemeToastContextProvider = ({
       }
     };
 
+    const getOverride = async () => {
+      const response: boolean = await getThemeOverride();
+      if (response) {
+        setSelectOverride(response);
+      }
+    };
+
     getTheme();
+    getOverride();
   }, []);
 
   const userMemo = useMemo(
     () => ({
       selectedThemeToast,
       setSelectedThemeToast,
+      selectOverride,
+      setSelectOverride,
     }),
-    [selectedThemeToast, setSelectedThemeToast]
+    [
+      selectedThemeToast,
+      setSelectedThemeToast,
+      selectOverride,
+      setSelectOverride,
+    ]
   );
 
   return (

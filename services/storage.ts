@@ -108,3 +108,24 @@ export const getThemeToast = async () => {
     console.warn("Error in getting your theme color");
   }
 };
+
+// ThemeOverride
+
+export const storeThemeOverride = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("themeOverride", jsonValue);
+  } catch (e) {
+    console.warn("Error in registering your theme color");
+  }
+};
+
+export const getThemeOverride = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("themeOverride");
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.warn("Error in getting your theme color");
+  }
+};
