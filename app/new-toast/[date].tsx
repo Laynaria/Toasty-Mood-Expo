@@ -23,6 +23,7 @@ import TextNewToast from "../../components/new-toast/TextNewToast";
 import MoodChoice from "../../components/new-toast/MoodChoice";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -37,6 +38,7 @@ export default function NewToast() {
   const [photo, setPhoto] = useState(null);
 
   const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast } = useContext(ThemeToastContext);
 
   const date = new Date(useGlobalSearchParams().date as string);
   const { index, previousOffset } = useLocalSearchParams();
@@ -48,7 +50,7 @@ export default function NewToast() {
       isJamDay,
       isBitey,
       note,
-      moodArray: 0,
+      moodArray: selectedThemeToast,
       date,
       photo,
     };

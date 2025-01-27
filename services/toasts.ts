@@ -13,6 +13,21 @@ const jamToastBad = require("../assets/toasts/toast-bad-jam.png");
 const toastVeryBad = require("../assets/toasts/toast-very-bad.png");
 const jamToastVeryBad = require("../assets/toasts/toast-very-bad-jam.png");
 
+const toastVeryGood2 = require("../assets/toasts/toast2-very-good.png");
+const jamToastVeryGood2 = require("../assets/toasts/toast2-very-good-jam.png");
+
+const toastOkay2 = require("../assets/toasts/toast2-okay.png");
+const jamToastOkay2 = require("../assets/toasts/toast2-okay-jam.png");
+
+const toastMid2 = require("../assets/toasts/toast2-mid.png");
+const jamToastMid2 = require("../assets/toasts/toast2-mid-jam.png");
+
+const toastBad2 = require("../assets/toasts/toast2-bad.png");
+const jamToastBad2 = require("../assets/toasts/toast2-bad-jam.png");
+
+const toastVeryBad2 = require("../assets/toasts/toast2-very-bad.png");
+const jamToastVeryBad2 = require("../assets/toasts/toast2-very-bad-jam.png");
+
 const basicMoods = [
   {
     id: 1,
@@ -41,6 +56,34 @@ const basicMoods = [
   },
 ];
 
-const toastsMoods = [basicMoods, []];
+const alternativeMoods = [
+  {
+    id: 1,
+    img: toastVeryGood2,
+    jamImg: jamToastVeryGood2,
+  },
+  {
+    id: 2,
+    img: toastOkay2,
+    jamImg: jamToastOkay2,
+  },
+  {
+    id: 3,
+    img: toastMid2,
+    jamImg: jamToastMid2,
+  },
+  {
+    id: 4,
+    img: toastBad2,
+    jamImg: jamToastBad2,
+  },
+  {
+    id: 5,
+    img: toastVeryBad2,
+    jamImg: jamToastVeryBad2,
+  },
+];
+
+const toastsMoods = [basicMoods, alternativeMoods];
 
 export default toastsMoods;

@@ -3,16 +3,19 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 import toastsMoods from "../../services/toasts";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
 export default function MoodChoice({ selectedToast, setSelectedToast }) {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast } = useContext(ThemeToastContext);
+
   const handleToastChange = (id) => {
     setSelectedToast(id);
   };
 
   return (
     <View style={styles.container}>
-      {toastsMoods[0].map((toast) => (
+      {toastsMoods[selectedThemeToast].map((toast) => (
         <Pressable
           key={toast.id}
           style={[
