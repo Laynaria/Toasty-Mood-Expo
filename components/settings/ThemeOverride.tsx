@@ -22,7 +22,7 @@ export default function ThemeOverride() {
       style={[styles.container, { backgroundColor: selectedTheme.primary }]}
     >
       <Text style={[styles.text, { color: selectedTheme.secondary }]}>
-        Override old toasts theme from calendar and timeline with current theme?
+        Override old toasts in calendar and timeline?
       </Text>
 
       {themeOverride.map((option: boolean, index: number) => (
