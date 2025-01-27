@@ -2,6 +2,8 @@ import { StyleSheet, View } from "react-native";
 import ThemeColor from "../../components/settings/ThemeColor";
 import ThemeSetting from "../../components/settings/ThemeSetting";
 import WeekDaySetting from "../../components/settings/WeekDaySetting";
+import ThemeOverride from "../../components/settings/ThemeOverride";
+
 // import ClearAllData from "../../components/ClearAllData";
 
 export default function Settings() {
@@ -10,6 +12,7 @@ export default function Settings() {
       <ThemeColor />
       <ThemeSetting />
       <WeekDaySetting />
+      <ThemeOverride />
 
       {/* <ClearAllData /> */}
     </View>
