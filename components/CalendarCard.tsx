@@ -4,6 +4,7 @@ import toastsMoods from "../services/toasts";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { Image } from "expo-image";
+import { ThemeToastContext } from "../contexts/ThemeToastContext";
 
 const toastEmpty = require("../assets/icons/toast-empty.png");
 const biteyOption = require("../assets/icons/bitey-calendar.png");
@@ -16,6 +17,7 @@ export default function CalendarCard({
   currentOffset,
 }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {
@@ -32,14 +34,14 @@ export default function CalendarCard({
     }
 
     if (checkDate(day).isJamDay) {
-      return toastsMoods[checkDate(day).moodArray][
-        checkDate(day).selectedToast - 1
-      ].jamImg;
+      return toastsMoods[
+        selectOverride ? selectedThemeToast : checkDate(day).moodArray
+      ][checkDate(day).selectedToast - 1].jamImg;
     }
 
-    return toastsMoods[checkDate(day).moodArray][
-      checkDate(day).selectedToast - 1
-    ].img;
+    return toastsMoods[
+      selectOverride ? selectedThemeToast : checkDate(day).moodArray
+    ][checkDate(day).selectedToast - 1].img;
   };
 
   const biteySource = () => {
