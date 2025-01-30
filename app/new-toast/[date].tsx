@@ -20,10 +20,12 @@ import { getToasts, storeToasts } from "../../services/storage";
 
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
 import TextNewToast from "../../components/new-toast/TextNewToast";
-import MoodChoice from "../../components/new-toast/MoodChoice";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
+import ChoiceComponent from "../../components/new-toast/ChoiceComponent";
+import weatherIcons from "../../services/weather";
+import toastsMoods from "../../services/toasts";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -34,6 +36,7 @@ export default function NewToast() {
   const [selectedToast, setSelectedToast] = useState(0);
   const [isJamDay, setIsJamDay] = useState(false);
   const [isBitey, setIsBitey] = useState(false);
+  const [weather, setWeather] = useState(1);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
@@ -49,6 +52,7 @@ export default function NewToast() {
       selectedToast,
       isJamDay,
       isBitey,
+      weather,
       note,
       moodArray: selectedThemeToast,
       date,
@@ -92,6 +96,10 @@ export default function NewToast() {
           setNote(todayToast.note);
           setSelectedToast(todayToast.selectedToast);
           setPhoto(todayToast.photo);
+
+          if (todayToast.weather) {
+            setWeather(todayToast.weather);
+          }
 
           if (todayToast.isJamDay) {
             setIsJamDay(todayToast.isJamDay);
@@ -139,9 +147,10 @@ export default function NewToast() {
             }}
           />
 
-          <MoodChoice
-            selectedToast={selectedToast}
-            setSelectedToast={setSelectedToast}
+          <ChoiceComponent
+            array={toastsMoods[selectedThemeToast]}
+            optionState={selectedToast}
+            setOptionState={setSelectedToast}
           />
 
           <ToastOptionChoice
@@ -154,6 +163,27 @@ export default function NewToast() {
             text={`${isOrWas(date)} it a Jam Day?`}
             optionState={isJamDay}
             setOptionState={setIsJamDay}
+          />
+
+          <TextNewToast
+            text={`How was the weather ${
+              isOrWas(date) === "Is" ? "today" : "that day"
+            }?`}
+            style={{
+              fontWeight: "500",
+            }}
+          />
+
+          <ChoiceComponent
+            array={weatherIcons}
+            optionState={weather}
+            setOptionState={setWeather}
+            styleProp={{
+              columnGap: 16,
+              rowGap: 8,
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
           />
 
           <View
