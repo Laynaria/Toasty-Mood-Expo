@@ -26,6 +26,7 @@ import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import ChoiceComponent from "../../components/new-toast/ChoiceComponent";
 import weatherIcons from "../../services/weather";
 import toastsMoods from "../../services/toasts";
+import temperatureIcons from "../../services/temperature";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -37,6 +38,7 @@ export default function NewToast() {
   const [isJamDay, setIsJamDay] = useState(false);
   const [isBitey, setIsBitey] = useState(false);
   const [weather, setWeather] = useState(1);
+  const [temperature, setTemperature] = useState(2);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
@@ -53,6 +55,7 @@ export default function NewToast() {
       isJamDay,
       isBitey,
       weather,
+      temperature,
       note,
       moodArray: selectedThemeToast,
       date,
@@ -99,6 +102,10 @@ export default function NewToast() {
 
           if (todayToast.weather) {
             setWeather(todayToast.weather);
+          }
+
+          if (todayToast.temperature) {
+            setTemperature(todayToast.temperature);
           }
 
           if (todayToast.isJamDay) {
@@ -182,6 +189,26 @@ export default function NewToast() {
               columnGap: 16,
               rowGap: 8,
               flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          />
+
+          <TextNewToast
+            text={`How was the temperature ${
+              isOrWas(date) === "Is" ? "today" : "that day"
+            }?`}
+            style={{
+              fontWeight: "500",
+            }}
+          />
+
+          <ChoiceComponent
+            array={temperatureIcons}
+            optionState={temperature}
+            setOptionState={setTemperature}
+            styleProp={{
+              columnGap: 16,
+              rowGap: 8,
               justifyContent: "center",
             }}
           />
