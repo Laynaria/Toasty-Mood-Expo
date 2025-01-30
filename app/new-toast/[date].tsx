@@ -35,7 +35,7 @@ export default function NewToast() {
   const [selectedToast, setSelectedToast] = useState(0);
   const [isJamDay, setIsJamDay] = useState(false);
   const [isBitey, setIsBitey] = useState(false);
-  const [weather, setWeather] = useState(0);
+  const [weather, setWeather] = useState(1);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState(null);
 
@@ -95,7 +95,10 @@ export default function NewToast() {
           setNote(todayToast.note);
           setSelectedToast(todayToast.selectedToast);
           setPhoto(todayToast.photo);
-          setWeather(todayToast.weather);
+
+          if (todayToast.weather) {
+            setWeather(todayToast.weather);
+          }
 
           if (todayToast.isJamDay) {
             setIsJamDay(todayToast.isJamDay);

@@ -17,19 +17,19 @@ export default function ChoiceComponent({
 
   return (
     <View style={[styles.container, styleProp]}>
-      {weatherIcons.map((toast) => (
+      {weatherIcons.map((element) => (
         <Pressable
-          key={toast.id}
+          key={element.id}
           style={[
             styles.button,
             {
               backgroundColor:
-                optionState === toast.id ? selectedTheme.primary : null,
+                optionState === element.id ? selectedTheme.primary : null,
             },
           ]}
-          onPress={() => handleToastChange(toast.id)}
+          onPress={() => handleToastChange(element.id)}
         >
-          <Image source={toast.img} />
+          <Image source={element.img} />
         </Pressable>
       ))}
     </View>
