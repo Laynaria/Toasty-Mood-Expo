@@ -20,11 +20,12 @@ import { getToasts, storeToasts } from "../../services/storage";
 
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
 import TextNewToast from "../../components/new-toast/TextNewToast";
-import MoodChoice from "../../components/new-toast/MoodChoice";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import ChoiceComponent from "../../components/new-toast/ChoiceComponent";
+import weatherIcons from "../../services/weather";
+import toastsMoods from "../../services/toasts";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -146,9 +147,10 @@ export default function NewToast() {
             }}
           />
 
-          <MoodChoice
-            selectedToast={selectedToast}
-            setSelectedToast={setSelectedToast}
+          <ChoiceComponent
+            array={toastsMoods[selectedThemeToast]}
+            optionState={selectedToast}
+            setOptionState={setSelectedToast}
           />
 
           <ToastOptionChoice
@@ -173,6 +175,7 @@ export default function NewToast() {
           />
 
           <ChoiceComponent
+            array={weatherIcons}
             optionState={weather}
             setOptionState={setWeather}
             styleProp={{

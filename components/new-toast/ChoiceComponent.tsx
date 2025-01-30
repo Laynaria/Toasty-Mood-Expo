@@ -2,9 +2,8 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-import weatherIcons from "../../services/weather";
-
 export default function ChoiceComponent({
+  array,
   optionState,
   setOptionState,
   styleProp = {},
@@ -17,7 +16,7 @@ export default function ChoiceComponent({
 
   return (
     <View style={[styles.container, styleProp]}>
-      {weatherIcons.map((element) => (
+      {array.map((element) => (
         <Pressable
           key={element.id}
           style={[
