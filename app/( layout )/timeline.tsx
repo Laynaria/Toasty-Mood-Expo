@@ -81,7 +81,7 @@ export default function Timeline() {
                   temperatureImg={
                     toast.temperature
                       ? temperatureIcons[toast.temperature - 1].img
-                      : temperatureIcons[0].img
+                      : temperatureIcons[1].img
                   }
                 />
               ))}
