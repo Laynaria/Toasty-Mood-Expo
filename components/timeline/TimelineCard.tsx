@@ -10,7 +10,12 @@ const uncrunchedToast = require("../../assets/icons/toast-uncrunched.png");
 const jam = require("../../assets/icons/jam.png");
 const grayJam = require("../../assets/icons/jam-gray.png");
 
-export default function TimelineCard({ toast, img }) {
+export default function TimelineCard({
+  toast,
+  img,
+  weatherImg,
+  temperatureImg,
+}) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const date = new Date(toast.date);
 
@@ -65,11 +70,11 @@ export default function TimelineCard({ toast, img }) {
           </CardViewElement>
 
           <CardViewElement>
-            <Image source={img} style={{ opacity: 0 }} />
+            <Image source={weatherImg} />
           </CardViewElement>
 
           <CardViewElement>
-            <Image source={img} style={{ opacity: 0 }} />
+            <Image source={temperatureImg} />
           </CardViewElement>
         </View>
         {toast.note ? (

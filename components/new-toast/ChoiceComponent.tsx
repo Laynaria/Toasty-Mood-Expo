@@ -1,33 +1,34 @@
 import { Image, Pressable, StyleSheet, View } from "react-native";
-
-import toastsMoods from "../../services/toasts";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
-export default function MoodChoice({ selectedToast, setSelectedToast }) {
+export default function ChoiceComponent({
+  array,
+  optionState,
+  setOptionState,
+  styleProp = {},
+}) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const { selectedThemeToast } = useContext(ThemeToastContext);
 
   const handleToastChange = (id) => {
-    setSelectedToast(id);
+    setOptionState(id);
   };
 
   return (
-    <View style={styles.container}>
-      {toastsMoods[selectedThemeToast].map((toast) => (
+    <View style={[styles.container, styleProp]}>
+      {array.map((element) => (
         <Pressable
-          key={toast.id}
+          key={element.id}
           style={[
             styles.button,
             {
               backgroundColor:
-                selectedToast === toast.id ? selectedTheme.primary : null,
+                optionState === element.id ? selectedTheme.primary : null,
             },
           ]}
-          onPress={() => handleToastChange(toast.id)}
+          onPress={() => handleToastChange(element.id)}
         >
-          <Image source={toast.img} />
+          <Image source={element.img} />
         </Pressable>
       ))}
     </View>
