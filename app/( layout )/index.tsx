@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
@@ -21,7 +21,7 @@ export default function Index() {
     useLocalSearchParams().previousOffset as string
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const load = async () => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
@@ -30,9 +30,13 @@ export default function Index() {
     load();
   }, []);
 
-  const scrollOnLoad = () => {
-    ref?.current?.scrollToOffset({ offset: previousOffset, animated: false });
-  };
+  useLayoutEffect(() => {
+    const scrollOnLoad = () => {
+      ref?.current?.scrollToOffset({ offset: previousOffset, animated: false });
+    };
+
+    scrollOnLoad();
+  }, []);
 
   const checkDate = (year, month) => {
     return `${year}-${
@@ -65,9 +69,6 @@ export default function Index() {
             ref={ref}
             estimatedItemSize={707}
             showsVerticalScrollIndicator={false}
-            onLoad={() => {
-              scrollOnLoad();
-            }}
             initialScrollIndex={index}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
             renderItem={({ item, index }) => (
