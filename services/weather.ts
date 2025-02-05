@@ -7,7 +7,14 @@ const fog = require("../assets/weather/fog.png");
 const snow = require("../assets/weather/snow.png");
 const wind = require("../assets/weather/wind.png");
 
-const weatherIcons = [
+type weather = {
+  id: number;
+  img: string;
+};
+
+type weatherArray = weather[];
+
+const weatherIcons: weatherArray = [
   { id: 1, img: sun },
   { id: 2, img: sunAndCloud },
   { id: 3, img: cloud },

@@ -12,6 +12,7 @@ import MonthCard from "../../components/MonthCard";
 import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import weatherIcons from "../../services/weather";
+import temperatureIcons from "../../services/temperature";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
@@ -76,6 +77,11 @@ export default function Timeline() {
                     toast.weather
                       ? weatherIcons[toast.weather - 1].img
                       : weatherIcons[0].img
+                  }
+                  temperatureImg={
+                    toast.temperature
+                      ? temperatureIcons[toast.temperature - 1].img
+                      : temperatureIcons[1].img
                   }
                 />
               ))}
