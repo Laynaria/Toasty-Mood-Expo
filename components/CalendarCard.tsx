@@ -9,13 +9,7 @@ import { ThemeToastContext } from "../contexts/ThemeToastContext";
 const toastEmpty = require("../assets/icons/toast-empty.png");
 const biteyOption = require("../assets/icons/bitey-calendar.png");
 
-export default function CalendarCard({
-  day,
-  checkDate,
-  date,
-  index,
-  currentOffset,
-}) {
+export default function CalendarCard({ day, date, index, currentOffset }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
 
@@ -29,27 +23,27 @@ export default function CalendarCard({
   };
 
   const imgSource = () => {
-    if (!checkDate(day)) {
+    if (!day.toast) {
       return toastEmpty;
     }
 
-    if (checkDate(day).isJamDay) {
+    if (day.toast.isJamDay) {
       return toastsMoods[
-        selectOverride ? selectedThemeToast : checkDate(day).moodArray
-      ][checkDate(day).selectedToast - 1].jamImg;
+        selectOverride ? selectedThemeToast : day.toast.moodArray
+      ][day.toast.selectedToast - 1].jamImg;
     }
 
     return toastsMoods[
-      selectOverride ? selectedThemeToast : checkDate(day).moodArray
-    ][checkDate(day).selectedToast - 1].img;
+      selectOverride ? selectedThemeToast : day.toast.moodArray
+    ][day.toast.selectedToast - 1].img;
   };
 
   const biteySource = () => {
-    if (!checkDate(day)) {
+    if (!day.toast) {
       return false;
     }
 
-    return checkDate(day).isBitey;
+    return day.toast.isBitey;
   };
 
   return (
@@ -59,7 +53,7 @@ export default function CalendarCard({
         style={[
           styles.toast,
           {
-            tintColor: !checkDate(day) ? selectedTheme.primary : "auto",
+            tintColor: !day.toast ? selectedTheme.primary : "auto",
             opacity: date.getTime() >= new Date().getTime() ? 0.5 : 1,
           },
         ]}
@@ -81,7 +75,7 @@ export default function CalendarCard({
         />
       ) : null}
 
-      <Text style={{ color: selectedTheme.primary }}>{day}</Text>
+      <Text style={{ color: selectedTheme.primary }}>{day.day}</Text>
     </Pressable>
   );
 }

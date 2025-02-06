@@ -71,20 +71,20 @@ export default function Calendar({
 
         {days
           .filter((day) => day <= daysInMonth)
+          .map((day) => ({ day, toast: checkDate(day) }))
           .map((day) => (
             <CalendarCard
               day={day}
-              checkDate={() => checkDate(day)}
               date={
                 new Date(
-                  `${selectedYear}-${
-                    months.indexOf(selectedMonth) + 1
-                  }-${day}T03:22:00`
+                  `${selectedYear}-${months.indexOf(selectedMonth) + 1}-${
+                    day.day
+                  }T03:22:00`
                 )
               }
               index={index}
               currentOffset={currentOffset}
-              key={day}
+              key={day.day}
             />
           ))}
 
