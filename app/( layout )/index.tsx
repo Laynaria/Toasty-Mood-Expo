@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
@@ -59,6 +59,22 @@ export default function Index() {
       }))
   );
 
+  const renderItem = useCallback(
+    ({ item, index }) => (
+      <Calendar
+        selectedMonth={item.month}
+        selectedYear={item.year}
+        weekDays={() => weekDays(weekPreference)}
+        toasts={toasts?.filter(
+          (toast) => toast.date.slice(0, 7) === checkDate(item.year, item.month)
+        )}
+        index={index}
+        currentOffset={currentOffset}
+      />
+    ),
+    [toasts]
+  );
+
   return (
     <View style={{ zIndex: 1, flex: 1 }}>
       <SafeAreaView style={styles.scroll}>
@@ -71,19 +87,7 @@ export default function Index() {
             showsVerticalScrollIndicator={false}
             initialScrollIndex={index}
             data={dataCalendar.flat(Infinity).reverse() as DataCalendar[]}
-            renderItem={({ item, index }) => (
-              <Calendar
-                selectedMonth={item.month}
-                selectedYear={item.year}
-                weekDays={() => weekDays(weekPreference)}
-                toasts={toasts?.filter(
-                  (toast) =>
-                    toast.date.slice(0, 7) === checkDate(item.year, item.month)
-                )}
-                index={index}
-                currentOffset={currentOffset}
-              />
-            )}
+            renderItem={renderItem}
             keyExtractor={(item) => `${item.month} ${item.year}`}
             onScroll={(e) => {
               setCurrentOffset(e.nativeEvent.contentOffset.y);

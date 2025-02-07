@@ -1,17 +1,21 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { router } from "expo-router";
-import toastsMoods from "../services/toasts";
+
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { Image } from "expo-image";
-import { ThemeToastContext } from "../contexts/ThemeToastContext";
 
-const toastEmpty = require("../assets/icons/toast-empty.png");
 const biteyOption = require("../assets/icons/bitey-calendar.png");
 
-export default function CalendarCard({ day, date, index, currentOffset }) {
+export default function CalendarCard({
+  day,
+  date,
+  index,
+  currentOffset,
+  imgSource,
+  biteySource,
+}) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
-  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
 
   const handlePress = () => {
     if (date.getTime() <= new Date().getTime()) {
@@ -22,34 +26,10 @@ export default function CalendarCard({ day, date, index, currentOffset }) {
     }
   };
 
-  const imgSource = () => {
-    if (!day.toast) {
-      return toastEmpty;
-    }
-
-    if (day.toast.isJamDay) {
-      return toastsMoods[
-        selectOverride ? selectedThemeToast : day.toast.moodArray
-      ][day.toast.selectedToast - 1].jamImg;
-    }
-
-    return toastsMoods[
-      selectOverride ? selectedThemeToast : day.toast.moodArray
-    ][day.toast.selectedToast - 1].img;
-  };
-
-  const biteySource = () => {
-    if (!day.toast) {
-      return false;
-    }
-
-    return day.toast.isBitey;
-  };
-
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image
-        source={imgSource()}
+        source={imgSource}
         style={[
           styles.toast,
           {
@@ -60,7 +40,7 @@ export default function CalendarCard({ day, date, index, currentOffset }) {
         recyclingKey={date}
       />
 
-      {biteySource() ? (
+      {biteySource ? (
         <Image
           source={biteyOption}
           style={[

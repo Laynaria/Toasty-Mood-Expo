@@ -5,6 +5,10 @@ import CalendarCard from "./CalendarCard";
 import MonthCard from "./MonthCard";
 import { useContext } from "react";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import toastsMoods from "../services/toasts";
+import { ThemeToastContext } from "../contexts/ThemeToastContext";
+
+const toastEmpty = require("../assets/icons/toast-empty.png");
 
 export default function Calendar({
   selectedMonth,
@@ -15,6 +19,7 @@ export default function Calendar({
   currentOffset,
 }) {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
   const daysInMonth = new Date(
     parseInt(selectedYear),
     months.indexOf(selectedMonth) + 1,
@@ -43,6 +48,30 @@ export default function Calendar({
           ).toLocaleDateString()
       )[0];
     }
+  };
+
+  const imgSource = (day) => {
+    if (!day.toast) {
+      return toastEmpty;
+    }
+
+    if (day.toast.isJamDay) {
+      return toastsMoods[
+        selectOverride ? selectedThemeToast : day.toast.moodArray
+      ][day.toast.selectedToast - 1].jamImg;
+    }
+
+    return toastsMoods[
+      selectOverride ? selectedThemeToast : day.toast.moodArray
+    ][day.toast.selectedToast - 1].img;
+  };
+
+  const biteySource = (day) => {
+    if (!day.toast) {
+      return false;
+    }
+
+    return day.toast.isBitey;
   };
 
   return (
@@ -85,6 +114,8 @@ export default function Calendar({
               index={index}
               currentOffset={currentOffset}
               key={day.day}
+              imgSource={imgSource(day)}
+              biteySource={biteySource(day)}
             />
           ))}
 
