@@ -1,5 +1,10 @@
 import { ThemePreference, ThemeType } from "../types/theme.types";
-import { storeThemeColor, storeThemePreference } from "./storage";
+import { FirstDayOfTheWeek } from "../types/weekday.types";
+import {
+  storeFirstDayPreference,
+  storeThemeColor,
+  storeThemePreference,
+} from "./storage";
 
 export const themeColors: ThemeType[] = [
   { primary: "#E3A062", secondary: "#6A3C11", darkBackground: "#221603" },
@@ -28,5 +33,22 @@ export const handleThemeSetting = (
   if (theme !== themePreference) {
     setThemePreference(theme);
     storeThemePreference(theme);
+  }
+};
+
+export const firstDaySetting: FirstDayOfTheWeek[] = [
+  "monday",
+  "sunday",
+  "system",
+];
+
+export const handleFirstDayOfTheWeek = (
+  day: FirstDayOfTheWeek,
+  dayPreference,
+  setDayPreference
+) => {
+  if (day !== dayPreference) {
+    setDayPreference(day);
+    storeFirstDayPreference(day);
   }
 };

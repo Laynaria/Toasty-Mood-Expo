@@ -2,24 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { FirstDayOfTheWeek } from "../../types/weekday.types";
+import { getFirstDayPreference } from "../../services/storage";
 import {
-  getFirstDayPreference,
-  storeFirstDayPreference,
-} from "../../services/storage";
+  firstDaySetting,
+  handleFirstDayOfTheWeek,
+} from "../../services/settingsService";
 
 export default function WeekDaySetting() {
   const { selectedTheme } = useContext(ThemeColorContext);
   const [dayPreference, setDayPreference] =
     useState<FirstDayOfTheWeek>("system");
-
-  const firstDaySetting: FirstDayOfTheWeek[] = ["monday", "sunday", "system"];
-
-  const handlePress = (day: FirstDayOfTheWeek) => {
-    if (day !== dayPreference) {
-      setDayPreference(day);
-      storeFirstDayPreference(day);
-    }
-  };
 
   useEffect(() => {
     const getPreference = async () => {
@@ -44,7 +36,9 @@ export default function WeekDaySetting() {
       {firstDaySetting.map((day: FirstDayOfTheWeek) => (
         <Pressable
           key={day}
-          onPress={() => handlePress(day)}
+          onPress={() =>
+            handleFirstDayOfTheWeek(day, dayPreference, setDayPreference)
+          }
           style={[
             styles.button,
             {
