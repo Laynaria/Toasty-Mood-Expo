@@ -1,7 +1,7 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
-import { ThemePreference, ThemeType } from "../types/theme.types";
-import { getThemeColor, getThemePreference } from "../services/storage";
 import { useColorScheme } from "react-native";
+import { getThemeColor, getThemePreference } from "../services/storage";
+import { ThemePreference, ThemeType } from "../types/theme.types";
 
 const ThemeColorContext = createContext({
   selectedTheme: { primary: "", secondary: "", darkBackground: "" },
