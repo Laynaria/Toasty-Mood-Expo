@@ -1,5 +1,5 @@
-import { ThemeType } from "../types/theme.types";
-import { storeThemeColor } from "./storage";
+import { ThemePreference, ThemeType } from "../types/theme.types";
+import { storeThemeColor, storeThemePreference } from "./storage";
 
 export const themeColors: ThemeType[] = [
   { primary: "#E3A062", secondary: "#6A3C11", darkBackground: "#221603" },
@@ -15,5 +15,18 @@ export const handleThemeColorChange = (
   if (theme !== selectedTheme) {
     setSelectedTheme(themeColors[themeColors.indexOf(theme)]);
     storeThemeColor(theme);
+  }
+};
+
+export const themeSetting: ThemePreference[] = ["light", "dark", "system"];
+
+export const handleThemeSetting = (
+  theme: ThemePreference,
+  themePreference,
+  setThemePreference
+) => {
+  if (theme !== themePreference) {
+    setThemePreference(theme);
+    storeThemePreference(theme);
   }
 };

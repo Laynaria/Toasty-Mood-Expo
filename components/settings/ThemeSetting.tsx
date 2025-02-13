@@ -2,20 +2,14 @@ import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemePreference } from "../../types/theme.types";
-import { storeThemePreference } from "../../services/storage";
+import {
+  handleThemeSetting,
+  themeSetting,
+} from "../../services/settingsService";
 
 export default function ThemeSetting() {
   const { selectedTheme, themePreference, setThemePreference } =
     useContext(ThemeColorContext);
-
-  const themeSetting: ThemePreference[] = ["light", "dark", "system"];
-
-  const handlePress = (theme: ThemePreference) => {
-    if (theme !== themePreference) {
-      setThemePreference(theme);
-      storeThemePreference(theme);
-    }
-  };
 
   return (
     <View
@@ -28,7 +22,9 @@ export default function ThemeSetting() {
       {themeSetting.map((theme: ThemePreference) => (
         <Pressable
           key={theme}
-          onPress={() => handlePress(theme)}
+          onPress={() =>
+            handleThemeSetting(theme, themePreference, setThemePreference)
+          }
           style={[
             styles.button,
             {
