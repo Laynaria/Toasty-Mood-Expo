@@ -1,6 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Toast } from "../types/toasts.types";
+import { ThemePreference, ThemeType } from "../types/theme.types";
+import { FirstDayOfTheWeek } from "../types/time.types";
 
-export const storeToasts = async (value) => {
+export const storeToasts = async (value: Toast[]) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("toasts", jsonValue);
@@ -29,7 +32,7 @@ export const deleteToasts = async () => {
 
 // ThemeColor
 
-export const storeThemeColor = async (value) => {
+export const storeThemeColor = async (value: ThemeType) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("themeColor", jsonValue);
@@ -48,7 +51,7 @@ export const getThemeColor = async () => {
   }
 };
 
-export const storeThemePreference = async (value) => {
+export const storeThemePreference = async (value: ThemePreference) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("themePreference", jsonValue);
@@ -69,7 +72,7 @@ export const getThemePreference = async () => {
 
 // First Day of The Week
 
-export const storeFirstDayPreference = async (value) => {
+export const storeFirstDayPreference = async (value: FirstDayOfTheWeek) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("firstDayPreference", jsonValue);
@@ -90,7 +93,7 @@ export const getFirstDayPreference = async () => {
 
 // ThemeToast
 
-export const storeThemeToast = async (value) => {
+export const storeThemeToast = async (value: number) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("themeToast", jsonValue);
@@ -111,7 +114,7 @@ export const getThemeToast = async () => {
 
 // ThemeOverride
 
-export const storeThemeOverride = async (value) => {
+export const storeThemeOverride = async (value: boolean) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("themeOverride", jsonValue);

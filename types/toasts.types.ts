@@ -7,10 +7,12 @@ export type ToastsMoodsPictureObject = {
 };
 
 export type Toast = {
-  date: string;
+  date: string | Date;
   isBitey: boolean;
   isJamDay: boolean;
   moodArray: number;
+  weather: number;
+  temperature: number;
   note: string;
   photo: string;
   selectedToast: number;

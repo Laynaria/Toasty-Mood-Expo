@@ -3,8 +3,16 @@ import { FirstDayOfTheWeek } from "../types/time.types";
 
 export const weekDays = (weekPreference: FirstDayOfTheWeek) => {
   const [{ firstWeekday }] = getCalendars();
-  const daysName = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const daysNameBis = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysName: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const daysNameBis: string[] = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
 
   if (weekPreference === "system" || !weekPreference) {
     return firstWeekday === 2 ? daysName : daysNameBis;
@@ -13,12 +21,12 @@ export const weekDays = (weekPreference: FirstDayOfTheWeek) => {
   return weekPreference === "monday" ? daysName : daysNameBis;
 };
 
-export const days = [
+export const days: number[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
   23, 24, 25, 26, 27, 28, 29, 30, 31,
 ];
 
-export const months = [
+export const months: string[] = [
   "January",
   "February",
   "March",
@@ -33,18 +41,18 @@ export const months = [
   "December",
 ];
 
-export const daySuffix = ["st", "nd", "rd"];
+export const daySuffix: string[] = ["st", "nd", "rd"];
 
-export const getDaysName = (year, month, day) => {
+export const getDaysName = (year: string, month: string, day: number) => {
   return new Date(parseInt(year), months.indexOf(month), day)
     .toString()
     .split(" ")[0];
 };
 
-export const daysInMonth = (year, month) =>
+export const daysInMonth = (year: string, month: string) =>
   new Date(parseInt(year), months.indexOf(month) + 1, 0).getDate();
 
-export const years = (year) => {
+export const years = (year: number) => {
   const currentYear = new Date().getFullYear();
   const yearsArray = [];
 
@@ -55,7 +63,7 @@ export const years = (year) => {
   return yearsArray;
 };
 
-export const isOrWas = (date) => {
+export const isOrWas = (date: Date) => {
   return date.toLocaleDateString() === new Date().toLocaleDateString()
     ? "Is"
     : "Was";
