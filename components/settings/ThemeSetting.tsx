@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { ThemePreference } from "../../types/theme.types";
 import {
   handleThemeSetting,
   themeSetting,
 } from "../../services/settingsServices";
+import { ThemePreference } from "../../types/theme.types";
 
 export default function ThemeSetting() {
   const { selectedTheme, themePreference, setThemePreference } =

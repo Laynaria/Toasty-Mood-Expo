@@ -1,10 +1,10 @@
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useContext } from "react";
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { themeNamesArray } from "../services/themeServices";
+import toastsMoods from "../services/toasts";
 import ToastThemeChoice from "../components/theme-page/ToastThemeChoice";
 import GradientNewToast from "../components/new-toast/GradientNewToast";
-import toastsMoods from "../services/toasts";
 
 export default function Theme() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);

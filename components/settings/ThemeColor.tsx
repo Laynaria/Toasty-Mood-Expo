@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { ThemeType } from "../../types/theme.types";
 import {
   handleThemeColorChange,
   themeColors,
 } from "../../services/settingsServices";
+import { ThemeType } from "../../types/theme.types";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);

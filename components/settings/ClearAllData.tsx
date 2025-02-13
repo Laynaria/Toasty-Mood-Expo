@@ -1,5 +1,5 @@
-import { Pressable, Text, View } from "react-native";
 import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
 import { handleClearAllData } from "../../services/settingsServices";
 
 export default function ClearAllData() {

@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { FirstDayOfTheWeek } from "../../types/weekday.types";
 import { getFirstDayPreference } from "../../services/storage";
 import {
   firstDaySetting,
   handleFirstDayOfTheWeek,
 } from "../../services/settingsServices";
+import { FirstDayOfTheWeek } from "../../types/weekday.types";
 
 export default function WeekDaySetting() {
   const { selectedTheme } = useContext(ThemeColorContext);

@@ -1,6 +1,4 @@
 import { Dispatch } from "react";
-import { ThemePreference, ThemeType } from "../types/theme.types";
-import { FirstDayOfTheWeek } from "../types/weekday.types";
 import {
   deleteToasts,
   storeFirstDayPreference,
@@ -8,6 +6,8 @@ import {
   storeThemeOverride,
   storeThemePreference,
 } from "./storage";
+import { ThemePreference, ThemeType } from "../types/theme.types";
+import { FirstDayOfTheWeek } from "../types/weekday.types";
 
 export const themeColors: ThemeType[] = [
   { primary: "#E3A062", secondary: "#6A3C11", darkBackground: "#221603" },
