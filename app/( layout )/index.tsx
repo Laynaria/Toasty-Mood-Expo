@@ -6,7 +6,7 @@ import { useLocalSearchParams } from "expo-router";
 
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
-import Calendar from "../../components/Calendar";
+import Calendar from "../../components/calendar/Calendar";
 
 type DataCalendar = { month: string; year: string };
 

@@ -2,10 +2,10 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { router } from "expo-router";
 
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { Image } from "expo-image";
 
-const biteyOption = require("../assets/icons/bitey-calendar.png");
+const biteyOption = require("../../assets/icons/bitey-calendar.png");
 
 export default function CalendarCard({
   day,

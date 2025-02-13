@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { days, months, getDaysName } from "../services/time";
+import { days, months, getDaysName } from "../../services/time";
 import CalendarCard from "./CalendarCard";
-import MonthCard from "./MonthCard";
+import MonthCard from "../MonthCard";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
-import toastsMoods from "../services/toasts";
-import { ThemeToastContext } from "../contexts/ThemeToastContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import toastsMoods from "../../services/toasts";
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
-const toastEmpty = require("../assets/icons/toast-empty.png");
+const toastEmpty = require("../../assets/icons/toast-empty.png");
 
 export default function Calendar({
   selectedMonth,
