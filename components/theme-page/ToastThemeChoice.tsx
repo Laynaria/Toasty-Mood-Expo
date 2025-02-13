@@ -2,9 +2,16 @@ import { useContext } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
-import { storeThemeToast } from "../../services/storage";
+import { handleToastsThemeChange } from "../../services/themeServices";
+import { ToastsMoodsPictureObject } from "../../types/toasts.type";
 
-export default function ToastThemeChoice({ array, name, index }) {
+type Props = {
+  array: ToastsMoodsPictureObject[];
+  name: String;
+  index: number;
+};
+
+export default function ToastThemeChoice({ array, name, index }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const { selectedThemeToast, setSelectedThemeToast } =
     useContext(ThemeToastContext);
@@ -21,17 +28,16 @@ export default function ToastThemeChoice({ array, name, index }) {
     return "transparent";
   };
 
-  const handlePress = () => {
-    if (selectedThemeToast !== index) {
-      setSelectedThemeToast(index);
-      storeThemeToast(index);
-    }
-  };
-
   return (
     <Pressable
       style={[styles.container, { borderColor: borderColor() }]}
-      onPress={handlePress}
+      onPress={() =>
+        handleToastsThemeChange(
+          selectedThemeToast,
+          setSelectedThemeToast,
+          index
+        )
+      }
     >
       <Text
         style={{

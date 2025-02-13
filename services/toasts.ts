@@ -1,3 +1,5 @@
+import { ToastsMoodsPictureObject } from "../types/toasts.type";
+
 const toastVeryGood = require("../assets/toasts/toast-very-good.png");
 const jamToastVeryGood = require("../assets/toasts/toast-very-good-jam.png");
 
@@ -28,7 +30,7 @@ const jamToastBad2 = require("../assets/toasts/toast2-bad-jam.png");
 const toastVeryBad2 = require("../assets/toasts/toast2-very-bad.png");
 const jamToastVeryBad2 = require("../assets/toasts/toast2-very-bad-jam.png");
 
-const basicMoods = [
+const basicMoods: ToastsMoodsPictureObject[] = [
   {
     id: 1,
     img: toastVeryGood,
@@ -56,7 +58,7 @@ const basicMoods = [
   },
 ];
 
-const alternativeMoods = [
+const alternativeMoods: ToastsMoodsPictureObject[] = [
   {
     id: 1,
     img: toastVeryGood2,
@@ -84,6 +86,9 @@ const alternativeMoods = [
   },
 ];
 
-const toastsMoods = [basicMoods, alternativeMoods];
+const toastsMoods: ToastsMoodsPictureObject[][] = [
+  basicMoods,
+  alternativeMoods,
+];
 
 export default toastsMoods;
