@@ -3,6 +3,7 @@ import { FirstDayOfTheWeek } from "../types/weekday.types";
 import {
   storeFirstDayPreference,
   storeThemeColor,
+  storeThemeOverride,
   storeThemePreference,
 } from "./storage";
 
@@ -50,5 +51,18 @@ export const handleFirstDayOfTheWeek = (
   if (day !== dayPreference) {
     setDayPreference(day);
     storeFirstDayPreference(day);
+  }
+};
+
+export const themeOverride: boolean[] = [true, false];
+
+export const handleThemeOverride = (
+  option: boolean,
+  selectOverride,
+  setSelectOverride
+) => {
+  if (option !== selectOverride) {
+    setSelectOverride(option);
+    storeThemeOverride(option);
   }
 };

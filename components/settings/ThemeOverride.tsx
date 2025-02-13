@@ -2,20 +2,14 @@ import { useContext } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
-import { storeThemeOverride } from "../../services/storage";
+import {
+  handleThemeOverride,
+  themeOverride,
+} from "../../services/settingsService";
 
 export default function ThemeOverride() {
   const { selectedTheme } = useContext(ThemeColorContext);
   const { selectOverride, setSelectOverride } = useContext(ThemeToastContext);
-
-  const themeOverride: boolean[] = [true, false];
-
-  const handlePress = (option: boolean) => {
-    if (option !== selectOverride) {
-      setSelectOverride(option);
-      storeThemeOverride(option);
-    }
-  };
 
   return (
     <View
@@ -28,7 +22,9 @@ export default function ThemeOverride() {
       {themeOverride.map((option: boolean, index: number) => (
         <Pressable
           key={index}
-          onPress={() => handlePress(option)}
+          onPress={() =>
+            handleThemeOverride(option, selectOverride, setSelectOverride)
+          }
           style={[
             styles.button,
             {
