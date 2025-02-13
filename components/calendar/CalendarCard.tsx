@@ -1,11 +1,19 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-import { router } from "expo-router";
-
 import { useContext } from "react";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { ImageSourcePropType, Pressable, StyleSheet, Text } from "react-native";
 import { Image } from "expo-image";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { handleCalendarToastRedirect } from "../../services/calendarServices";
 
 const biteyOption = require("../../assets/icons/bitey-calendar.png");
+
+type Props = {
+  day: any;
+  date: Date;
+  index: number;
+  currentOffset: number;
+  imgSource: ImageSourcePropType;
+  biteySource: ImageSourcePropType;
+};
 
 export default function CalendarCard({
   day,
@@ -14,20 +22,14 @@ export default function CalendarCard({
   currentOffset,
   imgSource,
   biteySource,
-}) {
+}: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
-  const handlePress = () => {
-    if (date.getTime() <= new Date().getTime()) {
-      router.push({
-        pathname: `/new-toast/${date}`,
-        params: { index, previousOffset: currentOffset },
-      });
-    }
-  };
-
   return (
-    <Pressable style={styles.container} onPress={handlePress}>
+    <Pressable
+      style={styles.container}
+      onPress={() => handleCalendarToastRedirect(date, index, currentOffset)}
+    >
       <Image
         source={imgSource}
         style={[
@@ -37,7 +39,7 @@ export default function CalendarCard({
             opacity: date.getTime() >= new Date().getTime() ? 0.5 : 1,
           },
         ]}
-        recyclingKey={date}
+        recyclingKey={date.toString()}
       />
 
       {biteySource ? (

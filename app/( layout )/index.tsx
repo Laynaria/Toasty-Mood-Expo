@@ -1,9 +1,8 @@
-import { StyleSheet, View } from "react-native";
 import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
-
 import { getFirstDayPreference, getToasts } from "../../services/storage";
 import { months, weekDays, years } from "../../services/time";
 import Calendar from "../../components/calendar/Calendar";

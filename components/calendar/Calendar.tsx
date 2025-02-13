@@ -1,12 +1,11 @@
+import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { days, months, getDaysName } from "../../services/time";
+import toastsMoods from "../../services/toasts";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "../MonthCard";
-import { useContext } from "react";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import toastsMoods from "../../services/toasts";
-import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 
 const toastEmpty = require("../../assets/icons/toast-empty.png");
 
