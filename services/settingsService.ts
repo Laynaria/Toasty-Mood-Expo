@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { ThemePreference, ThemeType } from "../types/theme.types";
 import { FirstDayOfTheWeek } from "../types/weekday.types";
 import {
@@ -16,9 +17,9 @@ export const themeColors: ThemeType[] = [
 
 export const handleThemeColorChange = (
   theme: ThemeType,
-  selectedTheme,
-  setSelectedTheme
-) => {
+  selectedTheme: ThemeType,
+  setSelectedTheme: Dispatch<ThemeType>
+): void => {
   if (theme !== selectedTheme) {
     setSelectedTheme(themeColors[themeColors.indexOf(theme)]);
     storeThemeColor(theme);
@@ -29,9 +30,9 @@ export const themeSetting: ThemePreference[] = ["light", "dark", "system"];
 
 export const handleThemeSetting = (
   theme: ThemePreference,
-  themePreference,
-  setThemePreference
-) => {
+  themePreference: ThemePreference | string,
+  setThemePreference: Dispatch<ThemePreference>
+): void => {
   if (theme !== themePreference) {
     setThemePreference(theme);
     storeThemePreference(theme);
@@ -46,9 +47,9 @@ export const firstDaySetting: FirstDayOfTheWeek[] = [
 
 export const handleFirstDayOfTheWeek = (
   day: FirstDayOfTheWeek,
-  dayPreference,
-  setDayPreference
-) => {
+  dayPreference: FirstDayOfTheWeek,
+  setDayPreference: Dispatch<FirstDayOfTheWeek>
+): void => {
   if (day !== dayPreference) {
     setDayPreference(day);
     storeFirstDayPreference(day);
@@ -59,16 +60,18 @@ export const themeOverride: boolean[] = [true, false];
 
 export const handleThemeOverride = (
   option: boolean,
-  selectOverride,
-  setSelectOverride
-) => {
+  selectOverride: boolean,
+  setSelectOverride: Dispatch<boolean>
+): void => {
   if (option !== selectOverride) {
     setSelectOverride(option);
     storeThemeOverride(option);
   }
 };
 
-export const handleClearAllData = async (setIsDeleteModal) => {
+export const handleClearAllData = async (
+  setIsDeleteModal: Dispatch<boolean>
+): Promise<void> => {
   await deleteToasts();
   setIsDeleteModal(false);
 };

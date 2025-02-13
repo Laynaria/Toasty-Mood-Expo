@@ -3,7 +3,7 @@ import { useState } from "react";
 import { handleClearAllData } from "../../services/settingsService";
 
 export default function ClearAllData() {
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
 
   return (
     <View>
@@ -14,7 +14,7 @@ export default function ClearAllData() {
       {isDeleteModal ? (
         <View>
           <Text>Are you sure? </Text>
-          <Pressable onPress={handleClearAllData}>
+          <Pressable onPress={() => handleClearAllData(setIsDeleteModal)}>
             <Text>Yes</Text>
           </Pressable>
           <Pressable onPress={() => setIsDeleteModal(false)}>
