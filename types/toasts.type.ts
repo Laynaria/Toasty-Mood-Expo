@@ -5,3 +5,13 @@ export type ToastsMoodsPictureObject = {
   img: ImageSourcePropType;
   jamImg: ImageSourcePropType;
 };
+
+export type Toast = {
+  date: string;
+  isBitey: boolean;
+  isJamDay: boolean;
+  moodArray: number;
+  note: string;
+  photo: string;
+  selectedToast: number;
+};

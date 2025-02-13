@@ -41,6 +41,9 @@ export const getDaysName = (year, month, day) => {
     .split(" ")[0];
 };
 
+export const daysInMonth = (year, month) =>
+  new Date(parseInt(year), months.indexOf(month) + 1, 0).getDate();
+
 export const years = (year) => {
   const currentYear = new Date().getFullYear();
   const yearsArray = [];
