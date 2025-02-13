@@ -5,7 +5,7 @@ import { ThemeType } from "../../types/theme.types";
 import {
   handleThemeColorChange,
   themeColors,
-} from "../../services/settingsService";
+} from "../../services/settingsServices";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);

@@ -5,7 +5,7 @@ import { ThemePreference } from "../../types/theme.types";
 import {
   handleThemeSetting,
   themeSetting,
-} from "../../services/settingsService";
+} from "../../services/settingsServices";
 
 export default function ThemeSetting() {
   const { selectedTheme, themePreference, setThemePreference } =

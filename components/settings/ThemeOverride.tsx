@@ -5,7 +5,7 @@ import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import {
   handleThemeOverride,
   themeOverride,
-} from "../../services/settingsService";
+} from "../../services/settingsServices";
 
 export default function ThemeOverride() {
   const { selectedTheme } = useContext(ThemeColorContext);

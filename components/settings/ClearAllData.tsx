@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 import { useState } from "react";
-import { handleClearAllData } from "../../services/settingsService";
+import { handleClearAllData } from "../../services/settingsServices";
 
 export default function ClearAllData() {
   const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
