@@ -1,7 +1,8 @@
-import { router, useGlobalSearchParams } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
+import { useGlobalSearchParams } from "expo-router";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { handlePreviousPageNavigation } from "../services/navigateService";
 
 const backIcon = require("../assets/icons/back.png");
 
@@ -10,14 +11,13 @@ export default function BackArrow() {
 
   const { previousPage, index, previousOffset } = useGlobalSearchParams();
 
-  const handlePress = () => {
-    previousPage
-      ? router.navigate(previousPage as string)
-      : router.navigate({ pathname: "/", params: { index, previousOffset } });
-  };
-
   return (
-    <Pressable onPress={handlePress} style={styles.backButton}>
+    <Pressable
+      onPress={() =>
+        handlePreviousPageNavigation(previousPage, previousOffset, index)
+      }
+      style={styles.backButton}
+    >
       <Image
         source={backIcon}
         style={[
