@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { handleToastsThemeChange } from "../../services/themeServices";
-import { ToastsMoodsPictureObject } from "../../types/toasts.type";
+import { ToastsMoodsPictureObject } from "../../types/toasts.types";
 
 type Props = {
   array: ToastsMoodsPictureObject[];

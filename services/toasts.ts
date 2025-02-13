@@ -1,4 +1,4 @@
-import { ToastsMoodsPictureObject } from "../types/toasts.type";
+import { ToastsMoodsPictureObject } from "../types/toasts.types";
 
 const toastVeryGood = require("../assets/toasts/toast-very-good.png");
 const jamToastVeryGood = require("../assets/toasts/toast-very-good-jam.png");

@@ -6,7 +6,7 @@ import {
   firstDaySetting,
   handleFirstDayOfTheWeek,
 } from "../../services/settingsServices";
-import { FirstDayOfTheWeek } from "../../types/weekday.types";
+import { FirstDayOfTheWeek } from "../../types/time.types";
 
 export default function WeekDaySetting() {
   const { selectedTheme } = useContext(ThemeColorContext);

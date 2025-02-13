@@ -3,11 +3,11 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
+import { checkDate, dataCalendar } from "../../services/calendarServices";
 import { getFirstDayPreference, getToasts } from "../../services/storage";
-import { months, weekDays, years } from "../../services/time";
+import { weekDays } from "../../services/time";
+import { DataCalendar } from "../../types/time.types";
 import Calendar from "../../components/calendar/Calendar";
-
-type DataCalendar = { month: string; year: string };
 
 export default function Index() {
   const [toasts, setToasts] = useState(null);
@@ -36,27 +36,6 @@ export default function Index() {
 
     scrollOnLoad();
   }, []);
-
-  const checkDate = (year, month) => {
-    return `${year}-${
-      months.indexOf(month) >= 9
-        ? months.indexOf(month) + 1
-        : `0${months.indexOf(month) + 1}`
-    }`;
-  };
-
-  const dataCalendar: DataCalendar[][] = years(2022).map((year) =>
-    months
-      .filter(
-        (month) =>
-          months.indexOf(month) <= new Date().getMonth() ||
-          year !== new Date().getFullYear()
-      )
-      .map((month) => ({
-        month,
-        year: year as string,
-      }))
-  );
 
   const renderItem = useCallback(
     ({ item, index }) => (

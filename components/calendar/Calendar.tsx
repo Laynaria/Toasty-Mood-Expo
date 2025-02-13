@@ -4,7 +4,7 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { days, months, getDaysName, daysInMonth } from "../../services/time";
 import { getToastByDay } from "../../services/calendarServices";
-import { Toast } from "../../types/toasts.type";
+import { Toast } from "../../types/toasts.types";
 import toastsMoods from "../../services/toasts";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "../MonthCard";

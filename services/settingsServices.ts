@@ -7,7 +7,7 @@ import {
   storeThemePreference,
 } from "./storage";
 import { ThemePreference, ThemeType } from "../types/theme.types";
-import { FirstDayOfTheWeek } from "../types/weekday.types";
+import { FirstDayOfTheWeek } from "../types/time.types";
 
 export const themeColors: ThemeType[] = [
   { primary: "#E3A062", secondary: "#6A3C11", darkBackground: "#221603" },

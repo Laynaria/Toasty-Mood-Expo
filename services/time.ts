@@ -1,5 +1,5 @@
 import { getCalendars } from "expo-localization";
-import { FirstDayOfTheWeek } from "../types/weekday.types";
+import { FirstDayOfTheWeek } from "../types/time.types";
 
 export const weekDays = (weekPreference: FirstDayOfTheWeek) => {
   const [{ firstWeekday }] = getCalendars();
