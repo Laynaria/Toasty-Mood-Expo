@@ -1,6 +1,7 @@
 import { ThemePreference, ThemeType } from "../types/theme.types";
 import { FirstDayOfTheWeek } from "../types/weekday.types";
 import {
+  deleteToasts,
   storeFirstDayPreference,
   storeThemeColor,
   storeThemeOverride,
@@ -65,4 +66,9 @@ export const handleThemeOverride = (
     setSelectOverride(option);
     storeThemeOverride(option);
   }
+};
+
+export const handleClearAllData = async (setIsDeleteModal) => {
+  await deleteToasts();
+  setIsDeleteModal(false);
 };
