@@ -1,25 +1,25 @@
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { Image, StyleSheet, Text, Pressable } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { handleMonthSelect } from "../services/monthCardService";
 
 const backIcon = require("../assets/icons/month-arrow.png");
+
+type Props = {
+  selectedMonth: string;
+  selectedYear: string;
+  timeline: boolean;
+  setIsSelectingMonth: Dispatch<boolean> | null;
+};
 
 export default function MonthCard({
   selectedMonth,
   selectedYear,
   timeline = false,
   setIsSelectingMonth = null,
-}) {
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-
-  const handlePress = () => {
-    if (!timeline) {
-      return;
-    }
-
-    setIsSelectingMonth(true);
-  };
 
   return (
     <Pressable
@@ -32,7 +32,7 @@ export default function MonthCard({
           alignSelf: timeline ? "flex-start" : "center",
         },
       ]}
-      onPress={handlePress}
+      onPress={() => handleMonthSelect(timeline, setIsSelectingMonth)}
     >
       <Svg
         width="156"
