@@ -72,7 +72,7 @@ export default function Index() {
         currentOffset={currentOffset}
       />
     ),
-    [toasts]
+    [toasts, weekPreference]
   );
 
   return (
