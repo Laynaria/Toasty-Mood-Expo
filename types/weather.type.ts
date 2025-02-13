@@ -1,6 +1,8 @@
+import { ImageSourcePropType } from "react-native";
+
 export type weather = {
   id: number;
-  img: string;
+  img: ImageSourcePropType;
 };
 
 export type weatherArray = weather[];
