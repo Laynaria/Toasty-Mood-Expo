@@ -1,7 +1,7 @@
 import React from "react";
+import { Image, StyleSheet, View } from "react-native";
 import { Slot } from "expo-router";
 import Navbar from "../../components/Navbar";
-import { Image, StyleSheet, View } from "react-native";
 import Header from "../../components/Header";
 
 const bgImg = require("../../assets/background-toasts.png");
