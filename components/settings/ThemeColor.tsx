@@ -2,22 +2,13 @@ import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeType } from "../../types/theme.types";
-import { storeThemeColor } from "../../services/storage";
+import {
+  handleThemeColorChange,
+  themeColors,
+} from "../../services/settingsService";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
-  const themeColors: ThemeType[] = [
-    { primary: "#E3A062", secondary: "#6A3C11", darkBackground: "#221603" },
-    { primary: "#8DAEDF", secondary: "#1E648B", darkBackground: "#030522" },
-    { primary: "#E47B7B", secondary: "#89122F", darkBackground: "#220304" },
-  ];
-
-  const handlePress = (theme: ThemeType) => {
-    if (theme !== selectedTheme) {
-      setSelectedTheme(themeColors[themeColors.indexOf(theme)]);
-      storeThemeColor(theme);
-    }
-  };
 
   return (
     <View
@@ -30,7 +21,9 @@ export default function ThemeColor() {
       {themeColors.map((theme: ThemeType) => (
         <Pressable
           key={theme.primary}
-          onPress={() => handlePress(theme)}
+          onPress={() =>
+            handleThemeColorChange(theme, selectedTheme, setSelectedTheme)
+          }
           style={[
             styles.button,
             {
