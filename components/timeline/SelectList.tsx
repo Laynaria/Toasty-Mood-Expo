@@ -4,9 +4,7 @@ import Animated from "react-native-reanimated";
 import SelectCard from "./SelectCard";
 
 export default function SelectList({ array, handleFunction, current }) {
-  const [currentScrollIndex, setCurrentScrollIndex] = useState<string | number>(
-    null
-  );
+  const [currentScrollIndex, setCurrentScrollIndex] = useState<number>(null);
   const ref = useRef<FlatList>();
 
   const handleScroll = (currentItem) => {
