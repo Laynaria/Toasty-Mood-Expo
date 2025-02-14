@@ -9,3 +9,10 @@ export const handlePreviousPageNavigation = (
     ? router.navigate(previousPage as string)
     : router.navigate({ pathname: "/", params: { index, previousOffset } });
 };
+
+export const handleHeaderNavigation = (link: string, path: string) => {
+  router.navigate({
+    pathname: link,
+    params: { previousPage: path },
+  });
+};

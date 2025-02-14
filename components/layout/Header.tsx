@@ -1,60 +1,23 @@
-import { router, usePathname } from "expo-router";
 import { useContext } from "react";
-import { Pressable, StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import HeaderButton from "./HeaderButton";
 
 const toDoIcon = require("../../assets/icons/todo.png");
 const themeIcon = require("../../assets/icons/theme.png");
 
 export default function Header() {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const path = usePathname();
 
   return (
     <View style={styles.container}>
-      <Pressable
-        style={{
-          backgroundColor: selectedTheme.primary,
-          marginTop: 10,
-          padding: 15,
-          borderRadius: 15,
-        }}
-        onPress={() =>
-          router.navigate({
-            pathname: "/todo",
-            params: { previousPage: path },
-          })
-        }
-      >
-        <Image
-          source={toDoIcon}
-          style={{ tintColor: selectedTheme.secondary }}
-        />
-      </Pressable>
+      <HeaderButton link={"/todo"} icon={toDoIcon} />
 
       <View
         style={[styles.background, { backgroundColor: selectedTheme.primary }]}
       />
 
-      <Pressable
-        style={{
-          backgroundColor: selectedTheme.primary,
-          marginTop: 10,
-          padding: 15,
-          borderRadius: 15,
-        }}
-        onPress={() =>
-          router.navigate({
-            pathname: "/theme",
-            params: { previousPage: path },
-          })
-        }
-      >
-        <Image
-          source={themeIcon}
-          style={{ tintColor: selectedTheme.secondary }}
-        />
-      </Pressable>
+      <HeaderButton link={"/theme"} icon={themeIcon} />
     </View>
   );
 }
