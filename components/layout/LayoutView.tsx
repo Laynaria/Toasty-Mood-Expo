@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Slot, usePathname } from "expo-router";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import BackArrow from "./BackArrow";
 
 export default function LayoutView() {

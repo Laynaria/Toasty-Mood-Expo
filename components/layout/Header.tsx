@@ -1,10 +1,10 @@
 import { router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Pressable, StyleSheet, View, Image } from "react-native";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-const toDoIcon = require("../assets/icons/todo.png");
-const themeIcon = require("../assets/icons/theme.png");
+const toDoIcon = require("../../assets/icons/todo.png");
+const themeIcon = require("../../assets/icons/theme.png");
 
 export default function Header() {
   const { selectedTheme } = useContext(ThemeColorContext);
