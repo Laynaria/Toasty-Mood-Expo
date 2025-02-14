@@ -5,8 +5,8 @@ import {
   Pressable,
   StyleSheet,
 } from "react-native";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { usePathname } from "expo-router";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handleHeaderNavigation } from "../../services/layoutService";
 
 type Props = {
