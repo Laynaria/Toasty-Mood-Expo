@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { handlePreviousPageNavigation } from "../../services/navigateService";
+import { handlePreviousPageNavigation } from "../../services/layoutService";
 
 const backIcon = require("../../assets/icons/back.png");
 
