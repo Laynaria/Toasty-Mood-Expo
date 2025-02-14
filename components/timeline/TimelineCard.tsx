@@ -31,9 +31,11 @@ export default function TimelineCard({
   temperatureImg,
 }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
-  const date = new Date(toast.date);
+  const date: Date = new Date(toast.date);
 
-  const photoSource = toast.photo ? { uri: toast.photo } : null;
+  const photoSource: ImageSourcePropType = toast.photo
+    ? { uri: toast.photo }
+    : null;
 
   return (
     <View style={styles.container}>
