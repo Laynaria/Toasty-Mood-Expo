@@ -1,9 +1,10 @@
-import { Link, router, usePathname } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import toastsMoods from "../../services/toasts";
+import NavLink from "./NavLink";
 
 const homeIcon = require("../../assets/icons/home.png");
 const timelineIcon = require("../../assets/icons/timeline.png");
@@ -11,9 +12,9 @@ const shopIcon = require("../../assets/icons/shop.png");
 const settingsIcon = require("../../assets/icons/settings.png");
 
 export default function Navbar() {
-  const path = usePathname();
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const { selectedThemeToast } = useContext(ThemeToastContext);
+  const path = usePathname();
 
   const selectedColor = () => {
     return colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
@@ -23,31 +24,13 @@ export default function Navbar() {
     <View
       style={[styles.container, { backgroundColor: selectedTheme.primary }]}
     >
-      <Link href="/" asChild style={styles.link}>
-        <Pressable>
-          <Image
-            source={homeIcon}
-            style={{
-              tintColor:
-                path === "/" ? selectedColor() : selectedTheme.secondary,
-            }}
-          />
-        </Pressable>
-      </Link>
+      <NavLink link="/" icon={homeIcon} selectedColor={selectedColor} />
 
-      <Link href="/timeline" asChild style={styles.link}>
-        <Pressable>
-          <Image
-            source={timelineIcon}
-            style={{
-              tintColor:
-                path === "/timeline"
-                  ? selectedColor()
-                  : selectedTheme.secondary,
-            }}
-          />
-        </Pressable>
-      </Link>
+      <NavLink
+        link="/timeline"
+        icon={timelineIcon}
+        selectedColor={selectedColor}
+      />
 
       <Pressable
         style={[
@@ -70,31 +53,13 @@ export default function Navbar() {
         <Image source={toastsMoods[selectedThemeToast][1].img} />
       </Pressable>
 
-      <Link href="/shop" asChild style={styles.link}>
-        <Pressable>
-          <Image
-            source={shopIcon}
-            style={{
-              tintColor:
-                path === "/shop" ? selectedColor() : selectedTheme.secondary,
-            }}
-          />
-        </Pressable>
-      </Link>
+      <NavLink link="/shop" icon={shopIcon} selectedColor={selectedColor} />
 
-      <Link href="/settings" asChild style={styles.link}>
-        <Pressable>
-          <Image
-            source={settingsIcon}
-            style={{
-              tintColor:
-                path === "/settings"
-                  ? selectedColor()
-                  : selectedTheme.secondary,
-            }}
-          />
-        </Pressable>
-      </Link>
+      <NavLink
+        link="/settings"
+        icon={settingsIcon}
+        selectedColor={selectedColor}
+      />
     </View>
   );
 }
