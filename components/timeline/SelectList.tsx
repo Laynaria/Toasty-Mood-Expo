@@ -1,7 +1,6 @@
-import { FlatList, StyleSheet } from "react-native";
 import { useRef, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
-
 import SelectCard from "./SelectCard";
 
 export default function SelectList({ array, handleFunction, current }) {

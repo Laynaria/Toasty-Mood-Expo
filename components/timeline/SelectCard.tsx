@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import Animated, {
   Easing,
   ReduceMotion,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export default function SelectCard({
   item,

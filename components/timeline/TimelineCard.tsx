@@ -1,7 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { months, daySuffix } from "../../services/time";
 import CardViewElement from "./CardViewElement";
 
 const crunchedToast = require("../../assets/icons/toast-crunched.png");

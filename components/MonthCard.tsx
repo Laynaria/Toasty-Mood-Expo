@@ -8,7 +8,7 @@ const backIcon = require("../assets/icons/month-arrow.png");
 
 type Props = {
   selectedMonth: string;
-  selectedYear: string;
+  selectedYear: string | number;
   timeline: boolean;
   setIsSelectingMonth: Dispatch<boolean> | null;
 };

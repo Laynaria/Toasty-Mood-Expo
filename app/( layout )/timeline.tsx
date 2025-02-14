@@ -1,18 +1,16 @@
-import { ScrollView, StyleSheet, View } from "react-native";
-import { getToasts } from "../../services/storage";
 import React, { useContext, useEffect, useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-
-import { months } from "../../services/time";
-
-import toastsMoods from "../../services/toasts";
-import TimelineCard from "../../components/timeline/TimelineCard";
-import MonthCard from "../../components/MonthCard";
-import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
-import weatherIcons from "../../services/weather";
 import temperatureIcons from "../../services/temperature";
+import { getToasts } from "../../services/storage";
+import weatherIcons from "../../services/weather";
+import toastsMoods from "../../services/toasts";
+import { months } from "../../services/time";
+import MonthCard from "../../components/MonthCard";
+import TimelineCard from "../../components/timeline/TimelineCard";
+import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 
 export default function Timeline() {
   const [toasts, setToasts] = useState(null);
