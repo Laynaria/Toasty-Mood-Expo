@@ -1,8 +1,8 @@
+import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useContext } from "react";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { Image } from "expo-image";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 const camera = require("../../assets/icons/camera.png");
 

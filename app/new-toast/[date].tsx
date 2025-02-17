@@ -1,8 +1,4 @@
-import {
-  router,
-  useGlobalSearchParams,
-  useLocalSearchParams,
-} from "expo-router";
+import { useContext, useEffect, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -12,41 +8,42 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { useContext, useEffect, useState } from "react";
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+} from "expo-router";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-
+import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { months, daySuffix, isOrWas } from "../../services/time";
 import { getToasts, storeToasts } from "../../services/storage";
-
+import weatherIcons from "../../services/weather";
+import toastsMoods from "../../services/toasts";
+import temperatureIcons from "../../services/temperature";
 import GradientNewToast from "../../components/new-toast/GradientNewToast";
 import TextNewToast from "../../components/new-toast/TextNewToast";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
-import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import ChoiceComponent from "../../components/new-toast/ChoiceComponent";
-import weatherIcons from "../../services/weather";
-import toastsMoods from "../../services/toasts";
-import temperatureIcons from "../../services/temperature";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
 
 export default function NewToast() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [selectedToast, setSelectedToast] = useState(0);
-  const [isJamDay, setIsJamDay] = useState(false);
-  const [isBitey, setIsBitey] = useState(false);
-  const [weather, setWeather] = useState(1);
-  const [temperature, setTemperature] = useState(2);
-  const [note, setNote] = useState("");
-  const [photo, setPhoto] = useState(null);
-
   const { selectedTheme } = useContext(ThemeColorContext);
   const { selectedThemeToast } = useContext(ThemeToastContext);
+  const { index, previousOffset } = useLocalSearchParams();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedToast, setSelectedToast] = useState<number>(0);
+  const [isJamDay, setIsJamDay] = useState<boolean>(false);
+  const [isBitey, setIsBitey] = useState<boolean>(false);
+  const [weather, setWeather] = useState<number>(1);
+  const [temperature, setTemperature] = useState<number>(2);
+  const [note, setNote] = useState<string>("");
+  const [photo, setPhoto] = useState<string>(null);
 
   const date = new Date(useGlobalSearchParams().date as string);
-  const { index, previousOffset } = useLocalSearchParams();
 
   const handleSubmit = async () => {
     const existingToasts = await getToasts();
