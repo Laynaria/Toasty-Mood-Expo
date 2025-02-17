@@ -3,25 +3,27 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
+import { filteredArray } from "../../services/timelineServices";
 import temperatureIcons from "../../services/temperature";
 import { getToasts } from "../../services/storage";
 import weatherIcons from "../../services/weather";
 import toastsMoods from "../../services/toasts";
 import { months } from "../../services/time";
+import { Toast } from "../../types/toasts.types";
 import MonthCard from "../../components/MonthCard";
 import TimelineCard from "../../components/timeline/TimelineCard";
 import SelectMonthModal from "../../components/timeline/SelectMonthModal";
-import { filteredArray } from "../../services/timelineServices";
 
 export default function Timeline() {
   const { selectedTheme } = useContext(ThemeColorContext);
   const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
-  const [toasts, setToasts] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(
+  const [toasts, setToasts] = useState<Toast[]>(null);
+  const [selectedMonth, setSelectedMonth] = useState<string>(
     months[new Date().getMonth()]
   );
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
 
   useEffect(() => {
@@ -31,13 +33,6 @@ export default function Timeline() {
 
     loadToasts();
   }, []);
-
-  const handleMonthChange = (newMonth, newYear) => {
-    setSelectedMonth(newMonth);
-    setSelectedYear(newYear);
-  };
-
-  const closeModal = () => setIsSelectingMonth(false);
 
   return (
     <>
@@ -90,10 +85,11 @@ export default function Timeline() {
 
       {isSelectingMonth ? (
         <SelectMonthModal
-          timelineFunction={handleMonthChange}
-          closeModal={closeModal}
+          closeModal={() => setIsSelectingMonth(false)}
           selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
         />
       ) : null}
     </>

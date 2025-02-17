@@ -1,36 +1,29 @@
-import { useContext, useState } from "react";
+import { Dispatch, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { updateSelectedMonth } from "../../services/timelineServices";
 import { months, years } from "../../services/time";
 import SelectValidationButton from "./SelectValidationButton";
 import SelectList from "./SelectList";
 
+type Props = {
+  closeModal: () => void;
+  selectedMonth: string;
+  setSelectedMonth: Dispatch<string>;
+  selectedYear: number;
+  setSelectedYear: Dispatch<number>;
+};
+
 export default function SelectMonthModal({
-  timelineFunction,
   closeModal,
   selectedMonth,
+  setSelectedMonth,
   selectedYear,
-}) {
+  setSelectedYear,
+}: Props) {
   const [newMonth, setNewMonth] = useState<string>(selectedMonth);
   const [newYear, setNewYear] = useState<number>(selectedYear);
   const { selectedTheme } = useContext(ThemeColorContext);
-
-  const cancelChange = () => {
-    closeModal();
-  };
-
-  const validateChange = () => {
-    timelineFunction(newMonth, newYear);
-    closeModal();
-  };
-
-  const handleMonthChange = (month) => {
-    setNewMonth(month);
-  };
-
-  const handleYearChange = (year) => {
-    setNewYear(year);
-  };
 
   return (
     <View style={styles.container}>
@@ -41,12 +34,12 @@ export default function SelectMonthModal({
 
         <SelectList
           array={months}
-          handleFunction={handleMonthChange}
+          setStateOption={setNewMonth}
           current={selectedMonth}
         />
         <SelectList
           array={years(2022)}
-          handleFunction={handleYearChange}
+          setStateOption={setNewYear}
           current={selectedYear}
         />
 
@@ -66,7 +59,7 @@ export default function SelectMonthModal({
 
         <SelectValidationButton
           text={"Cancel"}
-          buttonFunction={cancelChange}
+          buttonFunction={() => closeModal()}
           style={{
             backgroundColor: selectedTheme.primary,
             color: selectedTheme.secondary,
@@ -76,7 +69,15 @@ export default function SelectMonthModal({
 
         <SelectValidationButton
           text={"Ok"}
-          buttonFunction={validateChange}
+          buttonFunction={() =>
+            updateSelectedMonth(
+              setSelectedMonth,
+              newMonth,
+              setSelectedYear,
+              newYear,
+              closeModal
+            )
+          }
           style={{
             backgroundColor: selectedTheme.secondary,
             color: selectedTheme.primary,

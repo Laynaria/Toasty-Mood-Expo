@@ -10,3 +10,15 @@ export const filteredArray = (array, months, selectedMonth, selectedYear) =>
         new Date(toast.date).getMonth() === months.indexOf(selectedMonth) &&
         new Date(toast.date).getFullYear() === selectedYear
     );
+
+export const updateSelectedMonth = (
+  setSelectedMonth,
+  newMonth,
+  setSelectedYear,
+  newYear,
+  closeModal
+) => {
+  setSelectedMonth(newMonth);
+  setSelectedYear(newYear);
+  closeModal();
+};

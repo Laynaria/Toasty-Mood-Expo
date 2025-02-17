@@ -1,19 +1,17 @@
-import { useRef, useState } from "react";
+import { Dispatch, useRef, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import SelectCard from "./SelectCard";
 
-export default function SelectList({ array, handleFunction, current }) {
+type Props = {
+  array: string[] | number[];
+  setStateOption: Dispatch<string> | Dispatch<number>;
+  current: string | number;
+};
+
+export default function SelectList({ array, setStateOption, current }: Props) {
   const [currentScrollIndex, setCurrentScrollIndex] = useState<number>(null);
   const ref = useRef<FlatList>();
-
-  const handleScroll = (currentItem) => {
-    setCurrentScrollIndex(currentItem);
-  };
-
-  const handleSelectionScroll = (currentItem) => {
-    handleFunction(currentItem);
-  };
 
   const ITEM_HEIGHT = 40;
 
@@ -40,17 +38,17 @@ export default function SelectList({ array, handleFunction, current }) {
           handleClick={handleClick}
         />
       )}
-      initialScrollIndex={array.indexOf(current)}
+      initialScrollIndex={array.indexOf(current as never)}
       getItemLayout={(_, index) => ({
         length: ITEM_HEIGHT,
         offset: ITEM_HEIGHT * index,
         index,
       })}
       onViewableItemsChanged={({ viewableItems }) =>
-        handleSelectionScroll(viewableItems[1]?.item)
+        setStateOption(viewableItems[1]?.item as never)
       }
       onScroll={(e) => {
-        handleScroll(e.nativeEvent.contentOffset.y / 40);
+        setCurrentScrollIndex(e.nativeEvent.contentOffset.y / 40);
       }}
     />
   );
