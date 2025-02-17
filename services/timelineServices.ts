@@ -1,4 +1,12 @@
-export const filteredArray = (array, months, selectedMonth, selectedYear) =>
+import { Dispatch } from "react";
+import { Toast } from "../types/toasts.types";
+
+export const filteredArray = (
+  array: Toast[],
+  months: string[],
+  selectedMonth: string,
+  selectedYear: number
+) =>
   array
     .sort(
       (a, b) =>
@@ -12,11 +20,11 @@ export const filteredArray = (array, months, selectedMonth, selectedYear) =>
     );
 
 export const updateSelectedMonth = (
-  setSelectedMonth,
-  newMonth,
-  setSelectedYear,
-  newYear,
-  closeModal
+  setSelectedMonth: Dispatch<string>,
+  newMonth: string,
+  setSelectedYear: Dispatch<number>,
+  newYear: number,
+  closeModal: () => void
 ) => {
   setSelectedMonth(newMonth);
   setSelectedYear(newYear);

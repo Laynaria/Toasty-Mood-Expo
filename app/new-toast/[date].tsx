@@ -58,7 +58,7 @@ export default function NewToast() {
       temperature,
       note,
       moodArray: selectedThemeToast,
-      date,
+      date: date.toISOString(),
       photo,
     };
 

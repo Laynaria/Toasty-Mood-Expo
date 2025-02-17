@@ -7,7 +7,7 @@ export type ToastsMoodsPictureObject = {
 };
 
 export type Toast = {
-  date: string | Date;
+  date: string;
   isBitey: boolean;
   isJamDay: boolean;
   moodArray: number;
