@@ -1,95 +1,30 @@
-import { useContext, useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { getFirstDayPreference } from "../../services/storage";
+import { useEffect, useState } from "react";
 import {
   firstDaySetting,
   handleFirstDayOfTheWeek,
+  loadFirstDayPreference,
 } from "../../services/settingsServices";
 import { FirstDayOfTheWeek } from "../../types/time.types";
+import SettingsOptionSelector from "./SettingsOptionSelector";
+import SettingsOptionView from "./SettingsOptionView";
 
 export default function WeekDaySetting() {
-  const { selectedTheme } = useContext(ThemeColorContext);
   const [dayPreference, setDayPreference] =
     useState<FirstDayOfTheWeek>("system");
 
   useEffect(() => {
-    const getPreference = async (): Promise<void> => {
-      const response: FirstDayOfTheWeek = await getFirstDayPreference();
-
-      if (response) {
-        setDayPreference(response);
-      }
-    };
-
-    getPreference();
+    loadFirstDayPreference(setDayPreference);
   }, []);
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: selectedTheme.primary }]}
-    >
-      <Text style={[styles.text, { color: selectedTheme.secondary }]}>
-        First Day of The Week
-      </Text>
-
-      {firstDaySetting.map((day: FirstDayOfTheWeek) => (
-        <Pressable
-          key={day}
-          onPress={() =>
-            handleFirstDayOfTheWeek(day, dayPreference, setDayPreference)
-          }
-          style={[
-            styles.button,
-            {
-              backgroundColor:
-                day === dayPreference
-                  ? selectedTheme.secondary
-                  : selectedTheme.primary,
-              borderColor: selectedTheme.secondary,
-            },
-          ]}
-        >
-          <Text
-            style={{
-              color:
-                day === dayPreference
-                  ? selectedTheme.primary
-                  : selectedTheme.secondary,
-              textTransform: "capitalize",
-            }}
-          >
-            {day}
-          </Text>
-        </Pressable>
-      ))}
-    </View>
+    <SettingsOptionView text={"First Day of the Week"}>
+      <SettingsOptionSelector
+        array={firstDaySetting}
+        selectFunction={(option: FirstDayOfTheWeek) =>
+          handleFirstDayOfTheWeek(option, dayPreference, setDayPreference)
+        }
+        optionComparison={dayPreference}
+      />
+    </SettingsOptionView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "space-around",
-    gap: 24,
-    width: "90%",
-    paddingHorizontal: 16,
-    paddingTop: 5,
-    paddingBottom: 30,
-    borderRadius: 16,
-  },
-  text: {
-    fontWeight: "bold",
-    width: "100%",
-  },
-  button: {
-    flex: 1,
-    alignItems: "center",
-    borderRadius: 12,
-    borderWidth: 2,
-    paddingVertical: 2,
-  },
-});

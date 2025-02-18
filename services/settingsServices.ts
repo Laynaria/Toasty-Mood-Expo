@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import {
   deleteToasts,
+  getFirstDayPreference,
   storeFirstDayPreference,
   storeThemeColor,
   storeThemeOverride,
@@ -74,4 +75,22 @@ export const handleClearAllData = async (
 ): Promise<void> => {
   await deleteToasts();
   setIsDeleteModal(false);
+};
+
+export const settingsOptionText = (option: string | boolean): string => {
+  if (typeof option === "string") {
+    return option;
+  }
+
+  return option === true ? "Yes" : "No";
+};
+
+export const loadFirstDayPreference = async (
+  setDayPreference: Dispatch<FirstDayOfTheWeek>
+): Promise<void> => {
+  const response: FirstDayOfTheWeek = await getFirstDayPreference();
+
+  if (response) {
+    setDayPreference(response);
+  }
 };
