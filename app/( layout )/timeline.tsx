@@ -5,7 +5,6 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { filteredArray } from "../../services/timelineServices";
 import temperatureIcons from "../../services/temperature";
-import { getToasts } from "../../services/storage";
 import weatherIcons from "../../services/weather";
 import toastsMoods from "../../services/toasts";
 import { months } from "../../services/time";
@@ -13,6 +12,7 @@ import { Toast } from "../../types/toasts.types";
 import MonthCard from "../../components/MonthCard";
 import TimelineCard from "../../components/timeline/TimelineCard";
 import SelectMonthModal from "../../components/timeline/SelectMonthModal";
+import { loadToasts } from "../../services/loadToasts";
 
 export default function Timeline() {
   const { selectedTheme } = useContext(ThemeColorContext);
@@ -27,11 +27,7 @@ export default function Timeline() {
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
 
   useEffect(() => {
-    const loadToasts = async (): Promise<void> => {
-      setToasts(await getToasts());
-    };
-
-    loadToasts();
+    loadToasts(setToasts);
   }, []);
 
   return (

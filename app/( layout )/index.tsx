@@ -4,15 +4,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
 import { checkDate, dataCalendar } from "../../services/calendarServices";
-import { getFirstDayPreference, getToasts } from "../../services/storage";
+import { loadToasts } from "../../services/loadToasts";
 import { weekDays } from "../../services/time";
-import { DataCalendar } from "../../types/time.types";
+import { Toast } from "../../types/toasts.types";
+import { DataCalendar, FirstDayOfTheWeek } from "../../types/time.types";
 import Calendar from "../../components/calendar/Calendar";
 
 export default function Index() {
-  const [toasts, setToasts] = useState(null);
-  const [weekPreference, setWeekPreference] = useState(null);
-  const [currentOffset, setCurrentOffset] = useState(0);
+  const [toasts, setToasts] = useState<Toast[]>(null);
+  const [weekPreference, setWeekPreference] = useState<FirstDayOfTheWeek>(null);
+  const [currentOffset, setCurrentOffset] = useState<number>(0);
   const ref = useRef<FlashList<DataCalendar>>();
 
   const index: number = parseInt(useLocalSearchParams().index as string);
@@ -21,12 +22,7 @@ export default function Index() {
   );
 
   useLayoutEffect(() => {
-    const load = async (): Promise<void> => {
-      setToasts(await getToasts());
-      setWeekPreference(await getFirstDayPreference());
-    };
-
-    load();
+    loadToasts(setToasts, setWeekPreference);
   }, []);
 
   useLayoutEffect(() => {
