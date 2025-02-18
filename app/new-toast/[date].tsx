@@ -8,15 +8,10 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import {
-  router,
-  useGlobalSearchParams,
-  useLocalSearchParams,
-} from "expo-router";
+import { useGlobalSearchParams, useLocalSearchParams } from "expo-router";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { months, daySuffix, isOrWas } from "../../services/time";
-import { getToasts, storeToasts } from "../../services/storage";
 import weatherIcons from "../../services/weather";
 import toastsMoods from "../../services/toasts";
 import temperatureIcons from "../../services/temperature";
@@ -25,6 +20,10 @@ import TextNewToast from "../../components/new-toast/TextNewToast";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
 import ChoiceComponent from "../../components/new-toast/ChoiceComponent";
+import {
+  handleToastSubmit,
+  loadSpecificToast,
+} from "../../services/newToastService";
 
 const bgImg = require("../../assets/background-toasts-flip.png");
 const pencil = require("../../assets/icons/pencil.png");
@@ -43,82 +42,20 @@ export default function NewToast() {
   const [note, setNote] = useState<string>("");
   const [photo, setPhoto] = useState<string>(null);
 
-  const date = new Date(useGlobalSearchParams().date as string);
-
-  const handleSubmit = async () => {
-    const existingToasts = await getToasts();
-    const newToast = {
-      selectedToast,
-      isJamDay,
-      isBitey,
-      weather,
-      temperature,
-      note,
-      moodArray: selectedThemeToast,
-      date: date.toISOString(),
-      photo,
-    };
-
-    if (selectedToast !== 0) {
-      if (existingToasts) {
-        await storeToasts([
-          ...existingToasts.filter(
-            (toast) =>
-              new Date(toast.date).toLocaleDateString() !==
-              date.toLocaleDateString()
-          ),
-          newToast,
-        ]);
-        return router.push({
-          pathname: "/",
-          params: { index, previousOffset },
-        });
-      }
-
-      await storeToasts([newToast]);
-
-      router.push({ pathname: "/", params: { index, previousOffset } });
-    }
-  };
+  const date: Date = new Date(useGlobalSearchParams().date as string);
 
   useEffect(() => {
-    const loadToasts = async () => {
-      const existingToasts = await getToasts();
-
-      if (existingToasts) {
-        const [todayToast] = existingToasts.filter(
-          (toast) =>
-            new Date(toast.date).toLocaleDateString() ===
-            date.toLocaleDateString()
-        );
-
-        if (todayToast) {
-          setNote(todayToast.note);
-          setSelectedToast(todayToast.selectedToast);
-          setPhoto(todayToast.photo);
-
-          if (todayToast.weather) {
-            setWeather(todayToast.weather);
-          }
-
-          if (todayToast.temperature) {
-            setTemperature(todayToast.temperature);
-          }
-
-          if (todayToast.isJamDay) {
-            setIsJamDay(todayToast.isJamDay);
-          }
-
-          if (todayToast.isBitey) {
-            setIsBitey(todayToast.isBitey);
-          }
-        }
-      }
-
-      setIsLoading(false);
-    };
-
-    loadToasts();
+    loadSpecificToast(
+      date,
+      setNote,
+      setSelectedToast,
+      setPhoto,
+      setWeather,
+      setTemperature,
+      setIsJamDay,
+      setIsBitey,
+      setIsLoading
+    );
   }, []);
 
   if (isLoading) {
@@ -239,7 +176,21 @@ export default function NewToast() {
               styles.doneButton,
               { backgroundColor: selectedTheme.primary },
             ]}
-            onPress={handleSubmit}
+            onPress={() =>
+              handleToastSubmit(
+                selectedToast,
+                isJamDay,
+                isBitey,
+                weather,
+                temperature,
+                note,
+                selectedThemeToast,
+                date,
+                photo,
+                index,
+                previousOffset
+              )
+            }
           >
             <TextNewToast text="I'm Done!" style={{}} />
           </Pressable>
