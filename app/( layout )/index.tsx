@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
+import { useState, useRef, useLayoutEffect, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
@@ -15,13 +15,13 @@ export default function Index() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const ref = useRef<FlashList<DataCalendar>>();
 
-  const index = parseInt(useLocalSearchParams().index as string);
-  const previousOffset = parseInt(
+  const index: number = parseInt(useLocalSearchParams().index as string);
+  const previousOffset: number = parseInt(
     useLocalSearchParams().previousOffset as string
   );
 
   useLayoutEffect(() => {
-    const load = async () => {
+    const load = async (): Promise<void> => {
       setToasts(await getToasts());
       setWeekPreference(await getFirstDayPreference());
     };
@@ -30,7 +30,7 @@ export default function Index() {
   }, []);
 
   useLayoutEffect(() => {
-    const scrollOnLoad = () => {
+    const scrollOnLoad = (): void => {
       ref?.current?.scrollToOffset({ offset: previousOffset, animated: false });
     };
 

@@ -10,7 +10,7 @@ import { Image } from "expo-image";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handlePhotoChange } from "../../services/newToastService";
 
-const camera = require("../../assets/icons/camera.png");
+const camera: ImageSourcePropType = require("../../assets/icons/camera.png");
 
 type Props = {
   photo: string;
@@ -21,7 +21,7 @@ export default function PhotoChoice({ photo, setPhoto }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const photoSource: ImageSourcePropType = photo ? { uri: photo } : camera;
 
-  const tintColor = () => {
+  const tintColor = (): string => {
     if (photoSource !== camera) {
       return "";
     }

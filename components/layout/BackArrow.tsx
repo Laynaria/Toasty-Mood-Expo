@@ -1,10 +1,15 @@
 import { useContext } from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handlePreviousPageNavigation } from "../../services/layoutService";
 
-const backIcon = require("../../assets/icons/back.png");
+const backIcon: ImageSourcePropType = require("../../assets/icons/back.png");
 
 export default function BackArrow() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);

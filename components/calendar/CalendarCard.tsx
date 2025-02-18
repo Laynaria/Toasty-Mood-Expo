@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handleCalendarToastRedirect } from "../../services/calendarServices";
 
-const biteyOption = require("../../assets/icons/bitey-calendar.png");
+const biteyOption: ImageSourcePropType = require("../../assets/icons/bitey-calendar.png");
 
 type Props = {
   day: any;
@@ -12,7 +12,7 @@ type Props = {
   index: number;
   currentOffset: number;
   imgSource: ImageSourcePropType;
-  biteySource: ImageSourcePropType;
+  biteySource: ImageSourcePropType | false;
 };
 
 export default function CalendarCard({

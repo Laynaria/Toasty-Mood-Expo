@@ -7,7 +7,7 @@ export const handleCalendarToastRedirect = (
   date: Date,
   index: number,
   Offset: number
-) => {
+): void => {
   if (date.getTime() <= new Date().getTime()) {
     router.push({
       pathname: `/new-toast/${date}`,
@@ -22,7 +22,7 @@ export const getToastByDay = (
   months: string[],
   year: string,
   month: string
-) => {
+): Toast => {
   if (toasts) {
     return toasts.filter(
       (toast) =>
@@ -34,7 +34,7 @@ export const getToastByDay = (
   }
 };
 
-export const checkDate = (year: string, month: string) => {
+export const checkDate = (year: string, month: string): string => {
   return `${year}-${
     months.indexOf(month) >= 9
       ? months.indexOf(month) + 1
@@ -42,15 +42,16 @@ export const checkDate = (year: string, month: string) => {
   }`;
 };
 
-export const dataCalendar: DataCalendar[][] = years(2022).map((year) =>
-  months
-    .filter(
-      (month) =>
-        months.indexOf(month) <= new Date().getMonth() ||
-        year !== new Date().getFullYear()
-    )
-    .map((month) => ({
-      month,
-      year: year as string,
-    }))
+export const dataCalendar: DataCalendar[][] = years(2022).map(
+  (year): DataCalendar[] =>
+    months
+      .filter(
+        (month) =>
+          months.indexOf(month) <= new Date().getMonth() ||
+          year !== new Date().getFullYear()
+      )
+      .map((month) => ({
+        month,
+        year: year,
+      }))
 );

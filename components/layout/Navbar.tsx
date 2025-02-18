@@ -1,22 +1,28 @@
 import { router, usePathname } from "expo-router";
 import { useContext } from "react";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import toastsMoods from "../../services/toasts";
 import NavLink from "./NavLink";
 
-const homeIcon = require("../../assets/icons/home.png");
-const timelineIcon = require("../../assets/icons/timeline.png");
-const shopIcon = require("../../assets/icons/shop.png");
-const settingsIcon = require("../../assets/icons/settings.png");
+const homeIcon: ImageSourcePropType = require("../../assets/icons/home.png");
+const timelineIcon: ImageSourcePropType = require("../../assets/icons/timeline.png");
+const shopIcon: ImageSourcePropType = require("../../assets/icons/shop.png");
+const settingsIcon: ImageSourcePropType = require("../../assets/icons/settings.png");
 
 export default function Navbar() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const { selectedThemeToast } = useContext(ThemeToastContext);
-  const path = usePathname();
+  const path: string = usePathname();
 
-  const selectedColor = () => {
+  const selectedColor = (): string => {
     return colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground;
   };
 

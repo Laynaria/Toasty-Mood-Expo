@@ -1,8 +1,8 @@
-import { getCalendars } from "expo-localization";
+import { Calendar, getCalendars } from "expo-localization";
 import { FirstDayOfTheWeek } from "../types/time.types";
 
-export const weekDays = (weekPreference: FirstDayOfTheWeek) => {
-  const [{ firstWeekday }] = getCalendars();
+export const weekDays = (weekPreference: FirstDayOfTheWeek): string[] => {
+  const [{ firstWeekday }]: Calendar[] = getCalendars();
   const daysName: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const daysNameBis: string[] = [
     "Sun",
@@ -43,18 +43,22 @@ export const months: string[] = [
 
 export const daySuffix: string[] = ["st", "nd", "rd"];
 
-export const getDaysName = (year: string, month: string, day: number) => {
+export const getDaysName = (
+  year: string,
+  month: string,
+  day: number
+): string => {
   return new Date(parseInt(year), months.indexOf(month), day)
     .toString()
     .split(" ")[0];
 };
 
-export const daysInMonth = (year: string, month: string) =>
+export const daysInMonth = (year: string, month: string): number =>
   new Date(parseInt(year), months.indexOf(month) + 1, 0).getDate();
 
-export const years = (year: number) => {
-  const currentYear = new Date().getFullYear();
-  const yearsArray = [];
+export const years = (year: number): number[] => {
+  const currentYear: number = new Date().getFullYear();
+  const yearsArray: number[] = [];
 
   for (let i = year; i <= currentYear; i++) {
     yearsArray.push(i);
@@ -63,7 +67,7 @@ export const years = (year: number) => {
   return yearsArray;
 };
 
-export const isOrWas = (date: Date) => {
+export const isOrWas = (date: Date): string => {
   return date.toLocaleDateString() === new Date().toLocaleDateString()
     ? "Is"
     : "Was";

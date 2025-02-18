@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
@@ -27,7 +27,7 @@ export default function Timeline() {
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
 
   useEffect(() => {
-    const loadToasts = async () => {
+    const loadToasts = async (): Promise<void> => {
       setToasts(await getToasts());
     };
 

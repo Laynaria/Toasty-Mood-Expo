@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageSourcePropType, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
 import { days, months, getDaysName, daysInMonth } from "../../services/time";
@@ -9,7 +9,7 @@ import toastsMoods from "../../services/toasts";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "../MonthCard";
 
-const toastEmpty = require("../../assets/icons/toast-empty.png");
+const toastEmpty: ImageSourcePropType = require("../../assets/icons/toast-empty.png");
 
 type Props = {
   selectedMonth: string;
@@ -31,21 +31,21 @@ export default function Calendar({
   const { selectedTheme } = useContext(ThemeColorContext);
   const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
 
-  const daysName = weekDays();
+  const daysName: string[] = weekDays();
 
-  const firstDay = getDaysName(selectedYear, selectedMonth, 1);
+  const firstDay: string = getDaysName(selectedYear, selectedMonth, 1);
 
-  const firstDayFlexGrow = daysName.indexOf(firstDay);
+  const firstDayFlexGrow: number = daysName.indexOf(firstDay);
 
-  const lastDay = getDaysName(
+  const lastDay: string = getDaysName(
     selectedYear,
     selectedMonth,
     daysInMonth(selectedYear, selectedMonth)
   );
 
-  const lastDayFlexgrow = 6 - daysName.indexOf(lastDay);
+  const lastDayFlexgrow: number = 6 - daysName.indexOf(lastDay);
 
-  const imgSource = (day) => {
+  const imgSource = (day): ImageSourcePropType => {
     if (!day.toast) {
       return toastEmpty;
     }
@@ -61,7 +61,7 @@ export default function Calendar({
     ][day.toast.selectedToast - 1].img;
   };
 
-  const biteySource = (day) => {
+  const biteySource = (day): ImageSourcePropType | false => {
     if (!day.toast) {
       return false;
     }

@@ -16,7 +16,7 @@ type Props = {
 
 export default function HeaderButton({ link, icon }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const path = usePathname();
+  const path: string = usePathname();
 
   return (
     <Pressable

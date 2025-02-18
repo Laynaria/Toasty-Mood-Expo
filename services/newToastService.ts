@@ -2,15 +2,17 @@ import * as ImagePicker from "expo-image-picker";
 import { Dispatch } from "react";
 import { getToasts, storeToasts } from "./storage";
 import { router } from "expo-router";
+import { Toast } from "../types/toasts.types";
 
 export const handlePhotoChange = async (
   photo: string,
   setPhoto: Dispatch<string>
-) => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-    allowsEditing: true,
-    quality: 1,
-  });
+): Promise<void> => {
+  let result: ImagePicker.ImagePickerResult =
+    await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
 
   if (!result.canceled) {
     setPhoto(result.assets[0].uri);
@@ -31,9 +33,9 @@ export const handleToastSubmit = async (
   photo: string,
   index: string | string[],
   previousOffset: string | string[]
-) => {
-  const existingToasts = await getToasts();
-  const newToast = {
+): Promise<void> => {
+  const existingToasts: Toast[] = await getToasts();
+  const newToast: Toast = {
     selectedToast,
     isJamDay,
     isBitey,
@@ -77,11 +79,11 @@ export const loadSpecificToast = async (
   setIsJamDay: Dispatch<boolean>,
   setIsBitey: Dispatch<boolean>,
   setIsLoading: Dispatch<boolean>
-) => {
-  const existingToasts = await getToasts();
+): Promise<void> => {
+  const existingToasts: Toast[] = await getToasts();
 
   if (existingToasts) {
-    const [todayToast] = existingToasts.filter(
+    const [todayToast]: Toast[] = existingToasts.filter(
       (toast) =>
         new Date(toast.date).toLocaleDateString() === date.toLocaleDateString()
     );

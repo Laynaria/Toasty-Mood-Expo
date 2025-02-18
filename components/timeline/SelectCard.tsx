@@ -3,6 +3,7 @@ import { Pressable, StyleSheet } from "react-native";
 import Animated, {
   Easing,
   ReduceMotion,
+  SharedValue,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
@@ -23,9 +24,9 @@ export default function SelectCard({
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
-  const opacity = useSharedValue(1);
+  const opacity: SharedValue<number> = useSharedValue(1);
 
-  const handleOpacity = () => {
+  const handleOpacity = (): number => {
     if (
       array.indexOf(item as never) > currentScrollIndex - 0.5 &&
       array.indexOf(item as never) < currentScrollIndex + 0.5

@@ -1,8 +1,9 @@
+import { ImageSourcePropType } from "react-native";
 import { temperatureArray } from "../types/temperature.types";
 
-const hot = require("../assets/temperature/hot.png");
-const normal = require("../assets/temperature/normal.png");
-const cold = require("../assets/temperature/cold.png");
+const hot: ImageSourcePropType = require("../assets/temperature/hot.png");
+const normal: ImageSourcePropType = require("../assets/temperature/normal.png");
+const cold: ImageSourcePropType = require("../assets/temperature/cold.png");
 
 const temperatureIcons: temperatureArray = [
   {

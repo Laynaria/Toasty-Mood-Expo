@@ -1,8 +1,8 @@
 import { PropsWithChildren, useContext } from "react";
-import { Image, View } from "react-native";
+import { Image, ImageSourcePropType, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-const backgroundElement = require("../../assets/icons/toast-empty.png");
+const backgroundElement: ImageSourcePropType = require("../../assets/icons/toast-empty.png");
 
 export default function CardViewElement({ children }: PropsWithChildren) {
   const { selectedTheme } = useContext(ThemeColorContext);

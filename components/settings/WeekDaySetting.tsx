@@ -14,7 +14,7 @@ export default function WeekDaySetting() {
     useState<FirstDayOfTheWeek>("system");
 
   useEffect(() => {
-    const getPreference = async () => {
+    const getPreference = async (): Promise<void> => {
       const response: FirstDayOfTheWeek = await getFirstDayPreference();
 
       if (response) {

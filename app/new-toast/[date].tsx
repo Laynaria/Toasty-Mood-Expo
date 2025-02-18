@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import {
+  ImageSourcePropType,
   Pressable,
   StyleSheet,
   TextInput,
@@ -25,8 +26,8 @@ import {
   loadSpecificToast,
 } from "../../services/newToastService";
 
-const bgImg = require("../../assets/background-toasts-flip.png");
-const pencil = require("../../assets/icons/pencil.png");
+const bgImg: ImageSourcePropType = require("../../assets/background-toasts-flip.png");
+const pencil: ImageSourcePropType = require("../../assets/icons/pencil.png");
 
 export default function NewToast() {
   const { selectedTheme } = useContext(ThemeColorContext);

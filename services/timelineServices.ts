@@ -6,7 +6,7 @@ export const filteredArray = (
   months: string[],
   selectedMonth: string,
   selectedYear: number
-) =>
+): Toast[] =>
   array
     .sort(
       (a, b) =>
@@ -25,7 +25,7 @@ export const updateSelectedMonth = (
   setSelectedYear: Dispatch<number>,
   newYear: number,
   closeModal: () => void
-) => {
+): void => {
   setSelectedMonth(newMonth);
   setSelectedYear(newYear);
   closeModal();

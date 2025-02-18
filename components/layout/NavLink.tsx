@@ -16,7 +16,7 @@ type Props = {
 
 export default function NavLink({ link, icon, selectedColor }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const path = usePathname();
+  const path: string = usePathname();
 
   return (
     <Link href={link} asChild style={styles.link}>

@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import { ImageSourcePropType, StyleSheet, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import HeaderButton from "./HeaderButton";
 
-const toDoIcon = require("../../assets/icons/todo.png");
-const themeIcon = require("../../assets/icons/theme.png");
+const toDoIcon: ImageSourcePropType = require("../../assets/icons/todo.png");
+const themeIcon: ImageSourcePropType = require("../../assets/icons/theme.png");
 
 export default function Header() {
   const { selectedTheme } = useContext(ThemeColorContext);

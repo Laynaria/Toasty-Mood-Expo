@@ -11,11 +11,11 @@ import { months, daySuffix } from "../../services/time";
 import { Toast } from "../../types/toasts.types";
 import CardViewElement from "./CardViewElement";
 
-const crunchedToast = require("../../assets/icons/toast-crunched.png");
-const uncrunchedToast = require("../../assets/icons/toast-uncrunched.png");
+const crunchedToast: ImageSourcePropType = require("../../assets/icons/toast-crunched.png");
+const uncrunchedToast: ImageSourcePropType = require("../../assets/icons/toast-uncrunched.png");
 
-const jam = require("../../assets/icons/jam.png");
-const grayJam = require("../../assets/icons/jam-gray.png");
+const jam: ImageSourcePropType = require("../../assets/icons/jam.png");
+const grayJam: ImageSourcePropType = require("../../assets/icons/jam-gray.png");
 
 type Props = {
   toast: Toast;

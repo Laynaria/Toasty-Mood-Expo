@@ -16,7 +16,7 @@ export default function ToastThemeChoice({ array, name, index }: Props) {
   const { selectedThemeToast, setSelectedThemeToast } =
     useContext(ThemeToastContext);
 
-  const borderColor = () => {
+  const borderColor = (): string => {
     if (selectedThemeToast === index && colorScheme() === "light") {
       return selectedTheme.secondary;
     }

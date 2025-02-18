@@ -1,5 +1,5 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { ColorSchemeName, useColorScheme } from "react-native";
 import { getThemeColor, getThemePreference } from "../services/storage";
 import { ThemePreference, ThemeType } from "../types/theme.types";
 
@@ -22,21 +22,21 @@ const ThemeColorContextProvider = ({
   const [themePreference, setThemePreference] =
     useState<ThemePreference>("system");
 
-  const phoneScheme = useColorScheme();
+  const phoneScheme: ColorSchemeName = useColorScheme();
 
-  const colorScheme = () => {
+  const colorScheme = (): ColorSchemeName => {
     return themePreference === "system" ? phoneScheme : themePreference;
   };
 
   useEffect(() => {
-    const getTheme = async () => {
+    const getTheme = async (): Promise<void> => {
       const response: ThemeType = await getThemeColor();
       if (response) {
         setSelectedTheme(response);
       }
     };
 
-    const getPreference = async () => {
+    const getPreference = async (): Promise<void> => {
       const response: ThemePreference = await getThemePreference();
 
       if (response) {

@@ -3,18 +3,18 @@ import { Toast } from "../types/toasts.types";
 import { ThemePreference, ThemeType } from "../types/theme.types";
 import { FirstDayOfTheWeek } from "../types/time.types";
 
-export const storeToasts = async (value: Toast[]) => {
+export const storeToasts = async (value: Toast[]): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("toasts", jsonValue);
   } catch (e) {
     console.warn("Error in registering toast");
   }
 };
 
-export const getToasts = async () => {
+export const getToasts = async (): Promise<Toast[]> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("toasts");
+    const jsonValue: string = await AsyncStorage.getItem("toasts");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -22,7 +22,7 @@ export const getToasts = async () => {
   }
 };
 
-export const deleteToasts = async () => {
+export const deleteToasts = async (): Promise<void> => {
   try {
     await AsyncStorage.removeItem("toasts");
   } catch (e) {
@@ -32,18 +32,18 @@ export const deleteToasts = async () => {
 
 // ThemeColor
 
-export const storeThemeColor = async (value: ThemeType) => {
+export const storeThemeColor = async (value: ThemeType): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("themeColor", jsonValue);
   } catch (e) {
     console.warn("Error in registering your theme color");
   }
 };
 
-export const getThemeColor = async () => {
+export const getThemeColor = async (): Promise<ThemeType> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("themeColor");
+    const jsonValue: string = await AsyncStorage.getItem("themeColor");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -51,18 +51,20 @@ export const getThemeColor = async () => {
   }
 };
 
-export const storeThemePreference = async (value: ThemePreference) => {
+export const storeThemePreference = async (
+  value: ThemePreference
+): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("themePreference", jsonValue);
   } catch (e) {
     console.warn("Error in registering your theme preference");
   }
 };
 
-export const getThemePreference = async () => {
+export const getThemePreference = async (): Promise<ThemePreference> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("themePreference");
+    const jsonValue: string = await AsyncStorage.getItem("themePreference");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -72,18 +74,20 @@ export const getThemePreference = async () => {
 
 // First Day of The Week
 
-export const storeFirstDayPreference = async (value: FirstDayOfTheWeek) => {
+export const storeFirstDayPreference = async (
+  value: FirstDayOfTheWeek
+): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("firstDayPreference", jsonValue);
   } catch (e) {
     console.warn("Error in registering your theme preference");
   }
 };
 
-export const getFirstDayPreference = async () => {
+export const getFirstDayPreference = async (): Promise<FirstDayOfTheWeek> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("firstDayPreference");
+    const jsonValue: string = await AsyncStorage.getItem("firstDayPreference");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -93,18 +97,18 @@ export const getFirstDayPreference = async () => {
 
 // ThemeToast
 
-export const storeThemeToast = async (value: number) => {
+export const storeThemeToast = async (value: number): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("themeToast", jsonValue);
   } catch (e) {
     console.warn("Error in registering your theme color");
   }
 };
 
-export const getThemeToast = async () => {
+export const getThemeToast = async (): Promise<number> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("themeToast");
+    const jsonValue: string = await AsyncStorage.getItem("themeToast");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -114,18 +118,18 @@ export const getThemeToast = async () => {
 
 // ThemeOverride
 
-export const storeThemeOverride = async (value: boolean) => {
+export const storeThemeOverride = async (value: boolean): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue: string = JSON.stringify(value);
     await AsyncStorage.setItem("themeOverride", jsonValue);
   } catch (e) {
     console.warn("Error in registering your theme color");
   }
 };
 
-export const getThemeOverride = async () => {
+export const getThemeOverride = async (): Promise<boolean> => {
   try {
-    const jsonValue = await AsyncStorage.getItem("themeOverride");
+    const jsonValue: string = await AsyncStorage.getItem("themeOverride");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
