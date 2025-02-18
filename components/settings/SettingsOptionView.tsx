@@ -1,8 +1,15 @@
-import { useContext } from "react";
+import { PropsWithChildren, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-export default function SettingsOptionView({ text, children }) {
+type Props = {
+  text: string;
+};
+
+export default function SettingsOptionView({
+  text,
+  children,
+}: Props & PropsWithChildren) {
   const { selectedTheme } = useContext(ThemeColorContext);
   return (
     <View
