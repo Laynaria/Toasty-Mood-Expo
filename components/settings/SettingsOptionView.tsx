@@ -4,16 +4,24 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 type Props = {
   text: string;
+  columnGap?: boolean;
 };
 
 export default function SettingsOptionView({
   text,
+  columnGap = true,
   children,
 }: Props & PropsWithChildren) {
   const { selectedTheme } = useContext(ThemeColorContext);
   return (
     <View
-      style={[styles.container, { backgroundColor: selectedTheme.primary }]}
+      style={[
+        styles.container,
+        {
+          backgroundColor: selectedTheme.primary,
+          columnGap: columnGap ? 24 : 0,
+        },
+      ]}
     >
       <Text style={[styles.text, { color: selectedTheme.secondary }]}>
         {text}

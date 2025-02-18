@@ -1,23 +1,18 @@
 import { useContext } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import {
   handleThemeColorChange,
   themeColors,
 } from "../../services/settingsServices";
 import { ThemeType } from "../../types/theme.types";
+import SettingsOptionView from "./SettingsOptionView";
 
 export default function ThemeColor() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeColorContext);
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: selectedTheme.primary }]}
-    >
-      <Text style={[styles.text, { color: selectedTheme.secondary }]}>
-        Theme Colour
-      </Text>
-
+    <SettingsOptionView text={"Theme Colour"} columnGap={false}>
       {themeColors.map((theme: ThemeType) => (
         <Pressable
           key={theme.primary}
@@ -36,7 +31,7 @@ export default function ThemeColor() {
           ]}
         />
       ))}
-    </View>
+    </SettingsOptionView>
   );
 }
 
