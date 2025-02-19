@@ -1,14 +1,16 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
+type Props = {
+  text: string;
+  buttonFunction: () => void;
+  style: { backgroundColor: string; color: string; borderColor: string };
+};
+
 export default function SelectValidationButton({
   text,
   buttonFunction,
   style,
-}: {
-  text: string;
-  buttonFunction: () => void;
-  style: { backgroundColor: string; color: string; borderColor: string };
-}) {
+}: Props) {
   return (
     <Pressable
       style={[styles.buttons, style, { borderWidth: 1 }]}

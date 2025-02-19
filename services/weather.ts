@@ -1,18 +1,14 @@
-const sun = require("../assets/weather/sun.png");
-const sunAndCloud = require("../assets/weather/sun-and-cloud.png");
-const cloud = require("../assets/weather/cloud.png");
-const rain = require("../assets/weather/rain.png");
-const thunderAndRain = require("../assets/weather/thunder-and-rain.png");
-const fog = require("../assets/weather/fog.png");
-const snow = require("../assets/weather/snow.png");
-const wind = require("../assets/weather/wind.png");
+import { ImageSourcePropType } from "react-native";
+import { weatherArray } from "../types/weather.type";
 
-type weather = {
-  id: number;
-  img: string;
-};
-
-type weatherArray = weather[];
+const sun: ImageSourcePropType = require("../assets/weather/sun.png");
+const sunAndCloud: ImageSourcePropType = require("../assets/weather/sun-and-cloud.png");
+const cloud: ImageSourcePropType = require("../assets/weather/cloud.png");
+const rain: ImageSourcePropType = require("../assets/weather/rain.png");
+const thunderAndRain: ImageSourcePropType = require("../assets/weather/thunder-and-rain.png");
+const fog: ImageSourcePropType = require("../assets/weather/fog.png");
+const snow: ImageSourcePropType = require("../assets/weather/snow.png");
+const wind: ImageSourcePropType = require("../assets/weather/wind.png");
 
 const weatherIcons: weatherArray = [
   { id: 1, img: sun },

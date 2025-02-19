@@ -15,14 +15,14 @@ const ThemeToastContextProvider = ({
   const [selectOverride, setSelectOverride] = useState<boolean>(false);
 
   useEffect(() => {
-    const getTheme = async () => {
+    const getTheme = async (): Promise<void> => {
       const response: number = await getThemeToast();
       if (response) {
         setSelectedThemeToast(response);
       }
     };
 
-    const getOverride = async () => {
+    const getOverride = async (): Promise<void> => {
       const response: boolean = await getThemeOverride();
       if (response) {
         setSelectOverride(response);

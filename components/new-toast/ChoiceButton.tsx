@@ -1,19 +1,22 @@
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import TextNewToast from "./TextNewToast";
+
+type Props = {
+  text: string;
+  optionState: boolean;
+  setOptionState: Dispatch<boolean>;
+  value: boolean;
+};
 
 export default function ChoiceButton({
   text,
   optionState,
   setOptionState,
   value,
-}) {
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-
-  const handlePress = () => {
-    setOptionState(value);
-  };
 
   return (
     <Pressable
@@ -26,7 +29,7 @@ export default function ChoiceButton({
               : `${selectedTheme.primary}80`,
         },
       ]}
-      onPress={handlePress}
+      onPress={() => setOptionState(value)}
     >
       <TextNewToast text={text} style={{}} />
     </Pressable>

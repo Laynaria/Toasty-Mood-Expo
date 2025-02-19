@@ -1,8 +1,13 @@
-import { StyleSheet, Text } from "react-native";
 import { useContext } from "react";
+import { StyleSheet, Text, TextStyle } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
-export default function TextNewToast({ text, style }) {
+type Props = {
+  text: string;
+  style: TextStyle;
+};
+
+export default function TextNewToast({ text, style }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   if (text === "I'm Done!" || text === "Yes" || text === "No") {

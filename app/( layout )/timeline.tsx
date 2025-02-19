@@ -1,45 +1,34 @@
+import { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { getToasts } from "../../services/storage";
-import React, { useContext, useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-
-import { months } from "../../services/time";
-
-import toastsMoods from "../../services/toasts";
-import TimelineCard from "../../components/timeline/TimelineCard";
-import MonthCard from "../../components/MonthCard";
-import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 import { ThemeToastContext } from "../../contexts/ThemeToastContext";
-import weatherIcons from "../../services/weather";
+import { filteredArray } from "../../services/timelineServices";
 import temperatureIcons from "../../services/temperature";
+import weatherIcons from "../../services/weather";
+import toastsMoods from "../../services/toasts";
+import { months } from "../../services/time";
+import { Toast } from "../../types/toasts.types";
+import MonthCard from "../../components/MonthCard";
+import TimelineCard from "../../components/timeline/TimelineCard";
+import SelectMonthModal from "../../components/timeline/SelectMonthModal";
+import { loadToasts } from "../../services/loadToasts";
 
 export default function Timeline() {
-  const [toasts, setToasts] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(
+  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
+  const [toasts, setToasts] = useState<Toast[]>(null);
+  const [selectedMonth, setSelectedMonth] = useState<string>(
     months[new Date().getMonth()]
   );
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const { selectedTheme } = useContext(ThemeColorContext);
-
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
 
-  const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
-
   useEffect(() => {
-    const loadToasts = async () => {
-      setToasts(await getToasts());
-    };
-
-    loadToasts();
+    loadToasts(setToasts);
   }, []);
-
-  const handleMonthChange = (newMonth, newYear) => {
-    setSelectedMonth(newMonth);
-    setSelectedYear(newYear);
-  };
-
-  const closeModal = () => setIsSelectingMonth(false);
 
   return (
     <>
@@ -52,41 +41,34 @@ export default function Timeline() {
               timeline={true}
               setIsSelectingMonth={setIsSelectingMonth}
             />
-            {toasts
-              ?.sort(
-                (a, b) =>
-                  new Date(a.date.split("T")[0]).getTime() -
-                  new Date(b.date.split("T")[0]).getTime()
-              )
-              .filter(
-                (toast) =>
-                  new Date(toast.date).getMonth() ===
-                    months.indexOf(selectedMonth) &&
-                  new Date(toast.date).getFullYear() === selectedYear
-              )
-              ?.map((toast) => (
-                <TimelineCard
-                  key={toast.date}
-                  toast={toast}
-                  img={
-                    toastsMoods[
-                      selectOverride ? selectedThemeToast : toast.moodArray
-                    ][toast.selectedToast - 1].img
-                  }
-                  weatherImg={
-                    toast.weather
-                      ? weatherIcons[toast.weather - 1].img
-                      : weatherIcons[0].img
-                  }
-                  temperatureImg={
-                    toast.temperature
-                      ? temperatureIcons[toast.temperature - 1].img
-                      : temperatureIcons[1].img
-                  }
-                />
-              ))}
+
+            {toasts &&
+              filteredArray(toasts, months, selectedMonth, selectedYear)?.map(
+                (toast) => (
+                  <TimelineCard
+                    key={toast.date}
+                    toast={toast}
+                    img={
+                      toastsMoods[
+                        selectOverride ? selectedThemeToast : toast.moodArray
+                      ][toast.selectedToast - 1].img
+                    }
+                    weatherImg={
+                      toast.weather
+                        ? weatherIcons[toast.weather - 1].img
+                        : weatherIcons[0].img
+                    }
+                    temperatureImg={
+                      toast.temperature
+                        ? temperatureIcons[toast.temperature - 1].img
+                        : temperatureIcons[1].img
+                    }
+                  />
+                )
+              )}
           </View>
         </ScrollView>
+
         <LinearGradient
           colors={[
             "rgba(255,255,255, 0)",
@@ -99,10 +81,11 @@ export default function Timeline() {
 
       {isSelectingMonth ? (
         <SelectMonthModal
-          timelineFunction={handleMonthChange}
-          closeModal={closeModal}
+          closeModal={() => setIsSelectingMonth(false)}
           selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
         />
       ) : null}
     </>

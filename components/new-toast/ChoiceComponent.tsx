@@ -1,18 +1,24 @@
-import { Image, Pressable, StyleSheet, View } from "react-native";
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
+import { Image, Pressable, StyleSheet, View, ViewStyle } from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { ToastsMoodsPictureObject } from "../../types/toasts.types";
+import { temperatureArray } from "../../types/temperature.types";
+import { weatherArray } from "../../types/weather.type";
+
+type Props = {
+  array: ToastsMoodsPictureObject[] | temperatureArray | weatherArray;
+  optionState: number;
+  setOptionState: Dispatch<number>;
+  styleProp?: ViewStyle;
+};
 
 export default function ChoiceComponent({
   array,
   optionState,
   setOptionState,
   styleProp = {},
-}) {
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-
-  const handleToastChange = (id) => {
-    setOptionState(id);
-  };
 
   return (
     <View style={[styles.container, styleProp]}>
@@ -26,7 +32,7 @@ export default function ChoiceComponent({
                 optionState === element.id ? selectedTheme.primary : null,
             },
           ]}
-          onPress={() => handleToastChange(element.id)}
+          onPress={() => setOptionState(element.id)}
         >
           <Image source={element.img} />
         </Pressable>
