@@ -1,13 +1,19 @@
+import { Dispatch } from "react";
 import { StyleSheet, View } from "react-native";
 import TextNewToast from "./TextNewToast";
-import { isOrWas } from "../../services/time";
 import ChoiceButton from "./ChoiceButton";
+
+type Props = {
+  text: string;
+  optionState: boolean;
+  setOptionState: Dispatch<boolean>;
+};
 
 export default function ToastOptionChoice({
   text,
   optionState,
   setOptionState,
-}) {
+}: Props) {
   return (
     <View style={styles.container}>
       <TextNewToast

@@ -1,15 +1,9 @@
-import { Pressable, Text, View } from "react-native";
-
-import { deleteToasts } from "../../services/storage";
 import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import { handleClearAllData } from "../../services/settingsServices";
 
 export default function ClearAllData() {
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
-
-  const handleDelete = async () => {
-    await deleteToasts();
-    setIsDeleteModal(false);
-  };
+  const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
 
   return (
     <View>
@@ -20,7 +14,7 @@ export default function ClearAllData() {
       {isDeleteModal ? (
         <View>
           <Text>Are you sure? </Text>
-          <Pressable onPress={handleDelete}>
+          <Pressable onPress={() => handleClearAllData(setIsDeleteModal)}>
             <Text>Yes</Text>
           </Pressable>
           <Pressable onPress={() => setIsDeleteModal(false)}>

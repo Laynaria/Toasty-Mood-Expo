@@ -1,27 +1,35 @@
 import { useContext, useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import Animated, {
   Easing,
   ReduceMotion,
+  SharedValue,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+
+type Props = {
+  item: string | number;
+  currentScrollIndex: number;
+  array: string[] | number[];
+  handleClick: (e: any) => void;
+};
 
 export default function SelectCard({
   item,
   currentScrollIndex,
   array,
   handleClick,
-}) {
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
-  const opacity = useSharedValue(1);
+  const opacity: SharedValue<number> = useSharedValue(1);
 
-  const handleOpacity = () => {
+  const handleOpacity = (): number => {
     if (
-      array.indexOf(item) > currentScrollIndex - 0.5 &&
-      array.indexOf(item) < currentScrollIndex + 0.5
+      array.indexOf(item as never) > currentScrollIndex - 0.5 &&
+      array.indexOf(item as never) < currentScrollIndex + 0.5
     ) {
       return 1;
     }
@@ -41,7 +49,7 @@ export default function SelectCard({
     <Pressable
       style={styles.container}
       key={item}
-      onPress={() => handleClick(array.indexOf(item))}
+      onPress={() => handleClick(array.indexOf(item as never))}
     >
       <Animated.Text
         style={[

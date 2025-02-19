@@ -1,10 +1,10 @@
 import React from "react";
+import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
 import { Slot } from "expo-router";
-import Navbar from "../../components/Navbar";
-import { Image, StyleSheet, View } from "react-native";
-import Header from "../../components/Header";
+import Navbar from "../../components/layout/Navbar";
+import Header from "../../components/layout/Header";
 
-const bgImg = require("../../assets/background-toasts.png");
+const bgImg: ImageSourcePropType = require("../../assets/background-toasts.png");
 
 export default function RootLayout() {
   return (

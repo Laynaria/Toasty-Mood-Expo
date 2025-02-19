@@ -1,29 +1,27 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { useContext } from "react";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { Dispatch, useContext } from "react";
+import {
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Image } from "expo-image";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { handlePhotoChange } from "../../services/newToastService";
 
-const camera = require("../../assets/icons/camera.png");
+const camera: ImageSourcePropType = require("../../assets/icons/camera.png");
 
-export default function PhotoChoice({ photo, setPhoto }) {
+type Props = {
+  photo: string;
+  setPhoto: Dispatch<string>;
+};
+
+export default function PhotoChoice({ photo, setPhoto }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
-  const photoSource = photo ? { uri: photo } : camera;
+  const photoSource: ImageSourcePropType = photo ? { uri: photo } : camera;
 
-  const handlePhotoChange = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setPhoto(result.assets[0].uri);
-    } else if (!photo) {
-      alert("You did not select a photo.");
-    }
-  };
-
-  const tintColor = () => {
+  const tintColor = (): string => {
     if (photoSource !== camera) {
       return "";
     }
@@ -38,7 +36,7 @@ export default function PhotoChoice({ photo, setPhoto }) {
   return (
     <Pressable
       style={[styles.inputWrapper, { borderColor: selectedTheme.primary }]}
-      onPress={handlePhotoChange}
+      onPress={() => handlePhotoChange(photo, setPhoto)}
     >
       <View style={styles.photoTop}>
         <Text

@@ -1,25 +1,41 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import { months, daySuffix } from "../../services/time";
 import { useContext } from "react";
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { months, daySuffix } from "../../services/time";
+import { Toast } from "../../types/toasts.types";
 import CardViewElement from "./CardViewElement";
 
-const crunchedToast = require("../../assets/icons/toast-crunched.png");
-const uncrunchedToast = require("../../assets/icons/toast-uncrunched.png");
+const crunchedToast: ImageSourcePropType = require("../../assets/icons/toast-crunched.png");
+const uncrunchedToast: ImageSourcePropType = require("../../assets/icons/toast-uncrunched.png");
 
-const jam = require("../../assets/icons/jam.png");
-const grayJam = require("../../assets/icons/jam-gray.png");
+const jam: ImageSourcePropType = require("../../assets/icons/jam.png");
+const grayJam: ImageSourcePropType = require("../../assets/icons/jam-gray.png");
+
+type Props = {
+  toast: Toast;
+  img: ImageSourcePropType;
+  weatherImg: ImageSourcePropType;
+  temperatureImg: ImageSourcePropType;
+};
 
 export default function TimelineCard({
   toast,
   img,
   weatherImg,
   temperatureImg,
-}) {
+}: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
-  const date = new Date(toast.date);
+  const date: Date = new Date(toast.date);
 
-  const photoSource = toast.photo ? { uri: toast.photo } : null;
+  const photoSource: ImageSourcePropType = toast.photo
+    ? { uri: toast.photo }
+    : null;
 
   return (
     <View style={styles.container}>
