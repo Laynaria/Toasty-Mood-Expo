@@ -95,8 +95,10 @@ export default function Calendar({
         )}
 
         {days
-          .filter((day) => day <= daysInMonth(selectedYear, selectedMonth))
-          .map((day) => ({
+          .filter(
+            (day: number) => day <= daysInMonth(selectedYear, selectedMonth)
+          )
+          .map((day: number) => ({
             day,
             toast: getToastByDay(
               day,
@@ -106,7 +108,7 @@ export default function Calendar({
               selectedMonth
             ),
           }))
-          .map((day) => (
+          .map((day: CalendarDayType) => (
             <CalendarCard
               day={day}
               date={

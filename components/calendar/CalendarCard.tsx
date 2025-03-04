@@ -3,11 +3,12 @@ import { ImageSourcePropType, Pressable, StyleSheet, Text } from "react-native";
 import { Image } from "expo-image";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handleCalendarToastRedirect } from "../../services/calendarServices";
+import { CalendarDayType } from "@/types/time.types";
 
 const biteyOption: ImageSourcePropType = require("../../assets/icons/bitey-calendar.png");
 
 type Props = {
-  day: any;
+  day: CalendarDayType;
   date: Date;
   index: number;
   currentOffset: number;

@@ -13,7 +13,7 @@ type Props = {
   item: string | number | null;
   currentScrollIndex: number;
   array: string[] | number[];
-  handleClick: (e: any) => void;
+  handleClick: (e: number) => void;
 };
 
 export default function SelectCard({
