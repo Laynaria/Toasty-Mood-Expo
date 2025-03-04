@@ -11,8 +11,9 @@ import { DataCalendar, FirstDayOfTheWeek } from "../../types/time.types";
 import Calendar from "../../components/calendar/Calendar";
 
 export default function Index() {
-  const [toasts, setToasts] = useState<Toast[]>(null);
-  const [weekPreference, setWeekPreference] = useState<FirstDayOfTheWeek>(null);
+  const [toasts, setToasts] = useState<Toast[] | null>(null);
+  const [weekPreference, setWeekPreference] =
+    useState<FirstDayOfTheWeek | null>(null);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const ref = useRef<FlashList<DataCalendar>>();
 

@@ -34,7 +34,7 @@ export const handleToastSubmit = async (
   index: string | string[],
   previousOffset: string | string[]
 ): Promise<void> => {
-  const existingToasts: Toast[] = await getToasts();
+  const existingToasts: Toast[] | null = await getToasts();
   const newToast: Toast = {
     selectedToast,
     isJamDay,
@@ -80,7 +80,7 @@ export const loadSpecificToast = async (
   setIsBitey: Dispatch<boolean>,
   setIsLoading: Dispatch<boolean>
 ): Promise<void> => {
-  const existingToasts: Toast[] = await getToasts();
+  const existingToasts: Toast[] | null = await getToasts();
 
   if (existingToasts) {
     const [todayToast]: Toast[] = existingToasts.filter(

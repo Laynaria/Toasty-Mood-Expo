@@ -10,7 +10,7 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handleHeaderNavigation } from "../../services/layoutService";
 
 type Props = {
-  link: string;
+  link: "/todo" | "/theme";
   icon: ImageSourcePropType;
 };
 

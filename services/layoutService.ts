@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { Href, router } from "expo-router";
 
 export const handlePreviousPageNavigation = (
   previousPage: string | string[],
@@ -6,11 +6,14 @@ export const handlePreviousPageNavigation = (
   index: string | string[]
 ): void => {
   previousPage
-    ? router.navigate(previousPage as string)
+    ? router.navigate(previousPage as Href)
     : router.navigate({ pathname: "/", params: { index, previousOffset } });
 };
 
-export const handleHeaderNavigation = (link: string, path: string): void => {
+export const handleHeaderNavigation = (
+  link: "/todo" | "/theme",
+  path: string
+): void => {
   router.navigate({
     pathname: link,
     params: { previousPage: path },

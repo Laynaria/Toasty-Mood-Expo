@@ -10,7 +10,7 @@ import Animated, {
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 type Props = {
-  item: string | number;
+  item: string | number | null;
   currentScrollIndex: number;
   array: string[] | number[];
   handleClick: (e: any) => void;

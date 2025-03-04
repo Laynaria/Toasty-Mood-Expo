@@ -4,8 +4,8 @@ import { FirstDayOfTheWeek } from "../types/time.types";
 import { Toast } from "../types/toasts.types";
 
 export const loadToasts = async (
-  setToasts: Dispatch<Toast[]>,
-  setWeekPreference?: Dispatch<FirstDayOfTheWeek>
+  setToasts: Dispatch<Toast[] | null>,
+  setWeekPreference?: Dispatch<FirstDayOfTheWeek | null>
 ): Promise<void> => {
   if (setWeekPreference) {
     setWeekPreference(await getFirstDayPreference());

@@ -51,8 +51,8 @@ export default function Navbar() {
         ]}
         onPress={() =>
           router.navigate({
-            pathname: `/new-toast/${new Date().toString()}`,
-            params: { previousPage: path },
+            pathname: "/new-toast/[date]",
+            params: { date: new Date().toString(), previousPage: path },
           })
         }
       >
