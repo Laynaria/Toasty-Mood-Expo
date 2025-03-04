@@ -18,7 +18,7 @@ export const handleCalendarToastRedirect = (
 
 export const getToastByDay = (
   day: number,
-  toasts: Toast[],
+  toasts: Toast[] | undefined,
   months: string[],
   year: string,
   month: string

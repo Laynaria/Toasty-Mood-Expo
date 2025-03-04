@@ -11,11 +11,11 @@ type Props = {
 
 export default function SelectList({ array, setStateOption, current }: Props) {
   const [currentScrollIndex, setCurrentScrollIndex] = useState<number>(0);
-  const ref = useRef<FlatList>();
+  const ref = useRef<FlatList>(null);
 
   const ITEM_HEIGHT: number = 40;
 
-  const handleClick = (e): void => {
+  const handleClick = (e: number): void => {
     if (e >= 0) {
       ref?.current?.scrollToIndex({ index: e });
     }

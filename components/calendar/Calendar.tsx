@@ -15,7 +15,7 @@ const toastEmpty: ImageSourcePropType = require("../../assets/icons/toast-empty.
 type Props = {
   selectedMonth: string;
   selectedYear: string;
-  toasts: Toast[];
+  toasts: Toast[] | undefined;
   weekDays: () => string[];
   index: number;
   currentOffset: number;

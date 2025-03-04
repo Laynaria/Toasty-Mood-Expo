@@ -15,7 +15,7 @@ export default function Index() {
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
-  const ref = useRef<FlashList<DataCalendar>>();
+  const ref = useRef<FlashList<DataCalendar>>(null);
 
   const index: number = parseInt(useLocalSearchParams().index as string);
   const previousOffset: number = parseInt(
@@ -35,13 +35,15 @@ export default function Index() {
   }, []);
 
   const renderItem = useCallback(
-    ({ item, index }) => (
+    ({ item, index }: { item: DataCalendar; index: number }) => (
       <Calendar
         selectedMonth={item.month}
-        selectedYear={item.year}
+        selectedYear={item.year.toString()}
         weekDays={() => weekDays(weekPreference)}
         toasts={toasts?.filter(
-          (toast) => toast.date.slice(0, 7) === checkDate(item.year, item.month)
+          (toast) =>
+            toast.date.slice(0, 7) ===
+            checkDate(item.year.toString(), item.month)
         )}
         index={index}
         currentOffset={currentOffset}
