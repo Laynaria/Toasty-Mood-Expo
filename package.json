@@ -1,5 +1,5 @@
 {
-  "name": "tests-expo",
+  "name": "toasty-mood-expo",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
