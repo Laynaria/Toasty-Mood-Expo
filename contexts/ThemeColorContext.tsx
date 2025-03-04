@@ -8,7 +8,7 @@ const ThemeColorContext = createContext({
   setSelectedTheme: (selectedTheme: ThemeType) => {},
   themePreference: "",
   setThemePreference: (themePreference: ThemePreference) => {},
-  colorScheme: (): ThemePreference => "system",
+  colorScheme: (): ColorSchemeName => "light",
 });
 
 const ThemeColorContextProvider = ({

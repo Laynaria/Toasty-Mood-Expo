@@ -1,7 +1,9 @@
 import { Calendar, getCalendars } from "expo-localization";
 import { FirstDayOfTheWeek } from "../types/time.types";
 
-export const weekDays = (weekPreference: FirstDayOfTheWeek): string[] => {
+export const weekDays = (
+  weekPreference: FirstDayOfTheWeek | null
+): string[] => {
   const [{ firstWeekday }]: Calendar[] = getCalendars();
   const daysName: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const daysNameBis: string[] = [
