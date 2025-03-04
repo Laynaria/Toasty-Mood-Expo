@@ -28,7 +28,11 @@ export default function HeaderButton({ link, icon }: Props) {
       ]}
       onPress={() => handleHeaderNavigation(link, path)}
     >
-      <Image source={icon} style={{ tintColor: selectedTheme.secondary }} />
+      <Image
+        source={icon}
+        style={{ tintColor: selectedTheme.secondary }}
+        accessibilityLabel={`${link.split("/")[1]} page icon`}
+      />
     </Pressable>
   );
 }
