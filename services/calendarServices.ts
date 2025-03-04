@@ -10,8 +10,8 @@ export const handleCalendarToastRedirect = (
 ): void => {
   if (date.getTime() <= new Date().getTime()) {
     router.push({
-      pathname: `/new-toast/${date}`,
-      params: { index, previousOffset: Offset },
+      pathname: "/new-toast/[date]",
+      params: { date: date.toString(), index, previousOffset: Offset },
     });
   }
 };
