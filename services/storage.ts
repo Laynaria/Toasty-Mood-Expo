@@ -3,6 +3,8 @@ import { Toast } from "../types/toasts.types";
 import { ThemePreference, ThemeType } from "../types/theme.types";
 import { FirstDayOfTheWeek } from "../types/time.types";
 
+type JsonValueType = string | null;
+
 export const storeToasts = async (value: Toast[]): Promise<void> => {
   try {
     const jsonValue: string = JSON.stringify(value);
@@ -14,7 +16,7 @@ export const storeToasts = async (value: Toast[]): Promise<void> => {
 
 export const getToasts = async (): Promise<Toast[]> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("toasts");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem("toasts");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -43,7 +45,7 @@ export const storeThemeColor = async (value: ThemeType): Promise<void> => {
 
 export const getThemeColor = async (): Promise<ThemeType> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("themeColor");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem("themeColor");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -64,7 +66,9 @@ export const storeThemePreference = async (
 
 export const getThemePreference = async (): Promise<ThemePreference> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("themePreference");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem(
+      "themePreference"
+    );
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -87,7 +91,9 @@ export const storeFirstDayPreference = async (
 
 export const getFirstDayPreference = async (): Promise<FirstDayOfTheWeek> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("firstDayPreference");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem(
+      "firstDayPreference"
+    );
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -108,7 +114,7 @@ export const storeThemeToast = async (value: number): Promise<void> => {
 
 export const getThemeToast = async (): Promise<number> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("themeToast");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem("themeToast");
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
@@ -129,7 +135,9 @@ export const storeThemeOverride = async (value: boolean): Promise<void> => {
 
 export const getThemeOverride = async (): Promise<boolean> => {
   try {
-    const jsonValue: string = await AsyncStorage.getItem("themeOverride");
+    const jsonValue: JsonValueType = await AsyncStorage.getItem(
+      "themeOverride"
+    );
 
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {

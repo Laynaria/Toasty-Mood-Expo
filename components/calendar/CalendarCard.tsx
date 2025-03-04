@@ -12,7 +12,7 @@ type Props = {
   index: number;
   currentOffset: number;
   imgSource: ImageSourcePropType;
-  biteySource: ImageSourcePropType | false;
+  biteySource: ImageSourcePropType | boolean;
 };
 
 export default function CalendarCard({

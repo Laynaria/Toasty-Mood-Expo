@@ -22,7 +22,7 @@ export const getToastByDay = (
   months: string[],
   year: string,
   month: string
-): Toast => {
+): Toast | null => {
   if (toasts) {
     return toasts.filter(
       (toast) =>
@@ -32,6 +32,8 @@ export const getToastByDay = (
         ).toLocaleDateString()
     )[0];
   }
+
+  return null;
 };
 
 export const checkDate = (year: string, month: string): string => {
