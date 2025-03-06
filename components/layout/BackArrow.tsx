@@ -34,6 +34,7 @@ export default function BackArrow() {
                 : selectedTheme.primary,
           },
         ]}
+        accessibilityLabel="Previous page icon"
       />
     </Pressable>
   );
