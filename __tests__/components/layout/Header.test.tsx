@@ -1,5 +1,5 @@
-import Header from "@/components/layout/Header";
 import { render } from "@testing-library/react-native";
+import Header from "@/components/layout/Header";
 
 describe("<Header />", () => {
   test("Check if Header component contain todo and theme page icons", () => {

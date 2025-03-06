@@ -1,6 +1,6 @@
-import BackArrow from "@/components/layout/BackArrow";
-import { render } from "@testing-library/react-native";
 import { useGlobalSearchParams } from "expo-router";
+import { render } from "@testing-library/react-native";
+import BackArrow from "@/components/layout/BackArrow";
 
 jest.mock("expo-router", () => ({
   useGlobalSearchParams: jest.fn(),
