@@ -8,8 +8,8 @@ import {
 
 import { getCalendars } from "expo-localization";
 
-describe("time.ts test suite", () => {
-  describe("weekDays function test suite", () => {
+describe("> time.ts test suite", () => {
+  describe("> weekDays function test suite", () => {
     jest.mock("expo-localization", () => ({
       getCalendars: jest.fn(),
     }));
@@ -67,7 +67,7 @@ describe("time.ts test suite", () => {
     });
   });
 
-  describe("getDaysName function test suite", () => {
+  describe("> getDaysName function test suite", () => {
     test("Checks that getDayName properly return Thu for 16 May 2024", () => {
       expect(getDaysName("2024", "May", 16)).toBe("Thu");
     });
@@ -81,7 +81,7 @@ describe("time.ts test suite", () => {
     });
   });
 
-  describe("daysInMonth function test suite", () => {
+  describe("> daysInMonth function test suite", () => {
     test("Checks that daysInMonth return 31 for May 2024", () => {
       expect(daysInMonth("2024", "May")).toBe(31);
     });
@@ -99,7 +99,7 @@ describe("time.ts test suite", () => {
     });
   });
 
-  describe("years function test suite", () => {
+  describe("> years function test suite", () => {
     test("Checks that years function return [2024,2025] with 2024 as argument", () => {
       expect(years(2024)).toStrictEqual([2024, 2025]);
     });
@@ -125,7 +125,7 @@ describe("time.ts test suite", () => {
     });
   });
 
-  describe("isOrWas function test suite", () => {
+  describe("> isOrWas function test suite", () => {
     test("Checks that isOrWas function returns Is with today's date as argument", () => {
       expect(isOrWas(new Date())).toBe("Is");
     });
