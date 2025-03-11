@@ -1,22 +1,13 @@
+import { render } from "@testing-library/react-native";
+import { getCalendars } from "expo-localization";
+import { weekDays } from "@/services/time";
 import Calendar from "@/components/calendar/Calendar";
 
-import { FirstDayOfTheWeek } from "@/types/time.types";
-import { render } from "@testing-library/react-native";
+jest.mock("expo-localization", () => ({
+  getCalendars: jest.fn(),
+}));
 
-const MockedWeekDays = (weekPreference: FirstDayOfTheWeek | null) => {
-  const daysName: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const daysNameBis: string[] = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
-
-  return weekPreference === "monday" ? daysName : daysNameBis;
-};
+(getCalendars as jest.Mock).mockReturnValue([{ firstWeekday: 2 }]);
 
 describe("<Calendar />", () => {
   test("Check if Calendar component properly maps days with May 2018 parameter and also contain the right month indicator", () => {
@@ -25,7 +16,7 @@ describe("<Calendar />", () => {
         selectedMonth="May"
         selectedYear="2018"
         toasts={undefined}
-        weekDays={() => MockedWeekDays("monday")}
+        weekDays={() => weekDays("monday")}
         index={18}
         currentOffset={0}
       />
@@ -78,7 +69,7 @@ describe("<Calendar />", () => {
         selectedMonth="February"
         selectedYear="2018"
         toasts={undefined}
-        weekDays={() => MockedWeekDays("monday")}
+        weekDays={() => weekDays("monday")}
         index={18}
         currentOffset={0}
       />

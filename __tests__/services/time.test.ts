@@ -1,6 +1,72 @@
-import { daysInMonth, getDaysName, isOrWas, years } from "../../services/time";
+import {
+  daysInMonth,
+  getDaysName,
+  isOrWas,
+  weekDays,
+  years,
+} from "../../services/time";
+
+import { getCalendars } from "expo-localization";
 
 describe("time.ts test suite", () => {
+  describe("weekDays function test suite", () => {
+    jest.mock("expo-localization", () => ({
+      getCalendars: jest.fn(),
+    }));
+
+    (getCalendars as jest.Mock).mockReturnValue([{ firstWeekday: 2 }]);
+
+    test("Checks that weekDays function properly return an array starting with Mon with monday as argument", () => {
+      expect(weekDays("monday")).toStrictEqual([
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun",
+      ]);
+    });
+
+    test("Checks that weekDays function properly return an array starting with Sun with sunday as argument", () => {
+      expect(weekDays("sunday")).toStrictEqual([
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+      ]);
+    });
+
+    test("Checks that weekDays function properly return an array starting with Mon with system as argument, and mocked system equaling to monday", () => {
+      expect(weekDays("system")).toStrictEqual([
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun",
+      ]);
+    });
+
+    test("Checks that weekDays function properly return an array starting with Sun with system as argument, and mocked system equaling to sunday", () => {
+      (getCalendars as jest.Mock).mockReturnValue([{ firstWeekday: 1 }]);
+
+      expect(weekDays("system")).toStrictEqual([
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+      ]);
+    });
+  });
+
   describe("getDaysName function test suite", () => {
     test("Checks that getDayName properly return Thu for 16 May 2024", () => {
       expect(getDaysName("2024", "May", 16)).toBe("Thu");
