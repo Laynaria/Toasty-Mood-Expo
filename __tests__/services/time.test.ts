@@ -27,5 +27,9 @@ describe("time.ts test suite", () => {
     test("Checks that daysInMonth return 29 for February 2025", () => {
       expect(daysInMonth("2025", "February")).toBe(28);
     });
+
+    test("Checks that daysInMonth doesn't return 28 for February 2026", () => {
+      expect(daysInMonth("2026", "February")).not.toBe(29);
+    });
   });
 });
