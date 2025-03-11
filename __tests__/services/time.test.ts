@@ -1,4 +1,4 @@
-import { daysInMonth, getDaysName } from "../../services/time";
+import { daysInMonth, getDaysName, years } from "../../services/time";
 
 describe("time.ts test suite", () => {
   describe("getDaysName function test suite", () => {
@@ -30,6 +30,32 @@ describe("time.ts test suite", () => {
 
     test("Checks that daysInMonth doesn't return 28 for February 2026", () => {
       expect(daysInMonth("2026", "February")).not.toBe(29);
+    });
+  });
+
+  describe("years function test suite", () => {
+    test("Checks that years function return [2024,2025] with 2024 as argument", () => {
+      expect(years(2024)).toStrictEqual([2024, 2025]);
+    });
+
+    test("Checks that years function return [2025] with 2025 as argument", () => {
+      expect(years(2025)).toStrictEqual([2025]);
+    });
+
+    test("Checks that years function return [2024,2025] with 2024 as argument", () => {
+      expect(years(2024)).toStrictEqual([2024, 2025]);
+    });
+
+    test("Checks that years function return an array from 2016 to 2025 with 2016 as argument", () => {
+      expect(years(2016)).toStrictEqual([
+        2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
+      ]);
+    });
+
+    test("Checks that years function doesn't return an array from 2018 to 2025 with 2019 as argument", () => {
+      expect(years(2019)).not.toStrictEqual([
+        2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
+      ]);
     });
   });
 });
