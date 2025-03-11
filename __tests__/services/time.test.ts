@@ -1,4 +1,4 @@
-import { daysInMonth, getDaysName, years } from "../../services/time";
+import { daysInMonth, getDaysName, isOrWas, years } from "../../services/time";
 
 describe("time.ts test suite", () => {
   describe("getDaysName function test suite", () => {
@@ -56,6 +56,26 @@ describe("time.ts test suite", () => {
       expect(years(2019)).not.toStrictEqual([
         2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
       ]);
+    });
+  });
+
+  describe("isOrWas function test suite", () => {
+    test("Checks that isOrWas function returns Is with today's date as argument", () => {
+      expect(isOrWas(new Date())).toBe("Is");
+    });
+
+    test("Checks that isOrWas function returns Was with 17/12/2015 date as argument", () => {
+      expect(isOrWas(new Date("December 17, 2015"))).toBe("Was");
+    });
+
+    test("Checks that isOrWas function returns Was with 19/10/2024 date as argument", () => {
+      expect(isOrWas(new Date("October 19, 2024"))).toBe("Was");
+    });
+
+    test("Checks that isOrWas function doesn't returns Is with yesterday date as argument", () => {
+      const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+
+      expect(isOrWas(new Date(yesterday))).not.toBe("Is");
     });
   });
 });
