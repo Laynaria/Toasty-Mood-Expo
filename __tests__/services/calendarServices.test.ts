@@ -8,7 +8,7 @@ import { Toast } from "@/types/toasts.types";
 
 describe("> calendarServices.ts test suite", () => {
   describe("> getToastByDay function test suite", () => {
-    const MockedToastArray: Toast[] = [
+    const mockedToastArray: Toast[] = [
       {
         date: new Date("December 17, 2023").toDateString(),
         isBitey: true,
@@ -46,14 +46,14 @@ describe("> calendarServices.ts test suite", () => {
 
     test("Checks that function properly returns first toast of the array with proper arguments", () => {
       expect(
-        getToastByDay(17, MockedToastArray, months, "2023", "December")
-      ).toStrictEqual(MockedToastArray[0]);
+        getToastByDay(17, mockedToastArray, months, "2023", "December")
+      ).toStrictEqual(mockedToastArray[0]);
     });
 
     test("Checks that function properly returns second toast of the array with proper arguments", () => {
       expect(
-        getToastByDay(24, MockedToastArray, months, "2024", "April")
-      ).toStrictEqual(MockedToastArray[1]);
+        getToastByDay(24, mockedToastArray, months, "2024", "April")
+      ).toStrictEqual(mockedToastArray[1]);
     });
 
     test("Checks that function properly returns last toast of the array with proper arguments", () => {
@@ -62,16 +62,16 @@ describe("> calendarServices.ts test suite", () => {
       expect(
         getToastByDay(
           today.getDate(),
-          MockedToastArray,
+          mockedToastArray,
           months,
           `${today.getFullYear()}`,
           `${months[today.getMonth()]}`
         )
-      ).toStrictEqual(MockedToastArray[2]);
+      ).toStrictEqual(mockedToastArray[2]);
     });
 
     test("Checks that function properly doesn't returns a toast with wrong arguments", () => {
-      expect(getToastByDay(25, MockedToastArray, months, "2024", "April")).toBe(
+      expect(getToastByDay(25, mockedToastArray, months, "2024", "April")).toBe(
         undefined
       );
     });
