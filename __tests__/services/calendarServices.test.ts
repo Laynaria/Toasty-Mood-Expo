@@ -6,7 +6,7 @@ import {
 import { months } from "@/services/time";
 import { Toast } from "@/types/toasts.types";
 
-describe("> calendarService.ts test suite", () => {
+describe("> calendarServices.ts test suite", () => {
   describe("> getToastByDay function test suite", () => {
     const MockedToastArray: Toast[] = [
       {

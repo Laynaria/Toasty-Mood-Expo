@@ -1,6 +1,6 @@
 import { settingsOptionText } from "@/services/settingsServices";
 
-describe("> settingsService.ts test suite", () => {
+describe("> settingsServices.ts test suite", () => {
   describe("> settingsOptionText function test suite", () => {
     test("Checks that settingsOptionText properly return a string passed as argument", () => {
       expect(settingsOptionText("#FFFFFF")).toBe("#FFFFFF");
