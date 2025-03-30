@@ -26,6 +26,7 @@ graph TD;
 `#React Native`
 `#TSX`
 `#Typescript`
+`#Jest`
 
 ### Setup
 
