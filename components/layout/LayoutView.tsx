@@ -26,7 +26,7 @@ export default function LayoutView() {
     >
       <BackArrow />
       <Slot />
-      <StatusBar style="inverted" />
+      <StatusBar style={colorScheme() === "dark" ? "light" : "dark"} />
     </View>
   );
 }
