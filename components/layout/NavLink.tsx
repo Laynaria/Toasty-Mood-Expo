@@ -1,4 +1,4 @@
-import { Link, usePathname } from "expo-router";
+import { Href, Link, usePathname } from "expo-router";
 import { useContext } from "react";
 import {
   Image,
@@ -9,7 +9,7 @@ import {
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 type Props = {
-  link: string;
+  link: Href;
   icon: ImageSourcePropType;
   selectedColor: () => string;
 };

@@ -8,5 +8,7 @@ export const handleMonthSelect = (
     return;
   }
 
-  setIsSelectingMonth(true);
+  if (setIsSelectingMonth) {
+    setIsSelectingMonth(true);
+  }
 };

@@ -29,7 +29,9 @@ export default function ChoiceComponent({
             styles.button,
             {
               backgroundColor:
-                optionState === element.id ? selectedTheme.primary : null,
+                optionState === element.id
+                  ? selectedTheme.primary
+                  : "transparent",
             },
           ]}
           onPress={() => setOptionState(element.id)}

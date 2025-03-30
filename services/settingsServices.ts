@@ -88,7 +88,7 @@ export const settingsOptionText = (option: string | boolean): string => {
 export const loadFirstDayPreference = async (
   setDayPreference: Dispatch<FirstDayOfTheWeek>
 ): Promise<void> => {
-  const response: FirstDayOfTheWeek = await getFirstDayPreference();
+  const response: FirstDayOfTheWeek | null = await getFirstDayPreference();
 
   if (response) {
     setDayPreference(response);

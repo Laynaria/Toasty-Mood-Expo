@@ -8,7 +8,7 @@ const ThemeColorContext = createContext({
   setSelectedTheme: (selectedTheme: ThemeType) => {},
   themePreference: "",
   setThemePreference: (themePreference: ThemePreference) => {},
-  colorScheme: (): ThemePreference => "system",
+  colorScheme: (): ColorSchemeName => "light",
 });
 
 const ThemeColorContextProvider = ({
@@ -30,14 +30,14 @@ const ThemeColorContextProvider = ({
 
   useEffect(() => {
     const getTheme = async (): Promise<void> => {
-      const response: ThemeType = await getThemeColor();
+      const response: ThemeType | null = await getThemeColor();
       if (response) {
         setSelectedTheme(response);
       }
     };
 
     const getPreference = async (): Promise<void> => {
-      const response: ThemePreference = await getThemePreference();
+      const response: ThemePreference | null = await getThemePreference();
 
       if (response) {
         setThemePreference(response);
