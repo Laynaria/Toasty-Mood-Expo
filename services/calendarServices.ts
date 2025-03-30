@@ -28,7 +28,7 @@ export const getToastByDay = (
       (toast) =>
         new Date(toast.date).toLocaleDateString() ===
         new Date(
-          `${year}-${months.indexOf(month) + 1}-${day}T03:22:00`
+          `${year}-${months.indexOf(month) + 1}-${day}`
         ).toLocaleDateString()
     )[0];
   }

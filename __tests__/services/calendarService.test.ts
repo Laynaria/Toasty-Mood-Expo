@@ -1,8 +1,85 @@
-import { checkDate, dataCalendar } from "@/services/calendarServices";
+import {
+  checkDate,
+  dataCalendar,
+  getToastByDay,
+} from "@/services/calendarServices";
 import { months } from "@/services/time";
+import { Toast } from "@/types/toasts.types";
 
 describe("> calendarService.ts test suite", () => {
-  // getToastByDay test suite
+  describe("> getToastByDay function test suite", () => {
+    const MockedToastArray: Toast[] = [
+      {
+        date: new Date("December 17, 2023").toDateString(),
+        isBitey: true,
+        isJamDay: true,
+        moodArray: 3,
+        weather: 1,
+        temperature: 5,
+        note: "This is a mocked Test",
+        photo: "",
+        selectedToast: 4,
+      },
+      {
+        date: new Date("April 24, 2024").toDateString(),
+        isBitey: true,
+        isJamDay: true,
+        moodArray: 3,
+        weather: 1,
+        temperature: 5,
+        note: "This is a mocked Test",
+        photo: "",
+        selectedToast: 4,
+      },
+      {
+        date: new Date().toDateString(),
+        isBitey: true,
+        isJamDay: true,
+        moodArray: 3,
+        weather: 1,
+        temperature: 5,
+        note: "This is a mocked Test",
+        photo: "",
+        selectedToast: 4,
+      },
+    ];
+
+    test("Checks that function properly returns first toast of the array with proper arguments", () => {
+      expect(
+        getToastByDay(17, MockedToastArray, months, "2023", "December")
+      ).toStrictEqual(MockedToastArray[0]);
+    });
+
+    test("Checks that function properly returns second toast of the array with proper arguments", () => {
+      expect(
+        getToastByDay(24, MockedToastArray, months, "2024", "April")
+      ).toStrictEqual(MockedToastArray[1]);
+    });
+
+    test("Checks that function properly returns last toast of the array with proper arguments", () => {
+      const today = new Date();
+
+      expect(
+        getToastByDay(
+          today.getDate(),
+          MockedToastArray,
+          months,
+          `${today.getFullYear()}`,
+          `${months[today.getMonth()]}`
+        )
+      ).toStrictEqual(MockedToastArray[2]);
+    });
+
+    test("Checks that function properly doesn't returns a toast with wrong arguments", () => {
+      expect(getToastByDay(25, MockedToastArray, months, "2024", "April")).toBe(
+        undefined
+      );
+    });
+
+    test("Checks that function properly returns null if toasts array is undefined", () => {
+      expect(getToastByDay(25, undefined, months, "2024", "April")).toBe(null);
+    });
+  });
 
   describe("> checkDate function test suite", () => {
     test("Checks that checkDate function returns 2024-04 with 2024 and April as arguments", () => {
