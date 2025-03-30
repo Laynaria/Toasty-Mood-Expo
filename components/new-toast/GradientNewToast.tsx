@@ -1,9 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
-import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { StyleSheet } from "react-native";
 
-export default function GradientBackground() {
+export default function GradientNewToast() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   return (
@@ -11,8 +11,8 @@ export default function GradientBackground() {
       colors={[
         colorScheme() === "light"
           ? selectedTheme.primary
-          : selectedTheme.secondary,
-        colorScheme() === "light" ? "#FFFFFF" : selectedTheme.darkBackground,
+          : selectedTheme.darkBackground,
+        colorScheme() === "light" ? "#FFFFFF" : selectedTheme.secondary,
       ]}
       style={styles.gradient}
     />
