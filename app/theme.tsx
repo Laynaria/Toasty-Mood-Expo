@@ -4,15 +4,23 @@ import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import { themeNamesArray } from "../services/themeServices";
 import toastsMoods from "../services/toasts";
 import ToastThemeChoice from "../components/theme-page/ToastThemeChoice";
-import GradientBackground from "../components/GradientBackground";
+import GradientNewToast from "../components/new-toast/GradientNewToast";
 
 export default function Theme() {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   return (
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <GradientBackground />
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor:
+              colorScheme() === "light" ? "#FFFFFF" : selectedTheme.secondary,
+          },
+        ]}
+      >
+        <GradientNewToast />
         <Text
           style={{
             fontSize: 18,
