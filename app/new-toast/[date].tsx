@@ -16,7 +16,7 @@ import { months, daySuffix, isOrWas } from "../../services/time";
 import weatherIcons from "../../services/weather";
 import toastsMoods from "../../services/toasts";
 import temperatureIcons from "../../services/temperature";
-import GradientNewToast from "../../components/new-toast/GradientNewToast";
+import GradientBackground from "../../components/GradientBackground";
 import TextNewToast from "../../components/new-toast/TextNewToast";
 import PhotoChoice from "../../components/new-toast/PhotoChoice";
 import ToastOptionChoice from "../../components/new-toast/ToastOptionChoice";
@@ -62,7 +62,7 @@ export default function NewToast() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <GradientNewToast />
+        <GradientBackground />
       </View>
     );
   }
@@ -70,7 +70,7 @@ export default function NewToast() {
   return (
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <GradientNewToast />
+        <GradientBackground />
 
         <View style={styles.subContainer}>
           <TextNewToast
