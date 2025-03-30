@@ -8,13 +8,14 @@ import { Toast } from "../../types/toasts.types";
 import toastsMoods from "../../services/toasts";
 import CalendarCard from "./CalendarCard";
 import MonthCard from "../MonthCard";
+import { CalendarDayType } from "@/types/time.types";
 
 const toastEmpty: ImageSourcePropType = require("../../assets/icons/toast-empty.png");
 
 type Props = {
   selectedMonth: string;
   selectedYear: string;
-  toasts: Toast[];
+  toasts: Toast[] | undefined;
   weekDays: () => string[];
   index: number;
   currentOffset: number;
@@ -45,7 +46,7 @@ export default function Calendar({
 
   const lastDayFlexgrow: number = 6 - daysName.indexOf(lastDay);
 
-  const imgSource = (day): ImageSourcePropType => {
+  const imgSource = (day: CalendarDayType): ImageSourcePropType => {
     if (!day.toast) {
       return toastEmpty;
     }
@@ -61,7 +62,7 @@ export default function Calendar({
     ][day.toast.selectedToast - 1].img;
   };
 
-  const biteySource = (day): ImageSourcePropType | false => {
+  const biteySource = (day: CalendarDayType): ImageSourcePropType | boolean => {
     if (!day.toast) {
       return false;
     }
@@ -94,8 +95,10 @@ export default function Calendar({
         )}
 
         {days
-          .filter((day) => day <= daysInMonth(selectedYear, selectedMonth))
-          .map((day) => ({
+          .filter(
+            (day: number) => day <= daysInMonth(selectedYear, selectedMonth)
+          )
+          .map((day: number) => ({
             day,
             toast: getToastByDay(
               day,
@@ -105,7 +108,7 @@ export default function Calendar({
               selectedMonth
             ),
           }))
-          .map((day) => (
+          .map((day: CalendarDayType) => (
             <CalendarCard
               day={day}
               date={

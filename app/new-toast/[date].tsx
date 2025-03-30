@@ -41,7 +41,7 @@ export default function NewToast() {
   const [weather, setWeather] = useState<number>(1);
   const [temperature, setTemperature] = useState<number>(2);
   const [note, setNote] = useState<string>("");
-  const [photo, setPhoto] = useState<string>(null);
+  const [photo, setPhoto] = useState<string>("");
 
   const date: Date = new Date(useGlobalSearchParams().date as string);
 

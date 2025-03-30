@@ -10,28 +10,30 @@ export const handleCalendarToastRedirect = (
 ): void => {
   if (date.getTime() <= new Date().getTime()) {
     router.push({
-      pathname: `/new-toast/${date}`,
-      params: { index, previousOffset: Offset },
+      pathname: "/new-toast/[date]",
+      params: { date: date.toString(), index, previousOffset: Offset },
     });
   }
 };
 
 export const getToastByDay = (
   day: number,
-  toasts: Toast[],
+  toasts: Toast[] | undefined,
   months: string[],
   year: string,
   month: string
-): Toast => {
+): Toast | null => {
   if (toasts) {
     return toasts.filter(
       (toast) =>
         new Date(toast.date).toLocaleDateString() ===
         new Date(
-          `${year}-${months.indexOf(month) + 1}-${day}T03:22:00`
+          `${year}-${months.indexOf(month) + 1}-${day}`
         ).toLocaleDateString()
     )[0];
   }
+
+  return null;
 };
 
 export const checkDate = (year: string, month: string): string => {

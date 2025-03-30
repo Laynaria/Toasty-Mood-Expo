@@ -17,7 +17,7 @@ import { loadToasts } from "../../services/loadToasts";
 export default function Timeline() {
   const { selectedTheme } = useContext(ThemeColorContext);
   const { selectedThemeToast, selectOverride } = useContext(ThemeToastContext);
-  const [toasts, setToasts] = useState<Toast[]>(null);
+  const [toasts, setToasts] = useState<Toast[] | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<string>(
     months[new Date().getMonth()]
   );

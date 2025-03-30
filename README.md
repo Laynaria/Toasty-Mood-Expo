@@ -26,10 +26,11 @@ graph TD;
 `#React Native`
 `#TSX`
 `#Typescript`
+`#Jest`
 
 ### Setup
 
-- Install this project : `npm run install`
+- Install this project : `npm install`
 
 - Launch it with start script : `npm run start`
 

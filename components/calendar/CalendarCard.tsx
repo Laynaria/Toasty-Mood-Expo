@@ -3,16 +3,19 @@ import { ImageSourcePropType, Pressable, StyleSheet, Text } from "react-native";
 import { Image } from "expo-image";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { handleCalendarToastRedirect } from "../../services/calendarServices";
+import { daySuffix, months } from "@/services/time";
+import { CalendarDayType } from "@/types/time.types";
+import { moodAccessibility } from "@/services/accessibility";
 
 const biteyOption: ImageSourcePropType = require("../../assets/icons/bitey-calendar.png");
 
 type Props = {
-  day: any;
+  day: CalendarDayType;
   date: Date;
   index: number;
   currentOffset: number;
   imgSource: ImageSourcePropType;
-  biteySource: ImageSourcePropType | false;
+  biteySource: ImageSourcePropType | boolean;
 };
 
 export default function CalendarCard({
@@ -40,6 +43,13 @@ export default function CalendarCard({
           },
         ]}
         recyclingKey={date.toString()}
+        accessibilityLabel={`${months[date.getMonth()]} ${date.getDate()}${
+          date.getDate() > 3 ? "th" : daySuffix[date.getDate() - 1]
+        } ${date.getFullYear()} ${
+          day.toast
+            ? moodAccessibility[day.toast.selectedToast]
+            : "no mood selected"
+        } mood icon`}
       />
 
       {biteySource ? (
@@ -54,6 +64,7 @@ export default function CalendarCard({
                   : selectedTheme.darkBackground,
             },
           ]}
+          accessibilityLabel="Bitey option active icon"
         />
       ) : null}
 
