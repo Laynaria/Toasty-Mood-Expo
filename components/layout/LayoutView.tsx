@@ -11,10 +11,6 @@ export default function LayoutView() {
 
   const bgColor = (): string => {
     if (colorScheme() !== "light") {
-      if (path.startsWith("/new-toast")) {
-        return selectedTheme.secondary;
-      }
-
       return selectedTheme.darkBackground;
     }
 
@@ -31,7 +27,7 @@ export default function LayoutView() {
     >
       <BackArrow />
       <Slot />
-      <StatusBar style="inverted" />
+      <StatusBar style={colorScheme() === "dark" ? "light" : "dark"} />
     </View>
   );
 }
