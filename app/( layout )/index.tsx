@@ -4,11 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
 import { checkDate, dataCalendar } from "../../services/calendarServices";
+import { scrollBack } from "@/services/scrollBackService";
 import { loadToasts } from "../../services/loadToasts";
 import { weekDays } from "../../services/time";
 import { Toast } from "../../types/toasts.types";
 import { DataCalendar, FirstDayOfTheWeek } from "../../types/time.types";
 import Calendar from "../../components/calendar/Calendar";
+import ScrollBackButton from "@/components/ScrollBackButton";
 
 export default function Index() {
   const [toasts, setToasts] = useState<Toast[] | null>(null);
@@ -70,6 +72,7 @@ export default function Index() {
               setCurrentOffset(e.nativeEvent.contentOffset.y);
             }}
           />
+          <ScrollBackButton scrollBack={() => scrollBack(ref)} />
         </View>
       </SafeAreaView>
     </View>
