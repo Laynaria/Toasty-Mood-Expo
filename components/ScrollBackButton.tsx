@@ -15,13 +15,17 @@ type Props = {
 };
 
 export default function ScrollBackButton({ scrollBack, rotate }: Props) {
-  const { selectedTheme } = useContext(ThemeColorContext);
+  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   return (
     <Pressable
       style={[
         styles.button,
         {
           backgroundColor: selectedTheme.primary,
+          borderColor:
+            colorScheme() === "light"
+              ? "#FFFFFF"
+              : selectedTheme.darkBackground,
         },
       ]}
       onPress={scrollBack}
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 30,
     borderColor: "white",
+    borderWidth: 1,
   },
   image: {
     height: 20,
