@@ -72,7 +72,10 @@ export default function Index() {
               setCurrentOffset(e.nativeEvent.contentOffset.y);
             }}
           />
-          <ScrollBackButton scrollBack={() => scrollBack(ref)} />
+          <ScrollBackButton
+            scrollBack={() => scrollBack(ref)}
+            rotate="-90deg"
+          />
         </View>
       </SafeAreaView>
     </View>

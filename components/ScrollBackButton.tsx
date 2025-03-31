@@ -1,25 +1,40 @@
-import { Image, Pressable, StyleSheet } from "react-native";
+import { ThemeColorContext } from "@/contexts/ThemeColorContext";
+import { useContext } from "react";
+import {
+  AnimatableStringValue,
+  Image,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 
 const backPicture = require("@/assets/icons/back.png");
 
 type Props = {
   scrollBack: () => void;
+  rotate: AnimatableStringValue;
 };
 
-export default function ScrollBackButton({ scrollBack }: Props) {
+export default function ScrollBackButton({ scrollBack, rotate }: Props) {
+  const { selectedTheme } = useContext(ThemeColorContext);
   return (
     <Pressable
       style={[
         styles.button,
         {
-          backgroundColor: "orange",
+          backgroundColor: selectedTheme.primary,
         },
       ]}
       onPress={scrollBack}
     >
       <Image
         source={backPicture}
-        style={[styles.image, { transform: [{ rotate: "-90deg" }] }]}
+        style={[
+          styles.image,
+          {
+            transform: [{ rotate }],
+            tintColor: selectedTheme.secondary,
+          },
+        ]}
       />
     </Pressable>
   );
