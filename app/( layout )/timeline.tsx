@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { createRef, useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
@@ -13,6 +13,8 @@ import MonthCard from "../../components/MonthCard";
 import TimelineCard from "../../components/timeline/TimelineCard";
 import SelectMonthModal from "../../components/timeline/SelectMonthModal";
 import { loadToasts } from "../../services/loadToasts";
+import { scrollToTop } from "@/services/scrollBackService";
+import ScrollBackButton from "@/components/ScrollBackButton";
 
 export default function Timeline() {
   const { selectedTheme } = useContext(ThemeColorContext);
@@ -25,6 +27,7 @@ export default function Timeline() {
     new Date().getFullYear()
   );
   const [isSelectingMonth, setIsSelectingMonth] = useState<Boolean>(false);
+  const ref = createRef<ScrollView>();
 
   useEffect(() => {
     loadToasts(setToasts);
@@ -33,7 +36,11 @@ export default function Timeline() {
   return (
     <>
       <View style={styles.scroll}>
-        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          style={styles.scroll}
+          showsVerticalScrollIndicator={false}
+          ref={ref}
+        >
           <View style={styles.container}>
             <MonthCard
               selectedMonth={selectedMonth}
@@ -68,6 +75,8 @@ export default function Timeline() {
               )}
           </View>
         </ScrollView>
+
+        <ScrollBackButton scrollBack={() => scrollToTop(ref)} rotate="90deg" />
 
         <LinearGradient
           colors={[
