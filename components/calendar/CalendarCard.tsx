@@ -7,15 +7,12 @@ import { daySuffix, months } from "@/services/time";
 import { CalendarDayType } from "@/types/time.types";
 import { moodAccessibility } from "@/services/accessibility";
 
-const biteyOption: ImageSourcePropType = require("../../assets/icons/bitey-calendar.png");
-
 type Props = {
   day: CalendarDayType;
   date: Date;
   index: number;
   currentOffset: number;
   imgSource: ImageSourcePropType;
-  biteySource: ImageSourcePropType | boolean;
 };
 
 export default function CalendarCard({
@@ -24,9 +21,8 @@ export default function CalendarCard({
   index,
   currentOffset,
   imgSource,
-  biteySource,
 }: Props) {
-  const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
+  const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
     <Pressable
@@ -51,22 +47,6 @@ export default function CalendarCard({
             : "no mood selected"
         } mood icon`}
       />
-
-      {biteySource ? (
-        <Image
-          source={biteyOption}
-          style={[
-            styles.bitey,
-            {
-              tintColor:
-                colorScheme() === "light"
-                  ? "#FFFFFF"
-                  : selectedTheme.darkBackground,
-            },
-          ]}
-          accessibilityLabel="Bitey option active icon"
-        />
-      ) : null}
 
       <Text style={{ color: selectedTheme.primary }}>{day.day}</Text>
     </Pressable>
