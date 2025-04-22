@@ -51,23 +51,27 @@ export default function Calendar({
       return toastEmpty;
     }
 
+    if (day.toast.isJamDay && day.toast.isBitey) {
+      return toastsMoods[
+        selectOverride ? selectedThemeToast : day.toast.moodArray
+      ][day.toast.selectedToast - 1].biteyJamImg;
+    }
+
     if (day.toast.isJamDay) {
       return toastsMoods[
         selectOverride ? selectedThemeToast : day.toast.moodArray
       ][day.toast.selectedToast - 1].jamImg;
     }
 
+    if (day.toast.isBitey) {
+      return toastsMoods[
+        selectOverride ? selectedThemeToast : day.toast.moodArray
+      ][day.toast.selectedToast - 1].biteyImg;
+    }
+
     return toastsMoods[
       selectOverride ? selectedThemeToast : day.toast.moodArray
     ][day.toast.selectedToast - 1].img;
-  };
-
-  const biteySource = (day: CalendarDayType): ImageSourcePropType | boolean => {
-    if (!day.toast) {
-      return false;
-    }
-
-    return day.toast.isBitey;
   };
 
   return (
@@ -122,7 +126,6 @@ export default function Calendar({
               currentOffset={currentOffset}
               key={day.day}
               imgSource={imgSource(day)}
-              biteySource={biteySource(day)}
             />
           ))}
 

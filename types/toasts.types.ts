@@ -4,6 +4,8 @@ export type ToastsMoodsPictureObject = {
   id: number;
   img: ImageSourcePropType;
   jamImg: ImageSourcePropType;
+  biteyImg: ImageSourcePropType;
+  biteyJamImg: ImageSourcePropType;
 };
 
 export type Toast = {
