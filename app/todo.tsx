@@ -1,5 +1,6 @@
 import GradientBackground from "@/components/GradientBackground";
 import ToDoCard from "@/components/todo/ToDoCard";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 const bedIcon = require("@/assets/todo-icons/bed.png");
@@ -7,7 +8,7 @@ const sandwichIcon = require("@/assets/todo-icons/sandwich.png");
 const alarmIcon = require("@/assets/todo-icons/alarm.png");
 
 export default function ToDo() {
-  const fakeDatas = [
+  const [fakeDatas, setFakeDatas] = useState([
     {
       id: 0,
       taskName: "Sleep",
@@ -45,14 +46,19 @@ export default function ToDo() {
         },
       ],
     },
-  ];
+  ]);
 
   return (
     <View style={styles.container}>
       <GradientBackground />
       <View style={styles.subContainer}>
         {fakeDatas.map((task) => (
-          <ToDoCard task={task} key={task.id} />
+          <ToDoCard
+            task={task}
+            key={task.id}
+            fakeDatas={fakeDatas}
+            setFakeDatas={setFakeDatas}
+          />
         ))}
       </View>
     </View>

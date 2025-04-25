@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { Image } from "expo-image";
@@ -7,15 +7,23 @@ import SubTaskToDoCard from "./SubTaskToDoCard";
 const checkedImg = require("@/assets/icons/checked.png");
 const uncheckedImg = require("@/assets/icons/unchecked.png");
 
-export default function ToDoCard({ task }) {
+export default function ToDoCard({ task, fakeDatas, setFakeDatas }) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
-  const [isChecked, setIsChecked] = useState(task.isDone);
+  const taskIndex = fakeDatas.indexOf(task);
+
+  const updateTaskStatus = () => {
+    const newDatas = fakeDatas.map((currentTask, index) =>
+      taskIndex === index ? { ...task, isDone: !task.isDone } : currentTask
+    );
+
+    setFakeDatas(newDatas);
+  };
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => setIsChecked(!isChecked)}>
+      <Pressable onPress={() => updateTaskStatus()}>
         <Image
-          source={isChecked ? checkedImg : uncheckedImg}
+          source={task.isDone ? checkedImg : uncheckedImg}
           style={[
             styles.checkbox,
             {
