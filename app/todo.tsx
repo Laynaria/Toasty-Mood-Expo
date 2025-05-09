@@ -1,14 +1,15 @@
-import GradientBackground from "@/components/GradientBackground";
-import ToDoCard from "@/components/todo/ToDoCard";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import GradientBackground from "@/components/GradientBackground";
+import ToDoCard from "@/components/todo/ToDoCard";
+import { toDoTaskType } from "@/types/todo.types";
 
 const bedIcon = require("@/assets/todo-icons/bed.png");
 const sandwichIcon = require("@/assets/todo-icons/sandwich.png");
 const alarmIcon = require("@/assets/todo-icons/alarm.png");
 
 export default function ToDo() {
-  const [fakeDatas, setFakeDatas] = useState([
+  const [fakeDatas, setFakeDatas] = useState<toDoTaskType[]>([
     {
       id: 0,
       taskName: "Sleep",
@@ -33,14 +34,17 @@ export default function ToDo() {
       isDone: false,
       subTasks: [
         {
+          index: 0,
           name: "Cook",
           isDone: true,
         },
         {
+          index: 1,
           name: "Prepare Table",
           isDone: false,
         },
         {
+          index: 2,
           name: "Sit Down",
           isDone: false,
         },

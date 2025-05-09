@@ -1,20 +1,28 @@
-import { ThemeColorContext } from "@/contexts/ThemeColorContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { ThemeColorContext } from "@/contexts/ThemeColorContext";
+import { subTaskType } from "@/types/todo.types";
 
 const checkedImg = require("@/assets/icons/checked.png");
 const uncheckedImg = require("@/assets/icons/unchecked.png");
 
-export default function SubTaskToDoCard({ subTask }) {
+type Props = {
+  subTask: subTaskType;
+  updateSubTaskStatus: () => void;
+};
+
+export default function SubTaskToDoCard({
+  subTask,
+  updateSubTaskStatus,
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
-  const [isChecked, setIsChecked] = useState(subTask.isDone);
 
   return (
-    <Pressable onPress={() => setIsChecked(!isChecked)}>
+    <Pressable onPress={() => updateSubTaskStatus()}>
       <View style={styles.subTaskContainer}>
         <Text style={{ color: selectedTheme.secondary }}>-</Text>
         <Image
-          source={isChecked ? checkedImg : uncheckedImg}
+          source={subTask.isDone ? checkedImg : uncheckedImg}
           style={[
             styles.checkbox,
             {
