@@ -108,6 +108,8 @@ export default function ToDoCard({ task, fakeDatas, setFakeDatas }: Props) {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
+    marginHorizontal: "auto",
+    marginBottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
   },
