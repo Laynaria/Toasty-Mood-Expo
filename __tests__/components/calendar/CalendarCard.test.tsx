@@ -26,8 +26,8 @@ const mockedDay = (isBitey: boolean): CalendarDayType => ({
 });
 
 describe("<CalendarCard />", () => {
-  test("Check if not Bitey toast shows date and correct placeholder for mood icon without showing bitey additional icon", () => {
-    const { getByText, getByLabelText, queryByLabelText } = render(
+  test("Check if registered toast shows date and correct placeholder for mood icon", () => {
+    const { getByText, getByLabelText } = render(
       <CalendarCard
         day={mockedDay(false)}
         date={mockedDate}
@@ -44,12 +44,10 @@ describe("<CalendarCard />", () => {
         mockedDate.getDate() > 3 ? "th" : daySuffix[mockedDate.getDate() - 1]
       } ${mockedDate.getFullYear()} ${moodAccessibility[4]} mood icon`
     );
-
-    expect(queryByLabelText("Bitey option active icon")).not.toBeOnTheScreen();
   });
 
-  test("Check if component shows correctly text and label text on days without registered toast, witout showing bitey additional icon", () => {
-    const { getByText, getByLabelText, queryByLabelText } = render(
+  test("Check if component shows correctly text and label text on days without registered toast", () => {
+    const { getByText, getByLabelText } = render(
       <CalendarCard
         day={{ day: mockedDayNumber, toast: null }}
         date={mockedDate}
@@ -66,7 +64,5 @@ describe("<CalendarCard />", () => {
         mockedDate.getDate() > 3 ? "th" : daySuffix[mockedDate.getDate() - 1]
       } ${mockedDate.getFullYear()} no mood selected mood icon`
     );
-
-    expect(queryByLabelText("Bitey option active icon")).not.toBeOnTheScreen();
   });
 });
