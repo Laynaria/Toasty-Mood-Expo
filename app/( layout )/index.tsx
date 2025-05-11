@@ -71,6 +71,10 @@ export default function Index() {
             onScroll={(e) => {
               setCurrentOffset(e.nativeEvent.contentOffset.y);
             }}
+            snapToInterval={707}
+            decelerationRate="fast"
+            scrollEventThrottle={16}
+            disableIntervalMomentum
           />
           <ScrollBackButton
             scrollBack={() => scrollBack(ref)}
