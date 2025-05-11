@@ -34,7 +34,6 @@ describe("<CalendarCard />", () => {
         index={27}
         currentOffset={512}
         imgSource={mockedPhoto}
-        biteySource={false}
       />
     );
 
@@ -49,29 +48,6 @@ describe("<CalendarCard />", () => {
     expect(queryByLabelText("Bitey option active icon")).not.toBeOnTheScreen();
   });
 
-  test("Check if Bitey toast shows date and correct placeholder for mood icon while showing bitey additional icon", () => {
-    const { getByText, getByLabelText } = render(
-      <CalendarCard
-        day={mockedDay(true)}
-        date={mockedDate}
-        index={27}
-        currentOffset={512}
-        imgSource={mockedPhoto}
-        biteySource={true}
-      />
-    );
-
-    getByText(mockedDayNumber.toString());
-
-    getByLabelText(
-      `${months[mockedDate.getMonth()]} ${mockedDate.getDate()}${
-        mockedDate.getDate() > 3 ? "th" : daySuffix[mockedDate.getDate() - 1]
-      } ${mockedDate.getFullYear()} ${moodAccessibility[4]} mood icon`
-    );
-
-    getByLabelText("Bitey option active icon");
-  });
-
   test("Check if component shows correctly text and label text on days without registered toast, witout showing bitey additional icon", () => {
     const { getByText, getByLabelText, queryByLabelText } = render(
       <CalendarCard
@@ -80,7 +56,6 @@ describe("<CalendarCard />", () => {
         index={27}
         currentOffset={512}
         imgSource={mockedPhoto}
-        biteySource={false}
       />
     );
 
