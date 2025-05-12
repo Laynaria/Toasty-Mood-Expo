@@ -79,12 +79,17 @@ export default function ToDo() {
             data={fakeDatas}
             renderItem={renderItem}
             estimatedItemSize={50}
+            contentContainerStyle={{ paddingTop: 100 }}
           />
         </View>
       </SafeAreaView>
       <AddOrEditToDo setIsPressed={setIsPressed} />
       {isPressed ? (
-        <AddOrEditTodoModal isPressed={isPressed} setIsPressed={setIsPressed} />
+        <AddOrEditTodoModal
+          setIsPressed={setIsPressed}
+          fakeDatas={fakeDatas}
+          setFakeDatas={setFakeDatas}
+        />
       ) : null}
     </View>
   );
@@ -98,6 +103,5 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    marginTop: 100,
   },
 });
