@@ -1,18 +1,15 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { AddToDoButton } from "./AddToDoButton";
 import { Dispatch } from "react";
 
 type Props = {
-  isPressed: boolean;
   setIsPressed: Dispatch<boolean>;
 };
 
-export default function AddOrEditToDo({ isPressed, setIsPressed }: Props) {
+export default function AddOrEditToDo({ setIsPressed }: Props) {
   return (
     <View style={styles.container}>
       <AddToDoButton setIsPressed={setIsPressed} />
-
-      {isPressed ? <Text>PRESSED</Text> : null}
     </View>
   );
 }

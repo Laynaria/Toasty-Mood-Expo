@@ -5,6 +5,7 @@ import ToDoCard from "@/components/todo/ToDoCard";
 import { toDoTaskType } from "@/types/todo.types";
 import { FlashList } from "@shopify/flash-list";
 import AddOrEditToDo from "@/components/todo/AddOrEditToDo";
+import AddOrEditTodoModal from "@/components/todo/AddOrEditToDoModal";
 
 const bedIcon = require("@/assets/todo-icons/bed.png");
 const sandwichIcon = require("@/assets/todo-icons/sandwich.png");
@@ -81,7 +82,10 @@ export default function ToDo() {
           />
         </View>
       </SafeAreaView>
-      <AddOrEditToDo isPressed={isPressed} setIsPressed={setIsPressed} />
+      <AddOrEditToDo setIsPressed={setIsPressed} />
+      {isPressed ? (
+        <AddOrEditTodoModal isPressed={isPressed} setIsPressed={setIsPressed} />
+      ) : null}
     </View>
   );
 }
