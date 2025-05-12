@@ -4,6 +4,7 @@ import GradientBackground from "@/components/GradientBackground";
 import ToDoCard from "@/components/todo/ToDoCard";
 import { toDoTaskType } from "@/types/todo.types";
 import { FlashList } from "@shopify/flash-list";
+import AddOrEditToDo from "@/components/todo/AddOrEditToDo";
 
 const bedIcon = require("@/assets/todo-icons/bed.png");
 const sandwichIcon = require("@/assets/todo-icons/sandwich.png");
@@ -78,6 +79,7 @@ export default function ToDo() {
           />
         </View>
       </SafeAreaView>
+      <AddOrEditToDo />
     </View>
   );
 }
