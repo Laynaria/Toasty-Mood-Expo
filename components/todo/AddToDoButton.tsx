@@ -1,10 +1,14 @@
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
 
 const pencilIcon = require("@/assets/todo-icons/pencil.png");
 
-export function AddToDoButton() {
+type Props = {
+  setIsPressed: Dispatch<boolean>;
+};
+
+export function AddToDoButton({ setIsPressed }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
 
   return (
@@ -19,6 +23,7 @@ export function AddToDoButton() {
               : selectedTheme.darkBackground,
         },
       ]}
+      onPress={() => setIsPressed(true)}
     >
       <Image
         source={pencilIcon}

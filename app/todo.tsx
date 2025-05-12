@@ -54,6 +54,8 @@ export default function ToDo() {
     },
   ]);
 
+  const [isPressed, setIsPressed] = useState<boolean>(false);
+
   const renderItem = useCallback(
     ({ item, index }: { item: toDoTaskType; index: number }) => (
       <ToDoCard
@@ -79,7 +81,7 @@ export default function ToDo() {
           />
         </View>
       </SafeAreaView>
-      <AddOrEditToDo />
+      <AddOrEditToDo isPressed={isPressed} setIsPressed={setIsPressed} />
     </View>
   );
 }
