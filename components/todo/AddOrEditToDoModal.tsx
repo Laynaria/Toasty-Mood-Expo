@@ -2,7 +2,7 @@ import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { toDoTaskType } from "@/types/todo.types";
 import { Image } from "expo-image";
 import { Dispatch, useContext, useState } from "react";
-import { Pressable, StyleSheet, TextInput } from "react-native";
+import { Keyboard, Pressable, StyleSheet, TextInput } from "react-native";
 
 const bedIcon = require("@/assets/todo-icons/bed.png");
 const pencilIcon = require("@/assets/todo-icons/pencil2.png");
@@ -68,13 +68,18 @@ export default function AddOrEditTodoModal({
     setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
   };
 
+  const closeToDoModal = () => {
+    Keyboard.isVisible() ? Keyboard.dismiss() : setIsPressed(false);
+  };
+
   return (
-    <Pressable style={styles.container} onPress={() => setIsPressed(false)}>
+    <Pressable style={styles.container} onPress={closeToDoModal}>
       <Pressable
         style={[
           styles.subContainer,
           { backgroundColor: selectedTheme.primary },
         ]}
+        onPress={Keyboard.dismiss}
       >
         <TextInput
           placeholder="What do you want to do?"
@@ -110,7 +115,7 @@ export default function AddOrEditTodoModal({
 
         {currentToDo.subTasks.map((subTask) => (
           <TextInput
-            placeholder="What do you want to do?"
+            placeholder="Add a sub-task."
             placeholderTextColor={selectedTheme.secondary}
             style={[
               styles.taskNameInput,
