@@ -152,9 +152,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     flexDirection: "row",
     flexWrap: "wrap",
-    // justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
-    gap: 12,
+    rowGap: 12,
   },
   taskNameInput: {
     borderRadius: 12,
@@ -167,9 +167,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 4,
   },
   registerIcon: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
   },
 });
