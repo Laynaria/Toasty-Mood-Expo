@@ -34,7 +34,18 @@ export default function AddOrEditTodoModal({
     date,
     icon: bedIcon,
     isDone: false,
-    subTasks: [],
+    subTasks: [
+      {
+        index: 0,
+        name: "Cook",
+        isDone: false,
+      },
+      {
+        index: 1,
+        name: "Prepare Table",
+        isDone: false,
+      },
+    ],
   });
 
   const updateToDoList = () => {
@@ -42,6 +53,19 @@ export default function AddOrEditTodoModal({
       setFakeDatas([...fakeDatas, currentToDo]);
       setIsPressed(false);
     }
+  };
+
+  const changeTaskName = (text: string) => {
+    setCurrentToDo({ ...currentToDo, taskName: text });
+  };
+
+  const changeSubTaskName = (text: string, index: number) => {
+    const updatedSubTask = { ...currentToDo.subTasks[index], name: text };
+    const updatedSubTasks = currentToDo.subTasks.map((currentSubTask) =>
+      currentSubTask.index === index ? updatedSubTask : currentSubTask
+    );
+
+    setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
   };
 
   return (
@@ -63,9 +87,7 @@ export default function AddOrEditTodoModal({
             },
           ]}
           value={currentToDo.taskName}
-          onChangeText={(text: string) =>
-            setCurrentToDo({ ...currentToDo, taskName: text })
-          }
+          onChangeText={changeTaskName}
         />
 
         <Pressable
@@ -85,6 +107,23 @@ export default function AddOrEditTodoModal({
             ]}
           />
         </Pressable>
+
+        {currentToDo.subTasks.map((subTask) => (
+          <TextInput
+            placeholder="What do you want to do?"
+            placeholderTextColor={selectedTheme.secondary}
+            style={[
+              styles.taskNameInput,
+              {
+                color: selectedTheme.secondary,
+                borderColor: selectedTheme.secondary,
+              },
+            ]}
+            value={currentToDo.subTasks[subTask.index].name}
+            onChangeText={(text) => changeSubTaskName(text, subTask.index)}
+            key={subTask.index}
+          />
+        ))}
       </Pressable>
     </Pressable>
   );
@@ -108,7 +147,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     alignItems: "center",
     gap: 12,
   },
