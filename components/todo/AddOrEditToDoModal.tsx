@@ -48,9 +48,7 @@ export default function AddOrEditTodoModal({
   });
 
   const updateToDoList = () => {
-    console.log(currentToDo);
     if (currentToDo.taskName !== "") {
-      // console.log([...fakeDatas, currentToDo]);
       setFakeDatas([...fakeDatas, currentToDo]);
       setIsPressed(false);
     }
