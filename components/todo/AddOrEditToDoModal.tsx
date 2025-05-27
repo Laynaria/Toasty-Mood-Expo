@@ -1,9 +1,10 @@
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { toDoTaskType } from "@/types/todo.types";
 import { Dispatch, useContext, useState } from "react";
-import { Keyboard, Pressable, StyleSheet, TextInput } from "react-native";
+import { Keyboard, Pressable, StyleSheet } from "react-native";
 import ChoiceTaskName from "./ChoiceTaskName";
 import AddOrEditValidateButton from "./AddOrEditValideButton";
+import ChoiceCategory from "./ChoiceCategory";
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -87,6 +88,8 @@ export default function AddOrEditTodoModal({
 
         <AddOrEditValidateButton handleValidate={updateToDoList} />
 
+        <ChoiceCategory />
+
         {currentToDo.subTasks.map((subTask) => (
           // change map into flashlist later if not everything
 
@@ -94,6 +97,7 @@ export default function AddOrEditTodoModal({
             placeholder="Add a sub-task."
             taskName={currentToDo.subTasks[subTask.index].name}
             changeTaskName={(text) => changeSubTaskName(text, subTask.index)}
+            isSubTask={true}
             key={subTask.index}
           />
         ))}
