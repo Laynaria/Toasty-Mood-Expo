@@ -1,6 +1,6 @@
-import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { useContext } from "react";
 import { StyleSheet, TextInput } from "react-native";
+import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 
 type Props = {
   taskName: string;

@@ -1,11 +1,9 @@
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { toDoTaskType } from "@/types/todo.types";
-import { Image } from "expo-image";
 import { Dispatch, useContext, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, TextInput } from "react-native";
 import ChoiceTaskName from "./ChoiceTaskName";
-
-const pencilIcon = require("@/assets/todo-icons/pencil2.png");
+import AddOrEditValidateButton from "./AddOrEditValideButton";
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -86,23 +84,7 @@ export default function AddOrEditTodoModal({
           changeTaskName={changeTaskName}
         />
 
-        <Pressable
-          style={[
-            styles.registerButton,
-            {
-              borderColor: selectedTheme.secondary,
-            },
-          ]}
-          onPress={() => updateToDoList()}
-        >
-          <Image
-            source={pencilIcon}
-            style={[
-              styles.registerIcon,
-              { tintColor: selectedTheme.secondary },
-            ]}
-          />
-        </Pressable>
+        <AddOrEditValidateButton handleValidate={updateToDoList} />
 
         {currentToDo.subTasks.map((subTask) => (
           // change map into flashlist later if not everything
@@ -153,16 +135,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 8,
     width: "85%",
-  },
-  registerButton: {
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 4,
-  },
-  registerIcon: {
-    height: 30,
-    width: 30,
   },
 });
