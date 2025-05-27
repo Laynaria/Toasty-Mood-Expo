@@ -1,7 +1,13 @@
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { toDoTaskType } from "@/types/todo.types";
 import { Dispatch, useContext, useState } from "react";
-import { Keyboard, Pressable, StyleSheet } from "react-native";
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import ChoiceTaskName from "./ChoiceTaskName";
 import AddOrEditValidateButton from "./AddOrEditValideButton";
 import ChoiceCategory from "./ChoiceCategory";
@@ -98,36 +104,49 @@ export default function AddOrEditTodoModal({
         ]}
         onPress={Keyboard.dismiss}
       >
-        <ChoiceTaskName
-          placeholder="What do you want to do?"
-          taskName={currentToDo.taskName}
-          changeTaskName={changeTaskName}
-        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: 8,
+          }}
+        >
+          <View style={styles.subTaskContainer}>
+            <ChoiceTaskName
+              placeholder="What do you want to do?"
+              taskName={currentToDo.taskName}
+              changeTaskName={changeTaskName}
+            />
 
-        <AddOrEditValidateButton handleValidate={updateToDoList} />
+            <AddOrEditValidateButton handleValidate={updateToDoList} />
 
-        <ChoiceCategory />
+            <ChoiceCategory />
 
-        {currentToDo.subTasks.map((subTask) => (
-          // change map into flashlist later if not everything
+            {currentToDo.subTasks.map((subTask) => (
+              // change map into flashlist later if not everything
 
-          <ChoiceTaskName
-            placeholder="Add a sub-task."
-            taskName={currentToDo.subTasks[subTask.index].name}
-            changeTaskName={(text) => changeSubTaskName(text, subTask.index)}
-            isSubTask={true}
-            key={subTask.index}
-            onSubmitEditing={() => removeEmptySubTask(subTask.index)}
-          />
-        ))}
+              <ChoiceTaskName
+                placeholder="What sub-task do you want to add?"
+                taskName={currentToDo.subTasks[subTask.index].name}
+                changeTaskName={(text) =>
+                  changeSubTaskName(text, subTask.index)
+                }
+                isSubTask={true}
+                key={subTask.index}
+                onSubmitEditing={() => removeEmptySubTask(subTask.index)}
+              />
+            ))}
 
-        <ChoiceTaskName
-          placeholder="Add a sub-task."
-          taskName={newSubTask}
-          changeTaskName={setNewSubTask}
-          isSubTask={true}
-          onSubmitEditing={addNewSubTask}
-        />
+            {currentToDo.subTasks.length < 15 ? (
+              <ChoiceTaskName
+                placeholder="Add a sub-task."
+                taskName={newSubTask}
+                changeTaskName={setNewSubTask}
+                isSubTask={true}
+                onSubmitEditing={addNewSubTask}
+              />
+            ) : null}
+          </View>
+        </ScrollView>
       </Pressable>
     </Pressable>
   );
@@ -149,6 +168,13 @@ const styles = StyleSheet.create({
     padding: 24,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
+    rowGap: 12,
+  },
+  subTaskContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
