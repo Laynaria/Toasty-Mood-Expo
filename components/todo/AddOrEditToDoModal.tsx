@@ -33,23 +33,18 @@ export default function AddOrEditTodoModal({
     date,
     category: 0,
     isDone: false,
-    subTasks: [
-      {
-        index: 0,
-        name: "Cook",
-        isDone: false,
-      },
-      {
-        index: 1,
-        name: "Prepare Table",
-        isDone: false,
-      },
-    ],
+    subTasks: [],
   });
+  const [newSubTask, setNewSubTask] = useState<string>("");
 
   const updateToDoList = () => {
     if (currentToDo.taskName !== "") {
-      setFakeDatas([...fakeDatas, currentToDo]);
+      const newToDo: toDoTaskType = {
+        ...currentToDo,
+        subTasks: currentToDo.subTasks.filter((subTask) => subTask.name !== ""),
+      };
+
+      setFakeDatas([...fakeDatas, newToDo]);
       setIsPressed(false);
     }
   };
@@ -65,6 +60,29 @@ export default function AddOrEditTodoModal({
     );
 
     setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
+  };
+
+  const addNewSubTask = () => {
+    const updatedSubTasks = currentToDo.subTasks;
+
+    updatedSubTasks.push({
+      index: currentToDo.subTasks.length,
+      name: newSubTask,
+      isDone: false,
+    });
+
+    setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
+    setNewSubTask("");
+  };
+
+  const removeEmptySubTask = (index: number) => {
+    if (currentToDo.subTasks[index].name === "") {
+      const updatedSubTasks = currentToDo.subTasks.filter(
+        (subTask) => subTask.index !== index
+      );
+
+      setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
+    }
   };
 
   const closeToDoModal = () => {
@@ -99,8 +117,17 @@ export default function AddOrEditTodoModal({
             changeTaskName={(text) => changeSubTaskName(text, subTask.index)}
             isSubTask={true}
             key={subTask.index}
+            onSubmitEditing={() => removeEmptySubTask(subTask.index)}
           />
         ))}
+
+        <ChoiceTaskName
+          placeholder="Add a sub-task."
+          taskName={newSubTask}
+          changeTaskName={setNewSubTask}
+          isSubTask={true}
+          onSubmitEditing={addNewSubTask}
+        />
       </Pressable>
     </Pressable>
   );

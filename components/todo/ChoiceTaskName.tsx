@@ -7,6 +7,7 @@ type Props = {
   taskName: string;
   changeTaskName: (text: string) => void;
   isSubTask?: boolean;
+  onSubmitEditing?: () => void;
 };
 
 export default function ChoiceTaskName({
@@ -14,6 +15,7 @@ export default function ChoiceTaskName({
   taskName,
   changeTaskName,
   isSubTask,
+  onSubmitEditing,
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
@@ -39,6 +41,7 @@ export default function ChoiceTaskName({
         ]}
         value={taskName}
         onChangeText={changeTaskName}
+        onSubmitEditing={onSubmitEditing}
       />
     </View>
   );
