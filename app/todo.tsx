@@ -6,18 +6,15 @@ import { toDoTaskType } from "@/types/todo.types";
 import { FlashList } from "@shopify/flash-list";
 import AddOrEditToDo from "@/components/todo/AddOrEditToDo";
 import AddOrEditTodoModal from "@/components/todo/AddOrEditToDoModal";
-
-const bedIcon = require("@/assets/todo-icons/bed.png");
-const sandwichIcon = require("@/assets/todo-icons/sandwich.png");
-const alarmIcon = require("@/assets/todo-icons/alarm.png");
+import toDoCategory from "@/services/toDoCategory";
 
 export default function ToDo() {
   const [fakeDatas, setFakeDatas] = useState<toDoTaskType[]>([
     {
       id: 0,
       taskName: "Sleep",
+      category: 0,
       date: "Apr. 25 23:01",
-      icon: bedIcon,
       isDone: true,
       subTasks: [],
     },
@@ -25,7 +22,7 @@ export default function ToDo() {
       id: 1,
       taskName: "Wake Up",
       date: "Apr. 26 8:20",
-      icon: alarmIcon,
+      category: 2,
       isDone: false,
       subTasks: [],
     },
@@ -33,7 +30,7 @@ export default function ToDo() {
       id: 2,
       taskName: "Mealtime",
       date: "Apr. 26 8:20",
-      icon: sandwichIcon,
+      category: 1,
       isDone: false,
       subTasks: [
         {
@@ -58,12 +55,13 @@ export default function ToDo() {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
   const renderItem = useCallback(
-    ({ item, index }: { item: toDoTaskType; index: number }) => (
+    ({ item }: { item: toDoTaskType }) => (
       <ToDoCard
         task={item}
-        key={index}
+        key={item.id}
         fakeDatas={fakeDatas}
         setFakeDatas={setFakeDatas}
+        icon={toDoCategory[item.category]?.icon}
       />
     ),
     [fakeDatas]

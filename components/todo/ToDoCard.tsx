@@ -1,5 +1,11 @@
 import { useContext } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Image } from "expo-image";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import SubTaskToDoCard from "./SubTaskToDoCard";
@@ -12,9 +18,15 @@ type Props = {
   task: toDoTaskType;
   fakeDatas: toDoTaskType[];
   setFakeDatas: (newdatas: toDoTaskType[]) => void;
+  icon: ImageSourcePropType;
 };
 
-export default function ToDoCard({ task, fakeDatas, setFakeDatas }: Props) {
+export default function ToDoCard({
+  task,
+  fakeDatas,
+  setFakeDatas,
+  icon,
+}: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const taskIndex = fakeDatas.indexOf(task);
 
@@ -64,7 +76,7 @@ export default function ToDoCard({ task, fakeDatas, setFakeDatas }: Props) {
         ]}
       >
         <View style={styles.mainTaskContainer}>
-          <Image source={task.icon} style={styles.icon} />
+          <Image source={icon} style={styles.icon} />
 
           <View style={styles.textContainer}>
             <Text

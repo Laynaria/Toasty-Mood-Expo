@@ -4,7 +4,6 @@ import { Image } from "expo-image";
 import { Dispatch, useContext, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, TextInput } from "react-native";
 
-const bedIcon = require("@/assets/todo-icons/bed.png");
 const pencilIcon = require("@/assets/todo-icons/pencil2.png");
 
 type Props = {
@@ -32,7 +31,7 @@ export default function AddOrEditTodoModal({
     id: fakeDatas.length,
     taskName: "",
     date,
-    icon: bedIcon,
+    category: 0,
     isDone: false,
     subTasks: [
       {
@@ -49,7 +48,9 @@ export default function AddOrEditTodoModal({
   });
 
   const updateToDoList = () => {
+    console.log(currentToDo);
     if (currentToDo.taskName !== "") {
+      // console.log([...fakeDatas, currentToDo]);
       setFakeDatas([...fakeDatas, currentToDo]);
       setIsPressed(false);
     }
@@ -114,6 +115,7 @@ export default function AddOrEditTodoModal({
         </Pressable>
 
         {currentToDo.subTasks.map((subTask) => (
+          // change map into flashlist later if not everything
           <TextInput
             placeholder="Add a sub-task."
             placeholderTextColor={selectedTheme.secondary}
