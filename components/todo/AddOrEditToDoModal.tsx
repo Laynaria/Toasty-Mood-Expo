@@ -3,6 +3,7 @@ import { toDoTaskType } from "@/types/todo.types";
 import { Image } from "expo-image";
 import { Dispatch, useContext, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, TextInput } from "react-native";
+import ChoiceTaskName from "./ChoiceTaskName";
 
 const pencilIcon = require("@/assets/todo-icons/pencil2.png");
 
@@ -54,7 +55,7 @@ export default function AddOrEditTodoModal({
     }
   };
 
-  const changeTaskName = (text: string) => {
+  const changeTaskName = (text: string): void => {
     setCurrentToDo({ ...currentToDo, taskName: text });
   };
 
@@ -80,18 +81,9 @@ export default function AddOrEditTodoModal({
         ]}
         onPress={Keyboard.dismiss}
       >
-        <TextInput
-          placeholder="What do you want to do?"
-          placeholderTextColor={selectedTheme.secondary}
-          style={[
-            styles.taskNameInput,
-            {
-              color: selectedTheme.secondary,
-              borderColor: selectedTheme.secondary,
-            },
-          ]}
-          value={currentToDo.taskName}
-          onChangeText={changeTaskName}
+        <ChoiceTaskName
+          taskName={currentToDo.taskName}
+          changeTaskName={changeTaskName}
         />
 
         <Pressable
