@@ -83,9 +83,9 @@ export default function AddOrEditTodoModal({
 
   const removeEmptySubTask = (index: number) => {
     if (currentToDo.subTasks[index].name === "") {
-      const updatedSubTasks = currentToDo.subTasks.filter(
-        (subTask) => subTask.index !== index
-      );
+      const updatedSubTasks = currentToDo.subTasks
+        .filter((subTask) => subTask.index !== index)
+        .map((subTask, index) => ({ ...subTask, index }));
 
       setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
     }
