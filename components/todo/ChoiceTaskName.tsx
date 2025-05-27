@@ -3,16 +3,21 @@ import { StyleSheet, TextInput } from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 
 type Props = {
+  placeholder: string;
   taskName: string;
   changeTaskName: (text: string) => void;
 };
 
-export default function ChoiceTaskName({ taskName, changeTaskName }: Props) {
+export default function ChoiceTaskName({
+  placeholder,
+  taskName,
+  changeTaskName,
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
     <TextInput
-      placeholder="What do you want to do?"
+      placeholder={placeholder}
       placeholderTextColor={selectedTheme.secondary}
       style={[
         styles.taskNameInput,

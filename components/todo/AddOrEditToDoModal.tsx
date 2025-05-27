@@ -80,6 +80,7 @@ export default function AddOrEditTodoModal({
         onPress={Keyboard.dismiss}
       >
         <ChoiceTaskName
+          placeholder="What do you want to do?"
           taskName={currentToDo.taskName}
           changeTaskName={changeTaskName}
         />
@@ -88,18 +89,11 @@ export default function AddOrEditTodoModal({
 
         {currentToDo.subTasks.map((subTask) => (
           // change map into flashlist later if not everything
-          <TextInput
+
+          <ChoiceTaskName
             placeholder="Add a sub-task."
-            placeholderTextColor={selectedTheme.secondary}
-            style={[
-              styles.taskNameInput,
-              {
-                color: selectedTheme.secondary,
-                borderColor: selectedTheme.secondary,
-              },
-            ]}
-            value={currentToDo.subTasks[subTask.index].name}
-            onChangeText={(text) => changeSubTaskName(text, subTask.index)}
+            taskName={currentToDo.subTasks[subTask.index].name}
+            changeTaskName={(text) => changeSubTaskName(text, subTask.index)}
             key={subTask.index}
           />
         ))}
@@ -129,11 +123,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     rowGap: 12,
-  },
-  taskNameInput: {
-    borderRadius: 12,
-    borderWidth: 1,
-    paddingHorizontal: 8,
-    width: "85%",
   },
 });
