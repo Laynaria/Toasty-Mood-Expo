@@ -51,8 +51,13 @@ export default function ToDoCard({
       currentSubTask.index === subTask.index ? updatedSubTask : currentSubTask
     );
 
+    const isAllTaskDone = (): boolean =>
+      updatedSubTasks.every((task) => task.isDone);
+
     const newDatas = fakeDatas.map((currentTask, index) =>
-      taskIndex === index ? { ...task, subTasks: updatedSubTasks } : currentTask
+      taskIndex === index
+        ? { ...task, subTasks: updatedSubTasks, isDone: isAllTaskDone() }
+        : currentTask
     );
 
     setFakeDatas(newDatas);
