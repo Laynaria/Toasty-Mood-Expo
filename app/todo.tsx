@@ -67,6 +67,11 @@ export default function ToDo() {
     [fakeDatas]
   );
 
+  const sortedData = (): toDoTaskType[] =>
+    fakeDatas
+      .sort((a, b) => (a.date > b.date ? 1 : -1))
+      .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.scroll}>
@@ -74,7 +79,7 @@ export default function ToDo() {
         <View style={styles.subContainer}>
           <FlashList<toDoTaskType>
             showsVerticalScrollIndicator={false}
-            data={fakeDatas}
+            data={sortedData()}
             renderItem={renderItem}
             estimatedItemSize={50}
             contentContainerStyle={{ paddingTop: 100 }}
