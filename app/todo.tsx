@@ -73,16 +73,7 @@ export default function ToDo() {
       .sort((a, b) => (a.date > b.date ? 1 : -1))
       .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
 
-  const isAllTaskDone = (): boolean => {
-    const checkData: number[] = fakeDatas.map((task) => (task.isDone ? 1 : 0));
-
-    return (
-      checkData.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      ) === fakeDatas.length
-    );
-  };
+  const isAllTaskDone = (): boolean => fakeDatas.every((task) => task.isDone);
 
   return (
     <View style={styles.container}>
