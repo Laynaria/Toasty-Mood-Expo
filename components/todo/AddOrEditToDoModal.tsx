@@ -2,15 +2,18 @@ import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { toDoTaskType } from "@/types/todo.types";
 import { Dispatch, useContext, useState } from "react";
 import {
+  Image,
   Keyboard,
   Pressable,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 import ChoiceTaskName from "./ChoiceTaskName";
 import AddOrEditValidateButton from "./AddOrEditValideButton";
 import ChoiceCategory from "./ChoiceCategory";
+import toDoCategory from "@/services/toDoCategory";
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -24,6 +27,8 @@ export default function AddOrEditTodoModal({
   setFakeDatas,
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] =
+    useState<boolean>(false);
 
   // May be used in ToDoCard instead later
   const dateArray = new Date().toUTCString().split(", ")[1].split(" ");
@@ -57,6 +62,11 @@ export default function AddOrEditTodoModal({
 
   const changeTaskName = (text: string): void => {
     setCurrentToDo({ ...currentToDo, taskName: text });
+  };
+
+  const changeCateogry = (category: number): void => {
+    setCurrentToDo({ ...currentToDo, category });
+    setIsCategoryModalOpen(false);
   };
 
   const changeSubTaskName = (text: string, index: number) => {
@@ -119,7 +129,10 @@ export default function AddOrEditTodoModal({
 
             <AddOrEditValidateButton handleValidate={updateToDoList} />
 
-            <ChoiceCategory />
+            <ChoiceCategory
+              category={currentToDo.category}
+              openCategoryModal={() => setIsCategoryModalOpen(true)}
+            />
 
             {currentToDo.subTasks.map((subTask) => (
               // change map into flashlist later if not everything
@@ -148,6 +161,42 @@ export default function AddOrEditTodoModal({
           </View>
         </ScrollView>
       </Pressable>
+
+      {isCategoryModalOpen ? (
+        <Pressable
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            zIndex: 20,
+            backgroundColor: "rgba(0 ,0 ,0 , 0.2)",
+          }}
+          onPress={() => setIsCategoryModalOpen(false)}
+        >
+          <View
+            style={[
+              styles.modal,
+              {
+                backgroundColor: selectedTheme.primary,
+                borderColor: selectedTheme.secondary,
+              },
+            ]}
+          >
+            {toDoCategory.map((currentCategory) => (
+              <Pressable
+                key={currentCategory.id}
+                style={styles.button}
+                onPress={() => changeCateogry(currentCategory.id)}
+              >
+                <Image source={currentCategory.icon} style={styles.icon} />
+                <Text style={{ color: selectedTheme.secondary }}>
+                  {currentCategory.name}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        </Pressable>
+      ) : null}
     </Pressable>
   );
 }
@@ -180,5 +229,27 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     rowGap: 12,
+  },
+  modal: {
+    position: "absolute",
+    zIndex: 100,
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    left: 24,
+    bottom: 142,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: {
+    height: 30,
+    width: 30,
+    marginHorizontal: 4,
   },
 });
