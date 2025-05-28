@@ -52,7 +52,7 @@ export default function ToDoCard({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { opacity: task.isDone ? 0.7 : 1 }]}>
       <Pressable onPress={() => updateTaskStatus()}>
         <Image
           source={task.isDone ? checkedImg : uncheckedImg}
@@ -72,7 +72,9 @@ export default function ToDoCard({
       <View
         style={[
           styles.subcontainer,
-          { backgroundColor: selectedTheme.primary },
+          {
+            backgroundColor: selectedTheme.primary,
+          },
         ]}
       >
         <View style={styles.mainTaskContainer}>
