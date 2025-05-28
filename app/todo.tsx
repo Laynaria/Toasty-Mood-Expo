@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import GradientBackground from "@/components/GradientBackground";
 import ToDoCard from "@/components/todo/ToDoCard";
 import { toDoTaskType } from "@/types/todo.types";
@@ -7,6 +7,7 @@ import { FlashList } from "@shopify/flash-list";
 import AddOrEditToDo from "@/components/todo/AddOrEditToDo";
 import AddOrEditTodoModal from "@/components/todo/AddOrEditToDoModal";
 import toDoCategory from "@/services/toDoCategory";
+import ToDoTitle from "@/components/todo/ToDoTitle";
 
 export default function ToDo() {
   const [fakeDatas, setFakeDatas] = useState<toDoTaskType[]>([
@@ -72,6 +73,17 @@ export default function ToDo() {
       .sort((a, b) => (a.date > b.date ? 1 : -1))
       .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
 
+  const isAllTaskDone = (): boolean => {
+    const checkData: number[] = fakeDatas.map((task) => (task.isDone ? 1 : 0));
+
+    return (
+      checkData.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      ) === fakeDatas.length
+    );
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.scroll}>
@@ -83,6 +95,22 @@ export default function ToDo() {
             renderItem={renderItem}
             estimatedItemSize={50}
             contentContainerStyle={{ paddingTop: 100 }}
+            ListHeaderComponent={() => {
+              if (fakeDatas.length === 0) {
+                return;
+              }
+
+              if (isAllTaskDone()) {
+                return <ToDoTitle text="Done" />;
+              }
+
+              return <ToDoTitle text="To Do" />;
+            }}
+            ItemSeparatorComponent={(item) => {
+              if (item.trailingItem.isDone && !item.leadingItem.isDone) {
+                return <ToDoTitle text="Done" />;
+              }
+            }}
           />
         </View>
       </SafeAreaView>
