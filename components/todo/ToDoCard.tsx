@@ -10,6 +10,7 @@ import { Image } from "expo-image";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import SubTaskToDoCard from "./SubTaskToDoCard";
 import { subTaskType, toDoTaskType } from "@/types/todo.types";
+import { isAllTaskDone } from "@/services/toDoServices";
 
 const checkedImg = require("@/assets/icons/checked.png");
 const uncheckedImg = require("@/assets/icons/unchecked.png");
@@ -51,12 +52,13 @@ export default function ToDoCard({
       currentSubTask.index === subTask.index ? updatedSubTask : currentSubTask
     );
 
-    const isAllTaskDone = (): boolean =>
-      updatedSubTasks.every((task) => task.isDone);
-
     const newDatas = fakeDatas.map((currentTask, index) =>
       taskIndex === index
-        ? { ...task, subTasks: updatedSubTasks, isDone: isAllTaskDone() }
+        ? {
+            ...task,
+            subTasks: updatedSubTasks,
+            isDone: isAllTaskDone(updatedSubTasks),
+          }
         : currentTask
     );
 

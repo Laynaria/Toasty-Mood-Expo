@@ -8,6 +8,7 @@ import AddOrEditToDo from "@/components/todo/AddOrEditToDo";
 import AddOrEditTodoModal from "@/components/todo/AddOrEditToDoModal";
 import toDoCategory from "@/services/toDoCategory";
 import ToDoTitle from "@/components/todo/ToDoTitle";
+import { isAllTaskDone } from "@/services/toDoServices";
 
 export default function ToDo() {
   const [fakeDatas, setFakeDatas] = useState<toDoTaskType[]>([
@@ -73,8 +74,6 @@ export default function ToDo() {
       .sort((a, b) => (a.date > b.date ? 1 : -1))
       .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
 
-  const isAllTaskDone = (): boolean => fakeDatas.every((task) => task.isDone);
-
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.scroll}>
@@ -91,7 +90,7 @@ export default function ToDo() {
                 return;
               }
 
-              if (isAllTaskDone()) {
+              if (isAllTaskDone(fakeDatas)) {
                 return <ToDoTitle text="Done" />;
               }
 
