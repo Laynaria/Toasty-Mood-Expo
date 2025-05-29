@@ -64,6 +64,7 @@ export default function ToDo() {
         fakeDatas={fakeDatas}
         setFakeDatas={setFakeDatas}
         icon={toDoCategory[item.category]?.icon}
+        accessibilityHelper={toDoCategory[item.category]?.name}
       />
     ),
     [fakeDatas]

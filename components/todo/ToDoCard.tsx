@@ -20,6 +20,7 @@ type Props = {
   fakeDatas: toDoTaskType[];
   setFakeDatas: (newdatas: toDoTaskType[]) => void;
   icon: ImageSourcePropType;
+  accessibilityHelper: string;
 };
 
 export default function ToDoCard({
@@ -27,6 +28,7 @@ export default function ToDoCard({
   fakeDatas,
   setFakeDatas,
   icon,
+  accessibilityHelper,
 }: Props) {
   const { selectedTheme, colorScheme } = useContext(ThemeColorContext);
   const taskIndex = fakeDatas.indexOf(task);
@@ -92,7 +94,11 @@ export default function ToDoCard({
         ]}
       >
         <View style={styles.mainTaskContainer}>
-          <Image source={icon} style={styles.icon} />
+          <Image
+            source={icon}
+            style={styles.icon}
+            accessibilityLabel={accessibilityHelper}
+          />
 
           <View style={styles.textContainer}>
             <Text
