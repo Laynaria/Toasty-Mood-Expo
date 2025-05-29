@@ -47,6 +47,7 @@ export default function AddOrEditTodoModal({
     subTasks: [],
   });
   const [newSubTask, setNewSubTask] = useState<string>("");
+  const [modalHeight, setModalHeight] = useState(0);
 
   const updateToDoList = () => {
     if (currentToDo.taskName !== "") {
@@ -120,7 +121,13 @@ export default function AddOrEditTodoModal({
             paddingBottom: 8,
           }}
         >
-          <View style={styles.subTaskContainer}>
+          <View
+            style={styles.subTaskContainer}
+            onLayout={(event) => {
+              const { height } = event.nativeEvent.layout;
+              setModalHeight(height);
+            }}
+          >
             <ChoiceTaskName
               placeholder="What do you want to do?"
               taskName={currentToDo.taskName}
@@ -179,6 +186,7 @@ export default function AddOrEditTodoModal({
               {
                 backgroundColor: selectedTheme.primary,
                 borderColor: selectedTheme.secondary,
+                bottom: modalHeight - 13, // may need a condition based on array
               },
             ]}
           >
@@ -241,7 +249,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     left: 24,
-    bottom: 142,
+    // bottom: 142,
   },
   button: {
     flexDirection: "row",
