@@ -48,6 +48,7 @@ export default function AddOrEditTodoModal({
   });
   const [newSubTask, setNewSubTask] = useState<string>("");
   const [modalHeight, setModalHeight] = useState(0);
+  const [modalScrollY, setModalScrollY] = useState(0);
 
   const updateToDoList = () => {
     if (currentToDo.taskName !== "") {
@@ -120,13 +121,20 @@ export default function AddOrEditTodoModal({
           contentContainerStyle={{
             paddingBottom: 8,
           }}
+          onScroll={(e) => {
+            setModalScrollY(e.nativeEvent.contentOffset.y);
+          }}
+          onLayout={(event) => {
+            const { height } = event.nativeEvent.layout;
+            setModalHeight(height);
+          }}
         >
           <View
             style={styles.subTaskContainer}
-            onLayout={(event) => {
-              const { height } = event.nativeEvent.layout;
-              setModalHeight(height);
-            }}
+            // onLayout={(event) => {
+            //   const { height } = event.nativeEvent.layout;
+            //   setModalHeight(height);
+            // }}
           >
             <ChoiceTaskName
               placeholder="What do you want to do?"
@@ -142,8 +150,6 @@ export default function AddOrEditTodoModal({
             />
 
             {currentToDo.subTasks.map((subTask) => (
-              // change map into flashlist later if not everything
-
               <ChoiceTaskName
                 placeholder="What sub-task do you want to add?"
                 taskName={currentToDo.subTasks[subTask.index].name}
@@ -186,18 +192,29 @@ export default function AddOrEditTodoModal({
               {
                 backgroundColor: selectedTheme.primary,
                 borderColor: selectedTheme.secondary,
-                bottom: modalHeight - 13, // may need a condition based on array
+                bottom:
+                  currentToDo.subTasks.length > 7
+                    ? modalHeight +
+                      modalScrollY -
+                      262 -
+                      ((currentToDo.subTasks.length - 7 + 1) * 20) /
+                        (currentToDo.subTasks.length - 7 + 1)
+                    : modalHeight - 21,
               },
             ]}
           >
             {toDoCategory.map((currentCategory) => (
               <Pressable
                 key={currentCategory.id}
-                style={styles.button}
+                style={[styles.button]}
                 onPress={() => changeCateogry(currentCategory.id)}
               >
                 <Image source={currentCategory.icon} style={styles.icon} />
-                <Text style={{ color: selectedTheme.secondary }}>
+                <Text
+                  style={{
+                    color: selectedTheme.secondary,
+                  }}
+                >
                   {currentCategory.name}
                 </Text>
               </Pressable>
@@ -241,19 +258,21 @@ const styles = StyleSheet.create({
   modal: {
     position: "absolute",
     zIndex: 100,
-    flexDirection: "column",
-    justifyContent: "center",
+    flexDirection: "row",
+    // justifyContent: "space-around",
+    flexWrap: "wrap",
+    width: "75.1%",
     gap: 16,
     paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 12,
     borderWidth: 1,
     left: 24,
-    // bottom: 142,
   },
   button: {
     flexDirection: "row",
     alignItems: "center",
+    width: 130,
   },
   icon: {
     height: 30,
