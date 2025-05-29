@@ -194,11 +194,7 @@ export default function AddOrEditTodoModal({
                 borderColor: selectedTheme.secondary,
                 bottom:
                   currentToDo.subTasks.length > 7
-                    ? modalHeight +
-                      modalScrollY -
-                      262 -
-                      ((currentToDo.subTasks.length - 7 + 1) * 20) /
-                        (currentToDo.subTasks.length - 7 + 1)
+                    ? modalHeight + modalScrollY - 282
                     : modalHeight - 21,
               },
             ]}
