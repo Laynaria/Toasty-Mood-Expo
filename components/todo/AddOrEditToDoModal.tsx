@@ -129,13 +129,7 @@ export default function AddOrEditTodoModal({
             setModalHeight(height);
           }}
         >
-          <View
-            style={styles.subTaskContainer}
-            // onLayout={(event) => {
-            //   const { height } = event.nativeEvent.layout;
-            //   setModalHeight(height);
-            // }}
-          >
+          <View style={styles.subTaskContainer}>
             <ChoiceTaskName
               placeholder="What do you want to do?"
               taskName={currentToDo.taskName}
