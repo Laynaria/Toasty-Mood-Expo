@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import GradientBackground from "@/components/GradientBackground";
 import ToDoCard from "@/components/todo/ToDoCard";
 import { toDoTaskType } from "@/types/todo.types";
