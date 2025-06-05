@@ -9,7 +9,7 @@ export type subTaskType = {
 export type toDoTaskType = {
   id: number;
   taskName: string;
-  date: string;
+  date: string | Date;
   category: number;
   isDone: boolean;
   subTasks: subTaskType[];

@@ -14,6 +14,8 @@ import ChoiceTaskName from "./ChoiceTaskName";
 import AddOrEditValidateButton from "./AddOrEditValideButton";
 import ChoiceCategory from "./ChoiceCategory";
 import toDoCategory from "@/services/toDoCategory";
+import ChoiceDate from "./ChoiceDate";
+import ChoiceDateModal from "./ChoiceDateModal";
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -29,19 +31,12 @@ export default function AddOrEditTodoModal({
   const { selectedTheme } = useContext(ThemeColorContext);
   const [isCategoryModalOpen, setIsCategoryModalOpen] =
     useState<boolean>(false);
-
-  // May be used in ToDoCard instead later
-  const dateArray = new Date().toUTCString().split(", ")[1].split(" ");
-  const dotOrNot = dateArray[1].length > 3 ? "." : "";
-  const date = `${dateArray[1].slice(0, 3)}${dotOrNot} ${
-    dateArray[0]
-  } ${dateArray[3].slice(0, 5)}`;
-  // End of what could be used in ToDoCard instead later
+  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
 
   const [currentToDo, setCurrentToDo] = useState<toDoTaskType>({
     id: fakeDatas.length,
     taskName: "",
-    date,
+    date: new Date(),
     category: 0,
     isDone: false,
     subTasks: [],
@@ -69,6 +64,14 @@ export default function AddOrEditTodoModal({
   const changeCateogry = (category: number): void => {
     setCurrentToDo({ ...currentToDo, category });
     setIsCategoryModalOpen(false);
+  };
+
+  const changeDate = (selectedDate: Date): void => {
+    setCurrentToDo({ ...currentToDo, date: selectedDate });
+  };
+
+  const changeDateModalStatus = (): void => {
+    setIsDateModalOpen(!isDateModalOpen);
   };
 
   const changeSubTaskName = (text: string, index: number) => {
@@ -143,6 +146,11 @@ export default function AddOrEditTodoModal({
               openCategoryModal={() => setIsCategoryModalOpen(true)}
             />
 
+            <ChoiceDate
+              date={currentToDo.date}
+              openChangeDateModal={changeDateModalStatus}
+            />
+
             {currentToDo.subTasks.map((subTask) => (
               <ChoiceTaskName
                 placeholder="What sub-task do you want to add?"
@@ -211,6 +219,13 @@ export default function AddOrEditTodoModal({
             ))}
           </View>
         </Pressable>
+      ) : null}
+
+      {isDateModalOpen ? (
+        <ChoiceDateModal
+          changeDate={changeDate}
+          openChangeDateModal={changeDateModalStatus}
+        />
       ) : null}
     </Pressable>
   );

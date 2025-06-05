@@ -8,11 +8,7 @@ type Props = {
   openCategoryModal: () => void;
 };
 
-export default function ChoiceCategory({
-  category,
-
-  openCategoryModal,
-}: Props) {
+export default function ChoiceCategory({ category, openCategoryModal }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
@@ -30,7 +26,6 @@ export default function ChoiceCategory({
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 100,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
