@@ -10,7 +10,7 @@ import { Image } from "expo-image";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import SubTaskToDoCard from "./SubTaskToDoCard";
 import { subTaskType, toDoTaskType } from "@/types/todo.types";
-import { isAllTaskDone } from "@/services/toDoServices";
+import { dateText, isAllTaskDone } from "@/services/toDoServices";
 
 const checkedImg = require("@/assets/icons/checked.png");
 const uncheckedImg = require("@/assets/icons/unchecked.png");
@@ -122,7 +122,7 @@ export default function ToDoCard({
                 fontSize: 12,
               }}
             >
-              {task.date ? task.date : null}
+              {task.date ? dateText(new Date(task.date)) : null}
             </Text>
           </View>
         </View>

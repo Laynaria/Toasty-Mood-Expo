@@ -16,14 +16,14 @@ export default function ToDo() {
       id: 0,
       taskName: "Sleep",
       category: 1,
-      date: "Apr. 25 23:01",
+      date: "2025-04-25T23:00:00",
       isDone: true,
       subTasks: [],
     },
     {
       id: 1,
       taskName: "Wake Up",
-      date: "Apr. 26 8:20",
+      date: "2025-04-26T08:20:00",
       category: 2,
       isDone: false,
       subTasks: [],
@@ -31,7 +31,8 @@ export default function ToDo() {
     {
       id: 2,
       taskName: "Mealtime",
-      date: "Apr. 26 8:20",
+
+      date: "2025-04-26T12:15:00",
       category: 0,
       isDone: false,
       subTasks: [
