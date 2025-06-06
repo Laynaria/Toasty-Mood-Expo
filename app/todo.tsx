@@ -73,7 +73,9 @@ export default function ToDo() {
 
   const sortedData = (): toDoTaskType[] =>
     fakeDatas
-      .sort((a, b) => (a.date > b.date ? 1 : -1))
+      .sort((a, b) =>
+        a.date && b.date ? (a.date > b.date ? 1 : -1) : b.id - a.id
+      )
       .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
 
   return (

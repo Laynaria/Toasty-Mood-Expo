@@ -1,5 +1,7 @@
 import { ImageSourcePropType } from "react-native";
 
+export type toDoDate = string | null;
+
 export type subTaskType = {
   index: number;
   name: string;
@@ -9,7 +11,7 @@ export type subTaskType = {
 export type toDoTaskType = {
   id: number;
   taskName: string;
-  date: string | Date;
+  date: toDoDate;
   category: number;
   isDone: boolean;
   subTasks: subTaskType[];

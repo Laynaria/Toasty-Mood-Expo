@@ -114,7 +114,7 @@ export default function ToDoCard({
             <Text
               style={{
                 color: selectedTheme.primary,
-                backgroundColor: selectedTheme.secondary,
+                backgroundColor: task.date ? selectedTheme.secondary : "",
                 borderRadius: 12,
                 textAlign: "center",
                 paddingVertical: 1,
@@ -122,7 +122,7 @@ export default function ToDoCard({
                 fontSize: 12,
               }}
             >
-              {task.date ? dateText(new Date(task.date)) : null}
+              {task.date ? dateText(task.date) : null}
             </Text>
           </View>
         </View>

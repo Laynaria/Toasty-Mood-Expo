@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
+import { toDoDate } from "@/types/todo.types";
 
 type Props = {
-  changeDate: (selectedDate: Date) => void;
+  changeDate: (selectedDate: toDoDate) => void;
   openChangeDateModal: () => void;
 };
 
@@ -14,7 +15,7 @@ export default function ChoiceDateModal({
   const { selectedTheme } = useContext(ThemeColorContext);
 
   const onChangeDate = () => {
-    const selectDate = new Date();
+    const selectDate = new Date().toString();
 
     changeDate(selectDate);
     openChangeDateModal();

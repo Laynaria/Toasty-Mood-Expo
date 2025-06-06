@@ -1,5 +1,5 @@
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
-import { toDoTaskType } from "@/types/todo.types";
+import { toDoDate, toDoTaskType } from "@/types/todo.types";
 import { Dispatch, useContext, useState } from "react";
 import {
   Image,
@@ -36,7 +36,8 @@ export default function AddOrEditTodoModal({
   const [currentToDo, setCurrentToDo] = useState<toDoTaskType>({
     id: fakeDatas.length,
     taskName: "",
-    date: new Date(),
+    // date: new Date(),
+    date: null,
     category: 0,
     isDone: false,
     subTasks: [],
@@ -66,7 +67,7 @@ export default function AddOrEditTodoModal({
     setIsCategoryModalOpen(false);
   };
 
-  const changeDate = (selectedDate: Date): void => {
+  const changeDate = (selectedDate: toDoDate): void => {
     setCurrentToDo({ ...currentToDo, date: selectedDate });
   };
 

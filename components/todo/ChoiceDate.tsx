@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import { dateText } from "@/services/toDoServices";
+import { toDoDate } from "@/types/todo.types";
 
 type Props = {
-  date: Date | string;
+  date: toDoDate;
   openChangeDateModal: () => void;
 };
 
@@ -16,7 +17,9 @@ export default function ChoiceDate({ date, openChangeDateModal }: Props) {
       style={[styles.container, { borderColor: selectedTheme.secondary }]}
       onPress={openChangeDateModal}
     >
-      <Text style={{ color: selectedTheme.secondary }}>{dateText(date)}</Text>
+      <Text style={{ color: selectedTheme.secondary }}>
+        {date ? dateText(date) : "Pick a Date"}
+      </Text>
     </Pressable>
   );
 }
