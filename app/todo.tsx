@@ -71,12 +71,21 @@ export default function ToDo() {
     [fakeDatas]
   );
 
-  const sortedData = (): toDoTaskType[] =>
-    fakeDatas
-      .sort((a, b) =>
-        a.date && b.date ? (a.date > b.date ? 1 : -1) : b.id - a.id
-      )
-      .sort((a, b) => (a.isDone > b.isDone ? 1 : -1));
+  const sortedData = (): toDoTaskType[] => {
+    const toDoWithDate = fakeDatas
+      .filter((task) => task.date !== null && !task.isDone)
+      .sort((a, b) => (a.date && b.date ? (a.date > b.date ? 1 : -1) : -2));
+
+    const toDoWithoutDate = fakeDatas
+      .filter((task) => task.date === null && !task.isDone)
+      .sort((a, b) => b.id - a.id);
+
+    const doneTasks = fakeDatas
+      .filter((task) => task.isDone)
+      .sort((a, b) => a.id - b.id);
+
+    return [...toDoWithDate, ...toDoWithoutDate, ...doneTasks];
+  };
 
   return (
     <View style={styles.container}>
@@ -101,6 +110,14 @@ export default function ToDo() {
               return <ToDoTitle text="To Do" />;
             }}
             ItemSeparatorComponent={(item) => {
+              if (
+                !item.trailingItem.date &&
+                item.leadingItem.date &&
+                !item.trailingItem.isDone
+              ) {
+                return <ToDoTitle text="No Date" />;
+              }
+
               if (item.trailingItem.isDone && !item.leadingItem.isDone) {
                 return <ToDoTitle text="Done" />;
               }

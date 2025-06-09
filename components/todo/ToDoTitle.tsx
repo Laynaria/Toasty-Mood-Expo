@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 
 type Props = {
-  text: "To Do" | "Done";
+  text: "To Do" | "Done" | "No Date";
 };
 
 export default function ToDoTitle({ text }: Props) {

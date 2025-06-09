@@ -36,7 +36,7 @@ export default function AddOrEditTodoModal({
   const [currentToDo, setCurrentToDo] = useState<toDoTaskType>({
     id: fakeDatas.length,
     taskName: "",
-    // date: new Date(),
+    // date: new Date().toString(),
     date: null,
     category: 0,
     isDone: false,
