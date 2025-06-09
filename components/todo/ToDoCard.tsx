@@ -41,7 +41,14 @@ export default function ToDoCard({
 
     const newDatas = fakeDatas.map((currentTask, index) =>
       taskIndex === index
-        ? { ...task, isDone: !task.isDone, subTasks: updatedSubTasks }
+        ? {
+            ...task,
+            isDone: !task.isDone,
+            finished_at: !currentTask.finished_at
+              ? new Date().toString()
+              : null,
+            subTasks: updatedSubTasks,
+          }
         : currentTask
     );
 
@@ -60,6 +67,11 @@ export default function ToDoCard({
             ...task,
             subTasks: updatedSubTasks,
             isDone: isAllTaskDone(updatedSubTasks),
+
+            finished_at:
+              !currentTask.finished_at && isAllTaskDone(updatedSubTasks)
+                ? new Date().toString()
+                : null,
           }
         : currentTask
     );
@@ -114,7 +126,8 @@ export default function ToDoCard({
             <Text
               style={{
                 color: selectedTheme.primary,
-                backgroundColor: task.date ? selectedTheme.secondary : "",
+                backgroundColor:
+                  task.date || task.finished_at ? selectedTheme.secondary : "",
                 borderRadius: 12,
                 textAlign: "center",
                 paddingVertical: 1,
@@ -122,7 +135,7 @@ export default function ToDoCard({
                 fontSize: 12,
               }}
             >
-              {task.date ? dateText(task.date) : null}
+              {!task.isDone ? dateText(task.date) : dateText(task.finished_at)}
             </Text>
           </View>
         </View>

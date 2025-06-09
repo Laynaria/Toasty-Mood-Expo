@@ -14,6 +14,7 @@ export type toDoTaskType = {
   date: toDoDate;
   category: number;
   isDone: boolean;
+  finished_at: toDoDate;
   subTasks: subTaskType[];
 };
 

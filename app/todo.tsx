@@ -18,6 +18,7 @@ export default function ToDo() {
       category: 1,
       date: "2025-04-25T23:00:00",
       isDone: true,
+      finished_at: "2025-04-25T23:30:00",
       subTasks: [],
     },
     {
@@ -26,15 +27,16 @@ export default function ToDo() {
       date: "2025-04-26T08:20:00",
       category: 2,
       isDone: false,
+      finished_at: null,
       subTasks: [],
     },
     {
       id: 2,
       taskName: "Mealtime",
-
       date: "2025-04-26T12:15:00",
       category: 0,
       isDone: false,
+      finished_at: null,
       subTasks: [
         {
           index: 0,
@@ -78,11 +80,17 @@ export default function ToDo() {
 
     const toDoWithoutDate = fakeDatas
       .filter((task) => task.date === null && !task.isDone)
-      .sort((a, b) => b.id - a.id);
+      .sort((a, b) => a.id - b.id);
 
     const doneTasks = fakeDatas
       .filter((task) => task.isDone)
-      .sort((a, b) => a.id - b.id);
+      .sort((a, b) =>
+        a.finished_at && b.finished_at
+          ? a.finished_at < b.finished_at
+            ? 1
+            : -1
+          : -2
+      );
 
     return [...toDoWithDate, ...toDoWithoutDate, ...doneTasks];
   };

@@ -40,6 +40,7 @@ export default function AddOrEditTodoModal({
     date: null,
     category: 0,
     isDone: false,
+    finished_at: null,
     subTasks: [],
   });
   const [newSubTask, setNewSubTask] = useState<string>("");
