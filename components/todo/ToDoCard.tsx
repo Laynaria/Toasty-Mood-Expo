@@ -126,8 +126,8 @@ export default function ToDoCard({
             <Text
               style={{
                 color: selectedTheme.primary,
-                backgroundColor:
-                  task.date || task.finished_at ? selectedTheme.secondary : "",
+                backgroundColor: selectedTheme.secondary,
+                opacity: task.date || task.finished_at ? 1 : 0,
                 borderRadius: 12,
                 textAlign: "center",
                 paddingVertical: 1,
