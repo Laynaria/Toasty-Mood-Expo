@@ -74,3 +74,11 @@ export const isOrWas = (date: Date): string => {
     ? "Is"
     : "Was";
 };
+
+export const hours: string[] = Array.from({ length: 24 }, (_, i: number) =>
+  i.toString().padStart(2, "0")
+);
+
+export const minutes: string[] = Array.from({ length: 60 }, (_, i: number) =>
+  i.toString().padStart(2, "0")
+);
