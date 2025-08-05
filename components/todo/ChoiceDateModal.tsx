@@ -34,7 +34,8 @@ export default function ChoiceDateModal({
   const daysName: string[] = weekDays(weekPreference);
 
   const onChangeDate = () => {
-    const selectDate = new Date().toString();
+    const selectDate =
+      new Date(/*Add month, year, day and hour to create a real date*/).toString();
 
     changeDate(selectDate);
     openChangeDateModal();
@@ -49,11 +50,12 @@ export default function ChoiceDateModal({
 
   return (
     <Pressable style={styles.container} onPress={openChangeDateModal}>
-      <View
+      <Pressable
         style={[
           styles.subContainer,
           { backgroundColor: selectedTheme.primary },
         ]}
+        onPress={() => {}}
       >
         <View style={styles.monthYearContainer}>
           <ChoiceDateArrowButton source={yearArrow} />
@@ -150,7 +152,7 @@ export default function ChoiceDateModal({
             </Text>
           </Pressable>
         </View>
-      </View>
+      </Pressable>
     </Pressable>
   );
 }
