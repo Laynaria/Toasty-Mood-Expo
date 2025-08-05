@@ -90,7 +90,13 @@ export default function ChoiceDateModal({
             source={monthArrow}
             handlePress={() => handleChangeMonth("-")}
           />
-          <Text style={{ color: selectedTheme.secondary }}>
+          <Text
+            style={{
+              color: selectedTheme.secondary,
+              width: 115,
+              textAlign: "center",
+            }}
+          >
             {selectedMonth} {selectedYear}
           </Text>
           <ChoiceDateArrowButton
