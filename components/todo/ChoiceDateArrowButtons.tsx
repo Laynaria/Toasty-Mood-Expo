@@ -10,12 +10,17 @@ import {
 type Props = {
   source: ImageSourcePropType;
   rotate?: AnimatableStringValue;
+  handlePress: () => void;
 };
 
-export default function ChoiceDateArrowButton({ source, rotate }: Props) {
+export default function ChoiceDateArrowButton({
+  source,
+  rotate,
+  handlePress,
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
   return (
-    <Pressable>
+    <Pressable onPress={handlePress}>
       <Image
         source={source}
         style={{

@@ -41,6 +41,18 @@ export default function ChoiceDateModal({
     openChangeDateModal();
   };
 
+  const handleChangeMonth = (): void => {};
+
+  const handleChangeYear = (operator: "-" | "+"): void => {
+    if (selectedYear === "2022" && operator === "-") {
+      return;
+    }
+
+    operator === "-"
+      ? setSelectedYear(`${parseInt(selectedYear) - 1}`)
+      : setSelectedYear(`${parseInt(selectedYear) + 1}`);
+  };
+
   useLayoutEffect(() => {
     const loadWeekPreference = async () =>
       setWeekPreference(await getFirstDayPreference());
@@ -58,13 +70,27 @@ export default function ChoiceDateModal({
         onPress={() => {}}
       >
         <View style={styles.monthYearContainer}>
-          <ChoiceDateArrowButton source={yearArrow} />
-          <ChoiceDateArrowButton source={monthArrow} />
+          <ChoiceDateArrowButton
+            source={yearArrow}
+            handlePress={() => handleChangeYear("-")}
+          />
+          <ChoiceDateArrowButton
+            source={monthArrow}
+            handlePress={handleChangeMonth}
+          />
           <Text style={{ color: selectedTheme.secondary }}>
             {selectedMonth} {selectedYear}
           </Text>
-          <ChoiceDateArrowButton source={monthArrow} rotate={"180deg"} />
-          <ChoiceDateArrowButton source={yearArrow} rotate={"180deg"} />
+          <ChoiceDateArrowButton
+            source={monthArrow}
+            rotate={"180deg"}
+            handlePress={handleChangeMonth}
+          />
+          <ChoiceDateArrowButton
+            source={yearArrow}
+            rotate={"180deg"}
+            handlePress={() => handleChangeYear("+")}
+          />
         </View>
 
         <View style={styles.daysContainer}>
