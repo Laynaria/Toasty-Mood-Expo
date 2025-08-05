@@ -26,6 +26,8 @@ export default function ChoiceDateModal({
   const [selectedYear, setSelectedYear] = useState<string>(
     new Date().getFullYear().toString()
   );
+  const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
+
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
 
@@ -89,10 +91,31 @@ export default function ChoiceDateModal({
                 key={day}
                 style={[
                   styles.daysStyle,
-                  { borderColor: selectedTheme.secondary },
+                  {
+                    borderColor:
+                      selectedDay === day
+                        ? selectedTheme.primary
+                        : selectedTheme.secondary,
+                    backgroundColor:
+                      selectedDay === day
+                        ? selectedTheme.secondary
+                        : selectedTheme.primary,
+                  },
                 ]}
+                onPress={() => {
+                  setSelectedDay(day);
+                }}
               >
-                <Text style={{ color: selectedTheme.secondary }}>{day}</Text>
+                <Text
+                  style={{
+                    color:
+                      selectedDay === day
+                        ? selectedTheme.primary
+                        : selectedTheme.secondary,
+                  }}
+                >
+                  {day}
+                </Text>
               </Pressable>
             ))}
         </View>
@@ -100,17 +123,19 @@ export default function ChoiceDateModal({
         <View
           style={[styles.monthYearContainer, { width: "100%", padding: 8 }]}
         >
-          <Text
-            style={{
-              color: selectedTheme.secondary,
-              borderColor: selectedTheme.secondary,
-              borderWidth: 1,
-              borderRadius: 8,
-              padding: 8,
-            }}
-          >
-            XX:XX
-          </Text>
+          <Pressable>
+            <Text
+              style={{
+                color: selectedTheme.secondary,
+                borderColor: selectedTheme.secondary,
+                borderWidth: 1,
+                borderRadius: 8,
+                padding: 8,
+              }}
+            >
+              XX:XX
+            </Text>
+          </Pressable>
           <Pressable>
             <Text
               style={{
