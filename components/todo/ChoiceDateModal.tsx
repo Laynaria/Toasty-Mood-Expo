@@ -41,7 +41,19 @@ export default function ChoiceDateModal({
     openChangeDateModal();
   };
 
-  const handleChangeMonth = (): void => {};
+  const handleChangeMonth = (operator: "-" | "+"): void => {
+    if (selectedMonth === months[0] && operator === "-") {
+      return setSelectedMonth(months[11]);
+    }
+
+    if (selectedMonth === months[11] && operator === "+") {
+      return setSelectedMonth(months[0]);
+    }
+
+    operator === "-"
+      ? setSelectedMonth(months[months.indexOf(selectedMonth) - 1])
+      : setSelectedMonth(months[months.indexOf(selectedMonth) + 1]);
+  };
 
   const handleChangeYear = (operator: "-" | "+"): void => {
     if (selectedYear === "2022" && operator === "-") {
@@ -76,7 +88,7 @@ export default function ChoiceDateModal({
           />
           <ChoiceDateArrowButton
             source={monthArrow}
-            handlePress={handleChangeMonth}
+            handlePress={() => handleChangeMonth("-")}
           />
           <Text style={{ color: selectedTheme.secondary }}>
             {selectedMonth} {selectedYear}
@@ -84,7 +96,7 @@ export default function ChoiceDateModal({
           <ChoiceDateArrowButton
             source={monthArrow}
             rotate={"180deg"}
-            handlePress={handleChangeMonth}
+            handlePress={() => handleChangeMonth("+")}
           />
           <ChoiceDateArrowButton
             source={yearArrow}
@@ -149,7 +161,14 @@ export default function ChoiceDateModal({
         </View>
 
         <View
-          style={[styles.monthYearContainer, { width: "100%", padding: 8 }]}
+          style={[
+            styles.monthYearContainer,
+            {
+              width: "100%",
+              padding: 8,
+              marginTop: selectedMonth === months[1] ? 37.5 : 0,
+            },
+          ]}
         >
           <Pressable>
             <Text
