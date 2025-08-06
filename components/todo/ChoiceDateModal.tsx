@@ -15,11 +15,13 @@ const yearArrow = require("@/assets/todo-icons/double-arrow.png");
 type Props = {
   changeDate: (selectedDate: toDoDate) => void;
   openChangeDateModal: () => void;
+  bottom: number;
 };
 
 export default function ChoiceDateModal({
   changeDate,
   openChangeDateModal,
+  bottom,
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const [selectedMonth, setSelectedMonth] = useState<string>(
@@ -79,7 +81,7 @@ export default function ChoiceDateModal({
       <Pressable
         style={[
           styles.subContainer,
-          { backgroundColor: selectedTheme.primary },
+          { backgroundColor: selectedTheme.primary, bottom },
         ]}
         onPress={() => {}}
       >

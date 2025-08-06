@@ -219,6 +219,11 @@ export default function AddOrEditTodoModal({
         <ChoiceDateModal
           changeDate={changeDate}
           openChangeDateModal={changeDateModalStatus}
+          bottom={
+            currentToDo.subTasks.length > 4
+              ? modalHeight + modalScrollY - 409.9
+              : 0
+          }
         />
       )}
     </ModalBackground>
