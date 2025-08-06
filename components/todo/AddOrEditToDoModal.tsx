@@ -180,7 +180,7 @@ export default function AddOrEditTodoModal({
         </ScrollView>
       </Pressable>
 
-      {isCategoryModalOpen ? (
+      {isCategoryModalOpen && (
         <ModalBackground handlePress={() => setIsCategoryModalOpen(false)}>
           <View
             style={[
@@ -213,14 +213,14 @@ export default function AddOrEditTodoModal({
             ))}
           </View>
         </ModalBackground>
-      ) : null}
+      )}
 
-      {isDateModalOpen ? (
+      {isDateModalOpen && (
         <ChoiceDateModal
           changeDate={changeDate}
           openChangeDateModal={changeDateModalStatus}
         />
-      ) : null}
+      )}
     </ModalBackground>
   );
 }

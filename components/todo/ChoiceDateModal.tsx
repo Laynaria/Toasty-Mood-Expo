@@ -186,6 +186,12 @@ export default function ChoiceDateModal({
           <ChoiceDateTextButtons text={"Validate"} handlePress={() => {}} />
         </View>
       </Pressable>
+
+      {isHourModalOpen && (
+        <ModalBackground handlePress={() => setIsHourModalOpen(false)}>
+          <Text>Picking hour modal</Text>
+        </ModalBackground>
+      )}
     </ModalBackground>
   );
 }
