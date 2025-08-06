@@ -16,6 +16,7 @@ import ChoiceCategory from "./ChoiceCategory";
 import toDoCategory from "@/services/toDoCategory";
 import ChoiceDate from "./ChoiceDate";
 import ChoiceDateModal from "./ChoiceDateModal";
+import ModalBackground from "../ModalBackground";
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -113,7 +114,7 @@ export default function AddOrEditTodoModal({
   };
 
   return (
-    <Pressable style={styles.container} onPress={closeToDoModal}>
+    <ModalBackground handlePress={closeToDoModal}>
       <Pressable
         style={[
           styles.subContainer,
@@ -180,16 +181,7 @@ export default function AddOrEditTodoModal({
       </Pressable>
 
       {isCategoryModalOpen ? (
-        <Pressable
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            zIndex: 20,
-            backgroundColor: "rgba(0 ,0 ,0 , 0.2)",
-          }}
-          onPress={() => setIsCategoryModalOpen(false)}
-        >
+        <ModalBackground handlePress={() => setIsCategoryModalOpen(false)}>
           <View
             style={[
               styles.modal,
@@ -220,7 +212,7 @@ export default function AddOrEditTodoModal({
               </Pressable>
             ))}
           </View>
-        </Pressable>
+        </ModalBackground>
       ) : null}
 
       {isDateModalOpen ? (
@@ -229,20 +221,11 @@ export default function AddOrEditTodoModal({
           openChangeDateModal={changeDateModalStatus}
         />
       ) : null}
-    </Pressable>
+    </ModalBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    zIndex: 20,
-    height: "100%",
-    width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
   subContainer: {
     maxHeight: "75%",
     width: "100%",

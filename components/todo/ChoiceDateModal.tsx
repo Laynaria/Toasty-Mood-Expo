@@ -6,6 +6,7 @@ import { days, daysInMonth, months, weekDays } from "@/services/time";
 import { FirstDayOfTheWeek } from "@/types/time.types";
 import { getFirstDayPreference } from "@/services/storage";
 import ChoiceDateArrowButton from "./ChoiceDateArrowButtons";
+import ModalBackground from "../ModalBackground";
 
 const monthArrow = require("@/assets/todo-icons/simple-arrow.png");
 const yearArrow = require("@/assets/todo-icons/double-arrow.png");
@@ -73,7 +74,7 @@ export default function ChoiceDateModal({
   }, []);
 
   return (
-    <Pressable style={styles.container} onPress={openChangeDateModal}>
+    <ModalBackground handlePress={openChangeDateModal} alignItems={"flex-end"}>
       <Pressable
         style={[
           styles.subContainer,
@@ -204,20 +205,11 @@ export default function ChoiceDateModal({
           </Pressable>
         </View>
       </Pressable>
-    </Pressable>
+    </ModalBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    zIndex: 20,
-    backgroundColor: "rgba(0 ,0 ,0 , 0.2)",
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-  },
   subContainer: {
     padding: 16,
     borderRadius: 16,
