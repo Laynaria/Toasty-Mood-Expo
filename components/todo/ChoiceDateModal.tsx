@@ -7,6 +7,7 @@ import { FirstDayOfTheWeek } from "@/types/time.types";
 import { getFirstDayPreference } from "@/services/storage";
 import ChoiceDateArrowButton from "./ChoiceDateArrowButtons";
 import ModalBackground from "../ModalBackground";
+import ChoiceDateTextButtons from "./ChoiceDateTextButtons";
 
 const monthArrow = require("@/assets/todo-icons/simple-arrow.png");
 const yearArrow = require("@/assets/todo-icons/double-arrow.png");
@@ -28,9 +29,9 @@ export default function ChoiceDateModal({
     new Date().getFullYear().toString()
   );
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
-
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
+  const [isHourModalOpen, setIsHourModalOpen] = useState<boolean>(false);
 
   const daysName: string[] = weekDays(weekPreference);
 
@@ -177,32 +178,12 @@ export default function ChoiceDateModal({
             },
           ]}
         >
-          <Pressable>
-            <Text
-              style={{
-                color: selectedTheme.secondary,
-                borderColor: selectedTheme.secondary,
-                borderWidth: 1,
-                borderRadius: 8,
-                padding: 8,
-              }}
-            >
-              XX:XX
-            </Text>
-          </Pressable>
-          <Pressable>
-            <Text
-              style={{
-                color: selectedTheme.secondary,
-                borderColor: selectedTheme.secondary,
-                borderWidth: 1,
-                borderRadius: 8,
-                padding: 8,
-              }}
-            >
-              Validate
-            </Text>
-          </Pressable>
+          <ChoiceDateTextButtons
+            text={"XX:XX"}
+            handlePress={() => setIsHourModalOpen(true)}
+          />
+
+          <ChoiceDateTextButtons text={"Validate"} handlePress={() => {}} />
         </View>
       </Pressable>
     </ModalBackground>
