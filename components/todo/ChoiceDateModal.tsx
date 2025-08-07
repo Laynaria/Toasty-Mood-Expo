@@ -8,6 +8,7 @@ import { getFirstDayPreference } from "@/services/storage";
 import ChoiceDateArrowButton from "./ChoiceDateArrowButtons";
 import ModalBackground from "../ModalBackground";
 import ChoiceDateTextButtons from "./ChoiceDateTextButtons";
+import ChoiceDateHour from "./ChoiceDateHour";
 
 const monthArrow = require("@/assets/todo-icons/simple-arrow.png");
 const yearArrow = require("@/assets/todo-icons/double-arrow.png");
@@ -33,17 +34,12 @@ export default function ChoiceDateModal({
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
+
   const [isHourModalOpen, setIsHourModalOpen] = useState<boolean>(false);
+  const [selectedHour, setSelectedHour] = useState<string>("00");
+  const [selectedMinute, setSelectedMinute] = useState<string>("00");
 
   const daysName: string[] = weekDays(weekPreference);
-
-  const onChangeDate = () => {
-    const selectDate =
-      new Date(/*Add month, year, day and hour to create a real date*/).toString();
-
-    changeDate(selectDate);
-    openChangeDateModal();
-  };
 
   const handleChangeMonth = (operator: "-" | "+"): void => {
     if (selectedMonth === months[0] && operator === "-") {
@@ -67,6 +63,17 @@ export default function ChoiceDateModal({
     operator === "-"
       ? setSelectedYear(`${parseInt(selectedYear) - 1}`)
       : setSelectedYear(`${parseInt(selectedYear) + 1}`);
+  };
+
+  const handleValidate = () => {
+    const selectDate = new Date(
+      `${selectedYear}-${
+        months.indexOf(selectedMonth) + 1
+      }-${selectedDay}T${selectedHour}:${selectedMinute}:00`
+    ).toString();
+
+    changeDate(selectDate);
+    openChangeDateModal();
   };
 
   useLayoutEffect(() => {
@@ -181,17 +188,26 @@ export default function ChoiceDateModal({
           ]}
         >
           <ChoiceDateTextButtons
-            text={"XX:XX"}
+            text={`${selectedHour}:${selectedMinute}`}
             handlePress={() => setIsHourModalOpen(true)}
           />
 
-          <ChoiceDateTextButtons text={"Validate"} handlePress={() => {}} />
+          <ChoiceDateTextButtons
+            text={"Validate"}
+            handlePress={handleValidate}
+          />
         </View>
       </Pressable>
 
       {isHourModalOpen && (
         <ModalBackground handlePress={() => setIsHourModalOpen(false)}>
-          <Text>Picking hour modal</Text>
+          <ChoiceDateHour
+            selectedHour={selectedHour}
+            setSelectedHour={setSelectedHour}
+            selectedMinute={selectedMinute}
+            setSelectedMinute={setSelectedMinute}
+            bottom={bottom}
+          />
         </ModalBackground>
       )}
     </ModalBackground>
