@@ -14,30 +14,40 @@ const monthArrow = require("@/assets/todo-icons/simple-arrow.png");
 const yearArrow = require("@/assets/todo-icons/double-arrow.png");
 
 type Props = {
+  date: toDoDate;
   changeDate: (selectedDate: toDoDate) => void;
   openChangeDateModal: () => void;
   bottom: number;
 };
 
 export default function ChoiceDateModal({
+  date,
   changeDate,
   openChangeDateModal,
   bottom,
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const [selectedMonth, setSelectedMonth] = useState<string>(
-    months[new Date().getMonth()]
+    date ? months[new Date(date).getMonth()] : months[new Date().getMonth()]
   );
   const [selectedYear, setSelectedYear] = useState<string>(
-    new Date().getFullYear().toString()
+    date
+      ? new Date(date).getFullYear().toString()
+      : new Date().getFullYear().toString()
   );
-  const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
+  const [selectedDay, setSelectedDay] = useState<number>(
+    date ? new Date(date).getDate() : new Date().getDate()
+  );
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
 
   const [isHourModalOpen, setIsHourModalOpen] = useState<boolean>(false);
-  const [selectedHour, setSelectedHour] = useState<string>("00");
-  const [selectedMinute, setSelectedMinute] = useState<string>("00");
+  const [selectedHour, setSelectedHour] = useState<string>(
+    date ? new Date(date).getHours().toString().padStart(2, "0") : "00"
+  );
+  const [selectedMinute, setSelectedMinute] = useState<string>(
+    date ? new Date(date).getMinutes().toString().padStart(2, "0") : "00"
+  );
 
   const daysName: string[] = weekDays(weekPreference);
 

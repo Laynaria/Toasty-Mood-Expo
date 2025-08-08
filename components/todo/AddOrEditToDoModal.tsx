@@ -11,12 +11,15 @@ import {
   View,
 } from "react-native";
 import ChoiceTaskName from "./ChoiceTaskName";
-import AddOrEditValidateButton from "./AddOrEditValideButton";
+import IconButton from "./IconButton";
 import ChoiceCategory from "./ChoiceCategory";
 import toDoCategory from "@/services/toDoCategory";
 import ChoiceDate from "./ChoiceDate";
 import ChoiceDateModal from "./ChoiceDateModal";
 import ModalBackground from "../ModalBackground";
+
+const pencilIcon = require("@/assets/todo-icons/pencil2.png");
+const repeatIcon = require("@/assets/todo-icons/repeat.png");
 
 type Props = {
   setIsPressed: Dispatch<boolean>;
@@ -37,7 +40,6 @@ export default function AddOrEditTodoModal({
   const [currentToDo, setCurrentToDo] = useState<toDoTaskType>({
     id: fakeDatas.length,
     taskName: "",
-    // date: new Date().toString(),
     date: null,
     category: 0,
     isDone: false,
@@ -142,17 +144,21 @@ export default function AddOrEditTodoModal({
               changeTaskName={changeTaskName}
             />
 
-            <AddOrEditValidateButton handleValidate={updateToDoList} />
+            <IconButton icon={pencilIcon} handleValidate={updateToDoList} />
 
             <ChoiceCategory
               category={currentToDo.category}
               openCategoryModal={() => setIsCategoryModalOpen(true)}
             />
 
-            <ChoiceDate
-              date={currentToDo.date}
-              openChangeDateModal={changeDateModalStatus}
-            />
+            <View style={[styles.subTaskContainer, { gap: 12 }]}>
+              <IconButton icon={repeatIcon} handleValidate={() => {}} />
+
+              <ChoiceDate
+                date={currentToDo.date}
+                openChangeDateModal={changeDateModalStatus}
+              />
+            </View>
 
             {currentToDo.subTasks.map((subTask) => (
               <ChoiceTaskName
@@ -217,6 +223,7 @@ export default function AddOrEditTodoModal({
 
       {isDateModalOpen && (
         <ChoiceDateModal
+          date={currentToDo.date}
           changeDate={changeDate}
           openChangeDateModal={changeDateModalStatus}
           bottom={
@@ -254,7 +261,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 100,
     flexDirection: "row",
-    // justifyContent: "space-around",
     flexWrap: "wrap",
     width: "75.1%",
     gap: 16,

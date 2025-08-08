@@ -1,14 +1,18 @@
 import { useContext } from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 
-const pencilIcon = require("@/assets/todo-icons/pencil2.png");
-
 type Props = {
+  icon: ImageSourcePropType;
   handleValidate: () => void;
 };
 
-export default function AddOrEditValidateButton({ handleValidate }: Props) {
+export default function IconButton({ icon, handleValidate }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
@@ -22,7 +26,7 @@ export default function AddOrEditValidateButton({ handleValidate }: Props) {
       onPress={handleValidate}
     >
       <Image
-        source={pencilIcon}
+        source={icon}
         style={[styles.registerIcon, { tintColor: selectedTheme.secondary }]}
       />
     </Pressable>
