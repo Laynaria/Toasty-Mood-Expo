@@ -113,6 +113,10 @@ export default function ToDo() {
           new Date(new Date(day.renewableDate).setHours(0, 0, 0)) <= new Date()
       );
 
+      if (renewableCheck.length === 0) {
+        return;
+      }
+
       const editedRenewable: toDoTaskType[] = renewableCheck.map(
         (todo: toDoTaskType, index) => {
           return {
