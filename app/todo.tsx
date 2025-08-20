@@ -106,30 +106,39 @@ export default function ToDo() {
   };
 
   useEffect(() => {
-    const renewableCheck: toDoTaskType[] = fakeDatas.filter(
-      (day) => day.renewableDate
-    );
+    const checkRenewableDatas = () => {
+      const renewableCheck: toDoTaskType[] = fakeDatas.filter(
+        (day) =>
+          day.renewableDate &&
+          new Date(new Date(day.renewableDate).setHours(0, 0, 0)) <= new Date()
+      );
 
-    const editedRenewable: toDoTaskType[] = renewableCheck.map(
-      (todo: toDoTaskType, index) => {
-        return {
-          ...todo,
-          id: index + fakeDatas.length,
-          renewableDate: getNextDays(
-            new Date(todo.renewableDate as string),
-            todo.renewableDelay as number
-          ).toString(),
-        };
-      }
-    );
+      const editedRenewable: toDoTaskType[] = renewableCheck.map(
+        (todo: toDoTaskType, index) => {
+          return {
+            ...todo,
+            id: index + fakeDatas.length,
+            isDone: false,
+            renewableDate: getNextDays(
+              new Date(todo.renewableDate as string),
+              todo.renewableDelay as number
+            ).toString(),
+          };
+        }
+      );
 
-    // il faut maintenant arriver à éditer le tableau original pour remplacer
-    // le renewable pour ceux qui ont le meme id.
-    // puis on push au tableau editedRenewable
+      // il faut maintenant arriver à éditer le tableau original pour remplacer
+      // le renewable pour ceux qui ont le meme id.
+      // puis on push au tableau editedRenewable
 
-    // renewableCheck.forEach((day) => (day.renewableDate = null));
+      // renewableCheck.forEach((day) => (day.renewableDate = null));
 
-    console.log(renewableCheck);
+      // console.log(renewableCheck);
+
+      setFakeDatas([...fakeDatas, ...editedRenewable]);
+    };
+
+    checkRenewableDatas();
   }, []);
 
   return (
