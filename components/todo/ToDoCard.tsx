@@ -44,9 +44,7 @@ export default function ToDoCard({
         ? {
             ...task,
             isDone: !task.isDone,
-            finished_at: !currentTask.finished_at
-              ? new Date().toString()
-              : null,
+            finished_at: !task.isDone ? new Date().toString() : null,
             subTasks: updatedSubTasks,
           }
         : currentTask
@@ -69,7 +67,7 @@ export default function ToDoCard({
             isDone: isAllTaskDone(updatedSubTasks),
 
             finished_at:
-              !currentTask.finished_at && isAllTaskDone(updatedSubTasks)
+              !task.isDone && isAllTaskDone(updatedSubTasks)
                 ? new Date().toString()
                 : null,
           }
