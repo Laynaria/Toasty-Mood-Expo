@@ -14,7 +14,10 @@ export type toDoTaskType = {
   date: toDoDate;
   category: number;
   isDone: boolean;
+  created_at: string;
   finished_at: toDoDate;
+  renewableDate: toDoDate;
+  renewableDelay: number | null;
   subTasks: subTaskType[];
 };
 

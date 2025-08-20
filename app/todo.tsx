@@ -18,7 +18,10 @@ export default function ToDo() {
       category: 1,
       date: "2025-04-25T23:00:00",
       isDone: true,
+      created_at: "2025-03-25T23:30:00",
       finished_at: "2025-04-25T23:30:00",
+      renewableDate: null,
+      renewableDelay: null,
       subTasks: [],
     },
     {
@@ -27,7 +30,10 @@ export default function ToDo() {
       date: "2025-04-26T08:20:00",
       category: 2,
       isDone: false,
+      created_at: "2025-03-25T23:30:00",
       finished_at: null,
+      renewableDate: null,
+      renewableDelay: null,
       subTasks: [],
     },
     {
@@ -36,7 +42,10 @@ export default function ToDo() {
       date: "2025-04-26T12:15:00",
       category: 0,
       isDone: false,
+      created_at: "2025-03-25T23:30:00",
       finished_at: null,
+      renewableDate: null,
+      renewableDelay: null,
       subTasks: [
         {
           index: 0,
