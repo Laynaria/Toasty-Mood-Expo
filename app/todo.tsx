@@ -123,19 +123,24 @@ export default function ToDo() {
               new Date(todo.renewableDate as string),
               todo.renewableDelay as number
             ).toString(),
+            subTasks: todo.subTasks.map((subTask) => {
+              return { ...subTask, isDone: false };
+            }),
           };
         }
       );
 
-      // il faut maintenant arriver à éditer le tableau original pour remplacer
-      // le renewable pour ceux qui ont le meme id.
-      // puis on push au tableau editedRenewable
+      const newDatas = [
+        ...fakeDatas.map((day) =>
+          day.renewableDate &&
+          new Date(new Date(day.renewableDate).setHours(0, 0, 0)) <= new Date()
+            ? { ...day, renewableDate: null }
+            : day
+        ),
+        ...editedRenewable,
+      ];
 
-      // renewableCheck.forEach((day) => (day.renewableDate = null));
-
-      // console.log(renewableCheck);
-
-      setFakeDatas([...fakeDatas, ...editedRenewable]);
+      setFakeDatas(newDatas);
     };
 
     checkRenewableDatas();
