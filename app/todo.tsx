@@ -106,7 +106,7 @@ export default function ToDo() {
   };
 
   useEffect(() => {
-    const checkRenewableDatas = () => {
+    const checkRenewableDatas = (): void => {
       const renewableCheck: toDoTaskType[] = fakeDatas.filter(
         (day) =>
           day.renewableDate &&
