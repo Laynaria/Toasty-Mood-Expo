@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import GradientBackground from "@/components/GradientBackground";
 import ToDoCard from "@/components/todo/ToDoCard";
@@ -9,6 +9,7 @@ import AddOrEditTodoModal from "@/components/todo/AddOrEditToDoModal";
 import toDoCategory from "@/services/toDoCategory";
 import ToDoTitle from "@/components/todo/ToDoTitle";
 import { isAllTaskDone } from "@/services/toDoServices";
+import { getNextDays } from "@/services/time";
 
 export default function ToDo() {
   const [fakeDatas, setFakeDatas] = useState<toDoTaskType[]>([
@@ -20,8 +21,8 @@ export default function ToDo() {
       isDone: true,
       created_at: "2025-03-25T23:30:00",
       finished_at: "2025-04-25T23:30:00",
-      renewableDate: null,
-      renewableDelay: null,
+      renewableDate: getNextDays(new Date("2025-08-19T23:30:00")),
+      renewableDelay: 1,
       subTasks: [],
     },
     {
@@ -103,6 +104,33 @@ export default function ToDo() {
 
     return [...toDoWithDate, ...toDoWithoutDate, ...doneTasks];
   };
+
+  useEffect(() => {
+    const renewableCheck: toDoTaskType[] = fakeDatas.filter(
+      (day) => day.renewableDate
+    );
+
+    const editedRenewable: toDoTaskType[] = renewableCheck.map(
+      (todo: toDoTaskType, index) => {
+        return {
+          ...todo,
+          id: index + fakeDatas.length,
+          renewableDate: getNextDays(
+            new Date(todo.renewableDate as string),
+            todo.renewableDelay as number
+          ).toString(),
+        };
+      }
+    );
+
+    // il faut maintenant arriver à éditer le tableau original pour remplacer
+    // le renewable pour ceux qui ont le meme id.
+    // puis on push au tableau editedRenewable
+
+    // renewableCheck.forEach((day) => (day.renewableDate = null));
+
+    console.log(renewableCheck);
+  }, []);
 
   return (
     <View style={styles.container}>

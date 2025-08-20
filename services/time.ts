@@ -82,3 +82,12 @@ export const hours: string[] = Array.from({ length: 24 }, (_, i: number) =>
 export const minutes: string[] = Array.from({ length: 60 }, (_, i: number) =>
   i.toString().padStart(2, "0")
 );
+
+export const getNextDays = (
+  currentDate = new Date(),
+  daysToAdd = 1
+): string => {
+  const nextDate = new Date(currentDate);
+  nextDate.setDate(currentDate.getDate() + daysToAdd);
+  return nextDate.toString();
+};
