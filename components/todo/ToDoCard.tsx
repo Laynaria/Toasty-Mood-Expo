@@ -11,9 +11,11 @@ import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 import SubTaskToDoCard from "./SubTaskToDoCard";
 import { subTaskType, toDoTaskType } from "@/types/todo.types";
 import { dateText, isAllTaskDone } from "@/services/toDoServices";
+import IconButton from "./IconButton";
 
 const checkedImg = require("@/assets/icons/checked.png");
 const uncheckedImg = require("@/assets/icons/unchecked.png");
+const repeatIcon = require("@/assets/todo-icons/repeat.png");
 
 type Props = {
   task: toDoTaskType;
@@ -121,20 +123,37 @@ export default function ToDoCard({
               {task.taskName}
             </Text>
 
-            <Text
-              style={{
-                color: selectedTheme.primary,
-                backgroundColor: selectedTheme.secondary,
-                opacity: task.date || task.finished_at ? 1 : 0,
-                borderRadius: 12,
-                textAlign: "center",
-                paddingVertical: 1,
-                paddingHorizontal: 5,
-                fontSize: 12,
-              }}
-            >
-              {!task.isDone ? dateText(task.date) : dateText(task.finished_at)}
-            </Text>
+            <View style={{ flexDirection: "row", gap: 5 }}>
+              <Text
+                style={{
+                  color: selectedTheme.primary,
+                  backgroundColor: selectedTheme.secondary,
+                  opacity: task.date || task.finished_at ? 1 : 0,
+                  borderRadius: 12,
+                  textAlign: "center",
+                  paddingVertical: 1,
+                  paddingHorizontal: 5,
+                  fontSize: 12,
+                }}
+              >
+                {!task.isDone
+                  ? dateText(task.date)
+                  : dateText(task.finished_at)}
+              </Text>
+
+              {task.renewableDelay && (
+                <Image
+                  source={repeatIcon}
+                  style={[
+                    {
+                      tintColor: selectedTheme.secondary,
+                      width: 20,
+                      height: 20,
+                    },
+                  ]}
+                />
+              )}
+            </View>
           </View>
         </View>
 
