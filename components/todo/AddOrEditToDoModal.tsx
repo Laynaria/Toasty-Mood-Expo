@@ -17,6 +17,7 @@ import toDoCategory from "@/services/toDoCategory";
 import ChoiceDate from "./ChoiceDate";
 import ChoiceDateModal from "./ChoiceDateModal";
 import ModalBackground from "../ModalBackground";
+import ChoiceRenawableModal from "./ChoiceReneawableModal";
 
 const pencilIcon = require("@/assets/todo-icons/pencil2.png");
 const repeatIcon = require("@/assets/todo-icons/repeat.png");
@@ -36,6 +37,8 @@ export default function AddOrEditTodoModal({
   const [isCategoryModalOpen, setIsCategoryModalOpen] =
     useState<boolean>(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
+  const [isRenewableModalOpen, setIsRenewableModalOpen] =
+    useState<boolean>(false);
 
   const [currentToDo, setCurrentToDo] = useState<toDoTaskType>({
     id: fakeDatas.length,
@@ -80,6 +83,10 @@ export default function AddOrEditTodoModal({
 
   const changeDateModalStatus = (): void => {
     setIsDateModalOpen(!isDateModalOpen);
+  };
+
+  const handleCloseRenewableModal = (): void => {
+    setIsRenewableModalOpen(!isRenewableModalOpen);
   };
 
   const changeSubTaskName = (text: string, index: number) => {
@@ -157,7 +164,9 @@ export default function AddOrEditTodoModal({
             <View style={[styles.subTaskContainer, { gap: 12 }]}>
               <IconButton
                 icon={repeatIcon}
-                handleValidate={() => {}}
+                handleValidate={() => {
+                  handleCloseRenewableModal();
+                }}
                 colorState={currentToDo.renewableDate ? true : false}
               />
 
@@ -238,6 +247,17 @@ export default function AddOrEditTodoModal({
               ? modalHeight + modalScrollY - 409.9
               : 0
           }
+        />
+      )}
+
+      {isRenewableModalOpen && (
+        <ChoiceRenawableModal
+          handleCloseRenewableModal={handleCloseRenewableModal}
+          bottom={
+            currentToDo.subTasks.length > 4
+              ? modalHeight + modalScrollY - 409.9
+              : 0
+          } // to change once modal is done in her full design
         />
       )}
     </ModalBackground>
