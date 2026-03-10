@@ -9,9 +9,11 @@ import ChoiceDateArrowButton from "./ChoiceDateArrowButtons";
 import ModalBackground from "../ModalBackground";
 import ChoiceDateTextButtons from "./ChoiceDateTextButtons";
 import ChoiceDateHour from "./ChoiceDateHour";
+import IconButton from "./IconButton";
 
 const monthArrow = require("@/assets/todo-icons/simple-arrow.png");
 const yearArrow = require("@/assets/todo-icons/double-arrow.png");
+const trashIcon = require("@/assets/todo-icons/trash.png");
 
 type Props = {
   date: toDoDate;
@@ -28,25 +30,25 @@ export default function ChoiceDateModal({
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
   const [selectedMonth, setSelectedMonth] = useState<string>(
-    date ? months[new Date(date).getMonth()] : months[new Date().getMonth()]
+    date ? months[new Date(date).getMonth()] : months[new Date().getMonth()],
   );
   const [selectedYear, setSelectedYear] = useState<string>(
     date
       ? new Date(date).getFullYear().toString()
-      : new Date().getFullYear().toString()
+      : new Date().getFullYear().toString(),
   );
   const [selectedDay, setSelectedDay] = useState<number>(
-    date ? new Date(date).getDate() : new Date().getDate()
+    date ? new Date(date).getDate() : new Date().getDate(),
   );
   const [weekPreference, setWeekPreference] =
     useState<FirstDayOfTheWeek | null>(null);
 
   const [isHourModalOpen, setIsHourModalOpen] = useState<boolean>(false);
   const [selectedHour, setSelectedHour] = useState<string>(
-    date ? new Date(date).getHours().toString().padStart(2, "0") : "00"
+    date ? new Date(date).getHours().toString().padStart(2, "0") : "00",
   );
   const [selectedMinute, setSelectedMinute] = useState<string>(
-    date ? new Date(date).getMinutes().toString().padStart(2, "0") : "00"
+    date ? new Date(date).getMinutes().toString().padStart(2, "0") : "00",
   );
 
   const daysName: string[] = weekDays(weekPreference);
@@ -79,10 +81,15 @@ export default function ChoiceDateModal({
     const selectDate = new Date(
       `${selectedYear}-${
         months.indexOf(selectedMonth) + 1
-      }-${selectedDay}T${selectedHour}:${selectedMinute}:00`
+      }-${selectedDay}T${selectedHour}:${selectedMinute}:00`,
     ).toString();
 
     changeDate(selectDate);
+    openChangeDateModal();
+  };
+
+  const handleDeleteDate = () => {
+    changeDate(null);
     openChangeDateModal();
   };
 
@@ -151,7 +158,7 @@ export default function ChoiceDateModal({
 
           {days
             .filter(
-              (day: number) => day <= daysInMonth(selectedYear, selectedMonth)
+              (day: number) => day <= daysInMonth(selectedYear, selectedMonth),
             )
             .map((day) => (
               <Pressable
@@ -202,10 +209,14 @@ export default function ChoiceDateModal({
             handlePress={() => setIsHourModalOpen(true)}
           />
 
-          <ChoiceDateTextButtons
-            text={"Validate"}
-            handlePress={handleValidate}
-          />
+          <View style={[styles.monthYearContainer, { gap: 18 }]}>
+            <IconButton icon={trashIcon} handleValidate={handleDeleteDate} />
+
+            <ChoiceDateTextButtons
+              text={"Validate"}
+              handlePress={handleValidate}
+            />
+          </View>
         </View>
       </Pressable>
 
