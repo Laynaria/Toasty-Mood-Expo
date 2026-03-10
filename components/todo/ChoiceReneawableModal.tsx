@@ -1,18 +1,28 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import ModalBackground from "../ModalBackground";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 
 type Props = {
+  originalDelay: string | undefined;
   handleCloseRenewableModal: () => void;
+  handleRenewable: (delay: string | undefined) => void;
   bottom: number;
 };
 
 export default function ChoiceRenawableModal({
+  originalDelay,
   handleCloseRenewableModal,
+  handleRenewable,
   bottom,
 }: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
+  const [delay, setDelay] = useState<string | undefined>(originalDelay);
+
+  const handleTextChange = () => {
+    setDelay(delay);
+  };
+
   return (
     <ModalBackground handlePress={handleCloseRenewableModal}>
       <Pressable
@@ -22,7 +32,17 @@ export default function ChoiceRenawableModal({
         ]}
       >
         <View>
-          <Text>Renewable Modal Open</Text>
+          <TextInput
+            placeholder="0"
+            // keyboardType="numeric"
+            // lag and also may be bugged with string typing
+            maxLength={4}
+            value={delay}
+            onChangeText={handleTextChange}
+          />
+          <Pressable onPress={() => handleRenewable(delay)}>
+            <Text>Validate</Text>
+          </Pressable>
         </View>
       </Pressable>
     </ModalBackground>

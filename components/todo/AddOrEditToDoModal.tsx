@@ -89,6 +89,27 @@ export default function AddOrEditTodoModal({
     setIsRenewableModalOpen(!isRenewableModalOpen);
   };
 
+  const handleRenewable = (delay: string | undefined): void => {
+    // add validation for string to have only numbers, and to not be zero
+    // handle case if null to stay null
+    const renewableDelayValue = () => {
+      if (typeof delay === "string") {
+        console.log(delay);
+        return parseInt(delay);
+      }
+
+      return null;
+    };
+
+    setCurrentToDo({
+      ...currentToDo,
+      renewableDate: new Date("2025-08-19T23:30:00").toString(),
+      renewableDelay: renewableDelayValue(),
+    });
+
+    handleCloseRenewableModal();
+  };
+
   const changeSubTaskName = (text: string, index: number) => {
     const updatedSubTask = { ...currentToDo.subTasks[index], name: text };
     const updatedSubTasks = currentToDo.subTasks.map((currentSubTask) =>
@@ -167,7 +188,11 @@ export default function AddOrEditTodoModal({
                 handleValidate={() => {
                   handleCloseRenewableModal();
                 }}
-                colorState={currentToDo.renewableDate ? true : false}
+                colorState={
+                  currentToDo.renewableDate && currentToDo.renewableDelay
+                    ? true
+                    : false
+                }
               />
 
               <ChoiceDate
@@ -252,11 +277,13 @@ export default function AddOrEditTodoModal({
 
       {isRenewableModalOpen && (
         <ChoiceRenawableModal
+          originalDelay={currentToDo.renewableDelay?.toString()}
           handleCloseRenewableModal={handleCloseRenewableModal}
+          handleRenewable={handleRenewable}
           bottom={
             currentToDo.subTasks.length > 4
               ? modalHeight + modalScrollY - 409.9
-              : 0
+              : 0 + 67
           } // to change once modal is done in her full design
         />
       )}
