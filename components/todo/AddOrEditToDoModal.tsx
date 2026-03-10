@@ -85,7 +85,7 @@ export default function AddOrEditTodoModal({
   const changeSubTaskName = (text: string, index: number) => {
     const updatedSubTask = { ...currentToDo.subTasks[index], name: text };
     const updatedSubTasks = currentToDo.subTasks.map((currentSubTask) =>
-      currentSubTask.index === index ? updatedSubTask : currentSubTask
+      currentSubTask.index === index ? updatedSubTask : currentSubTask,
     );
 
     setCurrentToDo({ ...currentToDo, subTasks: updatedSubTasks });
@@ -155,7 +155,11 @@ export default function AddOrEditTodoModal({
             />
 
             <View style={[styles.subTaskContainer, { gap: 12 }]}>
-              <IconButton icon={repeatIcon} handleValidate={() => {}} />
+              <IconButton
+                icon={repeatIcon}
+                handleValidate={() => {}}
+                colorState={currentToDo.renewableDate ? true : false}
+              />
 
               <ChoiceDate
                 date={currentToDo.date}

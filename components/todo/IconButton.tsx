@@ -10,9 +10,14 @@ import { ThemeColorContext } from "@/contexts/ThemeColorContext";
 type Props = {
   icon: ImageSourcePropType;
   handleValidate: () => void;
+  colorState?: boolean;
 };
 
-export default function IconButton({ icon, handleValidate }: Props) {
+export default function IconButton({
+  icon,
+  handleValidate,
+  colorState = false,
+}: Props) {
   const { selectedTheme } = useContext(ThemeColorContext);
 
   return (
@@ -20,14 +25,26 @@ export default function IconButton({ icon, handleValidate }: Props) {
       style={[
         styles.registerButton,
         {
-          borderColor: selectedTheme.secondary,
+          borderColor: colorState
+            ? selectedTheme.primary
+            : selectedTheme.secondary,
+          backgroundColor: colorState
+            ? selectedTheme.secondary
+            : selectedTheme.primary,
         },
       ]}
       onPress={handleValidate}
     >
       <Image
         source={icon}
-        style={[styles.registerIcon, { tintColor: selectedTheme.secondary }]}
+        style={[
+          styles.registerIcon,
+          {
+            tintColor: colorState
+              ? selectedTheme.primary
+              : selectedTheme.secondary,
+          },
+        ]}
       />
     </Pressable>
   );
